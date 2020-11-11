@@ -11,8 +11,7 @@
       </el-carousel>
     </div>
 
-    <div class="w-100 d-block d-mb-none">
-      <!-- :height="(getScreenH - 300) + 'px'" -->
+    <div class="w-100 d-block d-mb-none pt-90">
       <el-carousel trigger="click" width="100%">
         <el-carousel-item
           v-for="(item, index) in bannerURL"

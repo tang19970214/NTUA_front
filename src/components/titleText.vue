@@ -1,6 +1,6 @@
 <template>
   <div id="titleText">
-    <div class="forWeb w-100 d-none d-mb-block">
+    <div class="forWeb d-none d-mb-block">
       <div
         class="w-100 d-flex align-items-center"
         :class="'justify-content-' + textAlign"

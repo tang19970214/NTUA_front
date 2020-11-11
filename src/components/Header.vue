@@ -107,16 +107,20 @@
     </div>
 
     <!-- phone -->
-    <div
-      class="phoneScreen d-block d-mb-none"
-    >
-      <div class="px-30 py-20 d-flex align-items-center justify-content-between">
-        <router-link to="/">
-          <img src="../assets/NTUA_LOGO.svg" alt="NTUA_LOGO" width="225px" />
-        </router-link>
-        <img src="../assets/images/icon/menuList-phone.png" alt="menu" />
+    <div class="d-block d-mb-none">
+      <div class="phoneScreen">
+        <div
+          class="px-30 py-20 d-flex align-items-center justify-content-between"
+        >
+          <router-link to="/">
+            <img src="../assets/NTUA_LOGO.svg" alt="NTUA_LOGO" width="225px" />
+          </router-link>
+          <img src="../assets/images/icon/menuList-phone.png" alt="menu" />
+        </div>
       </div>
     </div>
+
+    <div class="phoneModal"></div>
   </div>
 </template>
 
@@ -297,8 +301,9 @@ export default {
 
   // phone
   .phoneScreen {
+    position: fixed;
+    z-index: 99;
     width: 100%;
-    height: 100%;
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 10px 10px;
