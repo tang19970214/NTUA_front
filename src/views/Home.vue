@@ -345,7 +345,9 @@
         </div>
         <!-- crafts -->
         <div class="crafts w-100 mb-50">
-          <div class="craftsCard w-100 pl-30 d-flex align-items-center justify-content-start">
+          <div
+            class="craftsCard w-100 pl-30 d-flex align-items-center justify-content-start"
+          >
             <div
               class="d-flex flex-column align-items-center justify-content-center"
             >
@@ -419,7 +421,7 @@
         <!-- access -->
         <div class="access w-100">
           <TitleText textTitle="ACCESS" />
-          <div class="w-100">
+          <div class="w-100 mt-20">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.82818192357!2d121.44544191544658!3d25.005953645568127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346802ac9d6c823d%3A0x83607782804de78!2zMjIw5paw5YyX5biC5p2_5qmL5Y2A5aSn6KeA6Lev5LiA5q61NTnomZ8!5e0!3m2!1szh-TW!2stw!4v1604289041271!5m2!1szh-TW!2stw"
               width="100%"

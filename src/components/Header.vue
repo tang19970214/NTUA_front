@@ -115,12 +115,29 @@
           <router-link to="/">
             <img src="../assets/NTUA_LOGO.svg" alt="NTUA_LOGO" width="225px" />
           </router-link>
-          <img src="../assets/images/icon/menuList-phone.png" alt="menu" />
+          <img
+            src="../assets/images/icon/menuList-phone.png"
+            alt="menu"
+            @click="openMenuModal"
+          />
         </div>
       </div>
     </div>
 
-    <div class="phoneModal"></div>
+    <!-- phoneModal -->
+    <div class="modal" v-if="menuModal">
+      <div class="modal-content">
+        <div class="w-100 d-flex align-items-center">
+          <div class="menuList w-100">
+            <ul class="w-100 m-0 p-0 d-flex justify-content-center flex-column">
+              <li class="px-10" v-for="item in menuList" :key="item.value">
+                {{ item.text }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -187,6 +204,37 @@ export default {
           name: "關鍵字關鍵",
         },
       ],
+      menuModal: false,
+      menuList: [
+        {
+          value: "01",
+          text: "最新消息",
+        },
+        {
+          value: "02",
+          text: "系所簡介及課程",
+        },
+        {
+          value: "03",
+          text: "系所規定與申請表",
+        },
+        {
+          value: "04",
+          text: "招生資訊",
+        },
+        {
+          value: "05",
+          text: "教學成果",
+        },
+        {
+          value: "06",
+          text: "研討會/工作營網站",
+        },
+        {
+          value: "07",
+          text: "系所成員",
+        },
+      ],
     };
   },
   methods: {
@@ -206,13 +254,16 @@ export default {
       this.$router.push({ name: data.pathName });
       this.clickOpen = false;
     },
+    openMenuModal() {
+      this.menuModal = !this.menuModal;
+    },
   },
 };
 </script>
 
 <style lang="scss">
 #header {
-  z-index: 99;
+  z-index: 9999;
   .pos {
     &-logo {
       position: fixed;
@@ -302,11 +353,66 @@ export default {
   // phone
   .phoneScreen {
     position: fixed;
-    z-index: 99;
+    z-index: 5;
     width: 100%;
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 10px 10px;
+  }
+
+  // modal
+  .modal {
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+
+    &-content {
+      position: fixed;
+      bottom: 30%;
+      width: 100%;
+      animation-name: slideIn;
+      animation-duration: 0.5s;
+      .menuList {
+        writing-mode: vertical-lr;
+        color: white;
+        ul {
+          font-size: 24px;
+          font-weight: bold;
+          line-height: 28px;
+          color: #ded9d5;
+          list-style-type: korean-hanja-informal;
+        }
+      }
+    }
+  }
+
+  // @keyframes fadeIn {
+  //   from {
+  //     opacity: 0;
+  //   }
+
+  //   to {
+  //     opacity: 1;
+  //   }
+  // }
+
+  @keyframes slideIn {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+
+    to {
+      bottom: 30%;
+      opacity: 1;
+    }
   }
 }
 </style>

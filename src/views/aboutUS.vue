@@ -147,6 +147,7 @@ export default {
       opacity: 0.6;
       img {
         opacity: 0;
+        transition: all 0.8s;
         &:hover {
           opacity: 1;
         }

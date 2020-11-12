@@ -9,6 +9,20 @@
           <img :src="item.url" alt="" width="100%" height="100%" />
         </el-carousel-item>
       </el-carousel>
+
+      <!-- <flicking
+        class="flicking"
+        :options="{ circular: true, gap: 10, duration: 500 }"
+        :plugins="plugins"
+      >
+        <div
+          class="panel"
+          v-for="(item, index) in bannerURL"
+          :key="'URL__' + index"
+        >
+          <img :src="item.url" />
+        </div>
+      </flicking> -->
     </div>
 
     <div class="w-100 d-block d-mb-none pt-90">
@@ -39,6 +53,8 @@ export default {
           url: require("../assets/images/banner/banner_3.png"),
         },
       ],
+      plugins: [],
+      // plugins: [new Fade(), new AutoPlay(2000, "NEXT")]
     };
   },
   computed: {
