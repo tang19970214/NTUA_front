@@ -21,8 +21,8 @@
                     v-for="(items, index) in item.icon"
                     :key="'IC_' + index"
                   >
-                    <img :src="items.url" alt="" />
-                    <img :src="items.hoverUrl" alt="" />
+                    <img :src="items.url" alt="" width="50px" />
+                    <img :src="items.hoverUrl" alt="" width="50px" />
                   </span>
                 </div>
               </div>
@@ -56,8 +56,14 @@
             <img :src="item.imgURL" alt="" />
           </div>
         </div>
-        <div class="footerForPhone-logo d-flex align-items-center justify-content-center py-60">
-          <img src="../assets/images/logo/footer_logo.png" alt="" width="240px" />
+        <div
+          class="footerForPhone-logo d-flex align-items-center justify-content-center py-60"
+        >
+          <img
+            src="../assets/images/logo/footer_logo.png"
+            alt=""
+            width="240px"
+          />
         </div>
       </div>
     </div>
@@ -68,6 +74,7 @@
 export default {
   data() {
     return {
+      scrollTop: "",
       contactData: [
         {
           text: "Follow us",
@@ -128,7 +135,13 @@ export default {
   },
   methods: {
     scrollToTop() {
-      window.scrollTo(0, 0);
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      const timeTop = setInterval(() => {
+        document.body.scrollTop = document.documentElement.scrollTop = top -= 50;
+        if (top <= 0) {
+          clearInterval(timeTop);
+        }
+      }, 10);
     },
   },
 };
@@ -152,26 +165,39 @@ export default {
         img:last-child {
           display: none;
         }
+        span {
+          &:hover {
+            p {
+              color: #d4cbcc;
+            }
+            img:first-child {
+              display: none;
+            }
+            img:last-child {
+              display: block;
+            }
+          }
+        }
       }
       p {
         font-size: 18px;
         line-height: 21px;
         color: #d4cbcc;
       }
-      &:hover {
-        background: white;
-        color: #ceb87f;
-        padding-bottom: 11px;
-        p {
-          color: #d4cbcc;
-        }
-        img:first-child {
-          display: none;
-        }
-        img:last-child {
-          display: block;
-        }
-      }
+      // &:hover {
+      // background: white;
+      // color: #ceb87f;
+      // padding-bottom: 11px;
+      // p {
+      //   color: #d4cbcc;
+      // }
+      // img:first-child {
+      //   display: none;
+      // }
+      // img:last-child {
+      //   display: block;
+      // }
+      // }
     }
     &_right {
       width: 30%;
@@ -194,6 +220,7 @@ export default {
         width: 100%;
         height: 70%;
         background: #1a191e;
+        transition: all 0.6s;
         cursor: pointer;
         &:hover {
           background: white;
@@ -217,7 +244,7 @@ export default {
       overflow-x: auto;
     }
     &-logo {
-      background: #1A191E;
+      background: #1a191e;
     }
   }
 }

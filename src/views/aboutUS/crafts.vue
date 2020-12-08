@@ -53,7 +53,9 @@
                 <p class="m-0">1樓陶瓷工藝創作專業工坊</p>
               </div>
               <div class="pt-10 craftIntroduce-borTop">
-                <a class="text-decoration-none" href=""> VIEW MORE</a>
+                <router-link class="text-decoration-none" :to="{ name: 'equipment' }">
+                  VIEW MORE
+                </router-link>
               </div>
             </div>
           </div>
@@ -85,7 +87,9 @@
                 <p class="m-0">工藝大樓2樓-金屬工藝創作專業工坊</p>
               </div>
               <div class="pt-10 craftIntroduce-borTop">
-                <a class="text-decoration-none" href=""> VIEW MORE</a>
+                <router-link class="text-decoration-none" :to="{ name: 'equipment' }">
+                  VIEW MORE
+                </router-link>
               </div>
             </div>
           </div>
@@ -115,7 +119,9 @@
                 <p class="m-0">工藝大樓1樓-木材工藝創作專業工坊教室</p>
               </div>
               <div class="pt-10 craftIntroduce-borTop">
-                <a class="text-decoration-none" href=""> VIEW MORE</a>
+                <router-link class="text-decoration-none" :to="{ name: 'equipment' }">
+                  VIEW MORE
+                </router-link>
               </div>
             </div>
           </div>
@@ -145,7 +151,9 @@
                 <p class="m-0">工藝大樓1樓-木材工藝創作專業工坊教室</p>
               </div>
               <div class="pt-10 craftIntroduce-borTop">
-                <a class="text-decoration-none" href=""> VIEW MORE</a>
+                <router-link class="text-decoration-none" :to="{ name: 'equipment' }">
+                  VIEW MORE
+                </router-link>
               </div>
             </div>
           </div>
@@ -181,11 +189,15 @@ export default {
           name_en: "PRODUCT",
         },
       ],
-      showCrafts: "",
+      showCrafts: this.$route.params.sort,
     };
   },
   methods: {
     showIntroduce(data) {
+      // this.$router.push({ name: "crafts", params: { sort: data.name_en } });
+      // console.log(data);
+      // console.log(this.$route.params.sort);
+      // this.$route.params.sort = data.name_en;
       this.showCrafts = data.name_en;
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div id="equipment">
-    <div class="d-flex justify-content-around studioGroup">
+    <div class="d-flex justify-content-around studioGroup mb-60">
       <div
         class="m-item d-flex align-items-center flex-column"
         v-for="(item, index) in equipment"
@@ -36,24 +36,40 @@ export default {
     return {
       equipment: [
         {
-          imgURL: require("@/assets/images/craft/craft_1.png"),
-          name_ch: "陶瓷",
-          name_en: "CERAMICS",
+          imgURL: require("@/assets/images/equipment/equipment1.png"),
+          title: "工藝大樓B1-系所專屬展覽空間"
         },
         {
-          imgURL: require("@/assets/images/craft/craft_2.png"),
-          name_ch: "金工",
-          name_en: "METALWORKING",
+          imgURL: require("@/assets/images/equipment/equipment2.png"),
+          title: "工藝大樓1樓-木材工藝創作專業工作坊教室"
         },
         {
-          imgURL: require("@/assets/images/craft/craft_3.png"),
-          name_ch: "木工",
-          name_en: "WOODWORKING",
+          imgURL: require("@/assets/images/equipment/equipment3.png"),
+          title: "1樓陶瓷工藝創作專業工坊"
         },
         {
-          imgURL: require("@/assets/images/craft/craft_4.png"),
-          name_ch: "產品",
-          name_en: "PRODUCT",
+          imgURL: require("@/assets/images/equipment/equipment4.png"),
+          title: "工藝大樓2樓-金屬工藝創作專業工坊"
+        },
+        {
+          imgURL: require("@/assets/images/equipment/equipment5.png"),
+          title: "工藝大樓3樓教室等空間"
+        },
+        {
+          imgURL: require("@/assets/images/equipment/equipment6.png"),
+          title: "工藝大樓4樓-數位工程製造室"
+        },
+        {
+          imgURL: require("@/assets/images/equipment/equipment7.png"),
+          title: "工藝大樓4樓-產品設計與複媒創作專業工坊"
+        },
+        {
+          imgURL: require("@/assets/images/equipment/equipment8.png"),
+          title: "工藝大樓4樓-討論與閱讀室"
+        },
+        {
+          imgURL: require("@/assets/images/equipment/equipment9.png"),
+          title: "工藝大樓3樓-教授研究室"
         },
       ],
     };

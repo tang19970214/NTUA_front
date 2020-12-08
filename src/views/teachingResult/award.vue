@@ -7,7 +7,7 @@
       :key="'AD__' + index"
     >
       <el-col :span="4">
-        <div>{{ item.datetime }}</div>
+        <div><b>{{ item.datetime }}</b></div>
       </el-col>
       <el-col :span="16">
         <div>{{ item.content }}</div>

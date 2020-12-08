@@ -41,9 +41,13 @@
                     </span>
                   </span>
                 </div>
-                <div class="w-100 d-flex justify-content-end">2020 | 07.28</div>
-                <div class="text-left" style="max-width: 380px">
-                  目前市場上主流的機殼，多以塑膠、金屬、玻璃為主，且設計常與家居環境衝突
+                <div class="contest__content">
+                  <div class="w-100 d-flex justify-content-end">
+                    2020 | 07.28
+                  </div>
+                  <div class="text-left" style="max-width: 380px">
+                    目前市場上主流的機殼，多以塑膠、金屬、玻璃為主，且設計常與家居環境衝突
+                  </div>
                 </div>
               </div>
               <!------------------------------>
@@ -64,19 +68,21 @@
             <div
               class="w-100 d-flex align-items-center justify-content-center slash"
             ></div>
-            <img
-              src="@/assets/images/STUDENTS-WORKS/1597628561678@2x.jpg"
-              style="z-index: 1"
-              width="600px"
-              alt=""
-            />
-            <a
-              class="cur-pointer viewBtn pos-absolute"
-              style="margin: 20rem 0 0 35rem; z-index: 2"
-            >
-              <img src="@/assets/images/view_btn.png" alt="" />
-              <img src="@/assets/images/view_btn_hover.png" alt="" />
-            </a>
+            <div class="pos-relative">
+              <img
+                class="zIndex-1"
+                src="@/assets/images/STUDENTS-WORKS/1597628561678@2x.jpg"
+                width="600px"
+                alt=""
+              />
+              <router-link
+                class="viewBtn pos-absolute b-0 r-0 zIndex-2"
+                :to="{ name: 'studioResult' }"
+              >
+                <img src="@/assets/images/view_btn.png" alt="" />
+                <img src="@/assets/images/view_btn_hover.png" alt="" />
+              </router-link>
+            </div>
           </div>
           <div
             class="w-100 d-flex align-items-center justify-content-center mt-60"
@@ -95,8 +101,10 @@
                 <div
                   class="h-100 d-flex align-items-center justify-content-between"
                 >
-                  <div>VIEW MORE</div>
                   <div>
+                    <strong>VIEW MORE</strong>
+                  </div>
+                  <div @click="goNews()">
                     <img
                       class="cur-pointer"
                       src="@/assets/images/arrowRight_btn.png"
@@ -116,9 +124,13 @@
                   <div
                     class="h-100 d-flex align-items-center justify-content-between"
                   >
-                    <div>MAY.09.2020-{{ item }}</div>
                     <div>
-                      2020新一代設計展 展覽時間2020年5月22日(五)-5月25日(一)
+                      <p class="m-0">MAY.09.2020-{{ item }}</p>
+                    </div>
+                    <div>
+                      <p class="m-0">
+                        2020新一代設計展 展覽時間2020年5月22日(五)-5月25日(一)
+                      </p>
                     </div>
                     <div>
                       <img
@@ -141,19 +153,21 @@
             <div
               class="d-flex align-items-center justify-content-center pos-relative"
               style="margin-top: -3rem"
-              v-for="item in 4"
-              :key="item"
+              v-for="(item, index) in craftsList"
+              :key="'CF__' + index"
             >
-              <img src="@/assets/images/craft/craft_1.png" alt="" />
+              <img :src="item.imgURL" alt="" />
               <div
                 class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
               >
                 <div class="mb-30">
-                  <p class="m-0">陶瓷</p>
-                  <p class="m-0">CERAMICS</p>
+                  <p class="m-0">{{ item.name_ch }}</p>
+                  <p class="m-0">{{ item.name_en }}</p>
                 </div>
                 <div class="pt-10 craftCard-borTop">
-                  <a class="text-decoration-none" href=""> VIEW MORE</a>
+                  <a class="text-decoration-none cur-pointer" @click="goCraft(item.name_en)">
+                    VIEW MORE</a
+                  >
                 </div>
               </div>
             </div>
@@ -282,19 +296,21 @@
                   width="100%"
                 />
               </div>
-              <img
-                src="@/assets/images/STUDENTS-WORKS/1597628561678@2x_phone.png"
-                alt=""
-                style="z-index: 1"
-              />
-              <a class="cur-pointer students-viewBtn pos-absolute">
-                <img src="@/assets/images/view_btn.png" alt="" width="60px" />
+              <div class="pos-relative">
                 <img
-                  src="@/assets/images/view_btn_hover.png"
+                  class="zIndex-1"
+                  src="@/assets/images/STUDENTS-WORKS/1597628561678@2x_phone.png"
                   alt=""
-                  width="60px"
                 />
-              </a>
+                <a class="cur-pointer students-viewBtn">
+                  <img src="@/assets/images/view_btn.png" alt="" width="60px" />
+                  <img
+                    src="@/assets/images/view_btn_hover.png"
+                    alt=""
+                    width="60px"
+                  />
+                </a>
+              </div>
             </div>
             <div
               class="w-100 d-flex align-items-center justify-content-center mt-20"
@@ -621,6 +637,28 @@ export default {
           ],
         },
       ],
+      craftsList: [
+        {
+          name_ch: "陶瓷",
+          name_en: "CERAMICS",
+          imgURL: require("@/assets/images/craft/craft_1.png"),
+        },
+        {
+          name_ch: "金工",
+          name_en: "METALWORKING",
+          imgURL: require("@/assets/images/craft/craft_2.png"),
+        },
+        {
+          name_ch: "木工",
+          name_en: "WOODWORKING",
+          imgURL: require("@/assets/images/craft/craft_3.png"),
+        },
+        {
+          name_ch: "產品",
+          name_en: "PRODUCT",
+          imgURL: require("@/assets/images/craft/craft_4.png"),
+        },
+      ],
       getTraffic: "",
       phone_contestList: [
         {
@@ -693,12 +731,23 @@ export default {
       console.log(data);
       this.getTraffic = data.code;
     },
+    goNews() {
+      this.$router.push({ name: "bulletin" });
+    },
+    goCraft(sortName) {
+      this.$router.push({ name: "crafts", params: { sort: sortName } });
+    },
   },
 };
 </script>
 
 <style lang="scss">
 #HomePage {
+  .contest {
+    &__content {
+      color: #52505a;
+    }
+  }
   .introduceCard {
     width: 320px;
     height: 45px;
@@ -720,6 +769,8 @@ export default {
     }
   }
   .viewBtn {
+    margin-bottom: -6rem;
+    margin-right: -6rem;
     img:last-child {
       display: none;
     }
@@ -741,9 +792,11 @@ export default {
   }
   .collapseCard {
     height: 65px;
+    color: #77767b;
     border-bottom: 1px solid #c4c4c4;
     &-child {
       width: 100%;
+      color: #77767b;
       height: 60px;
       border-bottom: 1px solid #c4c4c4;
     }
@@ -862,8 +915,11 @@ export default {
       }
       &-viewBtn {
         z-index: 2;
-        margin-left: 9rem;
-        margin-top: 6rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-right: -1.8rem;
+        margin-bottom: -1.5rem;
         img:last-child {
           display: none;
         }

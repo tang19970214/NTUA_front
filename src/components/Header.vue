@@ -10,8 +10,14 @@
       <div>
         <img
           class="pos-menu"
-          src="../assets/images/logo/logo_header.png"
+          src="../assets/images/logo/logo_header_1.png"
           alt="menu"
+        />
+        <img
+          v-show="!scrollLeftTop"
+          class="pos-menuText"
+          src="../assets/images/logo/logo_header_2.png"
+          alt="Crafts & Design Department"
         />
         <img
           class="pos-search"
@@ -82,6 +88,7 @@
             class="w-100 m-0 p-0 d-flex align-items-center justify-content-center flex-column list-none"
           >
             <li
+              :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
               v-for="(item, index) in getMenu.leftMenu"
               :key="'GLM__' + index"
               @click="goNextPage(item)"
@@ -95,6 +102,7 @@
             class="w-100 m-0 p-0 d-flex align-items-center justify-content-center flex-column list-none"
           >
             <li
+              :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
               v-for="(item, index) in getMenu.rightMenu"
               :key="'GRM__' + index"
               @click="goNextPage(item)"
@@ -145,48 +153,61 @@
 export default {
   data() {
     return {
+      scrollTop: "",
+      scrollLeftTop: false,
       clickSearch: false,
       clickOpen: false,
       getMenu: {
         leftMenu: [
           {
+            mainPath: "departmentMember",
             pathName: "fullTime",
             name: "系所成員",
           },
           {
+            mainPath: "alumni",
             pathName: "alumni",
             name: "系友專區",
           },
           {
+            mainPath: "",
+            pathName: "",
             name: "捐款專區",
           },
           {
+            mainPath: "relatedLink",
             pathName: "relatedLink",
             name: "相關連結",
           },
         ],
         rightMenu: [
           {
+            mainPath: "latestNews",
             pathName: "bulletin",
             name: "最新消息",
           },
           {
+            mainPath: "aboutUS",
             pathName: "history",
             name: "系所簡介及課程",
           },
           {
+            mainPath: "",
             pathName: "",
             name: "系所規定與申請表",
           },
           {
+            mainPath: "",
             pathName: "",
             name: "招生資訊",
           },
           {
+            mainPath: "teachingResult",
             pathName: "award",
             name: "教學成果",
           },
           {
+            mainPath: "website",
             pathName: "workCamp",
             name: "研討會/工作營網站",
           },
@@ -238,6 +259,12 @@ export default {
     };
   },
   methods: {
+    handleScroll() {
+      this.scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+    },
     openSearch() {
       this.clickSearch = !this.clickSearch;
     },
@@ -258,6 +285,18 @@ export default {
       this.menuModal = !this.menuModal;
     },
   },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  watch: {
+    scrollTop(val) {
+      if (this.scrollTop > 200) {
+        this.scrollLeftTop = true;
+      } else {
+        this.scrollLeftTop = false;
+      }
+    },
+  },
 };
 </script>
 
@@ -273,9 +312,17 @@ export default {
     }
     &-menu {
       position: fixed;
-      top: 0%;
-      right: 0%;
+      top: 0;
+      right: 0;
       z-index: 99;
+    }
+    &-menuText {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 99;
+      margin-top: 200px;
+      margin-right: 50px;
     }
     &-search {
       position: fixed;
@@ -330,7 +377,7 @@ export default {
     width: 470px;
     height: 470px;
     border-radius: 50%;
-    background-color: rgba(89, 86, 86, 0.5);
+    background-color: rgba(89, 86, 86, 0.8);
     div > ul > li {
       font-size: 24px;
       line-height: 28px;
@@ -341,6 +388,10 @@ export default {
         background: white;
         color: #ceb87f;
       }
+    }
+    .stayPage {
+      background: white;
+      color: #ceb87f;
     }
   }
   .leftBar {
@@ -370,8 +421,6 @@ export default {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.8);
-    animation-name: fadeIn;
-    animation-duration: 0.4s;
 
     &-content {
       position: fixed;
@@ -392,16 +441,6 @@ export default {
       }
     }
   }
-
-  // @keyframes fadeIn {
-  //   from {
-  //     opacity: 0;
-  //   }
-
-  //   to {
-  //     opacity: 1;
-  //   }
-  // }
 
   @keyframes slideIn {
     from {

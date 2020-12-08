@@ -6,7 +6,7 @@
 
     <div class="catalog">
       <el-row
-        class="catalog-bor"
+        class="catalog__bor"
         v-for="(item, index) in eduList"
         :key="'EL_' + index"
       >
@@ -16,7 +16,7 @@
           </div>
         </el-col>
         <el-col :span="20">
-          <div class="pl-50 catalog-content">
+          <div class="pl-50 catalog__content">
             <ul class="m-0">
               <li v-for="(items, index) in item.list" :key="'LS__' + index">
                 {{ items.context }}
@@ -31,7 +31,7 @@
       <div class="w-100 d-flex justify-content-between">
         <div class="w-100 d-flex align-items-center flex-column">
           <div class="w-100 mb-45 ml-150">
-            <p class="m-0 rules-title">課程規劃原則</p>
+            <p class="m-0 rules__title">課程規劃原則</p>
           </div>
           <div
             class="w-100 mb-60"
@@ -44,7 +44,7 @@
               alt="A"
               height="190px"
             />
-            <div class="rules-Card">
+            <div class="rules__Card">
               <div
                 class="h-100 pl-120 pr-90 d-flex align-items-center justify-content-center"
               >
@@ -56,38 +56,40 @@
 
         <div class="w-100 d-flex align-items-center flex-column ml-100">
           <div class="w-100 mb-45">
-            <p class="m-0 rules-title">Download</p>
+            <p class="m-0 rules__title">Download</p>
           </div>
           <div class="w-100">
             <div class="downloadCard d-flex flex-column">
               <div
-                class="px-80 py-15 downloadCard-download d-flex align-items-center"
+                class="px-80 py-15 downloadCard__download d-flex align-items-center"
               >
                 <p class="m-0">五種學制地圖</p>
                 <img src="@/assets/images/icon/pdf_icon.png" alt="" />
               </div>
-              <div class="px-80 py-15 downloadCard-title">
+              <div class="px-80 py-15 downloadCard__title">
                 各年度課程科目學分表查詢
               </div>
-              <div class="w-100 downloadCard-content">
-                <div
-                  class="d-flex align-items-center justify-content-center mt-50"
-                  v-for="(item, index) in downloadList"
-                  :key="'DL_' + index"
-                >
+              <div class="w-100 downloadCard__content">
+                <div class="p-30">
                   <div
-                    class="downloadCard-content_blackTag d-flex align-items-center justify-content-center"
+                    class="d-flex align-items-center justify-content-center my-30"
+                    v-for="(item, index) in downloadList"
+                    :key="'DL_' + index"
                   >
-                    {{ item.tagName }}
-                  </div>
-                  <div
-                    class="w-100 d-flex align-items-center justify-content-between downloadCard-content_list"
-                  >
-                    <div class="w-100 text-right px-25">
-                      {{ item.leftYear }}
+                    <div
+                      class="downloadCard__content-blackTag d-flex align-items-center justify-content-center"
+                    >
+                      {{ item.tagName }}
                     </div>
-                    <div class="w-100 text-left px-25">
-                      {{ item.rightYear }}
+                    <div
+                      class="w-100 d-flex align-items-center justify-content-between downloadCard__content-list my-10"
+                    >
+                      <div class="w-100 text-right px-25">
+                        {{ item.leftYear }}
+                      </div>
+                      <div class="w-100 text-left px-25">
+                        {{ item.rightYear }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -99,17 +101,19 @@
     </div>
 
     <div class="triangle">
-      <div class="w-100 d-flex align-items-center justify-content-between pb-80 mb-80">
+      <div
+        class="w-100 d-flex align-items-center justify-content-between pb-80 mb-80"
+      >
         <div
           class="w-100 d-flex align-items-center flex-column ml-25 mt-150"
           v-for="(item, index) in depIntroduce"
           :key="'DI_' + index"
         >
           <div class="w-100 text-left">
-            <p class="triangle-title d-flex m-0">{{ item.titleName }}</p>
+            <p class="triangle__title d-flex m-0">{{ item.titleName }}</p>
           </div>
           <div
-            class="w-100 triangle-content d-flex flex-column"
+            class="w-100 triangle__content d-flex flex-column"
             v-for="(items, index) in item.options"
             :key="'OP_' + index"
           >
@@ -122,13 +126,72 @@
             class="w-100 d-flex align-items-center justify-content-center flex-column"
           >
             <div class="mt-20">
-              <img src="@/assets/images/triangle-top.png" alt="" />
+              <img
+                src="@/assets/images/triangle/triangle-top.png"
+                alt=""
+                v-if="!triangleBlock.top"
+              />
+              <div class="pos-relative" v-else>
+                <img
+                  src="@/assets/images/triangle/triangle-top_hover.png"
+                  alt=""
+                />
+                <div
+                  class="pos-absolute t-0 mt-130"
+                  style="margin-left: -18.4rem"
+                >
+                  <img
+                    src="@/assets/images/triangle/triangle-topText_hover.png"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
+
             <div class="mt-66">
-              <img src="@/assets/images/triangle-middle.png" alt="" />
+              <img
+                src="@/assets/images/triangle/triangle-middle.png"
+                alt=""
+                v-if="!triangleBlock.middle"
+              />
+              <div class="pos-relative" v-else>
+                <img
+                  src="@/assets/images/triangle/triangle-middle_hover.png"
+                  alt=""
+                />
+                <div
+                  class="pos-absolute t-0 mt-60"
+                  style="margin-left: -19.6rem"
+                >
+                  <img
+                    src="@/assets/images/triangle/triangle-middleText_hover.png"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
+
             <div class="mt-44">
-              <img src="@/assets/images/triangle-bottom.png" alt="" />
+              <img
+                src="@/assets/images/triangle/triangle-bottom.png"
+                alt=""
+                v-if="!triangleBlock.bottom"
+              />
+              <div class="pos-relative" v-else>
+                <img
+                  src="@/assets/images/triangle/triangle-bottom_hover.png"
+                  alt=""
+                />
+                <div
+                  class="pos-absolute t-0 mt-45"
+                  style="margin-left: -57.3rem"
+                >
+                  <img
+                    src="@/assets/images/triangle/triangle-bottomText_hover.png"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -141,6 +204,12 @@
 export default {
   data() {
     return {
+      scrollTop: "",
+      triangleBlock: {
+        top: false,
+        middle: false,
+        bottom: false,
+      },
       eduList: [
         {
           imgURL: require("@/assets/images/goal.png"),
@@ -239,6 +308,42 @@ export default {
       ],
     };
   },
+  methods: {
+    handleScroll() {
+      this.scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  watch: {
+    scrollTop(val) {
+      // console.log(val);
+      if (this.scrollTop > 2000) {
+        this.triangleBlock.top = true;
+      } else {
+        this.triangleBlock.top = false;
+      }
+      if (this.scrollTop > 2300) {
+        this.triangleBlock.middle = true;
+      } else {
+        this.triangleBlock.middle = false;
+      }
+      if (this.scrollTop > 2600) {
+        this.triangleBlock.bottom = true;
+      } else {
+        this.triangleBlock.bottom = false;
+      }
+
+      // if (this.scrollTop = 2100) {
+      //   console.log(document.getElementById("tri_top").style);
+      //   document.getElementById("tri_top").style.animationPlayState = "running";
+      // }
+    },
+  },
 };
 </script>
 
@@ -252,14 +357,14 @@ export default {
   }
   .catalog {
     margin: 0px 200px;
-    &-bor {
+    &__bor {
       padding: 60px 0px;
       border-bottom: 2px solid #c4c4c4;
       &:last-child {
         border-bottom: none;
       }
     }
-    &-content {
+    &__content {
       ul {
         list-style: square inside url("../../assets/images/icon/squareDot.png");
         li {
@@ -278,12 +383,12 @@ export default {
   }
   .rules {
     width: 100%;
-    &-title {
+    &__title {
       font-size: 24px;
       line-height: 28px;
       color: #ceb87f;
     }
-    &-Card {
+    &__Card {
       height: 190px;
       margin-left: 80px;
       background: #c4c4c4;
@@ -297,8 +402,7 @@ export default {
     .downloadCard {
       width: 560px;
       height: 690px;
-
-      &-download {
+      &__download {
         font-size: 24px;
         line-height: 160%;
         letter-spacing: 0.37em;
@@ -306,21 +410,23 @@ export default {
         background: #2d2d2d;
         border-bottom: 1px solid #ffffff;
       }
-      &-title {
+      &__title {
         font-size: 24px;
         line-height: 160%;
         letter-spacing: 0.37em;
         background: #2d2d2d;
         color: #ceb87f;
       }
-      &-content {
+      &__content {
+        position: relative;
         background: #c4c4c4;
         height: 553px;
         overflow-y: auto;
-        &_blackTag {
+        &-blackTag {
           position: absolute;
-          margin-left: -25rem;
-          margin-top: -6rem;
+          left: 0;
+          margin-left: 1rem;
+          margin-bottom: 6rem;
           width: 125px;
           height: 50px;
           background: #2d2d2d;
@@ -329,7 +435,7 @@ export default {
           letter-spacing: 0.3em;
           color: #ceb87f;
         }
-        &_list {
+        &-list {
           width: 480px;
           height: 80px;
           background: #ffffff;
@@ -338,13 +444,13 @@ export default {
     }
   }
   .triangle {
-    &-title {
+    &__title {
       width: 150px;
       font-size: 72px;
       line-height: 84px;
       color: #ceb87f;
     }
-    &-content {
+    &__content {
       margin-top: 10px;
       font-size: 24px;
       font-weight: bold;
@@ -352,6 +458,43 @@ export default {
       letter-spacing: 0.05em;
       color: #40172d;
     }
+    &__block {
+      img:last-child {
+        // opacity: 0;
+        // animation-name: scrollToShow;
+        // animation-duration: 0.5s;
+        // animation-fill-mode: forwards;
+        // animation-play-state: paused;
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar-track-piece {
+  //滾動條凹槽的顏色，還可以設定邊框屬性
+  background-color: #f8f8f8;
+}
+::-webkit-scrollbar {
+  //滾動條的寬度
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  //滾動條的設定
+  background-color: #dddddd;
+  background-clip: padding-box;
+  // min-height: 28px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+@keyframes scrollToShow {
+  0% {
+    display: none;
+  }
+  100% {
+    display: block;
   }
 }
 </style>

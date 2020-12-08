@@ -7,7 +7,7 @@
         </div>
       </el-col>
       <el-col :span="16">
-        <div class="historyCard d-flex flex-column">
+        <div class="historyCard d-flex flex-column mt-50">
           <p class="m-0 historyCard-title">歷史沿革</p>
           <p class="m-0 historyCard-content">
             系前身為「國立臺灣藝術專科學校美術工藝科」，創立於民國46年，分「產品組」和「裝飾組」實施教學（民國73年正式分「工藝組」及「設計組」兩組，76年又增設「陶瓷組」），為國內最早成立之美術工藝系培育人才無數，為國內設計之發展奠定了深厚的根基。
@@ -24,46 +24,9 @@
         class="education d-flex align-items-center justify-content-center cur-pointer"
         v-for="(item, index) in education"
         :key="'ED__' + index"
-        @click="openPopconfirm(item)"
+        @click="openPeriod(item)"
       >
         {{ item.name }}
-      </div>
-    </div>
-
-    <!-- popconfirm (0/13/30) -->
-    <div class="w-100" v-if="getEducationInfo.content">
-      <div class="popconfirm" :style="'margin-left:' + eduLeftDistance + 'rem'">
-        <div class="d-flex align-items-center justify-content-end pt-20 px-20">
-          <i
-            class="el-icon-close cur-pointer popconfirm-close"
-            @click="closePopconfirm()"
-          ></i>
-        </div>
-        <div
-          class="popconfirm-content py-30 px-60"
-          v-for="(item, index) in getEducationInfo.content"
-          :key="'CT_' + index"
-        >
-          <p class="m-0 popconfirm-content_title">
-            {{ item.context.length > 1 ? item.datetime : "" }}
-          </p>
-          <div
-            class="w-100"
-            v-for="(items, $index) in item.context"
-            :key="'CTX_' + $index"
-          >
-            <p class="m-0 popconfirm-content_title">
-              {{ item.context.length > 1 ? "" : item.datetime }}
-            </p>
-            <p
-              class="m-0 popconfirm-content_main ml-90"
-              :style="{ color: items.color }"
-            >
-              {{ items.text }}
-            </p>
-          </div>
-        </div>
-        <div class="popconfirm-footer px-15">{{ getEducationInfo.footer }}</div>
       </div>
     </div>
 
@@ -71,6 +34,70 @@
       <p class="m-0 mt-80">學制概況</p>
       <div class="w-100 d-flex align-items-center justify-content-center mt-50">
         <img src="@/assets/images/educationSystem.png" alt="" />
+      </div>
+    </div>
+
+    <!-- modal -->
+    <div class="modal" v-if="showPeriod">
+      <div class="modal__content">
+        <div class="w-100 d-flex align-items-center justify-content-center">
+          <div class="pos-relative p-40">
+            <div class="periodCard text-center">
+              <div class="periodCard__title py-25">
+                <strong>{{ getEducationInfo.name }}</strong>
+              </div>
+              <div class="periodCard__content">
+                <div
+                  class="p-70 d-flex align-items-center justify-content-center flex-column"
+                >
+                  <div
+                    class="w-100 d-flex align-items-start justify-content-around flex-row"
+                  >
+                    <div
+                      class="w-100 d-flex align-items-center justify-content-center flex-column"
+                      v-for="(item, index) in getEducationInfo.options.content"
+                      :key="'CT__' + index"
+                    >
+                      <div
+                        class="periodCard__content-yearCard d-inline-flex p-10"
+                      >
+                        <p class="m-0">
+                          {{ item.datetime }}
+                        </p>
+                      </div>
+                      <div class="w-100 periodCard__content-introduce mt-20">
+                        <p
+                          class="m-0"
+                          v-for="(items, $index) in item.context"
+                          :key="'CTX__' + $index"
+                        >
+                          {{ items.text }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="w-100" v-if="getEducationInfo.options.footer">
+                    <el-divider></el-divider>
+                    <div class="px-80 py-20">
+                      <div class="periodCard__content-footerCard p-30">
+                        <strong>{{ getEducationInfo.options.footer }}</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pos-absolute t-0 r-0">
+              <div
+                class="closeModalBtn d-flex align-items-center justify-content-center cur-pointer"
+                @click="showPeriod = false"
+              >
+                <i class="el-icon-close"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -83,7 +110,6 @@ export default {
       education: [
         {
           name: "專科時期",
-          leftDistance: 0,
           options: {
             content: [
               {
@@ -132,7 +158,6 @@ export default {
         },
         {
           name: "學院時期",
-          leftDistance: 13,
           options: {
             content: [
               {
@@ -159,7 +184,6 @@ export default {
         },
         {
           name: "大學時期",
-          leftDistance: 30,
           options: {
             content: [
               {
@@ -199,17 +223,14 @@ export default {
           },
         },
       ],
+      showPeriod: false,
       getEducationInfo: [],
-      eduLeftDistance: "",
     };
   },
   methods: {
-    openPopconfirm(data) {
-      this.getEducationInfo = data.options;
-      this.eduLeftDistance = data.leftDistance;
-    },
-    closePopconfirm() {
-      this.getEducationInfo = [];
+    openPeriod(data) {
+      this.showPeriod = true;
+      this.getEducationInfo = data;
     },
   },
 };
@@ -244,6 +265,7 @@ export default {
     line-height: 210%;
     letter-spacing: 0.25em;
     color: #ffffff;
+    transition: all 0.5s;
     &:hover {
       background: rgba(140, 143, 144, 0.8);
     }
@@ -257,40 +279,49 @@ export default {
     }
   }
 
-  .popconfirm {
-    position: absolute;
-    margin-top: -47rem;
-    width: 450px;
-    height: 640px;
-    background: #edece8;
-    border-radius: 40px;
-
-    &-close {
-      font-size: 30px;
-      font-weight: bold;
-    }
-
-    &-content {
-      &_title {
-        font-size: 18px;
-        line-height: 123%;
-        letter-spacing: 0.25em;
-        color: #596164;
-      }
-      &_main {
-        font-size: 20px;
+  .periodCard {
+    width: 1000px;
+    background: #fff;
+    border-radius: 8px;
+    &__title {
+      background: #596164;
+      border-radius: 8px 8px 0px 0px;
+      strong {
         font-weight: bold;
+        font-size: 36px;
+        line-height: 123%;
+        letter-spacing: 0.25em;
+        color: #ffffff;
+      }
+    }
+    &__content {
+      &-yearCard {
+        background: #52505a;
+        border-radius: 5px;
+        p {
+          font-size: 28px;
+          line-height: 123%;
+          letter-spacing: 0.25em;
+          color: #ffffff;
+        }
+      }
+      &-introduce {
+        font-size: 20px;
         line-height: 123%;
         letter-spacing: 0.25em;
         color: #596164;
       }
-    }
-    &-footer {
-      font-size: 24px;
-      font-weight: bold;
-      line-height: 150%;
-      letter-spacing: 0.25em;
-      color: #a92323;
+      &-footerCard {
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        strong {
+          font-size: 24px;
+          line-height: 210%;
+          letter-spacing: 0.25em;
+          color: #a92323;
+        }
+      }
     }
   }
 }

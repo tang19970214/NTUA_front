@@ -7,7 +7,7 @@
         <router-link
           class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
           :class="{ active: $route.name == item.pathURL }"
-          :to="{ name: item.pathURL }"
+          :to="{ name: item.pathURL, params: { sort: item.pathParams } }"
           v-for="(item, index) in aboutUS"
           :key="'TS__' + index"
         >
@@ -17,15 +17,7 @@
         </router-link>
       </div>
 
-      <div class="w-100 d-flex align-items-center flex-row">
-        <span
-          class="w-100 newsCard-transBg"
-          v-for="(item, index) in artImg"
-          :key="'AI__' + index"
-        >
-          <img :src="item.imgUrl" alt="" width="100%" />
-        </span>
-      </div>
+      <LoadShowIMG />
 
       <!-- <div class="w-100 newsCard-title">
         <div class="p-60">
@@ -60,20 +52,14 @@
 </template>
 
 <script>
+import LoadShowIMG from "@/components/LoadShowIMG.vue";
+
 export default {
+  components: {
+    LoadShowIMG,
+  },
   data() {
     return {
-      artImg: [
-        {
-          imgUrl: require("@/assets/images/art1.png"),
-        },
-        {
-          imgUrl: require("@/assets/images/art2.png"),
-        },
-        {
-          imgUrl: require("@/assets/images/art3.png"),
-        },
-      ],
       aboutUS: [
         {
           pathURL: "history",
@@ -85,6 +71,7 @@ export default {
         },
         {
           pathURL: "crafts",
+          pathParams: "CERAMICS",
           pathName: "四大工坊",
         },
         {
@@ -143,16 +130,6 @@ export default {
 
   .newsCard {
     background-color: white;
-    &-transBg {
-      opacity: 0.6;
-      img {
-        opacity: 0;
-        transition: all 0.8s;
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
     &-sortText {
       position: absolute;
       right: 0;
@@ -163,7 +140,7 @@ export default {
         font-size: 24px;
         line-height: 210%;
         letter-spacing: 0.25em;
-        color: #8c8f90;
+        color: #fff;
         cursor: pointer;
         &:hover {
           color: #ceb87f;

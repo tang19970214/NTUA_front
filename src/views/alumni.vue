@@ -16,15 +16,7 @@
         </router-link>
       </div>
 
-      <div class="w-100 d-flex align-items-center flex-row">
-        <span
-          class="w-100 newsCard-transBg"
-          v-for="(item, index) in artImg"
-          :key="'AI__' + index"
-        >
-          <img :src="item.imgUrl" alt="" width="100%" />
-        </span>
-      </div>
+      <LoadShowIMG />
 
       <div class="w-100 newsCard-title">
         <div class="p-60">
@@ -82,24 +74,15 @@
 
 <script>
 import Pagination from "@/components/Pagination.vue";
+import LoadShowIMG from "@/components/LoadShowIMG.vue";
 
 export default {
   components: {
     Pagination,
+    LoadShowIMG
   },
   data() {
     return {
-      artImg: [
-        {
-          imgUrl: require("@/assets/images/art1.png"),
-        },
-        {
-          imgUrl: require("@/assets/images/art2.png"),
-        },
-        {
-          imgUrl: require("@/assets/images/art3.png"),
-        },
-      ],
       alumniSort: [
         {
           pathURL: "alumni",
@@ -149,16 +132,6 @@ export default {
   .newsCard {
     background-color: white;
     padding-bottom: 90px;
-    &-transBg {
-      opacity: 0.6;
-      img {
-        opacity: 0;
-        transition: all 0.8s;
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
     &-sortText {
       position: absolute;
       right: 0;
@@ -169,7 +142,7 @@ export default {
         font-size: 24px;
         line-height: 210%;
         letter-spacing: 0.25em;
-        color: #8c8f90;
+        color: #FFF;
         cursor: pointer;
         &:hover {
           color: #ceb87f;

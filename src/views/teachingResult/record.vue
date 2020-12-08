@@ -8,7 +8,7 @@
         v-for="(item, index) in recordData"
         :key="'RD__' + index"
       >
-        <div class="">
+        <div class="bookIMG">
           <img :src="item.imageURL" alt="" />
         </div>
         <div class="bookContent">
@@ -88,6 +88,13 @@ export default {
 #record {
   padding: 30px;
   background: #2d2d2d;
+
+  .bookIMG {
+    transition: all 0.6s;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 
   .bookContent {
     position: relative;
