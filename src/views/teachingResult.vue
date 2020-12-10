@@ -22,7 +22,14 @@
         <div class="p-60">
           <div class="w-100 d-flex flex-row">
             <div class="w-100">
-              <p class="m-0">{{ getPathName(teachingSort) }}</p>
+              <p
+                class="m-0"
+                style="width: 200px"
+                v-if="getPathName(teachingSort) == '工作室成果'"
+              >
+                {{ getPathName(teachingSort) }}
+              </p>
+              <p class="m-0" v-else>{{ getPathName(teachingSort) }}</p>
             </div>
             <div class="w-100">
               <div
@@ -138,7 +145,7 @@ export default {
         font-size: 24px;
         line-height: 210%;
         letter-spacing: 0.25em;
-        color: #FFF;
+        color: #fff;
         cursor: pointer;
         &:hover {
           color: #ceb87f;
