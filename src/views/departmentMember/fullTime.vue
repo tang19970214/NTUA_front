@@ -14,7 +14,7 @@
             </div>
             <div class="back">
               <div
-                class="teacherList-introduce p-20 d-flex justify-content-center flex-column"
+                class="teacherList__introduce p-20 d-flex justify-content-center flex-column"
               >
                 <div
                   class="w-100"
@@ -22,7 +22,7 @@
                   :key="index"
                 >
                   <div
-                    class="w-100 d-flex flex-row teacherList-introduce_content"
+                    class="w-100 d-flex flex-row teacherList__introduce-content"
                   >
                     <el-row class="w-100">
                       <el-col :span="7">
@@ -44,10 +44,16 @@
                     </el-row>
                   </div>
                 </div>
+                <div
+                  class="w-100 text-left mt-20 teacherList__introduce-goPublishInfo"
+                  @click="goPublishInfo(item.name)"
+                >
+                  <p class="m-0">研究發表</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="teacherList-rightBar">
+          <div class="teacherList__rightBar">
             <div class="py-20 px-10">
               <p class="m-0">{{ item.name }}</p>
               <p class="m-0">{{ item.jobTitle }}</p>
@@ -130,6 +136,11 @@ export default {
       ],
     };
   },
+  methods: {
+    goPublishInfo(name) {
+      this.$router.push({ name: "publishInfo", params: { author: name } });
+    },
+  },
 };
 </script>
 
@@ -160,12 +171,11 @@ export default {
   .teacherList {
     height: 452px;
     margin-bottom: 200px;
-    &-introduce {
+    &__introduce {
       width: 310px;
       height: 410px;
       border: 1px solid #c4c4c4;
-
-      &_content {
+      &-content {
         strong {
           font-weight: bold;
           font-size: 24px;
@@ -184,21 +194,20 @@ export default {
           word-wrap: break-word;
         }
       }
-    }
-
-    &-name {
-      writing-mode: vertical-lr;
-      height: calc(100% - 40px);
-      padding: 20px 15px;
-      background: #c4c4c4;
-      font-size: 36px;
-      color: #2d2d2d;
-      p {
-        letter-spacing: 2em;
+      &-goPublishInfo {
+        color: #ceb87f;
+        font-weight: bold;
+        font-size: 24px;
+        text-decoration: underline;
+        transition: all 0.6s;
+        cursor: pointer;
+        &:hover {
+          letter-spacing: 0.2rem;
+        }
       }
     }
 
-    &-rightBar {
+    &__rightBar {
       height: 452px;
       background: #c4c4c4;
       writing-mode: vertical-lr;

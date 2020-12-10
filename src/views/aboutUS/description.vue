@@ -205,6 +205,7 @@ export default {
   data() {
     return {
       scrollTop: "",
+      topFlag: true,
       triangleBlock: {
         top: false,
         middle: false,
@@ -319,13 +320,23 @@ export default {
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   watch: {
     scrollTop(val) {
-      // console.log(val);
       if (this.scrollTop > 2000) {
-        this.triangleBlock.top = true;
+        if (this.topFlag) {
+          this.triangleBlock.top = true;
+          console.log("this.topFlag=false");
+          this.topFlag = false;
+        }
       } else {
-        this.triangleBlock.top = false;
+        if (!this.topFlag) {
+          this.triangleBlock.top = false;
+          console.log("asfdadsf");
+          this.topFlag = true;
+        }
       }
       if (this.scrollTop > 2300) {
         this.triangleBlock.middle = true;
@@ -489,12 +500,12 @@ export default {
   background-color: #bbb;
 }
 
-@keyframes scrollToShow {
-  0% {
-    display: none;
-  }
-  100% {
-    display: block;
-  }
-}
+// @keyframes scrollToShow {
+//   0% {
+//     display: none;
+//   }
+//   100% {
+//     display: block;
+//   }
+// }
 </style>

@@ -18,8 +18,10 @@
             <p class="m-0">{{ item.location }}</p>
           </div>
           <div class="d-flex align-items-center justify-content-end mt-18">
-            <a class="bookContent-viewMore text-decoration-none" href=""
-              >VIEW MORE</a
+            <router-link
+              class="bookContent-viewMore text-decoration-none"
+              :to="{ name: 'recordInfo', params: { art: item.title } }"
+              >VIEW MORE</router-link
             >
           </div>
         </div>

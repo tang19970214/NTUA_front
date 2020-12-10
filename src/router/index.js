@@ -192,6 +192,31 @@ const routes = [{
     meta: {
       mainPage: "relatedLink"
     }
+  },
+
+  {
+    path: '/equipmentInfo/:class',
+    name: 'equipmentInfo',
+    component: () => import('../views/aboutUS/equipment/equipmentInfo.vue'),
+    meta: {
+      mainPage: "aboutUS"
+    }
+  },
+  {
+    path: '/publishInfo/:author',
+    name: 'publishInfo',
+    component: () => import('../views/teachingResult/publish/publishInfo.vue'),
+    meta: {
+      mainPage: "teachingResult"
+    }
+  },
+  {
+    path: '/recordInfo/:art',
+    name: 'recordInfo',
+    component: () => import('../views/teachingResult/record/recordInfo.vue'),
+    meta: {
+      mainPage: "teachingResult"
+    }
   }
 ]
 

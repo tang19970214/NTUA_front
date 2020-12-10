@@ -20,11 +20,9 @@
         <div>{{ item.author }}</div>
       </el-col>
       <el-col :span="2" class="text-right">
-        <div>
-          <span class="cur-pointer">
-            <img src="@/assets/images/arrowRight_btn.png" alt="" />
-          </span>
-        </div>
+        <span class="cur-pointer" @click="goPublishInfo(item)">
+          <img src="@/assets/images/arrowRight_btn.png" alt="" />
+        </span>
       </el-col>
     </el-row>
 
@@ -81,6 +79,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    goPublishInfo(data) {
+      this.$router.push({
+        name: "publishInfo",
+        params: { author: data.author },
+      });
+    },
   },
 };
 </script>

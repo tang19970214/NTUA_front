@@ -7,17 +7,17 @@
       :key="'AD__' + index"
     >
       <el-col :span="4">
-        <div><b>{{ item.datetime }}</b></div>
+        <div>
+          <b>{{ item.datetime }}</b>
+        </div>
       </el-col>
       <el-col :span="16">
         <div>{{ item.content }}</div>
       </el-col>
       <el-col :span="4" class="text-right">
-        <div>
-          <span class="cur-pointer">
-            <img src="@/assets/images/icon/links.png" alt="" />
-          </span>
-        </div>
+        <span class="cur-pointer" @click="goPublish()">
+          <img src="@/assets/images/icon/links.png" alt="" />
+        </span>
       </el-col>
     </el-row>
 
@@ -72,6 +72,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    goPublish() {
+      this.$router.push({ name: "publish" });
+    },
   },
 };
 </script>

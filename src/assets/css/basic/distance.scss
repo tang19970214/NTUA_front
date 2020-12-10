@@ -1,4 +1,7 @@
 @for $i from 0 through 150 {
+    .font-s-#{$i} {
+        font-size: 1px * $i !important;
+    }
 
     // margin
     .m-#{$i} {
