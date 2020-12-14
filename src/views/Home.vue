@@ -374,7 +374,7 @@
           </div>
         </div>
         <!-- crafts -->
-        <div class="crafts w-100 mb-50">
+        <!-- <div class="crafts w-100 mb-50">
           <div
             class="craftsCard w-100 pl-30 d-flex align-items-center justify-content-start"
           >
@@ -467,7 +467,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- access -->
         <div class="access w-100">
           <TitleText textTitle="ACCESS" />

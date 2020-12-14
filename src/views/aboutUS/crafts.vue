@@ -175,11 +175,11 @@
       </div>
     </div>
 
-    <div class="phone d-block d-mb-none">
+    <div class="phone crafts d-block d-mb-none">
       <div class="pl-50 pt-70 pb-20">
-        <div class="crafts w-100">
+        <div class="w-100">
           <div
-            class="craftsCard w-100 pl-30 d-flex align-items-center justify-content-start"
+            class="crafts__Card pl-30 d-flex align-items-center justify-content-start"
           >
             <div
               class="d-flex flex-column align-items-center justify-content-center"
@@ -190,7 +190,7 @@
                 width="110px"
               />
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
               >
                 <div class="py-10">
                   <p class="m-0">陶瓷</p>
@@ -212,7 +212,7 @@
                 width="110px"
               />
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
               >
                 <div class="py-10">
                   <p class="m-0">金工</p>
@@ -234,7 +234,7 @@
                 width="110px"
               />
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
               >
                 <div class="py-10">
                   <p class="m-0">木工</p>
@@ -256,7 +256,7 @@
                 width="110px"
               />
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
               >
                 <div class="py-10">
                   <p class="m-0">產品</p>
@@ -273,24 +273,78 @@
         </div>
       </div>
       <div class="w-100">
-        <div class="py-20">
+        <div class="py-20 crafts__resetBG">
           <PhoneTitle
             :title="getCraftTitle($route.params.sort).title_ch"
             :filterDate="false"
           />
-          <p class="m-0 craftEngTitle">{{ craftsTitle.title_en }}</p>
+          <p class="m-0 crafts__EngTitle">{{ craftsTitle.title_en }}</p>
         </div>
         <div class="bg-white">
-          <div class="pl-50">
-            <div class="pl-50">
+          <div class="pl-50 pt-20 pb-55">
+            <div class="crafts__host pl-50">
               <div class="w-100 d-flex align-items-start flex-row">
-                <strong>主持人</strong>
-                <span class="px-10"></span>
+                <strong class="pl-20">主持人</strong>
+                <span class="mx-10 pt-10"></span>
                 <div class="d-flex align-items-center flex-column">
                   <p class="m-0">呂琪昌老師</p>
                   <p class="m-0">梁家豪老師</p>
                 </div>
               </div>
+            </div>
+
+            <div class="w-100 overflow-x crafts__studio">
+              <!-- <div class="p-20"> -->
+              <div class="w-100 d-flex flex-column">
+                <div class="p-15 d-flex align-items-start flex-row">
+                  <strong class="pl-20">大學部陶瓷工作室</strong>
+                  <span class="mx-10 pt-10"></span>
+                  <div class="d-flex align-items-center flex-column pr-20">
+                    <p class="m-0">
+                      成員採申請制，可容納33名。提供大二～大四有志專心
+                      學陶做陶的一個專屬創作空間，每年舉辦工作室成員聯
+                      展、陶藝家工作營、專題講座及參加工藝市集。
+                    </p>
+                  </div>
+                </div>
+                <div class="p-15 d-flex align-items-start flex-row">
+                  <strong class="pl-20">碩士班陶瓷工作室</strong>
+                  <span class="mx-10 pt-10"></span>
+                  <div class="d-flex align-items-center flex-column pr-20">
+                    <p class="m-0">
+                      成員採申請制，可容納14名。提供陶瓷研究生專屬的獨
+                      立研究與創作空間，每學期參加系上主辦的創作評圖，
+                      工作室經常參與國際展覽、校際交流、移地教學及研討
+                      會發表之學術性活動。
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-100 crafts__studioClass d-flex align-items-center justify-content-center"
+        >
+          <div
+            class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
+          >
+            <img
+              src="@/assets/images/craft/ceramics.png"
+              alt=""
+              width="200px"
+            />
+            <div
+              class="px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
+            >
+              <strong>1樓陶瓷工藝創作專業工坊</strong>
+              <router-link
+                class="mt-10 px-20 pt-8 text-decoration-none"
+                :to="{ name: 'equipment' }"
+              >
+                VIEW MORE
+              </router-link>
             </div>
           </div>
         </div>
@@ -475,7 +529,7 @@ export default {
   .phone {
     background: white;
     .crafts {
-      .craftsCard {
+      &__Card {
         overflow-x: auto;
         height: 190px;
         background: #2d2d2d;
@@ -504,15 +558,83 @@ export default {
           }
         }
       }
-    }
-    .craftEngTitle {
-      margin-left: 20px;
-      margin-right: 35px;
-      border-top: 1px solid #ceb87f;
-      font-size: 12px;
-      line-height: 160%;
-      letter-spacing: 0.02em;
-      color: #ceb87f;
+      &__resetBG {
+        background: #efefef;
+      }
+      &__EngTitle {
+        margin-left: 20px;
+        margin-right: 35px;
+        border-top: 1px solid #ceb87f;
+        font-size: 12px;
+        line-height: 160%;
+        letter-spacing: 0.02em;
+        color: #ceb87f;
+      }
+      &__host {
+        strong {
+          font-size: 14px;
+          line-height: 160%;
+          letter-spacing: 0.005em;
+          color: #596164;
+          border-left: 4px solid #ceb87f;
+        }
+        span {
+          width: 50px;
+          border-bottom: 1px solid #8c8f90;
+        }
+        p {
+          font-size: 14px;
+          line-height: 160%;
+          letter-spacing: 0.005em;
+          color: #596164;
+        }
+      }
+      &__studio {
+        background: #2d2d2d;
+        strong {
+          min-width: 120px;
+          font-size: 14px;
+          line-height: 160%;
+          letter-spacing: 0.005em;
+          color: #ffffff;
+          border-left: 4px solid #ceb87f;
+        }
+        span {
+          min-width: 30px;
+          max-width: 30px;
+          border-bottom: 1px solid #8c8f90;
+        }
+        p {
+          min-width: 340px;
+          font-size: 14px;
+          line-height: 160%;
+          letter-spacing: 0.005em;
+          color: #ffffff;
+        }
+      }
+      &__studioClass {
+        background: #2d2d2d;
+        &-classroom {
+          transform: translateY(-2.5rem);
+          div {
+            border: 2px solid #596164;
+            transform: translateY(-2rem);
+            strong {
+              font-size: 14px;
+              line-height: 160%;
+              letter-spacing: 0.005em;
+              color: #ffffff;
+            }
+            a {
+              border-top: 1px solid #ceb87f;
+              font-size: 14px;
+              line-height: 16px;
+              letter-spacing: 0.005em;
+              color: #ceb87f;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -27,7 +27,7 @@
     </div>
 
     <div class="phone d-block d-mb-none pt-70">
-      <PhoneTitle :title="getPathName(aboutUS)" :filterDate="true" />
+      <PhoneTitle :title="getPathName(aboutUS)" :filterDate="false" />
       <router-view></router-view>
     </div>
   </div>
@@ -95,7 +95,7 @@ export default {
 <style lang="scss">
 #aboutUS {
   .web {
-    padding-top: 420px;
+    padding-top: 140px;
     margin-left: 120px;
 
     .Txt {

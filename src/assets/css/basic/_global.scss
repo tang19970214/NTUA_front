@@ -134,6 +134,14 @@
       z-index: 999;
   }
 
+  .overflow-x {
+      overflow-x: auto;
+  }
+
+  .overflow-y {
+      overflow-y: auto;
+  }
+
   .modal {
       position: fixed;
       z-index: 4;

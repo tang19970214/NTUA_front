@@ -1,47 +1,74 @@
 <template>
   <div id="equipment">
-    <div class="d-flex justify-content-around studioGroup mb-60">
-      <div class="p-50 pos-relative">
-        <el-row>
-          <el-col
-            :span="6"
-            class="p-20 mb-120"
-            v-for="(item, index) in equipment"
-            :key="index"
-          >
-            <div class="m-item d-flex align-items-center flex-column">
-              <div class="pos-relative">
-                <img
-                  :src="item.imgURL"
-                  class="m-item-image w-100"
-                  width="100%"
-                />
-                <div
-                  class="w-100 m-item-title d-flex justify-content-center pos-absolute b-0"
-                  style="margin-bottom: -7.5rem"
-                >
-                  <div class="px-20">
-                    <div
-                      class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-                    >
-                      <div class="mb-30">
-                        <p class="m-0">{{ item.title }}</p>
-                      </div>
-                      <div class="pt-10 craftCard-borTop">
-                        <a
-                          class="text-decoration-none cur-pointer"
-                          @click="showIntroduce(item)"
-                        >
-                          VIEW MORE
-                        </a>
+    <div class="web d-none d-mb-block">
+      <div class="d-flex justify-content-around studioGroup mb-60">
+        <div class="p-50 pos-relative">
+          <el-row>
+            <el-col
+              :span="6"
+              class="p-20 mb-120"
+              v-for="(item, index) in equipment"
+              :key="index"
+            >
+              <div class="m-item d-flex align-items-center flex-column">
+                <div class="pos-relative">
+                  <img
+                    :src="item.imgURL"
+                    class="m-item-image w-100"
+                    width="100%"
+                  />
+                  <div
+                    class="w-100 m-item-title d-flex justify-content-center pos-absolute b-0"
+                    style="margin-bottom: -7.5rem"
+                  >
+                    <div class="px-20">
+                      <div
+                        class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
+                      >
+                        <div class="mb-30">
+                          <p class="m-0">{{ item.title }}</p>
+                        </div>
+                        <div class="pt-10 craftCard-borTop">
+                          <a
+                            class="text-decoration-none cur-pointer"
+                            @click="showIntroduce(item)"
+                          >
+                            VIEW MORE
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone d-block d-mb-none">
+      <div class="equipmentCard w-100">
+        <div class="py-30 d-flex justify-content-center flex-column">
+          <div
+            class="d-flex align-items-center justify-content-center flex-column"
+            v-for="(item, index1) in equipment"
+            :key="index1"
+          >
+            <img :src="item.imgURL" alt="" width="200px" />
+            <div
+              class="equipmentCard__information px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
+            >
+              <strong>{{ item.title }}</strong>
+              <a
+                class="text-decoration-none cur-pointer px-20 pt-8 mt-15"
+                @click="showIntroduce(item)"
+              >
+                VIEW MORE
+              </a>
             </div>
-          </el-col>
-        </el-row>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -105,47 +132,63 @@ export default {
 
 <style lang="scss">
 #equipment {
-  margin-top: 140px;
-  .studioGroup {
-    width: 100%;
-    background: #2d2d2d;
-
-    .m-item-title {
-      order: 2;
-    }
-
-    .m-item-image {
-      order: 1;
-    }
-
-    > .m-item:nth-child(odd) {
+  .web {
+    // margin-top: 140px;
+    .studioGroup {
+      width: 100%;
+      background: #2d2d2d;
       .m-item-title {
         order: 2;
       }
-
       .m-item-image {
         order: 1;
       }
+      > .m-item:nth-child(odd) {
+        .m-item-title {
+          order: 2;
+        }
+        .m-item-image {
+          order: 1;
+        }
+      }
+      .craftCard {
+        width: 17vw;
+        border: 2px solid #596164;
+        box-sizing: border-box;
+        p {
+          font-weight: bold;
+          font-size: 16px;
+          letter-spacing: 0.005em;
+          color: white;
+        }
+        a {
+          font-size: 18px;
+          line-height: 21px;
+          letter-spacing: 0.005em;
+          color: #ceb87f;
+        }
+        &-borTop {
+          border-top: 1px solid #ceb87f;
+        }
+      }
     }
-
-    .craftCard {
-      width: 17vw;
-      border: 2px solid #596164;
-      box-sizing: border-box;
-      p {
-        font-weight: bold;
-        font-size: 16px;
+  }
+  .phone {
+    .equipmentCard {
+      background: #2d2d2d;
+      &__information {
+        transform: translateY(-1.8rem);
+        border: 2px solid #596164;
+        font-size: 14px;
+        line-height: 16px;
         letter-spacing: 0.005em;
-        color: white;
-      }
-      a {
-        font-size: 18px;
-        line-height: 21px;
-        letter-spacing: 0.005em;
-        color: #ceb87f;
-      }
-      &-borTop {
-        border-top: 1px solid #ceb87f;
+        strong {
+          color: #ffffff;
+        }
+        a {
+          color: #ceb87f;
+          border-top: 1px solid #CEB87F;
+        }
       }
     }
   }

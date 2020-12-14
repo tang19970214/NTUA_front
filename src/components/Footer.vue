@@ -61,19 +61,21 @@
         </div>
         <router-link to="/">
           <div
-            class="footerForPhone-logo d-flex align-items-center justify-content-center flex-column pt-20 pb-40"
+            class="footerForPhone-logo d-flex align-items-center justify-content-center flex-column"
           >
-            <img
-              src="../assets/images/logo/footer_logo.svg"
-              alt=""
-              width="240px"
-            />
-            <img
-              class="mt-30"
-              src="../assets/images/logo/footer_logo.png"
-              alt=""
-              width="240px"
-            />
+            <div class="px-60 pt-20 pb-40">
+              <img
+                src="../assets/images/logo/footer_logo.svg"
+                alt=""
+                width="100%"
+              />
+              <img
+                class="mt-30"
+                src="../assets/images/logo/footer_logo.png"
+                alt=""
+                width="100%"
+              />
+            </div>
           </div>
         </router-link>
       </div>
