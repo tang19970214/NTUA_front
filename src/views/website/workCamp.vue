@@ -1,49 +1,103 @@
 <template>
   <div id="workCamp">
-    <div class="workCard">
-      <div class="workCard-title">
-        <p class="m-0">「工不可沒‧藝不可失 」2019數位工藝工作營</p>
-      </div>
-      <div
-        class="w-100 workCard-content pt-40 pb-60"
-        v-for="(item, index) in workCampList"
-        :key="'SL_' + index"
-      >
-        <div class="w-100">
-          <p class="m-0">{{ item.title }}</p>
+    <div class="web d-none d-mb-block">
+      <div class="workCard">
+        <div class="workCard-title">
+          <p class="m-0">「工不可沒‧藝不可失 」2019數位工藝工作營</p>
         </div>
+        <div
+          class="w-100 workCard-content pt-40 pb-60"
+          v-for="(item, index) in workCampList"
+          :key="'SL_' + index"
+        >
+          <div class="w-100">
+            <p class="m-0">{{ item.title }}</p>
+          </div>
 
-        <el-row class="mt-30" style="color: white">
-          <el-col :span="3">
-            <div class="text-center">{{ item.author }}</div>
-          </el-col>
-          <el-col :span="21" v-if="item.author">
-            <div
-              class="pl-10 workCard-content_list"
-              v-for="(items, index) in item.content"
-              :key="'CT_' + index"
-            >
-              {{ items.context }}
-            </div>
-          </el-col>
+          <el-row class="mt-30" style="color: white">
+            <el-col :span="3">
+              <div class="text-center">{{ item.author }}</div>
+            </el-col>
+            <el-col :span="21" v-if="item.author">
+              <div
+                class="pl-10 workCard-content_list"
+                v-for="(items, index) in item.content"
+                :key="'CT_' + index"
+              >
+                {{ items.context }}
+              </div>
+            </el-col>
 
-          <el-col :span="21" :offset="3" v-else>
+            <el-col :span="21" :offset="3" v-else>
+              <div
+                class="pl-10 workCard-content_list"
+                v-for="(items, index) in item.content"
+                :key="'CT_' + index"
+              >
+                {{ items.context }}
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone d-block d-mb-none">
+      <div class="px-10 py-50">
+        <PhoneTitle title="「工不可沒，藝不可失」" :filterDate="false" />
+        <PhoneTitle title="2019數位工藝工作營" :filterDate="false" />
+        <div class="px-20">
+          <div class="w-100 mt-30">
             <div
-              class="pl-10 workCard-content_list"
-              v-for="(items, index) in item.content"
-              :key="'CT_' + index"
+              class="w-100 workList pt-40 pb-50"
+              v-for="(item, index1) in workCampList"
+              :key="index1"
             >
-              {{ items.context }}
+              <div class="w-100">
+                <p class="m-0">
+                  {{ item.title }}
+                </p>
+              </div>
+
+              <el-row class="mt-30" style="color: white">
+                <el-col :span="4">
+                  <div class="text-center">{{ item.author }}</div>
+                </el-col>
+                <el-col :span="20" v-if="item.author">
+                  <div
+                    class="pl-10 workList__context"
+                    v-for="(items, index) in item.content"
+                    :key="'CT_' + index"
+                  >
+                    {{ items.context }}
+                  </div>
+                </el-col>
+
+                <el-col :span="24" v-else>
+                  <div
+                    class="pl-10 workList__context"
+                    v-for="(items, index) in item.content"
+                    :key="'CT_' + index"
+                  >
+                    {{ items.context }}
+                  </div>
+                </el-col>
+              </el-row>
             </div>
-          </el-col>
-        </el-row>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import PhoneTitle from "@/components/PhoneTitle.vue";
+
 export default {
+  components: {
+    PhoneTitle,
+  },
   data() {
     return {
       workCampList: [
@@ -136,26 +190,49 @@ export default {
 
 <style lang="scss">
 #workCamp {
-  .workCard {
-    padding: 50px 200px 180px 40px;
-    background: #2d2d2d;
-    &-title {
-      font-size: 24px;
-      line-height: 30px;
-      letter-spacing: 0.2em;
-      color: #ceb87f;
+  .web {
+    .workCard {
+      padding: 50px 200px 180px 40px;
+      background: #2d2d2d;
+      &-title {
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0.2em;
+        color: #ceb87f;
+      }
+      &-content {
+        font-size: 20px;
+        line-height: 25px;
+        letter-spacing: 0.2em;
+        color: #ffffff;
+        border-bottom: 1px solid #000000;
+        &_list {
+          padding-bottom: 20px;
+          &:last-child {
+            padding-bottom: 0;
+          }
+        }
+      }
     }
-    &-content {
-      font-size: 20px;
-      line-height: 25px;
+  }
+
+  .phone {
+    background: #2d2d2d;
+    .workList {
+      font-size: 14px;
+      line-height: 17px;
       letter-spacing: 0.2em;
       color: #ffffff;
       border-bottom: 1px solid #000000;
-      &_list {
-          padding-bottom: 20px;
-          &:last-child {
-              padding-bottom: 0;
-          }
+      &:last-child {
+        border-bottom: none;
+      }
+      &__context {
+        padding-bottom: 10px;
+        overflow-wrap: break-word;
+        &:last-child {
+          padding-bottom: 0px;
+        }
       }
     }
   }

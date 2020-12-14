@@ -209,16 +209,16 @@ export default {
         font-size: 24px;
         line-height: 210%;
         letter-spacing: 0.25em;
-        color: #FFF;
+        color: #52505A;
         cursor: pointer;
         &:hover {
-          color: #ceb87f;
+          color: #563F05;
           font-weight: bold;
         }
       }
     }
     .active {
-      color: #ceb87f;
+      color: #563F05;
       font-weight: bold;
     }
     &-title {

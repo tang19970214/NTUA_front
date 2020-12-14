@@ -132,7 +132,7 @@
                         2020新一代設計展 展覽時間2020年5月22日(五)-5月25日(一)
                       </p>
                     </div>
-                    <div>
+                    <div @click="goNews()">
                       <img
                         class="cur-pointer"
                         src="@/assets/images/arrowRight_btn.png"
@@ -165,9 +165,12 @@
                   <p class="m-0">{{ item.name_en }}</p>
                 </div>
                 <div class="pt-10 craftCard-borTop">
-                  <a class="text-decoration-none cur-pointer" @click="goCraft(item.name_en)">
-                    VIEW MORE</a
+                  <a
+                    class="text-decoration-none cur-pointer"
+                    @click="goCraft(item.name_en)"
                   >
+                    VIEW MORE
+                  </a>
                 </div>
               </div>
             </div>
@@ -213,8 +216,9 @@
                     class="text-decoration-none"
                     href="https://goo.gl/maps/67MWRHAoppzHiKP87"
                     target="_blank"
-                    >GOOGLE MAP</a
                   >
+                    GOOGLE MAP
+                  </a>
                 </button>
               </div>
               <div
@@ -269,7 +273,9 @@
               v-for="(item, index) in phone_contestList"
               :key="'CT_' + index"
             >
-              <img :src="item.imgURL" alt="" width="100%" />
+              <router-link :to="{ name: 'award' }">
+                <img :src="item.imgURL" alt="" width="100%" />
+              </router-link>
               <div
                 class="contest-card_title w-100 d-flex align-items-center justify-content-between py-10"
               >
@@ -302,14 +308,17 @@
                   src="@/assets/images/STUDENTS-WORKS/1597628561678@2x_phone.png"
                   alt=""
                 />
-                <a class="cur-pointer students-viewBtn">
+                <router-link
+                  class="students-viewBtn"
+                  :to="{ name: 'studioResult' }"
+                >
                   <img src="@/assets/images/view_btn.png" alt="" width="60px" />
                   <img
                     src="@/assets/images/view_btn_hover.png"
                     alt=""
                     width="60px"
                   />
-                </a>
+                </router-link>
               </div>
             </div>
             <div
@@ -331,6 +340,7 @@
                 src="@/assets/images/arrowRight_btn.png"
                 alt=""
                 width="24px"
+                @click="goNews()"
               />
             </div>
           </div>
@@ -353,7 +363,11 @@
                   </p>
                 </div>
                 <div class="ml-auto">
-                  <img src="@/assets/images/arrowRight_btn.png" alt="" />
+                  <img
+                    src="@/assets/images/arrowRight_btn.png"
+                    alt=""
+                    @click="goNews()"
+                  />
                 </div>
               </div>
             </div>
@@ -378,7 +392,12 @@
                 <div class="py-10">
                   <p class="m-0">陶瓷</p>
                 </div>
-                <a class="text-decoration-none mt-10">VIEW MORE</a>
+                <a
+                  class="text-decoration-none mt-10"
+                  @click="goCraft('CERAMICS')"
+                >
+                  VIEW MORE
+                </a>
               </div>
             </div>
             <div
@@ -395,7 +414,12 @@
                 <div class="py-10">
                   <p class="m-0">金工</p>
                 </div>
-                <a class="text-decoration-none mt-10">VIEW MORE</a>
+                <a
+                  class="text-decoration-none mt-10"
+                  @click="goCraft('METALWORKING')"
+                >
+                  VIEW MORE
+                </a>
               </div>
             </div>
             <div
@@ -412,7 +436,12 @@
                 <div class="py-10">
                   <p class="m-0">木工</p>
                 </div>
-                <a class="text-decoration-none mt-10">VIEW MORE</a>
+                <a
+                  class="text-decoration-none mt-10"
+                  @click="goCraft('WOODWORKING')"
+                >
+                  VIEW MORE
+                </a>
               </div>
             </div>
             <div
@@ -429,7 +458,12 @@
                 <div class="py-10">
                   <p class="m-0">產品</p>
                 </div>
-                <a class="text-decoration-none mt-10">VIEW MORE</a>
+                <a
+                  class="text-decoration-none mt-10"
+                  @click="goCraft('PRODUCT')"
+                >
+                  VIEW MORE
+                </a>
               </div>
             </div>
           </div>
@@ -743,6 +777,7 @@ export default {
 
 <style lang="scss">
 #HomePage {
+  // web
   .contest {
     &__content {
       color: #52505a;
@@ -866,6 +901,7 @@ export default {
       }
     }
   }
+  //
 
   // phone
   .phoneScreen {
@@ -999,11 +1035,10 @@ export default {
         background: #2d2d2d;
         border-bottom: 1px solid #d4cbcc;
         &_title {
-          min-width: 70px;
-          max-width: 70px;
+          min-width: 60px;
+          max-width: 60px;
           font-size: 14px;
           line-height: 17px;
-          text-align: center;
           letter-spacing: 0.2em;
           color: #ffffff;
         }
@@ -1016,7 +1051,7 @@ export default {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            max-width: 260px;
+            max-width: 220px;
           }
           button {
             a {

@@ -217,6 +217,22 @@ const routes = [{
     meta: {
       mainPage: "teachingResult"
     }
+  },
+  {
+    path: '/bulletinInfo',
+    name: 'bulletinInfo',
+    component: () => import('../views/latestNews/bulletin/bulletinInfo.vue'),
+    meta: {
+      mainPage: "latestNews"
+    }
+  },
+  {
+    path: '/awardInfo',
+    name: 'awardInfo',
+    component: () => import('../views/teachingResult/award/awardInfo.vue'),
+    meta: {
+      mainPage: "teachingResult"
+    }
   }
 ]
 

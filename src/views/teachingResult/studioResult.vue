@@ -1,62 +1,182 @@
 <template>
   <div id="studioResult">
-    <div class="w-100 h-100 studioBG">
-      <div class="d-flex justify-content-around studioGroup">
-        <div
-          class="m-item d-flex align-items-center flex-column"
-          v-for="(item, index) in crafts"
-          :key="index"
-        >
-          <img :src="item.imgURL" class="m-item-image w-100" />
-          <div class="m-item-title d-flex justify-content-center">
-            <div
-              class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-40 pb-20"
-            >
-              <div class="mb-30">
-                <p class="m-0">{{ item.name_ch }}</p>
-                <p class="m-0">{{ item.name_en }}</p>
-              </div>
-              <div class="pt-10 craftCard-borTop">
-                <router-link
-                  class="text-decoration-none"
-                  :to="{ name: 'crafts', params: { sort: item.name_en } }"
-                  >VIEW MORE</router-link
-                >
+    <div class="web d-none d-mb-block">
+      <div class="w-100 h-100 studioBG">
+        <div class="d-flex justify-content-around studioGroup">
+          <div
+            class="m-item d-flex align-items-center flex-column"
+            v-for="(item, index) in crafts"
+            :key="index"
+          >
+            <img :src="item.imgURL" class="m-item-image w-100" />
+            <div class="m-item-title d-flex justify-content-center">
+              <div
+                class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-40 pb-20"
+              >
+                <div class="mb-30">
+                  <p class="m-0">{{ item.name_ch }}</p>
+                  <p class="m-0">{{ item.name_en }}</p>
+                </div>
+                <div class="pt-10 craftCard-borTop">
+                  <router-link
+                    class="text-decoration-none"
+                    :to="{ name: 'crafts', params: { sort: item.name_en } }"
+                    >VIEW MORE</router-link
+                  >
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="w-100 studioCard mt-60">
-      <div class="px-150 py-20">
-        <el-row>
-          <el-col
-            class="mb-40"
-            :span="8"
-            v-for="(item, index1) in worksList"
-            :key="index1"
-          >
-            <div
-              class="w-100 d-flex align-items-center justify-content-center flex-column"
+      <div class="w-100 studioCard mt-60">
+        <div class="px-150 py-20">
+          <el-row>
+            <el-col
+              class="mb-40"
+              :span="8"
+              v-for="(item, index1) in worksList"
+              :key="index1"
             >
               <div
-                class="w-100 d-flex align-items-center justify-content-center"
+                class="w-100 d-flex align-items-center justify-content-center flex-column"
               >
-                <img :src="item.imgURL" alt="" />
+                <div
+                  class="w-100 d-flex align-items-center justify-content-center"
+                >
+                  <img :src="item.imgURL" alt="" />
+                </div>
+                <div
+                  class="studioCard__content w-100 d-flex align-items-center justify-content-center mt-40"
+                >
+                  <p class="m-0 d-inline-flex p-10">{{ item.title }}</p>
+                </div>
               </div>
-              <div
-                class="studioCard__content w-100 d-flex align-items-center justify-content-center mt-40"
-              >
-                <p class="m-0 d-inline-flex p-10">{{ item.title }}</p>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-        <div
-          class="w-100 py-50 d-flex align-items-center justify-content-center"
-        >
-          <Pagination :needPage="true" :pageNumber="5" />
+            </el-col>
+          </el-row>
+          <div
+            class="w-100 py-50 d-flex align-items-center justify-content-center"
+          >
+            <Pagination :needPage="true" :pageNumber="5" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone d-block d-mb-none">
+      <div class="pl-30 pt-70 pb-100">
+        <div class="studioBG pb-80">
+          <div class="px-25 studioBG__trans">
+            <el-row class="mb-80">
+              <el-col :span="12">
+                <div
+                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
+                >
+                  <img
+                    src="@/assets/images/craft/craft_1.png"
+                    alt=""
+                    width="110px"
+                  />
+                  <div class="pos-absolute b-0 craftCard">
+                    <div class="p-10">
+                      <div class="p-10 craftCard__title text-center">
+                        <p class="m-0">陶瓷</p>
+                      </div>
+                      <router-link
+                        class="text-decoration-none"
+                        :to="{ name: 'crafts', params: { sort: 'CERAMICS' } }"
+                      >
+                        VIEW MORE
+                      </router-link>
+                    </div>
+                  </div>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <div
+                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
+                >
+                  <img
+                    src="@/assets/images/craft/craft_2.png"
+                    alt=""
+                    width="110px"
+                  />
+                  <div class="pos-absolute b-0 craftCard">
+                    <div class="p-10">
+                      <div class="p-10 craftCard__title text-center">
+                        <p class="m-0">金工</p>
+                      </div>
+                      <router-link
+                        class="text-decoration-none"
+                        :to="{
+                          name: 'crafts',
+                          params: { sort: 'METALWORKING' },
+                        }"
+                      >
+                        VIEW MORE
+                      </router-link>
+                    </div>
+                  </div>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="12">
+                <div
+                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
+                >
+                  <img
+                    src="@/assets/images/craft/craft_3.png"
+                    alt=""
+                    width="110px"
+                  />
+                  <div class="pos-absolute b-0 craftCard">
+                    <div class="p-10">
+                      <div class="p-10 craftCard__title text-center">
+                        <p class="m-0">金工</p>
+                      </div>
+                      <router-link
+                        class="text-decoration-none"
+                        :to="{
+                          name: 'crafts',
+                          params: { sort: 'WOODWORKING' },
+                        }"
+                      >
+                        VIEW MORE
+                      </router-link>
+                    </div>
+                  </div>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <div
+                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
+                >
+                  <img
+                    src="@/assets/images/craft/craft_4.png"
+                    alt=""
+                    width="110px"
+                  />
+                  <div class="pos-absolute b-0 craftCard">
+                    <div class="p-10">
+                      <div class="p-10 craftCard__title text-center">
+                        <p class="m-0">金工</p>
+                      </div>
+                      <router-link
+                        class="text-decoration-none"
+                        :to="{
+                          name: 'crafts',
+                          params: { sort: 'PRODUCT' },
+                        }"
+                      >
+                        VIEW MORE
+                      </router-link>
+                    </div>
+                  </div>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
         </div>
       </div>
     </div>
@@ -139,37 +259,60 @@ export default {
 
 <style lang="scss">
 #studioResult {
-  margin-top: 60px;
-  .studioBG {
-    height: 500px;
-    background: #2d2d2d;
-    .studioGroup {
-      width: calc(100% - 120px);
-      position: absolute;
-      margin-top: -50px;
+  .web {
+    margin-top: 60px;
+    .studioBG {
+      height: 500px;
+      background: #2d2d2d;
+      .studioGroup {
+        width: calc(100% - 120px);
+        position: absolute;
+        margin-top: -50px;
 
-      .m-item-title {
-        -webkit-box-ordinal-group: 2;
-        order: 1;
-      }
-
-      .m-item-image {
-        -webkit-box-ordinal-group: 3;
-        order: 2;
-      }
-
-      > .m-item:nth-child(odd) {
         .m-item-title {
+          -webkit-box-ordinal-group: 2;
+          order: 1;
+        }
+
+        .m-item-image {
           -webkit-box-ordinal-group: 3;
           order: 2;
         }
 
-        .m-item-image {
-          -webkit-box-ordinal-group: 2;
-          order: 1;
+        > .m-item:nth-child(odd) {
+          .m-item-title {
+            -webkit-box-ordinal-group: 3;
+            order: 2;
+          }
+
+          .m-item-image {
+            -webkit-box-ordinal-group: 2;
+            order: 1;
+          }
+        }
+
+        .craftCard {
+          width: 200px;
+          height: 200px;
+          border: 2px solid #596164;
+          box-sizing: border-box;
+          p {
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 0.005em;
+            color: white;
+          }
+          a {
+            font-size: 18px;
+            line-height: 21px;
+            letter-spacing: 0.005em;
+            color: #ceb87f;
+          }
+          &-borTop {
+            border-top: 1px solid #ceb87f;
+          }
         }
       }
-
       .craftCard {
         width: 200px;
         height: 200px;
@@ -192,38 +335,45 @@ export default {
         }
       }
     }
-    .craftCard {
-      width: 200px;
-      height: 200px;
-      border: 2px solid #596164;
-      box-sizing: border-box;
-      p {
-        font-weight: bold;
-        font-size: 18px;
-        letter-spacing: 0.005em;
-        color: white;
-      }
-      a {
-        font-size: 18px;
-        line-height: 21px;
-        letter-spacing: 0.005em;
-        color: #ceb87f;
-      }
-      &-borTop {
-        border-top: 1px solid #ceb87f;
+    .studioCard {
+      background: #2d2d2d;
+      &__content {
+        p {
+          border-top: 1px solid #ceb87f;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 160%;
+          letter-spacing: 0.005em;
+          color: #ffffff;
+        }
       }
     }
   }
-  .studioCard {
-    background: #2d2d2d;
-    &__content {
-      p {
-        border-top: 1px solid #ceb87f;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 160%;
-        letter-spacing: 0.005em;
-        color: #ffffff;
+
+  .phone {
+    background: white;
+    .studioBG {
+      background: #2d2d2d;
+      &__trans {
+        transform: translateY(-2rem);
+      }
+      .craftCard {
+        border: 1px solid #596164;
+        margin-bottom: -4rem;
+        &__title {
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 120%;
+          letter-spacing: 0.015em;
+          color: #ffffff;
+          border-bottom: 1px solid #ceb87f;
+        }
+        a {
+          font-size: 10px;
+          line-height: 12px;
+          letter-spacing: 0.005em;
+          color: #ceb87f;
+        }
       }
     }
   }

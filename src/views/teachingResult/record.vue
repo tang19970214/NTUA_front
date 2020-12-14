@@ -21,8 +21,9 @@
             <router-link
               class="bookContent-viewMore text-decoration-none"
               :to="{ name: 'recordInfo', params: { art: item.title } }"
-              >VIEW MORE</router-link
             >
+              VIEW MORE
+            </router-link>
           </div>
         </div>
       </el-col>

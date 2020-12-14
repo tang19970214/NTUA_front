@@ -1,5 +1,6 @@
 <template>
   <div id="footer">
+    <!-- web -->
     <div class="d-none d-mb-block">
       <div class="w-100 h-100 d-flex align-items">
         <div class="block_left">
@@ -45,6 +46,8 @@
         </div>
       </div>
     </div>
+
+    <!-- phone -->
     <div class="footerForPhone d-block d-mb-none">
       <div class="w-100 d-flex flex-column">
         <div class="footerForPhone-community w-100 py-20 d-flex">
@@ -56,15 +59,23 @@
             <img :src="item.imgURL" alt="" />
           </div>
         </div>
-        <div
-          class="footerForPhone-logo d-flex align-items-center justify-content-center py-60"
-        >
-          <img
-            src="../assets/images/logo/footer_logo.png"
-            alt=""
-            width="240px"
-          />
-        </div>
+        <router-link to="/">
+          <div
+            class="footerForPhone-logo d-flex align-items-center justify-content-center flex-column pt-20 pb-40"
+          >
+            <img
+              src="../assets/images/logo/footer_logo.svg"
+              alt=""
+              width="240px"
+            />
+            <img
+              class="mt-30"
+              src="../assets/images/logo/footer_logo.png"
+              alt=""
+              width="240px"
+            />
+          </div>
+        </router-link>
       </div>
     </div>
   </div>

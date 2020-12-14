@@ -18,13 +18,13 @@ export default {
     return {
       artImg: [
         {
-          imgUrl: require("@/assets/images/art1.png"),
+          imgUrl: require("@/assets/images/art/art1.png"),
         },
         {
-          imgUrl: require("@/assets/images/art2.png"),
+          imgUrl: require("@/assets/images/art/art2.png"),
         },
         {
-          imgUrl: require("@/assets/images/art3.png"),
+          imgUrl: require("@/assets/images/art/art3.png"),
         },
       ],
     };

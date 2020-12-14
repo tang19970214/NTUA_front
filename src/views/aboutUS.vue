@@ -1,62 +1,46 @@
 <template>
   <div id="aboutUS">
-    <p class="Txt-title">ABOUT US</p>
-    <p class="Txt-children">Crafts&Design Department</p>
-    <div class="mt-70 newsCard">
-      <div class="newsCard-sortText">
-        <router-link
-          class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
-          :class="{ active: $route.name == item.pathURL }"
-          :to="{ name: item.pathURL, params: { sort: item.pathParams } }"
-          v-for="(item, index) in aboutUS"
-          :key="'TS__' + index"
-        >
-          <p class="m-0">{{ item.pathName }}</p>
-          <i class="el-icon-minus"></i>
-          <p class="m-0">0{{ index + 1 }}</p>
-        </router-link>
-      </div>
-
-      <LoadShowIMG />
-
-      <!-- <div class="w-100 newsCard-title">
-        <div class="p-60">
-          <div class="w-100 d-flex flex-row">
-            <div class="w-100">
-              <p class="m-0">{{ getPathName(aboutUS) }}</p>
-            </div>
-            <div class="w-100">
-              <div
-                class="w-100 d-flex justify-content-center newsCard-title_chooseYear"
-              >
-                <select>
-                  <option
-                    :value="item"
-                    v-for="item in getYearGrouop()"
-                    :key="item"
-                  >
-                    {{ item }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
+    <div class="web d-none d-mb-block">
+      <p class="Txt-title">ABOUT US</p>
+      <p class="Txt-children">Crafts&Design Department</p>
+      <div class="mt-70 newsCard">
+        <div class="newsCard-sortText">
+          <router-link
+            class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
+            :class="{ active: $route.name == item.pathURL }"
+            :to="{ name: item.pathURL, params: { sort: item.pathParams } }"
+            v-for="(item, index) in aboutUS"
+            :key="'TS__' + index"
+          >
+            <p class="m-0">{{ item.pathName }}</p>
+            <i class="el-icon-minus"></i>
+            <p class="m-0">0{{ index + 1 }}</p>
+          </router-link>
         </div>
-      </div> -->
 
-      <div class="w-100">
-        <router-view></router-view>
+        <LoadShowIMG />
+
+        <div class="w-100">
+          <router-view></router-view>
+        </div>
       </div>
+    </div>
+
+    <div class="phone d-block d-mb-none pt-70">
+      <PhoneTitle :title="getPathName(aboutUS)" :filterDate="true" />
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
 import LoadShowIMG from "@/components/LoadShowIMG.vue";
+import PhoneTitle from "@/components/PhoneTitle.vue";
 
 export default {
   components: {
     LoadShowIMG,
+    PhoneTitle,
   },
   data() {
     return {
@@ -110,71 +94,50 @@ export default {
 
 <style lang="scss">
 #aboutUS {
-  padding-top: 420px;
-  margin-left: 120px;
+  .web {
+    padding-top: 420px;
+    margin-left: 120px;
 
-  .Txt {
-    &-title {
-      margin: 0;
-      font-size: 48px;
-      line-height: 56px;
-      color: #596164;
-    }
-    &-children {
-      margin: 5px 0px 0px 180px;
-      font-size: 24px;
-      line-height: 28px;
-      color: #c4c4c4;
-    }
-  }
-
-  .newsCard {
-    background-color: white;
-    &-sortText {
-      position: absolute;
-      right: 0;
-      z-index: 100;
-      margin-top: 45px;
-      a {
-        font-weight: 400;
+    .Txt {
+      &-title {
+        margin: 0;
+        font-size: 48px;
+        line-height: 56px;
+        color: #596164;
+      }
+      &-children {
+        margin: 5px 0px 0px 180px;
         font-size: 24px;
-        line-height: 210%;
-        letter-spacing: 0.25em;
-        color: #fff;
-        cursor: pointer;
-        &:hover {
-          color: #ceb87f;
-          font-weight: bold;
-        }
+        line-height: 28px;
+        color: #c4c4c4;
       }
     }
-    .active {
-      color: #ceb87f;
-      font-weight: bold;
+
+    .newsCard {
+      background-color: white;
+      &-sortText {
+        position: absolute;
+        right: 0;
+        z-index: 100;
+        margin-top: 45px;
+        a {
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 210%;
+          letter-spacing: 0.25em;
+          color: #52505a;
+          cursor: pointer;
+          &:hover {
+            color: #563f05;
+            font-weight: bold;
+          }
+        }
+      }
+      .active {
+        color: #563f05;
+        font-weight: bold;
+      }
     }
-    // &-title {
-    //   p {
-    //     width: 130px;
-    //     font-size: 64px;
-    //     line-height: 75px;
-    //     color: #ceb87f;
-    //   }
-    //   &_chooseYear {
-    //     select {
-    //       width: 150px;
-    //       height: 35px;
-    //       border: 0;
-    //       border-radius: 15px;
-    //       background: #ceb87f;
-    //       text-align-last: center;
-    //       font-size: 18px;
-    //       line-height: 21px;
-    //       letter-spacing: 0.005em;
-    //       color: #52505a;
-    //       cursor: pointer;
-    //     }
-    //   }
-    // }
   }
 }
 </style>

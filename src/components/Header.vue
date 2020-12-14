@@ -118,16 +118,23 @@
     <div class="d-block d-mb-none">
       <div class="phoneScreen">
         <div
-          class="px-30 py-20 d-flex align-items-center justify-content-between"
+          class="pr-10 py-5 d-flex align-items-center justify-content-center pos-relative"
         >
           <router-link to="/">
-            <img src="../assets/NTUA_LOGO.svg" alt="NTUA_LOGO" width="225px" />
+            <img
+              src="../assets/images/logo/NTUA_LOGO.svg"
+              alt="回到台藝大工藝系首頁"
+              width="150px"
+            />
           </router-link>
-          <img
-            src="../assets/images/icon/menuList-phone.png"
-            alt="menu"
-            @click="openMenuModal"
-          />
+          <div class="pos-absolute t-0 r-0 mt-20 mr-20">
+            <img
+              src="../assets/images/icon/menuList-phone.png"
+              alt="menu"
+              width="35px"
+              @click="openMenuModal"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -138,7 +145,13 @@
         <div class="w-100 d-flex align-items-center">
           <div class="menuList w-100">
             <ul class="w-100 m-0 p-0 d-flex justify-content-center flex-column">
-              <li class="px-10" v-for="item in menuList" :key="item.value">
+              <li
+                class="px-10"
+                :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
+                v-for="item in menuList"
+                :key="item.value"
+                @click="goNextPage(item)"
+              >
                 {{ item.text }}
               </li>
             </ul>
@@ -230,30 +243,44 @@ export default {
         {
           value: "01",
           text: "最新消息",
+          mainPath: "latestNews",
+          pathName: "bulletin",
         },
         {
           value: "02",
           text: "系所簡介及課程",
+          mainPath: "aboutUS",
+          pathName: "history",
         },
         {
           value: "03",
           text: "系所規定與申請表",
+          mainPath: "",
+          pathName: "",
         },
         {
           value: "04",
           text: "招生資訊",
+          mainPath: "",
+          pathName: "",
         },
         {
           value: "05",
           text: "教學成果",
+          mainPath: "teachingResult",
+          pathName: "award",
         },
         {
           value: "06",
           text: "研討會/工作營網站",
+          mainPath: "website",
+          pathName: "workCamp",
         },
         {
           value: "07",
           text: "系所成員",
+          mainPath: "departmentMember",
+          pathName: "fullTime",
         },
       ],
     };
@@ -280,6 +307,7 @@ export default {
     goNextPage(data) {
       this.$router.push({ name: data.pathName });
       this.clickOpen = false;
+      this.menuModal = false;
     },
     openMenuModal() {
       this.menuModal = !this.menuModal;
@@ -437,6 +465,9 @@ export default {
           line-height: 28px;
           color: #ded9d5;
           list-style-type: korean-hanja-informal;
+        }
+        .stayPage {
+          color: #ceb87f;
         }
       }
     }
