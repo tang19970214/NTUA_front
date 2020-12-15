@@ -108,7 +108,7 @@
           </div>
         </div>
 
-        <div class="w-100 text-left ml-60">
+        <div class="text-left pl-60">
           <p class="Txt-title" @click="goPrev()">研究發表</p>
         </div>
 
