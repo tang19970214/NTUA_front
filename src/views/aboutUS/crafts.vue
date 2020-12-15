@@ -403,7 +403,6 @@ export default {
   computed: {
     getCraftTitle() {
       return (data) => {
-        console.log(data);
         if (data == "CERAMICS") {
           this.craftsTitle.title_ch = "陶瓷工藝創作專業工坊";
           this.craftsTitle.title_en = "Ceramics Studio";
@@ -430,7 +429,8 @@ export default {
 <style lang="scss">
 #crafts {
   .web {
-    margin-top: 140px;
+    margin-left: 0;
+    padding-top: 140px;
     .studioGroup {
       width: 100%;
       background: #2d2d2d;
@@ -465,13 +465,11 @@ export default {
         p {
           font-weight: bold;
           font-size: 18px;
-          letter-spacing: 0.005em;
           color: white;
         }
         a {
           font-size: 18px;
           line-height: 21px;
-          letter-spacing: 0.005em;
           color: #ceb87f;
         }
         &-borTop {
@@ -488,7 +486,6 @@ export default {
         font-weight: bold;
         font-size: 36px;
         line-height: 160%;
-        letter-spacing: 0.005em;
         color: #ceb87f;
         border-bottom: 1px solid #ceb87f;
       }
@@ -510,7 +507,6 @@ export default {
           font-size: 18px;
           line-height: 160%;
           text-align: center;
-          letter-spacing: 0.005em;
           color: #ffffff;
         }
       }
@@ -519,7 +515,6 @@ export default {
         a {
           font-size: 18px;
           line-height: 21px;
-          letter-spacing: 0.005em;
           color: #ceb87f;
         }
       }
@@ -574,7 +569,6 @@ export default {
         strong {
           font-size: 14px;
           line-height: 160%;
-          letter-spacing: 0.005em;
           color: #596164;
           border-left: 4px solid #ceb87f;
         }
@@ -585,7 +579,6 @@ export default {
         p {
           font-size: 14px;
           line-height: 160%;
-          letter-spacing: 0.005em;
           color: #596164;
         }
       }
@@ -595,7 +588,6 @@ export default {
           min-width: 120px;
           font-size: 14px;
           line-height: 160%;
-          letter-spacing: 0.005em;
           color: #ffffff;
           border-left: 4px solid #ceb87f;
         }
@@ -608,7 +600,6 @@ export default {
           min-width: 340px;
           font-size: 14px;
           line-height: 160%;
-          letter-spacing: 0.005em;
           color: #ffffff;
         }
       }
@@ -622,14 +613,12 @@ export default {
             strong {
               font-size: 14px;
               line-height: 160%;
-              letter-spacing: 0.005em;
               color: #ffffff;
             }
             a {
               border-top: 1px solid #ceb87f;
               font-size: 14px;
               line-height: 16px;
-              letter-spacing: 0.005em;
               color: #ceb87f;
             }
           }

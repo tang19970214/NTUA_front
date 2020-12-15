@@ -240,24 +240,4 @@ export default {
     }
   }
 }
-
-@keyframes prevShowSlow {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes titleMoveRight {
-  0% {
-    opacity: 0;
-    margin-left: -30px;
-  }
-  100% {
-    opacity: 1;
-    margin-left: 0px;
-  }
-}
 </style>

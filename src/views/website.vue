@@ -160,7 +160,6 @@ export default {
             text-align-last: center;
             font-size: 18px;
             line-height: 21px;
-            letter-spacing: 0.005em;
             color: #52505a;
             cursor: pointer;
           }
@@ -176,8 +175,6 @@ export default {
         }
       }
     }
-  }
-  .phone {
   }
 }
 </style>

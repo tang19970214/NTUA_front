@@ -64,109 +64,25 @@
     </div>
 
     <div class="phone d-block d-mb-none">
-      <div class="pl-30 pt-70 pb-100">
-        <div class="studioBG pb-80">
+      <div class="pl-30 pt-70 pb-80 mb-100">
+        <div class="studioBG">
           <div class="px-25 studioBG__trans">
-            <el-row class="mb-80">
-              <el-col :span="12">
-                <div
-                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
-                >
-                  <img
-                    src="@/assets/images/craft/craft_1.png"
-                    alt=""
-                    width="110px"
-                  />
-                  <div class="pos-absolute b-0 craftCard">
-                    <div class="p-10">
-                      <div class="p-10 craftCard__title text-center">
-                        <p class="m-0">陶瓷</p>
-                      </div>
-                      <router-link
-                        class="text-decoration-none"
-                        :to="{ name: 'crafts', params: { sort: 'CERAMICS' } }"
-                      >
-                        VIEW MORE
-                      </router-link>
-                    </div>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div
-                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
-                >
-                  <img
-                    src="@/assets/images/craft/craft_2.png"
-                    alt=""
-                    width="110px"
-                  />
-                  <div class="pos-absolute b-0 craftCard">
-                    <div class="p-10">
-                      <div class="p-10 craftCard__title text-center">
-                        <p class="m-0">金工</p>
-                      </div>
-                      <router-link
-                        class="text-decoration-none"
-                        :to="{
-                          name: 'crafts',
-                          params: { sort: 'METALWORKING' },
-                        }"
-                      >
-                        VIEW MORE
-                      </router-link>
-                    </div>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
             <el-row>
-              <el-col :span="12">
+              <el-col :span="12" v-for="(item, index1) in crafts" :key="index1">
                 <div
-                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
+                  class="w-100 d-flex align-items-center justify-content-center flex-column"
                 >
-                  <img
-                    src="@/assets/images/craft/craft_3.png"
-                    alt=""
-                    width="110px"
-                  />
-                  <div class="pos-absolute b-0 craftCard">
+                  <img :src="item.imgURL" alt="" width="110px" />
+                  <div class="b-0 craftCard">
                     <div class="p-10">
                       <div class="p-10 craftCard__title text-center">
-                        <p class="m-0">金工</p>
+                        <p class="m-0">{{ item.name_ch }}</p>
                       </div>
                       <router-link
                         class="text-decoration-none"
                         :to="{
-                          name: 'crafts',
-                          params: { sort: 'WOODWORKING' },
-                        }"
-                      >
-                        VIEW MORE
-                      </router-link>
-                    </div>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div
-                  class="pos-relative w-100 d-flex align-items-center justify-content-center"
-                >
-                  <img
-                    src="@/assets/images/craft/craft_4.png"
-                    alt=""
-                    width="110px"
-                  />
-                  <div class="pos-absolute b-0 craftCard">
-                    <div class="p-10">
-                      <div class="p-10 craftCard__title text-center">
-                        <p class="m-0">金工</p>
-                      </div>
-                      <router-link
-                        class="text-decoration-none"
-                        :to="{
-                          name: 'crafts',
-                          params: { sort: 'PRODUCT' },
+                          name: 'studioResultInfo',
+                          params: { craft: item.name_en },
                         }"
                       >
                         VIEW MORE
@@ -260,6 +176,8 @@ export default {
 <style lang="scss">
 #studioResult {
   .web {
+    padding-top: 0;
+    margin-left: 0;
     margin-top: 60px;
     .studioBG {
       height: 500px;
@@ -299,13 +217,11 @@ export default {
           p {
             font-weight: bold;
             font-size: 18px;
-            letter-spacing: 0.005em;
             color: white;
           }
           a {
             font-size: 18px;
             line-height: 21px;
-            letter-spacing: 0.005em;
             color: #ceb87f;
           }
           &-borTop {
@@ -321,13 +237,11 @@ export default {
         p {
           font-weight: bold;
           font-size: 18px;
-          letter-spacing: 0.005em;
           color: white;
         }
         a {
           font-size: 18px;
           line-height: 21px;
-          letter-spacing: 0.005em;
           color: #ceb87f;
         }
         &-borTop {
@@ -343,7 +257,6 @@ export default {
           font-weight: bold;
           font-size: 18px;
           line-height: 160%;
-          letter-spacing: 0.005em;
           color: #ffffff;
         }
       }
@@ -359,7 +272,7 @@ export default {
       }
       .craftCard {
         border: 1px solid #596164;
-        margin-bottom: -4rem;
+        transform: translateY(-1rem);
         &__title {
           font-weight: bold;
           font-size: 12px;
@@ -371,7 +284,6 @@ export default {
         a {
           font-size: 10px;
           line-height: 12px;
-          letter-spacing: 0.005em;
           color: #ceb87f;
         }
       }

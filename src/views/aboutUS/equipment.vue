@@ -133,7 +133,8 @@ export default {
 <style lang="scss">
 #equipment {
   .web {
-    // margin-top: 140px;
+    margin-left: 0;
+    padding-top: 140px;
     .studioGroup {
       width: 100%;
       background: #2d2d2d;
@@ -158,13 +159,11 @@ export default {
         p {
           font-weight: bold;
           font-size: 16px;
-          letter-spacing: 0.005em;
           color: white;
         }
         a {
           font-size: 18px;
           line-height: 21px;
-          letter-spacing: 0.005em;
           color: #ceb87f;
         }
         &-borTop {
@@ -181,13 +180,12 @@ export default {
         border: 2px solid #596164;
         font-size: 14px;
         line-height: 16px;
-        letter-spacing: 0.005em;
         strong {
           color: #ffffff;
         }
         a {
           color: #ceb87f;
-          border-top: 1px solid #CEB87F;
+          border-top: 1px solid #ceb87f;
         }
       }
     }

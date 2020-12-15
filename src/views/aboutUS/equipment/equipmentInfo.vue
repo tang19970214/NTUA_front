@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <div class="phone d-block d-mb none pt-70">
+    <div class="phone d-block d-mb-none pt-70">
       <div
         class="equipmentInfo__Title w-100 d-flex align-items-center flex-row"
       >
@@ -406,7 +406,6 @@ export default {
           font-weight: bold;
           font-size: 18px;
           line-height: 160%;
-          letter-spacing: 0.005em;
           color: #ffffff;
         }
       }
@@ -417,7 +416,6 @@ export default {
         font-weight: bold;
         font-size: 18px;
         line-height: 160%;
-        letter-spacing: 0.005em;
         color: #2d2d2d;
       }
     }
@@ -453,7 +451,6 @@ export default {
         &-title {
           font-size: 28px;
           line-height: 33px;
-          letter-spacing: 0.005em;
           color: #ceb87f;
         }
         &-content {
@@ -502,7 +499,6 @@ export default {
         color: #ceb87f;
         font-size: 18px;
         line-height: 21px;
-        letter-spacing: 0.005em;
       }
       &-content {
         .el-col {
@@ -510,13 +506,11 @@ export default {
             color: #ceb87f;
             font-size: 14px;
             line-height: 16px;
-            letter-spacing: 0.005em;
           }
           &:last-child {
             color: #fff;
             font-size: 14px;
             line-height: 16px;
-            letter-spacing: 0.005em;
           }
         }
       }
@@ -537,26 +531,6 @@ export default {
       border: 2px solid #ceb87f;
       color: #fff;
     }
-  }
-}
-
-@keyframes prevShowSlow {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes titleMoveRight {
-  0% {
-    opacity: 0;
-    margin-left: -30px;
-  }
-  100% {
-    opacity: 1;
-    margin-left: 0px;
   }
 }
 </style>

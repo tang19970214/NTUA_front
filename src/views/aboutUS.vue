@@ -95,7 +95,7 @@ export default {
 <style lang="scss">
 #aboutUS {
   .web {
-    padding-top: 140px;
+    padding-top: 420px;
     margin-left: 120px;
 
     .Txt {

@@ -57,8 +57,8 @@
         >
           <div
             class="w-100 mx-5 educationCard text-center"
-            v-for="(item, index_1) in education"
-            :key="index_1"
+            v-for="(item, index1) in education"
+            :key="'EDU__' + index1"
           >
             <div class="p-10" @click="openPeriod_phone(item)">
               <p class="m-0">{{ item.name }}</p>
@@ -337,6 +337,8 @@ export default {
 <style lang="scss">
 #history {
   .web {
+    margin-left: 0;
+    padding-top: 0;
     .historyCard {
       height: 100%;
       padding: 0px 240px;

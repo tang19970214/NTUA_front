@@ -118,7 +118,7 @@
     <div class="d-block d-mb-none">
       <div class="phoneScreen">
         <div
-          class="pr-10 py-5 d-flex align-items-center justify-content-center pos-relative"
+          class="pr-10 py-5 d-flex align-items-center justify-content-center"
         >
           <router-link to="/">
             <img
@@ -142,19 +142,40 @@
     <!-- phoneModal -->
     <div class="modal" v-if="menuModal">
       <div class="modal-content">
-        <div class="w-100 d-flex align-items-center">
-          <div class="menuList w-100">
-            <ul class="w-100 m-0 p-0 d-flex justify-content-center flex-column">
-              <li
-                class="px-10"
-                :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
-                v-for="item in menuList"
-                :key="item.value"
-                @click="goNextPage(item)"
+        <div
+          class="menuList w-100 d-flex align-items-center justify-content-center flex-row"
+        >
+          <ul
+            class="w-100 m-0 p-0 d-flex justify-content-center justify-content-start flex-column"
+          >
+            <li
+              class="px-10"
+              :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
+              v-for="item in menuList"
+              :key="item.value"
+              @click="goNextPage(item)"
+            >
+              {{ item.text }}
+            </li>
+          </ul>
+
+          <div class="w-100 overflow-x mt-60">
+            <div class="px-30">
+              <div
+                class="menuList__submenu p-10 mx-10"
+                :class="{
+                  'menuList__submenu-active': items.pathName == $route.name,
+                }"
+                v-for="items in subList[$route.meta.mainPage]"
+                :key="items.value"
+                @click="goNextPage_phone(items)"
               >
-                {{ item.text }}
-              </li>
-            </ul>
+                <span>{{ items.value }}</span>
+                <div class="w-100 d-flex align-items-center">
+                  <label>{{ items.text }}</label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -283,6 +304,130 @@ export default {
           pathName: "fullTime",
         },
       ],
+      subList: {
+        latestNews: [
+          {
+            value: "01",
+            text: "系辦公告",
+            mainPath: "latestNews",
+            pathName: "bulletin",
+          },
+          {
+            value: "02",
+            text: "競賽資訊",
+            mainPath: "latestNews",
+            pathName: "contest",
+          },
+          {
+            value: "03",
+            text: "活動訊息",
+            mainPath: "latestNews",
+            pathName: "activity",
+          },
+        ],
+        aboutUS: [
+          {
+            value: "01",
+            text: "歷史沿革",
+            mainPath: "aboutUS",
+            pathName: "history",
+          },
+          {
+            value: "02",
+            text: "課程說明",
+            mainPath: "aboutUS",
+            pathName: "description",
+          },
+          {
+            value: "03",
+            text: "四大工坊",
+            mainPath: "aboutUS",
+            pathName: "crafts",
+            params: {
+              title: "sort",
+              name: "CERAMICS",
+            },
+          },
+          {
+            value: "04",
+            text: "教學設備與空間",
+            mainPath: "aboutUS",
+            pathName: "equipment",
+          },
+        ],
+        teachingResult: [
+          {
+            value: "01",
+            text: "競賽得獎",
+            mainPath: "teachingResult",
+            pathName: "award",
+          },
+          {
+            value: "02",
+            text: "研究發表",
+            mainPath: "teachingResult",
+            pathName: "publish",
+          },
+          {
+            value: "03",
+            text: "展覽紀錄",
+            mainPath: "teachingResult",
+            pathName: "record",
+          },
+          {
+            value: "04",
+            text: "活動花絮",
+            mainPath: "teachingResult",
+            pathName: "highlight",
+          },
+          {
+            value: "05",
+            text: "實習成果",
+            mainPath: "teachingResult",
+            pathName: "internshipResult",
+          },
+          {
+            value: "06",
+            text: "工作室成果",
+            mainPath: "teachingResult",
+            pathName: "studioResult",
+          },
+        ],
+        website: [
+          {
+            value: "01",
+            text: "工作營",
+            mainPath: "website",
+            pathName: "workCamp",
+          },
+          {
+            value: "02",
+            text: "研討會",
+            mainPath: "website",
+            pathName: "seminar",
+          },
+        ],
+        departmentMember: [
+          {
+            value: "01",
+            text: "專任教師",
+            mainPath: "departmentMember",
+            pathName: "fullTime",
+          },
+          {
+            value: "02",
+            text: "兼任教師",
+            mainPath: "departmentMember",
+            pathName: "partTime",
+          },
+          {
+            value: "03",
+            text: "行政助理",
+            mainPath: "departmentMember",
+            pathName: "administrative",
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -308,6 +453,18 @@ export default {
       this.$router.push({ name: data.pathName });
       this.clickOpen = false;
       this.menuModal = false;
+    },
+    goNextPage_phone(data) {
+      if (!data.params) {
+        this.$router.push({ name: data.pathName });
+        this.menuModal = false;
+      } else {
+        this.$router.push({
+          name: data.pathName,
+          params: { [data.params.title]: data.params.name },
+        });
+        this.menuModal = false;
+      }
     },
     openMenuModal() {
       this.menuModal = !this.menuModal;
@@ -452,7 +609,7 @@ export default {
 
     &-content {
       position: fixed;
-      bottom: 30%;
+      bottom: 15%;
       width: 100%;
       animation-name: slideIn;
       animation-duration: 0.5s;
@@ -468,6 +625,33 @@ export default {
         }
         .stayPage {
           color: #ceb87f;
+        }
+        &__submenu {
+          writing-mode: horizontal-tb;
+          background: #ffffff;
+          border-radius: 6px;
+          width: 100px;
+          height: 100px;
+          span {
+            height: 30px;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 0.25em;
+            color: #ceb87f;
+            border-bottom: 2px solid #ceb87f;
+          }
+          div {
+            height: 70px;
+            label {
+              font-size: 20px;
+              line-height: 160%;
+              letter-spacing: 0.25em;
+              color: #ceb87f;
+            }
+          }
+          &-active {
+            background: #596164;
+          }
         }
       }
     }

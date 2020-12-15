@@ -374,100 +374,102 @@
           </div>
         </div>
         <!-- crafts -->
-        <!-- <div class="crafts w-100 mb-50">
+        <div class="crafts w-100 mb-50">
           <div
-            class="craftsCard w-100 pl-30 d-flex align-items-center justify-content-start"
+            class="craftsCard"
           >
-            <div
-              class="d-flex flex-column align-items-center justify-content-center"
-            >
-              <img
-                src="@/assets/images/craft/craft_1.png"
-                alt=""
-                width="110px"
-              />
+            <div class="p-20 d-flex align-items-center justify-content-start">
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="d-flex flex-column align-items-center justify-content-center"
               >
-                <div class="py-10">
-                  <p class="m-0">陶瓷</p>
-                </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="goCraft('CERAMICS')"
+                <img
+                  src="@/assets/images/craft/craft_1.png"
+                  alt=""
+                  width="110px"
+                />
+                <div
+                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
                 >
-                  VIEW MORE
-                </a>
+                  <div class="py-10">
+                    <p class="m-0">陶瓷</p>
+                  </div>
+                  <a
+                    class="text-decoration-none mt-10"
+                    @click="goCraft('CERAMICS')"
+                  >
+                    VIEW MORE
+                  </a>
+                </div>
               </div>
-            </div>
-            <div
-              class="d-flex flex-column align-items-center justify-content-center ml-30"
-            >
-              <img
-                src="@/assets/images/craft/craft_2.png"
-                alt=""
-                width="110px"
-              />
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="d-flex flex-column align-items-center justify-content-center ml-30"
               >
-                <div class="py-10">
-                  <p class="m-0">金工</p>
-                </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="goCraft('METALWORKING')"
+                <img
+                  src="@/assets/images/craft/craft_2.png"
+                  alt=""
+                  width="110px"
+                />
+                <div
+                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
                 >
-                  VIEW MORE
-                </a>
+                  <div class="py-10">
+                    <p class="m-0">金工</p>
+                  </div>
+                  <a
+                    class="text-decoration-none mt-10"
+                    @click="goCraft('METALWORKING')"
+                  >
+                    VIEW MORE
+                  </a>
+                </div>
               </div>
-            </div>
-            <div
-              class="d-flex flex-column align-items-center justify-content-center ml-30"
-            >
-              <img
-                src="@/assets/images/craft/craft_3.png"
-                alt=""
-                width="110px"
-              />
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="d-flex flex-column align-items-center justify-content-center ml-30"
               >
-                <div class="py-10">
-                  <p class="m-0">木工</p>
-                </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="goCraft('WOODWORKING')"
+                <img
+                  src="@/assets/images/craft/craft_3.png"
+                  alt=""
+                  width="110px"
+                />
+                <div
+                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
                 >
-                  VIEW MORE
-                </a>
+                  <div class="py-10">
+                    <p class="m-0">木工</p>
+                  </div>
+                  <a
+                    class="text-decoration-none mt-10"
+                    @click="goCraft('WOODWORKING')"
+                  >
+                    VIEW MORE
+                  </a>
+                </div>
               </div>
-            </div>
-            <div
-              class="d-flex flex-column align-items-center justify-content-center ml-30"
-            >
-              <img
-                src="@/assets/images/craft/craft_4.png"
-                alt=""
-                width="110px"
-              />
               <div
-                class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                class="d-flex flex-column align-items-center justify-content-center ml-30"
               >
-                <div class="py-10">
-                  <p class="m-0">產品</p>
-                </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="goCraft('PRODUCT')"
+                <img
+                  src="@/assets/images/craft/craft_4.png"
+                  alt=""
+                  width="110px"
+                />
+                <div
+                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
                 >
-                  VIEW MORE
-                </a>
+                  <div class="py-10">
+                    <p class="m-0">產品</p>
+                  </div>
+                  <a
+                    class="text-decoration-none mt-10"
+                    @click="goCraft('PRODUCT')"
+                  >
+                    VIEW MORE
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- access -->
         <div class="access w-100">
           <TitleText textTitle="ACCESS" />
@@ -850,13 +852,11 @@ export default {
     p {
       font-weight: bold;
       font-size: 18px;
-      letter-spacing: 0.005em;
       color: white;
     }
     a {
       font-size: 18px;
       line-height: 21px;
-      letter-spacing: 0.005em;
       color: #ceb87f;
     }
     &-borTop {
@@ -977,7 +977,6 @@ export default {
           font-weight: 500;
           font-size: 14px;
           line-height: 16px;
-          letter-spacing: 0.005em;
           color: #596164;
         }
       }
@@ -986,13 +985,11 @@ export default {
           font-weight: 500;
           font-size: 12px;
           line-height: 14px;
-          letter-spacing: 0.005em;
           color: #d4cbcc;
         }
         &_context {
           font-size: 14px;
           line-height: 16px;
-          letter-spacing: 0.005em;
           color: #596164;
           border-bottom: 1px solid #d4cbcc;
         }
@@ -1001,7 +998,8 @@ export default {
     .crafts {
       .craftsCard {
         overflow-x: auto;
-        height: 190px;
+        width: calc(100% + 30px);
+        // height: 190px;
         background: #2d2d2d;
         &-info {
           width: 75px;
@@ -1029,7 +1027,6 @@ export default {
         }
       }
     }
-
     .access {
       &-infoCard {
         background: #2d2d2d;

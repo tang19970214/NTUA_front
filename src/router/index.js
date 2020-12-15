@@ -195,11 +195,43 @@ const routes = [{
   },
 
   {
+    path: '/bulletinInfo',
+    name: 'bulletinInfo',
+    component: () => import('../views/latestNews/bulletin/bulletinInfo.vue'),
+    meta: {
+      mainPage: "latestNews"
+    }
+  },
+  {
+    path: '/contestInfo',
+    name: 'contestInfo',
+    component: () => import('../views/latestNews/contest/contestInfo.vue'),
+    meta: {
+      mainPage: "latestNews"
+    }
+  },
+  {
+    path: '/activityInfo',
+    name: 'activityInfo',
+    component: () => import('../views/latestNews/activity/activityInfo.vue'),
+    meta: {
+      mainPage: "latestNews"
+    }
+  },
+  {
     path: '/equipmentInfo/:class',
     name: 'equipmentInfo',
     component: () => import('../views/aboutUS/equipment/equipmentInfo.vue'),
     meta: {
       mainPage: "aboutUS"
+    }
+  },
+  {
+    path: '/awardInfo',
+    name: 'awardInfo',
+    component: () => import('../views/teachingResult/award/awardInfo.vue'),
+    meta: {
+      mainPage: "teachingResult"
     }
   },
   {
@@ -219,21 +251,21 @@ const routes = [{
     }
   },
   {
-    path: '/bulletinInfo',
-    name: 'bulletinInfo',
-    component: () => import('../views/latestNews/bulletin/bulletinInfo.vue'),
-    meta: {
-      mainPage: "latestNews"
-    }
-  },
-  {
-    path: '/awardInfo',
-    name: 'awardInfo',
-    component: () => import('../views/teachingResult/award/awardInfo.vue'),
+    path: '/highlightInfo',
+    name: 'highlightInfo',
+    component: () => import('../views/teachingResult/highlight/highlightInfo.vue'),
     meta: {
       mainPage: "teachingResult"
     }
-  }
+  },
+  {
+    path: '/studioResultInfo/:craft',
+    name: 'studioResultInfo',
+    component: () => import('../views/teachingResult/studioResult/studioResultInfo.vue'),
+    meta: {
+      mainPage: "teachingResult"
+    }
+  },
 ]
 
 const router = new VueRouter({

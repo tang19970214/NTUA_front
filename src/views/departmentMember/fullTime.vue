@@ -76,7 +76,7 @@
           />
           <div class="teacherCard__information" v-else>
             <div
-              class="px-15 py-20 d-flex align-items-center justify-content-start flex-column"
+              class="p-15 d-flex align-items-center justify-content-start flex-column"
             >
               <div class="w-100 d-flex flex-column">
                 <strong>職稱</strong>
@@ -345,7 +345,10 @@ export default {
 <style lang="scss">
 #fullTime {
   .web {
-    padding-left: 200px;
+    padding-top: 0;
+    margin-left: 120px;
+    padding-left: 80px;
+    background: #ffffff;
     .creation:hover {
       transform: rotateY(180deg);
     }
@@ -438,7 +441,7 @@ export default {
             color: #2d2d2d;
           }
           p {
-            border-left: 2px solid #C4C4C4;
+            border-left: 2px solid #c4c4c4;
             font-size: 14px;
             line-height: 150%;
             letter-spacing: 0.25em;
