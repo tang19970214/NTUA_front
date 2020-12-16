@@ -119,6 +119,7 @@ export default {
         border-radius: 8px;
         &-date {
           min-width: 85px;
+          white-space: nowrap;
           div {
             background: #ceb87f;
             border-radius: 8px;

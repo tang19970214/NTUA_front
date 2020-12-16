@@ -149,12 +149,13 @@
             class="w-100 m-0 p-0 d-flex justify-content-center justify-content-start flex-column"
           >
             <li
-              class="px-10"
+              class="px-10 d-flex"
               :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
               v-for="item in menuList"
               :key="item.value"
               @click="goNextPage(item)"
             >
+              <p class="m-0 pb-10">{{ item.value }}</p>
               {{ item.text }}
             </li>
           </ul>
@@ -589,7 +590,7 @@ export default {
   // phone
   .phoneScreen {
     position: fixed;
-    z-index: 5;
+    z-index: 5000;
     width: 100%;
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -621,7 +622,10 @@ export default {
           font-weight: bold;
           line-height: 28px;
           color: #ded9d5;
-          list-style-type: korean-hanja-informal;
+          list-style-type: none;
+          li > p {
+            writing-mode: horizontal-tb;
+          }
         }
         .stayPage {
           color: #ceb87f;

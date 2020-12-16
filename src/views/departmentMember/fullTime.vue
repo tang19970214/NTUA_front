@@ -91,13 +91,20 @@
                 <p class="m-0 pl-10 py-5">ext.2119&2110</p>
               </div>
               <div class="w-100 d-flex flex-column">
-                <strong>職稱</strong>
+                <strong>MAIL</strong>
                 <img
                   class="pl-10 py-5"
                   src="@/assets/images/icon/email.png"
                   alt=""
                   width="26px"
                 />
+              </div>
+              <div class="w-100 d-flex flex-column">
+                <router-link
+                  :to="{ name: 'publishInfo', params: { author: '劉家豪' } }"
+                >
+                  研究發表
+                </router-link>
               </div>
             </div>
           </div>
@@ -433,19 +440,19 @@ export default {
           width: 200px;
           height: 257px;
           background: white;
+          font-size: 14px;
+          line-height: 150%;
+          letter-spacing: 0.25em;
           strong {
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 150%;
-            letter-spacing: 0.25em;
             color: #2d2d2d;
           }
           p {
             border-left: 2px solid #c4c4c4;
-            font-size: 14px;
-            line-height: 150%;
-            letter-spacing: 0.25em;
             color: #2d2d2d;
+          }
+          a {
+            font-weight: bold;
+            color: #ceb87f;
           }
         }
         &__name {

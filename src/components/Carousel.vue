@@ -9,31 +9,27 @@
           <img :src="item.url" alt="" width="100%" height="100%" />
         </el-carousel-item>
       </el-carousel>
-
-      <!-- <flicking
-        class="flicking"
-        :options="{ circular: true, gap: 10, duration: 500 }"
-        :plugins="plugins"
-      >
-        <div
-          class="panel"
-          v-for="(item, index) in bannerURL"
-          :key="'URL__' + index"
-        >
-          <img :src="item.url" />
-        </div>
-      </flicking> -->
     </div>
 
     <div class="w-100 d-block d-mb-none pt-60">
-      <el-carousel trigger="click" width="100%">
+      <!-- <el-carousel trigger="click" width="100%">
         <el-carousel-item
           v-for="(item, index) in bannerURL"
           :key="'URL__' + index"
         >
           <img :src="item.url" alt="" width="100%" height="100%" />
         </el-carousel-item>
-      </el-carousel>
+      </el-carousel> -->
+
+      <flicking
+        class="flicking"
+        :options="{ gap: 10, circular: true }"
+        :plugins="plugins"
+      >
+        <div class="panel" v-for="(item, index1) in bannerURL" :key="index1">
+          <img :src="item.url" width="100%" />
+        </div>
+      </flicking>
     </div>
   </div>
 </template>
@@ -64,3 +60,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#carousel {
+  .flicking .panel {
+    width: 100%;
+  }
+}
+</style>
