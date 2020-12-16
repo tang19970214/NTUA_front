@@ -2,13 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import VueFlicking from "@egjs/vue-flicking";
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
+// import 'swiper/css/swiper.css'
+
 import "@/assets/all.scss"
 
-Vue.use(ElementUI);
-Vue.use(VueFlicking);
+Vue.use(ElementUI)
+Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
 new Vue({

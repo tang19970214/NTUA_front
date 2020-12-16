@@ -600,7 +600,7 @@ export default {
   // modal
   .modal {
     position: fixed;
-    z-index: 4;
+    z-index: 3000;
     left: 0;
     top: 0;
     width: 100%;
@@ -624,6 +624,7 @@ export default {
           color: #ded9d5;
           list-style-type: none;
           li > p {
+            white-space: nowrap;
             writing-mode: horizontal-tb;
           }
         }
