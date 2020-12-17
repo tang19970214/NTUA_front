@@ -71,7 +71,7 @@
           <div class="w-100 text-center pb-40">
             <div class="p-30">
               <img
-                src="@/assets/images/education/education.png"
+                src="@/assets/images/education/education.svg"
                 alt=""
                 width="100%"
               />
@@ -244,7 +244,7 @@ export default {
               },
             ],
             footer: "國內最早的大專美工、設計科系",
-            imgURL: require("@/assets/images/education/education1.png"),
+            imgURL: require("@/assets/images/education/education1.svg"),
           },
         },
         {
@@ -271,7 +271,7 @@ export default {
               },
             ],
             footer: "",
-            imgURL: require("@/assets/images/education/education2.png"),
+            imgURL: require("@/assets/images/education/education2.svg"),
           },
         },
         {
@@ -312,7 +312,7 @@ export default {
             ],
             footer:
               "2020年文化創意產業的推動類似係、所在台灣如雨後春筍般大幅成長",
-            imgURL: require("@/assets/images/education/education3.png"),
+            imgURL: require("@/assets/images/education/education3.svg"),
           },
         },
       ],

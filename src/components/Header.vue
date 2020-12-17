@@ -623,6 +623,7 @@ export default {
           line-height: 28px;
           color: #ded9d5;
           list-style-type: none;
+          height: 18rem;
           li > p {
             white-space: nowrap;
             writing-mode: horizontal-tb;

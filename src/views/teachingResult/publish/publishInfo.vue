@@ -155,7 +155,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="infoList__rightBlock" v-if="chooseThesis">
+                <div class="infoList__rightBlock" v-if="chooseThesis && !!item.thesisList">
                   <div class="p-20">
                     <div
                       class="py-20 infoList__rightBlock-text w-100 d-flex align-items-center flex-row"

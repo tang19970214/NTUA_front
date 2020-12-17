@@ -121,6 +121,8 @@ export default {
 #award {
   .web {
     padding: 45px 380px;
+    padding-top: 0;
+    margin-left: 0px;
     .awardContent {
       border-bottom: 1px solid #c4c4c4;
       padding: 25px 0px;

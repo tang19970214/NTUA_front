@@ -33,11 +33,13 @@
                   >
                     <p class="m-0">DIGIWOOD{{ item }}</p>
                     <span class="mr-25 cur-pointer">
-                      <img
-                        class="d-flex align-items-center"
-                        src="@/assets/images/icon/door.png"
-                        alt=""
-                      />
+                      <router-link :to="{ name: 'award' }">
+                        <img
+                          class="d-flex align-items-center"
+                          src="@/assets/images/icon/door.png"
+                          alt=""
+                        />
+                      </router-link>
                     </span>
                   </span>
                 </div>
@@ -375,9 +377,7 @@
         </div>
         <!-- crafts -->
         <div class="crafts w-100 mb-50">
-          <div
-            class="craftsCard"
-          >
+          <div class="craftsCard">
             <div class="p-20 d-flex align-items-center justify-content-start">
               <div
                 class="d-flex flex-column align-items-center justify-content-center"
