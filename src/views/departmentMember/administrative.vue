@@ -278,9 +278,9 @@ export default {
             transform: translateY(10px);
           }
           p {
-            font-size: 24px;
-            line-height: 210%;
-            letter-spacing: 0.25em;
+            font-size: 18px;
+            line-height: 250%;
+            letter-spacing: 0.1em;
             color: #2d2d2d;
             word-wrap: break-word;
           }
@@ -306,7 +306,6 @@ export default {
         background: #c4c4c4;
         font-size: 36px;
         color: #2d2d2d;
-        cursor: pointer;
         p {
           letter-spacing: 0.6em;
         }
