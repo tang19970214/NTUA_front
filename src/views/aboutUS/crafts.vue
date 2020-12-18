@@ -182,88 +182,20 @@
             class="crafts__Card pl-30 d-flex align-items-center justify-content-start"
           >
             <div
-              class="d-flex flex-column align-items-center justify-content-center"
+              class="mx-15 d-flex flex-column align-items-center justify-content-center"
+              v-for="(item, index1) in crafts"
+              :key="index1"
             >
-              <img
-                src="@/assets/images/craft/craft_1.png"
-                alt=""
-                width="110px"
-              />
+              <img :src="item.imgURL" alt="" width="110px" />
               <div
                 class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
               >
                 <div class="py-10">
-                  <p class="m-0">陶瓷</p>
+                  <p class="m-0">{{ item.name_ch }}</p>
                 </div>
                 <a
                   class="text-decoration-none mt-10"
-                  @click="goCraft('CERAMICS')"
-                >
-                  VIEW MORE
-                </a>
-              </div>
-            </div>
-            <div
-              class="d-flex flex-column align-items-center justify-content-center ml-30"
-            >
-              <img
-                src="@/assets/images/craft/craft_2.png"
-                alt=""
-                width="110px"
-              />
-              <div
-                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
-              >
-                <div class="py-10">
-                  <p class="m-0">金工</p>
-                </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="goCraft('METALWORKING')"
-                >
-                  VIEW MORE
-                </a>
-              </div>
-            </div>
-            <div
-              class="d-flex flex-column align-items-center justify-content-center ml-30"
-            >
-              <img
-                src="@/assets/images/craft/craft_3.png"
-                alt=""
-                width="110px"
-              />
-              <div
-                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
-              >
-                <div class="py-10">
-                  <p class="m-0">木工</p>
-                </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="goCraft('WOODWORKING')"
-                >
-                  VIEW MORE
-                </a>
-              </div>
-            </div>
-            <div
-              class="d-flex flex-column align-items-center justify-content-center ml-30"
-            >
-              <img
-                src="@/assets/images/craft/craft_4.png"
-                alt=""
-                width="110px"
-              />
-              <div
-                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
-              >
-                <div class="py-10">
-                  <p class="m-0">產品</p>
-                </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="goCraft('PRODUCT')"
+                  @click="showIntroduce(item)"
                 >
                   VIEW MORE
                 </a>
@@ -272,6 +204,7 @@
           </div>
         </div>
       </div>
+
       <div class="w-100">
         <div class="py-20 crafts__resetBG">
           <PhoneTitle
@@ -280,9 +213,11 @@
           />
           <p class="m-0 crafts__EngTitle">{{ craftsTitle.title_en }}</p>
         </div>
+
         <div class="bg-white">
-          <div class="pl-50 pt-20 pb-55">
-            <div class="crafts__host pl-50">
+          <!-- CERAMICS -->
+          <div class="pl-50 pt-20 pb-55" v-if="showCrafts == 'CERAMICS'">
+            <div class="crafts__host pl-50 mb-10">
               <div class="w-100 d-flex align-items-start flex-row">
                 <strong class="pl-20">主持人</strong>
                 <span class="mx-10 pt-10"></span>
@@ -294,7 +229,6 @@
             </div>
 
             <div class="w-100 overflow-x crafts__studio">
-              <!-- <div class="p-20"> -->
               <div class="w-100 d-flex flex-column">
                 <div class="p-15 d-flex align-items-start flex-row">
                   <strong class="pl-20">大學部陶瓷工作室</strong>
@@ -320,15 +254,121 @@
                   </div>
                 </div>
               </div>
-              <!-- </div> -->
+            </div>
+          </div>
+          <!-- METALWORKING -->
+          <div
+            class="pl-50 pt-20 pb-55"
+            v-else-if="showCrafts == 'METALWORKING'"
+          >
+            <div class="crafts__host pl-50 mb-10">
+              <div class="w-100 d-flex align-items-start flex-row">
+                <strong class="pl-20">主持人</strong>
+                <span class="mx-10 pt-10"></span>
+                <div class="d-flex align-items-center flex-column">
+                  <p class="m-0">趙丹綺老師</p>
+                  <p class="m-0">王意婷老師</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-100 overflow-x crafts__studio">
+              <div class="w-100 d-flex flex-column">
+                <div class="pt-15 pl-70 text-center">
+                  <p class="m-0" style="white-space: nowrap">
+                    金工工作室具備各式專業機具、設備及個人專用工作桌的創作空間。
+                  </p>
+                </div>
+                <div class="p-15 d-flex align-items-start flex-row">
+                  <strong class="pl-20">大學部金工工作室</strong>
+                  <span class="mx-10 pt-10"></span>
+                  <div class="d-flex align-items-center flex-column pr-20">
+                    <p class="m-0">
+                      成員採申請審查制，具有金工創作熱誠的大二～大四
+                      學生皆可申請，可容納24名成員。每年舉辦工作室成
+                      員聯展及不定期的工作營、專題講座及工藝市集。
+                    </p>
+                  </div>
+                </div>
+                <div class="p-15 d-flex align-items-start flex-row">
+                  <strong class="pl-20">碩士班金工工作室</strong>
+                  <span class="mx-10 pt-10"></span>
+                  <div class="d-flex align-items-center flex-column pr-20">
+                    <p class="m-0">
+                      員採申請制，可容納13名成員。提供金工研究生專屬
+                      的獨立研究與創作空間，每學期參加系上主辦的創作
+                      評圖，不定期舉辦交流展、校外參訪、工作營及研討
+                      會發表之學術性活動。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- WOODWORKING -->
+          <div
+            class="pl-50 pt-20 pb-55"
+            v-else-if="showCrafts == 'WOODWORKING'"
+          >
+            <div class="crafts__host pl-50 mb-10">
+              <div class="w-100 d-flex align-items-start flex-row">
+                <strong class="pl-20">主持人</strong>
+                <span class="mx-10 pt-10"></span>
+                <div class="d-flex align-items-center flex-column">
+                  <p class="m-0">李英嘉老師</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-100 overflow-x crafts__studio">
+              <div class="p-30">
+                <p class="m-0 pr-30">
+                  木藝工作室成員先備條件需修過木藝相關基礎課程，提出作品集申請，通過技術考核即可，硬體特色擁有相關的書籍，完備的公用工具，
+                  個人專用座位，最重要的是可以盡情使用工廠設備，具有打破年級制度共同交流學習的軟體精神。在多門木藝相關課程共同學習中，除理性技術加深加廣再輔以感性思維建立，工作室成員皆能產出令人讚嘆的
+                  作品，校內藝術市集提供學生作品於市場實驗的經驗，對外競賽都能
+                  獲得相當高的獎項，訓練學生能想能做更能賣的能力。
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- PRODUCT -->
+          <div class="pl-50 pt-20 pb-55" v-else-if="showCrafts == 'PRODUCT'">
+            <div class="crafts__host pl-50 mb-10">
+              <div class="w-100 d-flex align-items-start flex-row">
+                <strong class="pl-20">主持人</strong>
+                <span class="mx-10 pt-10"></span>
+                <div class="d-flex align-items-center flex-column">
+                  <p class="m-0">劉立偉老師</p>
+                  <p class="m-0">張恭領老師</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-100 overflow-x crafts__studio">
+              <div class="p-30">
+                <p class="m-0 pr-30">
+                  產品設計工作室專為培養工業設計與工藝產品設計人才為宗旨，秉持自主、
+                  自律、合群之原則，亦是本工作室的基本學習態度。
+                  編制成員由兩學制之
+                  碩士、大四、大三、大二採取合班共享學習制度，並同時進行由上至下的
+                  垂直管理與專業技能的傳承責任。
+                  除了專業能力以菁英式的培訓之外，團
+                  隊合作的群合精神之養成與產學實務經驗的累積，皆是本工作室重要的學
+                  用理念與執行目標。
+                  「智圓行方，開悟成物，匠中有心」乃室訓之中心思 想與奉行圭臬。
+                </p>
+              </div>
             </div>
           </div>
         </div>
+
         <div
           class="w-100 crafts__studioClass d-flex align-items-center justify-content-center"
         >
+          <!-- CERAMICS -->
           <div
             class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
+            v-if="showCrafts == 'CERAMICS'"
           >
             <img
               src="@/assets/images/craft/ceramics.png"
@@ -339,6 +379,68 @@
               class="px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
             >
               <strong>1樓陶瓷工藝創作專業工坊</strong>
+              <router-link
+                class="mt-10 px-20 pt-8 text-decoration-none"
+                :to="{ name: 'equipment' }"
+              >
+                VIEW MORE
+              </router-link>
+            </div>
+          </div>
+          <!-- METALWORKING -->
+          <div
+            class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
+            v-if="showCrafts == 'METALWORKING'"
+          >
+            <img
+              src="@/assets/images/craft/metalworking.png"
+              alt=""
+              width="200px"
+            />
+            <div
+              class="px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
+            >
+              <strong>工藝大樓2樓-金屬工藝創作專業工坊</strong>
+              <router-link
+                class="mt-10 px-20 pt-8 text-decoration-none"
+                :to="{ name: 'equipment' }"
+              >
+                VIEW MORE
+              </router-link>
+            </div>
+          </div>
+          <!-- WOODWORKING -->
+          <div
+            class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
+            v-if="showCrafts == 'WOODWORKING'"
+          >
+            <img
+              src="@/assets/images/craft/woodworking.png"
+              alt=""
+              width="200px"
+            />
+            <div
+              class="px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
+            >
+              <strong>工藝大樓1樓-木材工藝創作專業工坊教室</strong>
+              <router-link
+                class="mt-10 px-20 pt-8 text-decoration-none"
+                :to="{ name: 'equipment' }"
+              >
+                VIEW MORE
+              </router-link>
+            </div>
+          </div>
+          <!-- PRODUCT -->
+          <div
+            class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
+            v-if="showCrafts == 'PRODUCT'"
+          >
+            <img src="@/assets/images/craft/product.png" alt="" width="200px" />
+            <div
+              class="px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
+            >
+              <strong>工藝大樓1樓-木材工藝創作專業工坊教室</strong>
               <router-link
                 class="mt-10 px-20 pt-8 text-decoration-none"
                 :to="{ name: 'equipment' }"
@@ -393,33 +495,33 @@ export default {
   },
   methods: {
     showIntroduce(data) {
-      // this.$router.push({ name: "crafts", params: { sort: data.name_en } });
-      // console.log(data);
-      // console.log(this.$route.params.sort);
-      // this.$route.params.sort = data.name_en;
       this.showCrafts = data.name_en;
     },
   },
   computed: {
     getCraftTitle() {
       return (data) => {
-        if (data == "CERAMICS") {
-          this.craftsTitle.title_ch = "陶瓷工藝創作專業工坊";
-          this.craftsTitle.title_en = "Ceramics Studio";
-          return this.craftsTitle;
-        } else if (data == "METALWORKING") {
-          this.craftsTitle.title_ch = "金屬工藝創作專業工坊";
-          this.craftsTitle.title_en = "Jewelry and Metal Arts Studio";
-          return this.craftsTitle;
-        } else if (data == "WOODWORKING") {
-          this.craftsTitle.title_ch = "木材工藝創作專業工坊";
-          this.craftsTitle.title_en = "Woodworking Arts Studio";
-          return this.craftsTitle;
-        } else if (data == "PRODUCT") {
-          this.craftsTitle.title_ch = "產品設計與複媒創作專業工坊";
-          this.craftsTitle.title_en = "Product Design Studio";
-          return this.craftsTitle;
+        switch (data) {
+          case "CERAMICS":
+            this.craftsTitle.title_ch = "陶瓷工藝創作專業工坊";
+            this.craftsTitle.title_en = "Ceramics Studio";
+            break;
+          case "METALWORKING":
+            this.craftsTitle.title_ch = "金屬工藝創作專業工坊";
+            this.craftsTitle.title_en = "Jewelry and Metal Arts Studio";
+            break;
+          case "WOODWORKING":
+            this.craftsTitle.title_ch = "木材工藝創作專業工坊";
+            this.craftsTitle.title_en = "Woodworking Arts Studio";
+            break;
+          case "PRODUCT":
+            this.craftsTitle.title_ch = "產品設計與複媒創作專業工坊";
+            this.craftsTitle.title_en = "Product Design Studio";
+            break;
+          default:
+            break;
         }
+        return this.craftsTitle;
       };
     },
   },
@@ -531,6 +633,7 @@ export default {
         &-info {
           width: 75px;
           height: 75px;
+          transform: translateY(-0.8rem);
           border: 1px solid #596164;
           box-sizing: border-box;
           div {

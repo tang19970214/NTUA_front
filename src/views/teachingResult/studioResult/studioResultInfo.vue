@@ -22,7 +22,7 @@
                 :src="item.imgURL"
                 alt=""
                 width="100%"
-                @click="showIMG = true"
+                @click="getTouchIMG(item.imgURL)"
               />
               <div class="studioResultInfoCard__title mt-15">
                 <p class="m-0 pt-10 px-20">陶瓷作品{{ index + 1 }}</p>
@@ -54,11 +54,11 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <img
-                  src="@/assets/images/studio/studio1.png"
+                  :src="enlargeIMG"
                   alt=""
                   width="100%"
                 />
-                <div
+                <!-- <div
                   class="w-100 my-20 d-flex align-items-center justify-content-between"
                 >
                   <img
@@ -71,7 +71,7 @@
                     alt=""
                     width="32px"
                   />
-                </div>
+                </div> -->
                 <div class="w-100 worksInfo__introduce">
                   <div class="px-30 py-10">
                     <div
@@ -138,6 +138,7 @@ export default {
           imgURL: require("@/assets/images/studio/studio9.png"),
         },
       ],
+      enlargeIMG: "",
       showIMG: false,
     };
   },
@@ -163,6 +164,12 @@ export default {
         }
         return craftName;
       };
+    },
+  },
+  methods: {
+    getTouchIMG(url) {
+      this.enlargeIMG = url;
+      this.showIMG = true;
     },
   },
 };

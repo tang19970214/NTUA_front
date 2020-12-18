@@ -155,7 +155,10 @@
                     </p>
                   </div>
                 </div>
-                <div class="infoList__rightBlock" v-if="chooseThesis && !!item.thesisList">
+                <div
+                  class="infoList__rightBlock"
+                  v-if="chooseThesis && !!item.thesisList"
+                >
                   <div class="p-20">
                     <div
                       class="py-20 infoList__rightBlock-text w-100 d-flex align-items-center flex-row"
@@ -411,36 +414,36 @@ export default {
               code: "B",
               title: "B 專書中之輪文",
             },
-            {
-              code: "C",
-              title: "C 主編之專書",
-            },
-            {
-              code: "D",
-              title: "D 學位論文",
-            },
-            {
-              code: "E",
-              title: "E 研討會論文",
-            },
-            {
-              code: "F",
-              title: "F 譯著",
-            },
-            {
-              code: "G",
-              title: "G 其他",
-            },
-            {
-              code: "H",
-              title: "H 展覽經驗",
-            },
+            // {
+            //   code: "C",
+            //   title: "C 主編之專書",
+            // },
+            // {
+            //   code: "D",
+            //   title: "D 學位論文",
+            // },
+            // {
+            //   code: "E",
+            //   title: "E 研討會論文",
+            // },
+            // {
+            //   code: "F",
+            //   title: "F 譯著",
+            // },
+            // {
+            //   code: "G",
+            //   title: "G 其他",
+            // },
+            // {
+            //   code: "H",
+            //   title: "H 展覽經驗",
+            // },
           ],
         },
-        {
-          value: 2,
-          title: "研究計畫一覽",
-        },
+        // {
+        //   value: 2,
+        //   title: "研究計畫一覽",
+        // },
       ],
       infoList: {
         A: [

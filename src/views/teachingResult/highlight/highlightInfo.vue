@@ -24,7 +24,7 @@
                     :src="item.imgURL"
                     alt=""
                     width="100%"
-                    @click="showIMG_phone = true"
+                    @click="getTouchIMG(item.imgURL)"
                   />
                 </div>
                 <div
@@ -60,13 +60,9 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <div class="px-30">
-                  <img
-                    src="@/assets/images/highlight/highlight1.png"
-                    alt=""
-                    width="100%"
-                  />
+                  <img :src="enlargeIMG" alt="" width="100%" />
                 </div>
-                <div
+                <!-- <div
                   class="w-100 my-20 d-flex align-items-center justify-content-between"
                 >
                   <img
@@ -79,7 +75,7 @@
                     alt=""
                     width="32px"
                   />
-                </div>
+                </div> -->
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
@@ -143,8 +139,16 @@ export default {
           title: "2015（第四屆）工藝創作與文創設計研討會 暨陶瓷柴燒工作營",
         },
       ],
+      enlargeIMG: "",
+      showIMG_phone: false,
       showIMG_phone: false,
     };
+  },
+  methods: {
+    getTouchIMG(url) {
+      this.enlargeIMG = url;
+      this.showIMG_phone = true;
+    },
   },
 };
 </script>

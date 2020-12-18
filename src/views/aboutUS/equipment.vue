@@ -2,40 +2,35 @@
   <div id="equipment">
     <div class="web d-none d-mb-block">
       <div class="d-flex justify-content-around studioGroup mb-60">
-        <div class="p-50 pos-relative">
+        <div class="p-50">
           <el-row>
             <el-col
               :span="6"
-              class="p-20 mb-120"
+              class="p-20"
               v-for="(item, index) in equipment"
               :key="index"
             >
               <div class="m-item d-flex align-items-center flex-column">
-                <div class="pos-relative">
-                  <img
-                    :src="item.imgURL"
-                    class="m-item-image w-100"
-                    width="100%"
-                  />
-                  <div
-                    class="w-100 m-item-title d-flex justify-content-center pos-absolute b-0"
-                    style="margin-bottom: -7.5rem"
-                  >
-                    <div class="px-20">
-                      <div
-                        class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-                      >
-                        <div class="mb-30">
-                          <p class="m-0">{{ item.title }}</p>
-                        </div>
-                        <div class="pt-10 craftCard-borTop">
-                          <a
-                            class="text-decoration-none cur-pointer"
-                            @click="showIntroduce(item)"
-                          >
-                            VIEW MORE
-                          </a>
-                        </div>
+                <img
+                  :src="item.imgURL"
+                  class="m-item-image w-100"
+                  height="300px"
+                />
+                <div class="w-100 m-item-title d-flex justify-content-center">
+                  <div class="px-20">
+                    <div
+                      class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
+                    >
+                      <div class="mb-30">
+                        <p class="m-0">{{ item.title }}</p>
+                      </div>
+                      <div class="pt-10 craftCard-borTop">
+                        <a
+                          class="text-decoration-none cur-pointer"
+                          @click="showIntroduce(item)"
+                        >
+                          VIEW MORE
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -156,6 +151,7 @@ export default {
         width: 17vw;
         border: 2px solid #596164;
         box-sizing: border-box;
+        transform: translateY(-2rem);
         p {
           font-weight: bold;
           font-size: 16px;

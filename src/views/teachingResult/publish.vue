@@ -114,10 +114,12 @@ export default {
   },
   methods: {
     goPublishInfo(data) {
-      this.$router.push({
-        name: "publishInfo",
-        params: { author: data.author },
-      });
+      if (data.author == "梁家豪") {
+        this.$router.push({
+          name: "publishInfo",
+          params: { author: data.author },
+        });
+      }
     },
   },
 };

@@ -18,32 +18,36 @@
                   class="teacherList-introduce p-20 d-flex justify-content-center flex-column"
                 >
                   <div
-                    class="w-100"
+                    class="w-100 d-flex flex-row teacherList-introduce_content"
                     v-for="(items, index) in item.info"
                     :key="index"
                   >
-                    <div
-                      class="w-100 d-flex flex-row teacherList-introduce_content"
-                    >
-                      <el-row class="w-100">
-                        <el-col :span="7">
-                          <strong>{{ items.title }}</strong>
-                        </el-col>
-                        <el-col :span="4">
-                          <img src="@/assets/images/icon/dashLine.png" alt="" />
-                        </el-col>
-                        <el-col :span="13" v-if="items.title == 'MAIL'">
-                          <img
-                            class="cur-pointer"
-                            src="@/assets/images/icon/email.png"
-                            alt="email link"
-                          />
-                        </el-col>
-                        <el-col :span="13" v-else>
-                          <p class="m-0">{{ items.value }}</p>
-                        </el-col>
-                      </el-row>
-                    </div>
+                    <el-row class="w-100">
+                      <el-col :span="10">
+                        <strong>{{ items.title }}</strong>
+                      </el-col>
+                      <el-col :span="2">
+                        <img
+                          src="@/assets/images/icon/dashLine.png"
+                          alt=""
+                          width="100%"
+                        />
+                      </el-col>
+                      <el-col
+                        class="pl-5"
+                        :span="12"
+                        v-if="items.title == 'MAIL'"
+                      >
+                        <img
+                          class="cur-pointer"
+                          src="@/assets/images/icon/email.png"
+                          alt="email link"
+                        />
+                      </el-col>
+                      <el-col class="pl-5" :span="12" v-else>
+                        <p class="m-0">{{ items.value }}</p>
+                      </el-col>
+                    </el-row>
                   </div>
                 </div>
               </div>
@@ -60,82 +64,65 @@
     </div>
 
     <div class="phone d-block d-mb-none pb-20">
-      <div class="cardBlock py-20 px-40 d-flex align-items-center flex-row">
-        <div class="teacherCard d-flex align-items-center flex-row mr-40">
+      <div
+        class="cardBlock py-20 px-40 d-flex align-items-center flex-row"
+        v-for="fetch in teacherList_phone"
+        :key="fetch.id"
+      >
+        <div
+          class="teacherCard d-flex align-items-center flex-row mr-40"
+          v-for="(item, index1) in fetch"
+          :key="index1"
+        >
           <img
-            src="@/assets/images/teacher/administrative/teacher1.jpg"
+            :src="item.imageURL"
             alt=""
             width="200px"
-            v-if="!showInfo"
+            v-if="showInfo[item.id]"
           />
           <div class="teacherCard__information" v-else>
-            <div
-              class="p-15 d-flex align-items-center justify-content-start flex-column"
-            >
-              <div class="w-100 d-flex flex-column">
-                <strong>職稱</strong>
-                <p class="m-0 pl-10 py-5">教授</p>
-              </div>
-              <div class="w-100 d-flex flex-column">
-                <strong>負責業務</strong>
-                <p class="m-0 pl-10 pt-5">系上總務事務</p>
-                <p class="m-0 pl-10 pb-5">系上學務事務</p>
-              </div>
-              <div class="w-100 d-flex flex-column">
-                <strong>聯繫我</strong>
-                <p class="m-0 pl-10 py-5">ext.21110</p>
-              </div>
-              <div class="w-100 d-flex flex-column">
-                <strong>職稱</strong>
-                <img
-                  class="pl-10 py-5"
-                  src="@/assets/images/icon/email.png"
-                  alt=""
-                  width="26px"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="teacherCard__name" @click="showTeacherInfo">
-            <div class="p-10 d-flex flex-row justify-content-between">
-              <div class="d-flex flex-column">
-                <p class="m-0">曾煥荻</p>
-              </div>
-              <div class="d-flex align-items-center">
-                <img src="@/assets/images/icon/arrowRight.png" alt="" />
+            <div class="p-15">
+              <div
+                class="d-flex align-items-center justify-content-start flex-column"
+                v-for="(items, index2) in item.info"
+                :key="index2"
+              >
+                <div
+                  class="w-100 d-flex flex-column"
+                  v-if="items.title !== 'MAIL'"
+                >
+                  <strong>{{ items.title }}</strong>
+                  <p class="m-0 pl-10 py-5">{{ items.value }}</p>
+                </div>
+                <div class="w-100 d-flex flex-column" v-else>
+                  <strong>MAIL</strong>
+                  <img
+                    class="pl-10 py-5"
+                    src="@/assets/images/icon/email.png"
+                    alt=""
+                    width="26px"
+                  />
+                </div>
+                <!-- <div class="w-100 d-flex flex-column">
+                <router-link
+                  :to="{ name: 'publishInfo', params: { author: '劉家豪' } }"
+                >
+                  研究發表
+                </router-link>
+              </div> -->
               </div>
             </div>
           </div>
-        </div>
-        <div class="teacherCard d-flex align-items-center flex-row mr-40">
-          <img
-            src="@/assets/images/teacher/administrative/teacher2.jpg"
-            alt=""
-            width="200px"
-          />
           <div class="teacherCard__name">
             <div class="p-10 d-flex flex-row justify-content-between">
               <div class="d-flex flex-column">
-                <p class="m-0">陳瑩娟</p>
+                <p class="m-0">{{ item.name }}</p>
+                <p class="m-0">{{ item.jobTitle }}</p>
               </div>
-              <div class="d-flex align-items-center">
-                <img src="@/assets/images/icon/arrowRight.png" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="teacherCard d-flex align-items-center flex-row mr-40">
-          <img
-            src="@/assets/images/teacher/administrative/teacher3.jpg"
-            alt=""
-            width="200px"
-          />
-          <div class="teacherCard__name">
-            <div class="p-10 d-flex flex-row justify-content-between">
-              <div class="d-flex flex-column">
-                <p class="m-0">呂沛錞</p>
-              </div>
-              <div class="d-flex align-items-center">
+              <div
+                class="d-flex align-items-center"
+                @click="showTeacherInfo(item)"
+              >
                 <img src="@/assets/images/icon/arrowRight.png" alt="" />
               </div>
             </div>
@@ -149,48 +136,95 @@
 <script>
 export default {
   data() {
+    let fetchData = [
+      {
+        id: 1,
+        imageURL: require("@/assets/images/teacher/administrative/teacher1.jpg"),
+        name: "曾煥荻",
+        jobTitle: "",
+        info: [
+          {
+            title: "職稱",
+            value: "助教",
+          },
+          {
+            title: "負責業務",
+            value: "系上總務事物、系上學務事物",
+          },
+          {
+            title: "聯繫我",
+            value: "ext.2111",
+          },
+          {
+            title: "MAIL",
+            value: "信箱",
+          },
+        ],
+      },
+      {
+        id: 2,
+        imageURL: require("@/assets/images/teacher/administrative/teacher2.jpg"),
+        name: "陳瑩娟",
+        jobTitle: "",
+        info: [
+          {
+            title: "職稱",
+            value: "助教",
+          },
+          {
+            title: "負責業務",
+            value: "系上註冊、排／選課程事務",
+          },
+          {
+            title: "聯繫我",
+            value: "ext.2112",
+          },
+          {
+            title: "MAIL",
+            value: "信箱",
+          },
+        ],
+      },
+      {
+        id: 3,
+        imageURL: require("@/assets/images/teacher/administrative/teacher3.jpg"),
+        name: "呂沛錞",
+        jobTitle: "",
+        info: [
+          {
+            title: "職稱",
+            value: "助教",
+          },
+          {
+            title: "負責業務",
+            value: "系上網站與臉書資料維護更新",
+          },
+          {
+            title: "聯繫我",
+            value: "ext.2129",
+          },
+          {
+            title: "MAIL",
+            value: "信箱",
+          },
+        ],
+      },
+    ];
+    let teacherListSplit = [];
+    fetchData.forEach((item, index, arr) => {
+      if (index % 3 === 0) {
+        return teacherListSplit.push(arr.slice(index, index + 3));
+      }
+    });
     return {
-      teacherList: [
-        {
-          imageURL: require("@/assets/images/teacher/administrative/teacher1.jpg"),
-          name: "曾煥荻",
-          jobTitle: "",
-          info: [
-            {
-              title: "職稱",
-              value: "教授",
-            },
-            {
-              title: "授課",
-              value: "產品設計實務與管理",
-            },
-            {
-              title: "聯繫我",
-              value: "ext.2119&2110",
-            },
-            {
-              title: "MAIL",
-              value: "信箱",
-            },
-          ],
-        },
-        {
-          imageURL: require("@/assets/images/teacher/administrative/teacher2.jpg"),
-          name: "陳瑩娟",
-          jobTitle: "",
-        },
-        {
-          imageURL: require("@/assets/images/teacher/administrative/teacher3.jpg"),
-          name: "呂沛錞",
-          jobTitle: "",
-        },
-      ],
-      showInfo: false,
+      teacherList: fetchData,
+      teacherList_phone: teacherListSplit,
+      showInfo: fetchData.reduce((a, b) => ((a[b.id] = true), a), {}),
     };
   },
   methods: {
-    showTeacherInfo() {
-      this.showInfo = !this.showInfo;
+    showTeacherInfo(data) {
+      this.showInfo[data?.id] = !this.showInfo[data?.id];
     },
   },
 };

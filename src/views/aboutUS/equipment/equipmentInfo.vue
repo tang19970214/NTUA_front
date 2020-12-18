@@ -28,7 +28,7 @@
                         class="cur-pointer"
                         :src="item.imgURL"
                         alt=""
-                        @click="showIMG = true"
+                        @click="getTouchIMG(item.imgURL)"
                       />
                     </div>
 
@@ -65,7 +65,7 @@
               v-for="(item, index) in anotherClassList"
               :key="'ACL__' + index"
             >
-              <img :src="item.imgURL" alt="" />
+              <img class="cur-pointer" :src="item.imgURL" alt="" @click="showIntroduce(item)" />
               <div class="mt-20">
                 <strong>{{ item.title }}</strong>
               </div>
@@ -101,7 +101,7 @@
                     :src="item.imgURL"
                     alt=""
                     width="100%"
-                    @click="showIMG_phone = true"
+                    @click="getTouchIMG_phone(item.imgURL)"
                   />
                   <strong class="mt-15 pt-10 px-20">展覽空間</strong>
                 </div>
@@ -126,7 +126,12 @@
               v-for="(item, index2) in anotherClassList"
               :key="index2"
             >
-              <img :src="item.imgURL" alt="" width="200px" />
+              <img
+                :src="item.imgURL"
+                alt=""
+                width="200px"
+                @click="showIntroduce(item)"
+              />
               <div class="mt-20 text-center">
                 <strong>{{ item.title }}</strong>
               </div>
@@ -144,11 +149,7 @@
             <div class="classCard w-100">
               <div class="p-100">
                 <div class="w-100 d-flex align-items-end flex-row">
-                  <img
-                    src="@/assets/images/equipment/equipment1.png"
-                    alt=""
-                    width="700px"
-                  />
+                  <img :src="enlargeIMG" alt="" width="700px" />
                   <div class="classCard__introduce d-inline-flex">
                     <div class="px-50 pt-60 pb-80">
                       <div
@@ -204,12 +205,8 @@
               <div
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
-                <img
-                  src="@/assets/images/equipment/equipment1.png"
-                  alt=""
-                  width="100%"
-                />
-                <div
+                <img :src="enlargeIMG" alt="" width="100%" />
+                <!-- <div
                   class="w-100 my-20 d-flex align-items-center justify-content-between"
                 >
                   <img
@@ -222,7 +219,7 @@
                     alt=""
                     width="32px"
                   />
-                </div>
+                </div> -->
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
@@ -282,7 +279,7 @@ export default {
             imgURL: require("@/assets/images/equipment/class/class1-5.png"),
           },
         ],
-        "工藝大樓1樓-木材工藝創作專業工作坊教室": [
+        "工藝大樓1樓-木材工藝創作專業工坊教室": [
           {
             imgURL: require("@/assets/images/equipment/equipment2.png"),
           },
@@ -361,6 +358,7 @@ export default {
           title: "工藝大樓3樓-教授研究室",
         },
       ],
+      enlargeIMG: "",
       showIMG: false,
       showIMG_phone: false,
     };
@@ -368,6 +366,20 @@ export default {
   methods: {
     goBackEquipment() {
       this.$router.push({ name: "equipment" });
+    },
+    getTouchIMG(url) {
+      this.enlargeIMG = url;
+      this.showIMG = true;
+    },
+    getTouchIMG_phone(url) {
+      this.enlargeIMG = url;
+      this.showIMG_phone = true;
+    },
+    showIntroduce(data) {
+      this.$router.push({
+        name: "equipmentInfo",
+        params: { class: data.title },
+      });
     },
   },
 };
@@ -417,6 +429,10 @@ export default {
         font-size: 18px;
         line-height: 160%;
         color: #2d2d2d;
+      }
+      img:hover {
+        transition: all 0.4s;
+        opacity: 0.8;
       }
     }
   }

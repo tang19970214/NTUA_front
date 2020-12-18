@@ -16,7 +16,11 @@
                 <div
                   class="recordCard__info w-100 d-flex align-items-center justify-content-start flex-column"
                 >
-                  <img :src="item.imgURL" alt="" />
+                  <img
+                    :src="item.imgURL"
+                    alt=""
+                    @click="getTouchIMG(item.imgURL)"
+                  />
                   <span class="mt-40 mb-10"></span>
                   <p class="m-0 text-center">{{ item.title }}</p>
                 </div>
@@ -51,7 +55,7 @@
                     :src="item.imgURL"
                     alt=""
                     width="100%"
-                    @click="showIMG_phone = true"
+                    @click="getTouchIMG_phone(item.imgURL)"
                   />
                 </div>
                 <div
@@ -68,6 +72,68 @@
     </div>
 
     <!-- modal -->
+    <div class="modal" v-if="showIMG">
+      <div class="modal__content">
+        <div class="mx-20 d-flex align-items-center justify-content-center">
+          <div class="classCardPhone">
+            <div class="px-30 pt-10 pb-40">
+              <div
+                class="w-100 d-flex align-items-center justify-content-end mb-10"
+              >
+                <div
+                  class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
+                  @click="showIMG = false"
+                >
+                  <i class="el-icon-close"></i>
+                </div>
+              </div>
+
+              <div
+                class="w-100 d-flex align-items-end justify-content-center flex-column"
+              >
+                <div class="px-30">
+                  <img :src="enlargeIMG" alt="" width="100%" />
+                </div>
+                <!-- <div
+                  class="w-100 my-20 d-flex align-items-center justify-content-between"
+                >
+                  <img
+                    src="@/assets/images/arrowLeft_btn.png"
+                    alt=""
+                    width="32px"
+                  />
+                  <img
+                    src="@/assets/images/arrowRight_btn.png"
+                    alt=""
+                    width="32px"
+                  />
+                </div> -->
+                <div class="w-100 classCardPhone__introduce">
+                  <div class="px-30 py-10">
+                    <div
+                      class="w-100 classCardPhone__introduce-title text-left pb-5"
+                    >
+                      <strong>展覽空間</strong>
+                    </div>
+                    <div class="w-100 pr-60 classCardPhone__introduce-content">
+                      <el-row class="pt-10">
+                        <el-col :span="12">上傳時間</el-col>
+                        <el-col :span="12">2019-05-24</el-col>
+                      </el-row>
+                      <el-row class="pt-10">
+                        <el-col :span="12">上傳者</el-col>
+                        <el-col :span="12">admin</el-col>
+                      </el-row>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal" v-if="showIMG_phone">
       <div class="modal__content">
         <div class="mx-20 d-flex align-items-center justify-content-center">
@@ -88,13 +154,9 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <div class="px-30">
-                  <img
-                    src="@/assets/images/book/book1.png"
-                    alt=""
-                    width="100%"
-                  />
+                  <img :src="enlargeIMG" alt="" width="100%" />
                 </div>
-                <div
+                <!-- <div
                   class="w-100 my-20 d-flex align-items-center justify-content-between"
                 >
                   <img
@@ -107,7 +169,7 @@
                     alt=""
                     width="32px"
                   />
-                </div>
+                </div> -->
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
@@ -171,12 +233,22 @@ export default {
           title: "設計學院許院長頒發參展證明給清華大學蕭銘芚教授",
         },
       ],
+      enlargeIMG: "",
+      showIMG: false,
       showIMG_phone: false,
     };
   },
   methods: {
     goBackRecord() {
       this.$router.push({ name: "record" });
+    },
+    getTouchIMG(url) {
+      this.enlargeIMG = url;
+      this.showIMG = true;
+    },
+    getTouchIMG_phone(url) {
+      this.enlargeIMG = url;
+      this.showIMG_phone = true;
     },
   },
 };
