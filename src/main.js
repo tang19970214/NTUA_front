@@ -4,15 +4,20 @@ import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
-// import 'swiper/css/swiper.css'
 
+import api from "@/api/apis.js";
 import "@/assets/all.scss"
 
 Vue.use(ElementUI)
+Vue.use(VueAxios, axios)
 Vue.use(VueAwesomeSwiper)
+Vue.use(require('vue-moment'))
 Vue.config.productionTip = false
+Vue.prototype.$api = api;
 
 new Vue({
   router,

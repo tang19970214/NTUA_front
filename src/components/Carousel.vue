@@ -31,9 +31,6 @@ export default {
       },
       bannerURL: [
         {
-          url: require("../assets/images/banner/banner_1.png"),
-        },
-        {
           url: require("../assets/images/banner/banner_2.png"),
         },
         {

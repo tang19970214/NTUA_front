@@ -8,7 +8,7 @@ module.exports = {
     publicPath: "/NTUA_front/dist/",
     lintOnSave: process.env.NODE_ENV !== "production",
     devServer: {
-        //port: 1803, // 端口
+        port: 1804, // 端口
         overlay: {
             warnings: true,
             errors: false,
