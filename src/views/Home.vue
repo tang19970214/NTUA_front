@@ -395,7 +395,7 @@
                   </div>
                   <a
                     class="text-decoration-none mt-10"
-                    @click="goCraft('CERAMICS')"
+                    @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
                   >
                     VIEW MORE
                   </a>
@@ -676,7 +676,7 @@ export default {
       craftsList: [
         {
           name_ch: "陶瓷",
-          name_en: "CERAMICS",
+          name_en: "SYS_CLASSTYPE_CERAMICS",
           imgURL: require("@/assets/images/craft/craft_1.png"),
         },
         {
@@ -742,7 +742,7 @@ export default {
         {
           imgURL: require("@/assets/images/craft/craft_1.png"),
           name_ch: "陶瓷",
-          name_en: "CERAMICS",
+          name_en: "SYS_CLASSTYPE_CERAMICS",
         },
         {
           imgURL: require("@/assets/images/craft/craft_2.png"),

@@ -10,13 +10,12 @@
           :key="'RD__' + index"
         >
           <div class="bookIMG">
-            <img :src="item.imageURL" alt="" />
+            <img :src="item.coverPic" alt="" />
           </div>
           <div class="bookContent">
             <strong class="m-0 bookContent-title">{{ item.title }}</strong>
             <div class="bookContent-directions">
-              <p class="m-0">{{ item.datetime }}</p>
-              <p class="m-0">{{ item.location }}</p>
+              <p class="m-0">{{ item.summary }}</p>
             </div>
             <div class="d-flex align-items-center justify-content-end mt-18">
               <router-link
@@ -30,9 +29,9 @@
         </el-col>
       </el-row>
 
-      <div class="w-100 mt-150">
+      <!-- <div class="w-100 mt-150">
         <Pagination :needPage="true" :pageNumber="5" />
-      </div>
+      </div> -->
     </div>
 
     <div class="phone d-block d-mb-none">
@@ -43,7 +42,7 @@
           :key="index1"
         >
           <div class="px-40">
-            <img :src="item.imageURL" alt="" width="100%" />
+            <img :src="item.coverPic" alt="" width="100%" />
           </div>
           <div class="w-100 text-center">
             <div class="pt-40 pb-10 recordCard__content">
@@ -51,8 +50,8 @@
                 <strong>{{ item.title }}</strong>
               </div>
               <div class="px-40 text-left mb-20">
-                <p class="m-0">{{ item.datetime }}</p>
-                <p class="m-0">{{ item.location }}</p>
+                <p class="m-0">{{ item.summary }}</p>
+                <!-- <p class="m-0">{{ item.location }}</p> -->
               </div>
               <div class="w-100">
                 <router-link
@@ -79,45 +78,25 @@ export default {
   },
   data() {
     return {
-      recordData: [
-        {
-          imageURL: require("@/assets/images/book/book1.png"),
-          title: "2019臺藝清華師生聯展",
-          datetime: "展期：108/5/14-5/24",
-          location: "本校教研1樓國際展覽廳",
-        },
-        {
-          imageURL: require("@/assets/images/book/book2.png"),
-          title: "106學年度系展得獎作品",
-          datetime: "年度主題：獨白 107/3/27-4/1",
-          location: "教研B2大觀與真善美藝廊",
-        },
-        {
-          imageURL: require("@/assets/images/book/book3.png"),
-          title: "106級日間部創作組畢業成果校外展：喃喃",
-          datetime: "展期：106/5/23~5/28",
-          location: "地點：濕地Venue5F策展空間",
-        },
-        {
-          imageURL: require("@/assets/images/book/book4.png"),
-          title: "2017進學班創作組校外展-呦呦",
-          datetime: "地點：淡水古蹟博物館-海關碼頭園區C棟",
-          location: "展期：106/6/3-6/12 （6/5休館",
-        },
-        {
-          imageURL: require("@/assets/images/book/book5.png"),
-          title: "104級工藝在職畢業聯展",
-          datetime: "日期：106/6/5-6/11",
-          location: "地點：教研B1大漢藝廊",
-        },
-        {
-          imageURL: require("@/assets/images/book/book6.png"),
-          title: "105-2陶瓷工作室展",
-          datetime: "展期：106/5/1-5/7",
-          location: "地點：學生藝廊",
-        },
-      ],
+      listQuery: {
+        TypeId: "SYS_ACTALBUM_EXHIBITION",
+        Years: "",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      recordData: [],
     };
+  },
+  methods: {
+    getList() {
+      this.$api.record(this.listQuery).then((res) => {
+        this.recordData = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>

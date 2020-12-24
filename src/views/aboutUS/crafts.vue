@@ -14,15 +14,15 @@
             >
               <div class="mb-30">
                 <p class="m-0">{{ item.name_ch }}</p>
-                <p class="m-0">{{ item.name_en }}</p>
+                <p class="m-0">{{ item.name_en.split("_", 3)[2] }}</p>
               </div>
               <div class="pt-10 craftCard-borTop">
                 <a
                   class="text-decoration-none cur-pointer"
                   @click="showIntroduce(item)"
                 >
-                  VIEW MORE</a
-                >
+                  VIEW MORE
+                </a>
               </div>
             </div>
           </div>
@@ -30,14 +30,57 @@
       </div>
 
       <div class="w-100 mt-60">
-        <!-- ceramics -->
-        <div class="craftIntroduce" v-if="showCrafts == 'CERAMICS'">
+        <div class="craftIntroduce">
           <div class="w-100">
-            <p class="m-0 craftIntroduce-title">陶瓷工藝創作專業工坊</p>
+            <p class="m-0 craftIntroduce-title">
+              {{ showCrafts }}
+              {{ getCraftTitle($route.params.sort).title_ch }}
+            </p>
             <p class="m-0 craftIntroduce-smallTxt">Ceramics Studio</p>
           </div>
-          <div class="w-100 mt-70">
-            <img src="@/assets/images/craft/ceramicsIntroduce.jpg" alt="" />
+          <div class="w-100 mt-70 bg-white craftIntroduce__card">
+            <el-row>
+              <el-col :span="6">
+                <div
+                  class="w-100 d-flex align-items-center justify-content-center"
+                  v-for="item in craftsContent"
+                  :key="item.id"
+                >
+                  <div
+                    class="craftIntroduce__card-leftBlock d-flex align-items-start justify-content-center mt-100"
+                    v-if="item.roomTypeId == 'SYS_CLASSDATA_MEMBER'"
+                  >
+                    <strong class="pl-15">{{ item.title }}</strong>
+                    <span class="mx-10 mt-13"></span>
+                    <div class="d-flex flex-column">
+                      <p
+                        class="m-0"
+                        v-for="(items, index) in item.summary.split('\n')"
+                        :key="'SMR__' + index"
+                      >
+                        {{ items }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </el-col>
+              <el-col class="my-10" :span="18">
+                <div
+                  class="craftIntroduce__card-rightBlock w-100 d-flex align-items-center justify-content-start"
+                  v-for="item in craftsContent"
+                  :key="item.id"
+                >
+                  <div
+                    class="p-30 d-flex align-items-start flex-row"
+                    v-if="item.roomTypeId == 'SYS_CLASSDATA_CONTENT'"
+                  >
+                    <strong class="pl-15">{{ item.title }}</strong>
+                    <span class="mx-10 mt-13" v-if="item.title"></span>
+                    <p class="m-0">{{ item.summary }}</p>
+                  </div>
+                </div>
+              </el-col>
+            </el-row>
           </div>
           <div
             class="w-100 mt-70 d-flex align-items-center justify-content-start"
@@ -52,113 +95,6 @@
               >
                 <div class="mb-30">
                   <p class="m-0">1樓陶瓷工藝創作專業工坊</p>
-                </div>
-                <div class="pt-10 craftIntroduce-borTop">
-                  <router-link
-                    class="text-decoration-none"
-                    :to="{ name: 'equipment' }"
-                  >
-                    VIEW MORE
-                  </router-link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- metalworking -->
-        <div class="craftIntroduce" v-else-if="showCrafts == 'METALWORKING'">
-          <div class="w-100">
-            <p class="m-0 craftIntroduce-title">金屬工藝創作專業工坊</p>
-            <p class="m-0 craftIntroduce-smallTxt">
-              Jewelry and Metal Arts Studio
-            </p>
-          </div>
-          <div class="w-100 mt-70">
-            <img src="@/assets/images/craft/metalworkingIntroduce.jpg" alt="" />
-          </div>
-          <div
-            class="w-100 mt-70 d-flex align-items-center justify-content-start"
-          >
-            <div
-              class="d-flex align-items-center justify-content-center flex-column pos-relative"
-              style=""
-            >
-              <img src="@/assets/images/craft/metalworking.png" alt="" />
-              <div
-                class="craftIntroduce-Card d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-              >
-                <div class="mb-30">
-                  <p class="m-0">工藝大樓2樓-金屬工藝創作專業工坊</p>
-                </div>
-                <div class="pt-10 craftIntroduce-borTop">
-                  <router-link
-                    class="text-decoration-none"
-                    :to="{ name: 'equipment' }"
-                  >
-                    VIEW MORE
-                  </router-link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- woodworking -->
-        <div class="craftIntroduce" v-else-if="showCrafts == 'WOODWORKING'">
-          <div class="w-100">
-            <p class="m-0 craftIntroduce-title">木材工藝創作專業工坊</p>
-            <p class="m-0 craftIntroduce-smallTxt">Woodworking Arts Studio</p>
-          </div>
-          <div class="w-100 mt-70">
-            <img src="@/assets/images/craft/woodworkingIntroduce.jpg" alt="" />
-          </div>
-          <div
-            class="w-100 mt-70 d-flex align-items-center justify-content-start"
-          >
-            <div
-              class="d-flex align-items-center justify-content-center flex-column pos-relative"
-              style=""
-            >
-              <img src="@/assets/images/craft/woodworking.png" alt="" />
-              <div
-                class="craftIntroduce-Card d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-              >
-                <div class="mb-30">
-                  <p class="m-0">工藝大樓1樓-木材工藝創作專業工坊教室</p>
-                </div>
-                <div class="pt-10 craftIntroduce-borTop">
-                  <router-link
-                    class="text-decoration-none"
-                    :to="{ name: 'equipment' }"
-                  >
-                    VIEW MORE
-                  </router-link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- product -->
-        <div class="craftIntroduce" v-else-if="showCrafts == 'PRODUCT'">
-          <div class="w-100">
-            <p class="m-0 craftIntroduce-title">產品設計與複媒創作專業工坊</p>
-            <p class="m-0 craftIntroduce-smallTxt">Product Design Studio</p>
-          </div>
-          <div class="w-100 mt-70">
-            <img src="@/assets/images/craft/productIntroduce.jpg" alt="" />
-          </div>
-          <div
-            class="w-100 mt-70 d-flex align-items-center justify-content-start"
-          >
-            <div
-              class="d-flex align-items-center justify-content-center flex-column pos-relative"
-              style=""
-            >
-              <img src="@/assets/images/craft/product.png" alt="" />
-              <div
-                class="craftIntroduce-Card d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-              >
-                <div class="mb-30">
-                  <p class="m-0">工藝大樓1樓-木材工藝創作專業工坊教室</p>
                 </div>
                 <div class="pt-10 craftIntroduce-borTop">
                   <router-link
@@ -216,7 +152,10 @@
 
         <div class="bg-white">
           <!-- CERAMICS -->
-          <div class="pl-50 pt-20 pb-55" v-if="showCrafts == 'CERAMICS'">
+          <div
+            class="pl-50 pt-20 pb-55"
+            v-if="showCrafts == 'SYS_CLASSTYPE_CERAMICS'"
+          >
             <div class="crafts__host pl-50 mb-10">
               <div class="w-100 d-flex align-items-start flex-row">
                 <strong class="pl-20">主持人</strong>
@@ -259,7 +198,7 @@
           <!-- METALWORKING -->
           <div
             class="pl-50 pt-20 pb-55"
-            v-else-if="showCrafts == 'METALWORKING'"
+            v-else-if="showCrafts == 'SYS_CLASSTYPE_METAL'"
           >
             <div class="crafts__host pl-50 mb-10">
               <div class="w-100 d-flex align-items-start flex-row">
@@ -308,7 +247,7 @@
           <!-- WOODWORKING -->
           <div
             class="pl-50 pt-20 pb-55"
-            v-else-if="showCrafts == 'WOODWORKING'"
+            v-else-if="showCrafts == 'SYS_CLASSTYPE_WOOD'"
           >
             <div class="crafts__host pl-50 mb-10">
               <div class="w-100 d-flex align-items-start flex-row">
@@ -332,7 +271,10 @@
             </div>
           </div>
           <!-- PRODUCT -->
-          <div class="pl-50 pt-20 pb-55" v-else-if="showCrafts == 'PRODUCT'">
+          <div
+            class="pl-50 pt-20 pb-55"
+            v-else-if="showCrafts == 'SYS_CLASSTYPE_PRODUCTION'"
+          >
             <div class="crafts__host pl-50 mb-10">
               <div class="w-100 d-flex align-items-start flex-row">
                 <strong class="pl-20">主持人</strong>
@@ -368,7 +310,7 @@
           <!-- CERAMICS -->
           <div
             class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
-            v-if="showCrafts == 'CERAMICS'"
+            v-if="showCrafts == 'SYS_CLASSTYPE_CERAMICS'"
           >
             <img
               src="@/assets/images/craft/ceramics.png"
@@ -390,7 +332,7 @@
           <!-- METALWORKING -->
           <div
             class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
-            v-if="showCrafts == 'METALWORKING'"
+            v-if="showCrafts == 'SYS_CLASSTYPE_METAL'"
           >
             <img
               src="@/assets/images/craft/metalworking.png"
@@ -412,7 +354,7 @@
           <!-- WOODWORKING -->
           <div
             class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
-            v-if="showCrafts == 'WOODWORKING'"
+            v-if="showCrafts == 'SYS_CLASSTYPE_WOOD'"
           >
             <img
               src="@/assets/images/craft/woodworking.png"
@@ -434,7 +376,7 @@
           <!-- PRODUCT -->
           <div
             class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column"
-            v-if="showCrafts == 'PRODUCT'"
+            v-if="showCrafts == 'SYS_CLASSTYPE_PRODUCTION'"
           >
             <img src="@/assets/images/craft/product.png" alt="" width="200px" />
             <div
@@ -464,28 +406,36 @@ export default {
   },
   data() {
     return {
+      listQuery: {
+        RoomTypeId: "",
+        DataTypeId: this.$route.params.sort,
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
       crafts: [
         {
           imgURL: require("@/assets/images/craft/craft_1.png"),
           name_ch: "陶瓷",
-          name_en: "CERAMICS",
+          name_en: "SYS_CLASSTYPE_CERAMICS",
         },
         {
           imgURL: require("@/assets/images/craft/craft_2.png"),
           name_ch: "金工",
-          name_en: "METALWORKING",
+          name_en: "SYS_CLASSTYPE_METAL",
         },
         {
           imgURL: require("@/assets/images/craft/craft_3.png"),
           name_ch: "木工",
-          name_en: "WOODWORKING",
+          name_en: "SYS_CLASSTYPE_WOOD",
         },
         {
           imgURL: require("@/assets/images/craft/craft_4.png"),
           name_ch: "產品",
-          name_en: "PRODUCT",
+          name_en: "SYS_CLASSTYPE_PRODUCTION",
         },
       ],
+      craftsContent: [],
       showCrafts: this.$route.params.sort,
       craftsTitle: {
         title_ch: "",
@@ -493,28 +443,24 @@ export default {
       },
     };
   },
-  methods: {
-    showIntroduce(data) {
-      this.showCrafts = data.name_en;
-    },
-  },
   computed: {
     getCraftTitle() {
       return (data) => {
+        console.log(data)
         switch (data) {
-          case "CERAMICS":
+          case "SYS_CLASSTYPE_CERAMICS":
             this.craftsTitle.title_ch = "陶瓷工藝創作專業工坊";
             this.craftsTitle.title_en = "Ceramics Studio";
             break;
-          case "METALWORKING":
+          case "SYS_CLASSTYPE_METAL":
             this.craftsTitle.title_ch = "金屬工藝創作專業工坊";
             this.craftsTitle.title_en = "Jewelry and Metal Arts Studio";
             break;
-          case "WOODWORKING":
+          case "SYS_CLASSTYPE_WOOD":
             this.craftsTitle.title_ch = "木材工藝創作專業工坊";
             this.craftsTitle.title_en = "Woodworking Arts Studio";
             break;
-          case "PRODUCT":
+          case "SYS_CLASSTYPE_PRODUCTION":
             this.craftsTitle.title_ch = "產品設計與複媒創作專業工坊";
             this.craftsTitle.title_en = "Product Design Studio";
             break;
@@ -524,6 +470,22 @@ export default {
         return this.craftsTitle;
       };
     },
+  },
+  methods: {
+    showIntroduce(data) {
+      this.showCrafts = data.name_en;
+      this.listQuery.DataTypeId = data.name_en;
+      this.getList();
+    },
+    getList() {
+      this.$api.crafts(this.listQuery).then((res) => {
+        this.craftsContent = res.data.data;
+        // console.log(res.data.data);
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -618,6 +580,39 @@ export default {
           font-size: 18px;
           line-height: 21px;
           color: #ceb87f;
+        }
+      }
+      &__card {
+        &-leftBlock {
+          width: calc(100% - 120px);
+          font-size: 18px;
+          line-height: 160%;
+          color: #596164;
+          strong {
+            border-left: 4px solid #ceb87f;
+          }
+          span {
+            min-width: 50px;
+            max-width: 50px;
+            height: 1px;
+            background: #8c8f90;
+          }
+        }
+        &-rightBlock {
+          background: #2d2d2d;
+          font-size: 18px;
+          line-height: 160%;
+          color: #ffffff;
+          strong {
+            min-width: 150px;
+            border-left: 4px solid #ceb87f;
+          }
+          span {
+            min-width: 50px;
+            max-width: 50px;
+            height: 1px;
+            background: #8c8f90;
+          }
         }
       }
     }

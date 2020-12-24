@@ -11,7 +11,7 @@
           >
             <div class="creation">
               <div class="front">
-                <img :src="item.imageURL" alt="" width="350px" height="452px" />
+                <img :src="item.pic" alt="" width="350px" height="452px" />
               </div>
               <div class="back">
                 <div
@@ -19,7 +19,7 @@
                 >
                   <div
                     class="w-100 d-flex flex-row teacherList-introduce_content"
-                    v-for="(items, index) in item.info"
+                    v-for="(items, index) in item.backInfo"
                     :key="index"
                   >
                     <el-row class="w-100">
@@ -38,14 +38,15 @@
                         :span="12"
                         v-if="items.title == 'MAIL'"
                       >
-                        <img
-                          class="cur-pointer"
-                          src="@/assets/images/icon/email.png"
-                          alt="email link"
-                        />
+                        <a :href="'mailto:' + items.summary" v-if="items.summary">
+                          <img
+                            src="@/assets/images/icon/email.png"
+                            alt="email link"
+                          />
+                        </a>
                       </el-col>
                       <el-col class="pl-5" :span="12" v-else>
-                        <p class="m-0">{{ items.value }}</p>
+                        <p class="m-0">{{ items.summary }}</p>
                       </el-col>
                     </el-row>
                   </div>
@@ -55,7 +56,7 @@
             <div class="teacherList-rightBar">
               <div class="py-20 px-10">
                 <p class="m-0">{{ item.name }}</p>
-                <p class="m-0">{{ item.jobTitle }}</p>
+                <p class="m-0">{{ item.subName }}</p>
               </div>
             </div>
           </el-col>
@@ -74,12 +75,7 @@
           v-for="(item, index1) in fetch"
           :key="index1"
         >
-          <img
-            :src="item.imageURL"
-            alt=""
-            width="200px"
-            v-if="showInfo[item.id]"
-          />
+          <img :src="item.pic" alt="" width="200px" v-if="showInfo[item.key]" />
           <div class="teacherCard__information" v-else>
             <div class="p-15">
               <div
@@ -92,16 +88,18 @@
                   v-if="items.title !== 'MAIL'"
                 >
                   <strong>{{ items.title }}</strong>
-                  <p class="m-0 pl-10 py-5">{{ items.value }}</p>
+                  <p class="m-0 pl-10 py-5">{{ items.summary }}</p>
                 </div>
                 <div class="w-100 d-flex flex-column" v-else>
                   <strong>MAIL</strong>
-                  <img
-                    class="pl-10 py-5"
-                    src="@/assets/images/icon/email.png"
-                    alt=""
-                    width="26px"
-                  />
+                  <a :href="'mailto:' + items.summary" v-if="items.summary">
+                    <img
+                      class="pl-10 py-5"
+                      src="@/assets/images/icon/email.png"
+                      alt="email link"
+                      width="26px"
+                    />
+                  </a>
                 </div>
                 <!-- <div class="w-100 d-flex flex-column">
                 <router-link
@@ -117,7 +115,7 @@
             <div class="p-10 d-flex flex-row justify-content-between">
               <div class="d-flex flex-column">
                 <p class="m-0">{{ item.name }}</p>
-                <p class="m-0">{{ item.jobTitle }}</p>
+                <p class="m-0">{{ item.subName }}</p>
               </div>
               <div
                 class="d-flex align-items-center"
@@ -136,96 +134,67 @@
 <script>
 export default {
   data() {
-    let fetchData = [
-      {
-        id: 1,
-        imageURL: require("@/assets/images/teacher/administrative/teacher1.jpg"),
-        name: "曾煥荻",
-        jobTitle: "",
-        info: [
-          {
-            title: "職稱",
-            value: "助教",
-          },
-          {
-            title: "負責業務",
-            value: "系上總務事物、系上學務事物",
-          },
-          {
-            title: "聯繫我",
-            value: "ext.2111",
-          },
-          {
-            title: "MAIL",
-            value: "信箱",
-          },
-        ],
-      },
-      {
-        id: 2,
-        imageURL: require("@/assets/images/teacher/administrative/teacher2.jpg"),
-        name: "陳瑩娟",
-        jobTitle: "",
-        info: [
-          {
-            title: "職稱",
-            value: "助教",
-          },
-          {
-            title: "負責業務",
-            value: "系上註冊、排／選課程事務",
-          },
-          {
-            title: "聯繫我",
-            value: "ext.2112",
-          },
-          {
-            title: "MAIL",
-            value: "信箱",
-          },
-        ],
-      },
-      {
-        id: 3,
-        imageURL: require("@/assets/images/teacher/administrative/teacher3.jpg"),
-        name: "呂沛錞",
-        jobTitle: "",
-        info: [
-          {
-            title: "職稱",
-            value: "助教",
-          },
-          {
-            title: "負責業務",
-            value: "系上網站與臉書資料維護更新",
-          },
-          {
-            title: "聯繫我",
-            value: "ext.2129",
-          },
-          {
-            title: "MAIL",
-            value: "信箱",
-          },
-        ],
-      },
-    ];
-    let teacherListSplit = [];
-    fetchData.forEach((item, index, arr) => {
-      if (index % 3 === 0) {
-        return teacherListSplit.push(arr.slice(index, index + 3));
-      }
-    });
     return {
-      teacherList: fetchData,
-      teacherList_phone: teacherListSplit,
-      showInfo: fetchData.reduce((a, b) => ((a[b.id] = true), a), {}),
+      listQuery: {
+        MemberTypeId: "SYS_MEMBER_MANAGER",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      teacherList: [],
+      teacherList_phone: [],
+      showInfo: {},
     };
   },
   methods: {
     showTeacherInfo(data) {
-      this.showInfo[data?.id] = !this.showInfo[data?.id];
+      this.showInfo[data?.key] = !this.showInfo[data?.key];
     },
+    getList() {
+      this.$api.members(this.listQuery).then((res) => {
+        const memberData = [];
+        res.data.data.forEach((item, index) => {
+          const resetData = {
+            key: index + 1,
+            id: item.id,
+            pic: item.pic,
+            name: item.name,
+            subName: item.subName,
+            backInfo: [
+              {
+                title: "職稱",
+                summary: item.jobTitle,
+              },
+              {
+                title: "負責業務",
+                summary: item.teachClass,
+              },
+              {
+                title: "聯繫我",
+                summary: item.contactTel,
+              },
+              {
+                title: "MAIL",
+                summary: item.email,
+              },
+            ],
+          };
+          memberData.push(resetData);
+        });
+        this.teacherList = memberData;
+        this.showInfo = memberData.reduce((a, b) => ((a[b.key] = true), a), {});
+        const teacherListSplit = [];
+        this.teacherList.forEach((item, index, arr) => {
+          if (index % 5 === 0) {
+            return teacherListSplit.push(arr.slice(index, index + 5));
+          }
+        });
+        this.teacherList_phone = teacherListSplit;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -278,24 +247,17 @@ export default {
             transform: translateY(10px);
           }
           p {
-            font-size: 18px;
+            font-size: 16px;
             line-height: 250%;
             letter-spacing: 0.1em;
             color: #2d2d2d;
             word-wrap: break-word;
+            overflow: hidden;
+            -webkit-line-clamp: 4;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
           }
-        }
-      }
-
-      &-name {
-        writing-mode: vertical-lr;
-        height: calc(100% - 40px);
-        padding: 20px 15px;
-        background: #c4c4c4;
-        font-size: 36px;
-        color: #2d2d2d;
-        p {
-          letter-spacing: 2em;
         }
       }
 
@@ -304,7 +266,7 @@ export default {
         background: #c4c4c4;
         writing-mode: vertical-lr;
         background: #c4c4c4;
-        font-size: 36px;
+        font-size: 28px;
         color: #2d2d2d;
         p {
           letter-spacing: 0.6em;
@@ -331,11 +293,15 @@ export default {
             color: #2d2d2d;
           }
           p {
+            width: 100%;
+            max-height: 40px;
             border-left: 2px solid #c4c4c4;
-            font-size: 14px;
-            line-height: 150%;
-            letter-spacing: 0.25em;
             color: #2d2d2d;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
           }
         }
         &__name {

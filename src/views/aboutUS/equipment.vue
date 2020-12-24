@@ -12,7 +12,7 @@
             >
               <div class="m-item d-flex align-items-center flex-column">
                 <img
-                  :src="item.imgURL"
+                  :src="item.coverPic"
                   class="m-item-image w-100"
                   height="300px"
                 />
@@ -50,7 +50,7 @@
             v-for="(item, index1) in equipment"
             :key="index1"
           >
-            <img :src="item.imgURL" alt="" width="200px" />
+            <img :src="item.coverPic" alt="" width="200px" />
             <div
               class="equipmentCard__information px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
             >
@@ -73,44 +73,12 @@
 export default {
   data() {
     return {
-      equipment: [
-        {
-          imgURL: require("@/assets/images/equipment/equipment1.png"),
-          title: "工藝大樓B1-系所專屬展覽空間",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment2.png"),
-          title: "工藝大樓1樓-木材工藝創作專業工作坊教室",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment3.png"),
-          title: "1樓陶瓷工藝創作專業工坊",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment4.png"),
-          title: "工藝大樓2樓-金屬工藝創作專業工坊",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment5.png"),
-          title: "工藝大樓3樓教室等空間",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment6.png"),
-          title: "工藝大樓4樓-數位工程製造室",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment7.png"),
-          title: "工藝大樓4樓-產品設計與複媒創作專業工坊",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment8.png"),
-          title: "工藝大樓4樓-討論與閱讀室",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment9.png"),
-          title: "工藝大樓3樓-教授研究室",
-        },
-      ],
+      listQuery: {
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      equipment: [],
     };
   },
   methods: {
@@ -118,9 +86,17 @@ export default {
       console.log(data);
       this.$router.push({
         name: "equipmentInfo",
-        params: { class: data.title },
+        params: { id: data.id },
       });
     },
+    getList() {
+      this.$api.classrooms(this.listQuery).then((res) => {
+        this.equipment = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -128,8 +104,8 @@ export default {
 <style lang="scss">
 #equipment {
   .web {
-    margin-left: 0;
-    padding-top: 140px;
+    margin-left: 0 !important;
+    padding-top: 140px !important;
     .studioGroup {
       width: 100%;
       background: #2d2d2d;

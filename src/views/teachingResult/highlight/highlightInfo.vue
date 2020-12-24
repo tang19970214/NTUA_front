@@ -1,5 +1,37 @@
 <template>
   <div id="highlightInfo">
+    <div class="web d-none d-mb-block">
+      <div class="w-100 bg-white pb-80">
+        <div class="p-60 text-left">
+          <p class="Txt-title" @click="goBackHighlight()">活動花絮</p>
+        </div>
+        <div class="w-100 highlightCard">
+          <div class="px-150 py-30">
+            <el-row>
+              <el-col
+                :xl="8"
+                :lg="12"
+                v-for="(item, index) in highlightList"
+                :key="'RCL__' + index"
+              >
+                <div
+                  class="highlightCard__info w-100 d-flex align-items-center justify-content-center flex-column"
+                >
+                  <img
+                    :src="item.imgURL"
+                    alt=""
+                    @click="getTouchIMG(item.imgURL)"
+                  />
+                  <span class="mt-40 mb-10"></span>
+                  <p class="m-0 text-center">{{ item.title }}</p>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="phone d-block d-mb-none pt-70">
       <div class="highlightInfoTitle w-100 d-flex align-items-center flex-row">
         <router-link class="pl-20" :to="{ name: 'highlight' }">
@@ -36,6 +68,54 @@
               </div>
             </el-col>
           </el-row>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" v-if="showIMG">
+      <div class="modal__content">
+        <div class="mx-20 d-flex align-items-center justify-content-center">
+          <div class="classCardPhone">
+            <div class="px-30 pt-10 pb-40">
+              <div
+                class="w-100 d-flex align-items-center justify-content-end mb-10"
+              >
+                <div
+                  class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
+                  @click="showIMG = false"
+                >
+                  <i class="el-icon-close"></i>
+                </div>
+              </div>
+
+              <div
+                class="w-100 d-flex align-items-end justify-content-center flex-column"
+              >
+                <div class="px-30">
+                  <img :src="enlargeIMG" alt="" width="100%" />
+                </div>
+                <div class="w-100 classCardPhone__introduce">
+                  <div class="px-30 py-10">
+                    <div
+                      class="w-100 classCardPhone__introduce-title text-left pb-5"
+                    >
+                      <strong>展覽空間</strong>
+                    </div>
+                    <div class="w-100 pr-60 classCardPhone__introduce-content">
+                      <el-row class="pt-10">
+                        <el-col :span="12">上傳時間</el-col>
+                        <el-col :span="12">2019-05-24</el-col>
+                      </el-row>
+                      <el-row class="pt-10">
+                        <el-col :span="12">上傳者</el-col>
+                        <el-col :span="12">admin</el-col>
+                      </el-row>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -140,12 +220,19 @@ export default {
         },
       ],
       enlargeIMG: "",
-      showIMG_phone: false,
+      showIMG: false,
       showIMG_phone: false,
     };
   },
   methods: {
+    goBackHighlight() {
+      this.$router.push({ name: "highlight" });
+    },
     getTouchIMG(url) {
+      this.enlargeIMG = url;
+      this.showIMG = true;
+    },
+    getTouchIMG_phone(url) {
       this.enlargeIMG = url;
       this.showIMG_phone = true;
     },
@@ -155,6 +242,35 @@ export default {
 
 <style lang="scss">
 #highlightInfo {
+  .web {
+    padding-top: 420px;
+    margin-left: 120px;
+    .Txt-title {
+      width: 130px;
+      font-size: 64px;
+      line-height: 75px;
+      color: #ceb87f;
+    }
+    .highlightCard {
+      background: #2d2d2d;
+      &__info {
+        min-height: 500px;
+        max-height: 500px;
+        span {
+          width: 120px;
+          border: 1px solid #ceb87f;
+        }
+        p {
+          max-width: 260px;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 160%;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
   .phone {
     .highlightInfoTitle {
       a {
@@ -171,7 +287,7 @@ export default {
     .highlightInfo {
       background: #2d2d2d;
       &__content {
-        min-height: 250px;
+        min-height: 430px;
         span {
           border-top: 1px solid #ceb87f;
           width: 120px;

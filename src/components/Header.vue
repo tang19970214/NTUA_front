@@ -146,7 +146,7 @@
           class="menuList w-100 d-flex align-items-center justify-content-center flex-row"
         >
           <ul
-            class="w-100 m-0 p-0 d-flex justify-content-center justify-content-start flex-column"
+            class="w-100 m-0 p-0 d-flex align-items-start justify-content-start flex-column"
           >
             <li
               class="px-10 d-flex"
@@ -304,6 +304,24 @@ export default {
           mainPath: "departmentMember",
           pathName: "fullTime",
         },
+        {
+          value: "08",
+          text: "系友專區",
+          mainPath: "alumni",
+          pathName: "alumni",
+        },
+        {
+          value: "09",
+          text: "捐款專區",
+          mainPath: "",
+          pathName: "",
+        },
+        {
+          value: "10",
+          text: "相關連結",
+          mainPath: "relatedLink",
+          pathName: "relatedLink",
+        },
       ],
       subList: {
         latestNews: [
@@ -346,7 +364,7 @@ export default {
             pathName: "crafts",
             params: {
               title: "sort",
-              name: "CERAMICS",
+              name: "SYS_CLASSTYPE_CERAMICS",
             },
           },
           {
@@ -556,7 +574,7 @@ export default {
   }
   .circleMenu {
     position: fixed;
-    z-index: 99;
+    z-index: 999;
     margin-top: 6rem;
     margin-right: 10rem;
     right: 0;
@@ -617,6 +635,7 @@ export default {
       .menuList {
         writing-mode: vertical-lr;
         color: white;
+        overflow-x: auto;
         ul {
           font-size: 24px;
           font-weight: bold;

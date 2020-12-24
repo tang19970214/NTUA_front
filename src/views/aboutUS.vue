@@ -55,7 +55,7 @@ export default {
         },
         {
           pathURL: "crafts",
-          pathParams: "CERAMICS",
+          pathParams: "SYS_CLASSTYPE_CERAMICS",
           pathName: "四大工坊",
         },
         {

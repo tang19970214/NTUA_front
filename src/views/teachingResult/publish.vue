@@ -12,12 +12,12 @@
             class="blackTag d-flex align-items-center justify-content-center"
           >
             <p class="m-0">
-              {{ item.kind }}
+              {{ item.titleType }}
             </p>
           </div>
         </el-col>
         <el-col :span="15">
-          <div>{{ item.content }}</div>
+          <div>{{ item.contents }}</div>
         </el-col>
         <el-col :span="2" class="text-right">
           <div>{{ item.author }}</div>
@@ -44,7 +44,7 @@
           <div
             class="publishCard__header w-100 d-flex align-items-center justify-content-between"
           >
-            <span class="p-10">{{ item.kind }}</span>
+            <span class="p-10">{{ item.titleType }}</span>
             <div class="d-flex align-items-center">
               <p class="m-0 mr-5">{{ item.author }}</p>
               <img
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="p-15 publishCard__content">
-            <p class="m-0">{{ item.content }}</p>
+            <p class="m-0">{{ item.contents }}</p>
           </div>
         </div>
       </div>
@@ -73,43 +73,14 @@ export default {
   },
   data() {
     return {
-      publishData: [
-        {
-          kind: "期刊論文",
-          content:
-            "C. L. Lin, 2020. The influence of color temperature and illuminance on the touch motivation and preference of craft, Journal of Ambient Intelligence and Humanized Computing, in press (SCI, IF=4.594).",
-          author: "林志隆",
-        },
-        {
-          kind: "研討會論文",
-          content:
-            "Chang, K. L. (2020, July). Parametric mechanism of computer aided craft design: taking wooden crib as an example. Proceedings of the 22th International Conference on Human-Computer Interaction (HCII2020). Copenhagen, Denmark.",
-          author: "張恭領",
-        },
-        {
-          kind: "其他",
-          content: "梁家豪，泥舟土痕系列四，大毅讚幸福建案收藏，台中",
-          author: "梁家豪",
-        },
-        {
-          kind: "期刊論文",
-          content:
-            "張恭領（2020）。以參數化的形構邏輯探討接頭構件之設計。藝術學報，16（1），1-32。",
-          author: "張恭領",
-        },
-        {
-          kind: "研討會論文",
-          content:
-            "張恭領（2020年5月）。參數化介入工藝設計的意義。2020文化‧創意‧設計國際學術研討會。玄奘大學藝術設計學院，新竹市。",
-          author: "張恭領",
-        },
-        {
-          kind: "期刊論文",
-          content:
-            "C. L. Lin, S. J. Chen and R. Lin, 2020. Efficacy of Virtual Reality in Painting Art Exhibitions Appreciation, Applied Sciences, 10(9), 3012 (SCI, IF=2.217). ",
-          author: "林志隆",
-        },
-      ],
+      listQuery: {
+        TeachTypeId: "SYS_TEACH_RESEARCHPUBLIC",
+        Years: "",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      publishData: [],
     };
   },
   methods: {
@@ -121,6 +92,14 @@ export default {
         });
       }
     },
+    getList() {
+      this.$api.award(this.listQuery).then((res) => {
+        this.publishData = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>

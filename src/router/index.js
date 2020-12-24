@@ -219,7 +219,7 @@ const routes = [{
     }
   },
   {
-    path: '/equipmentInfo/:class',
+    path: '/equipmentInfo/:id',
     name: 'equipmentInfo',
     component: () => import('../views/aboutUS/equipment/equipmentInfo.vue'),
     meta: {

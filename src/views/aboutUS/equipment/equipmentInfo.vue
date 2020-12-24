@@ -2,11 +2,17 @@
   <div id="equipmentInfo">
     <div class="web d-none d-mb-block">
       <div class="w-100 text-left">
-        <p class="Txt-title" @click="goBackEquipment()">教學設備與空間</p>
+        <p class="Txt-title">教學設備與空間</p>
       </div>
       <div class="mt-70 newsCard">
-        <div class="px-150 pt-90">
-          <strong class="newsCard__title">{{ $route.params.class }}</strong>
+        <div class="px-150 pt-90 d-flex align-items-center">
+          <router-link
+            class="pr-20 d-flex align-items-center"
+            :to="{ name: 'equipment' }"
+          >
+            <img src="@/assets/images/icon/arrowLeft.png" alt="" width="30px" />
+          </router-link>
+          <strong class="newsCard__title">{{ albumTitle }}</strong>
         </div>
         <div class="py-100 w-100 introduceCard mt-20">
           <div class="px-150 py-30">
@@ -14,7 +20,7 @@
               <el-col
                 class="mb-60"
                 :span="8"
-                v-for="(item, index) in classData[$route.params.class]"
+                v-for="(item, index) in classData"
                 :key="'CD__' + index"
               >
                 <div
@@ -26,9 +32,9 @@
                     >
                       <img
                         class="cur-pointer"
-                        :src="item.imgURL"
+                        :src="item.links"
                         alt=""
-                        @click="getTouchIMG(item.imgURL)"
+                        @click="getTouchIMG(item)"
                       />
                     </div>
 
@@ -65,7 +71,14 @@
               v-for="(item, index) in anotherClassList"
               :key="'ACL__' + index"
             >
-              <img class="cur-pointer" :src="item.imgURL" alt="" @click="showIntroduce(item)" />
+              <img
+                class="cur-pointer"
+                :src="item.coverPic"
+                alt=""
+                @click="showIntroduce(item)"
+                v-if="item.id !== $route.params.id"
+              />
+              <img :src="item.coverPic" alt="" v-else />
               <div class="mt-20">
                 <strong>{{ item.title }}</strong>
               </div>
@@ -82,26 +95,22 @@
         <router-link class="pl-20" :to="{ name: 'equipment' }">
           <img src="@/assets/images/icon/arrowLeft.png" alt="" />
         </router-link>
-        <p class="m-0 pl-10">{{ $route.params.class }}</p>
+        <p class="m-0 pl-10">{{ albumTitle }}</p>
       </div>
 
       <div class="equipmentInfo__card mt-5">
         <div class="p-20">
           <el-row>
-            <el-col
-              :span="12"
-              v-for="(item, index1) in classData[$route.params.class]"
-              :key="index1"
-            >
+            <el-col :span="12" v-for="item in classData" :key="item.id">
               <div class="p-10">
                 <div
                   class="equipmentInfo__card-information w-100 d-flex align-items-center justify-content-center flex-column"
                 >
                   <img
-                    :src="item.imgURL"
+                    :src="item.links"
                     alt=""
                     width="100%"
-                    @click="getTouchIMG_phone(item.imgURL)"
+                    @click="getTouchIMG_phone(item)"
                   />
                   <strong class="mt-15 pt-10 px-20">展覽空間</strong>
                 </div>
@@ -160,11 +169,15 @@
                       <div class="w-100 pr-60 classCard__introduce-content">
                         <el-row class="pt-10">
                           <el-col :span="12">上傳時間</el-col>
-                          <el-col :span="12">2019-09-05</el-col>
+                          <el-col :span="12">{{
+                            enContent.createDate | moment("YYYY-MM-DD")
+                          }}</el-col>
                         </el-row>
                         <el-row class="pt-10">
                           <el-col :span="12">上傳者</el-col>
-                          <el-col :span="12">admin</el-col>
+                          <el-col :span="12">
+                            {{ enContent.createUserName }}
+                          </el-col>
                         </el-row>
                       </div>
                     </div>
@@ -188,7 +201,6 @@
     <div class="modal" v-if="showIMG_phone">
       <div class="modal__content">
         <div class="w-100 d-flex align-items-center justify-content-center">
-          <!-- <div class="pos-relative"> -->
           <div class="classCardPhone w-100">
             <div class="px-30 pt-10 pb-40">
               <div
@@ -206,20 +218,6 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <img :src="enlargeIMG" alt="" width="100%" />
-                <!-- <div
-                  class="w-100 my-20 d-flex align-items-center justify-content-between"
-                >
-                  <img
-                    src="@/assets/images/arrowLeft_btn.png"
-                    alt=""
-                    width="32px"
-                  />
-                  <img
-                    src="@/assets/images/arrowRight_btn.png"
-                    alt=""
-                    width="32px"
-                  />
-                </div> -->
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
@@ -230,11 +228,15 @@
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
-                        <el-col :span="12">2019-09-05</el-col>
+                        <el-col :span="12">{{
+                          enContent.createDate | moment("YYYY-MM-DD")
+                        }}</el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
-                        <el-col :span="12">admin</el-col>
+                        <el-col :span="12">
+                          {{ enContent.createUserName }}
+                        </el-col>
                       </el-row>
                     </div>
                   </div>
@@ -242,15 +244,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="pos-absolute t-0 r-0 mt-20 mr-20">
-              <div
-                class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
-                @click="showIMG = false"
-              >
-                <i class="el-icon-close"></i>
-              </div>
-            </div> -->
-          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -261,126 +254,69 @@
 export default {
   data() {
     return {
-      classData: {
-        "工藝大樓B1-系所專屬展覽空間": [
-          {
-            imgURL: require("@/assets/images/equipment/class/class1-1.png"),
-          },
-          {
-            imgURL: require("@/assets/images/equipment/class/class1-2.png"),
-          },
-          {
-            imgURL: require("@/assets/images/equipment/class/class1-3.png"),
-          },
-          {
-            imgURL: require("@/assets/images/equipment/class/class1-4.png"),
-          },
-          {
-            imgURL: require("@/assets/images/equipment/class/class1-5.png"),
-          },
-        ],
-        "工藝大樓1樓-木材工藝創作專業工坊教室": [
-          {
-            imgURL: require("@/assets/images/equipment/equipment2.png"),
-          },
-        ],
-        "1樓陶瓷工藝創作專業工坊": [
-          {
-            imgURL: require("@/assets/images/equipment/equipment3.png"),
-          },
-        ],
-        "工藝大樓2樓-金屬工藝創作專業工坊": [
-          {
-            imgURL: require("@/assets/images/equipment/equipment4.png"),
-          },
-        ],
-        工藝大樓3樓教室等空間: [
-          {
-            imgURL: require("@/assets/images/equipment/equipment5.png"),
-          },
-        ],
-        "工藝大樓4樓-數位工程製造室": [
-          {
-            imgURL: require("@/assets/images/equipment/equipment6.png"),
-          },
-        ],
-        "工藝大樓4樓-產品設計與複媒創作專業工坊": [
-          {
-            imgURL: require("@/assets/images/equipment/equipment7.png"),
-          },
-        ],
-        "工藝大樓4樓-討論與閱讀室": [
-          {
-            imgURL: require("@/assets/images/equipment/equipment8.png"),
-          },
-        ],
-        "工藝大樓3樓-教授研究室": [
-          {
-            imgURL: require("@/assets/images/equipment/equipment9.png"),
-          },
-        ],
+      listQuery: {
+        RoomId: this.$route.params.id,
+        page: 1,
+        limit: 20,
+        key: undefined,
       },
-      anotherClassList: [
-        {
-          imgURL: require("@/assets/images/equipment/equipment1.png"),
-          title: "工藝大樓B1-系所專屬展覽空間",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment2.png"),
-          title: "工藝大樓1樓-木材工藝創作專業工坊教室",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment3.png"),
-          title: "1樓陶瓷工藝創作專業工坊",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment4.png"),
-          title: "工藝大樓2樓-金屬工藝創作專業工坊",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment5.png"),
-          title: "工藝大樓3樓教室等空間",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment6.png"),
-          title: "工藝大樓4樓-數位工程製造室",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment7.png"),
-          title: "工藝大樓4樓-產品設計與複媒創作專業工坊",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment8.png"),
-          title: "工藝大樓4樓-討論與閱讀室",
-        },
-        {
-          imgURL: require("@/assets/images/equipment/equipment9.png"),
-          title: "工藝大樓3樓-教授研究室",
-        },
-      ],
+      classListQuery: {
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      albumTitle: "",
+      classData: [],
+      anotherClassList: [],
       enlargeIMG: "",
+      enContent: {},
       showIMG: false,
       showIMG_phone: false,
     };
   },
   methods: {
-    goBackEquipment() {
-      this.$router.push({ name: "equipment" });
-    },
-    getTouchIMG(url) {
-      this.enlargeIMG = url;
+    getTouchIMG(item) {
+      this.enlargeIMG = item.links;
+      this.enContent = {
+        createUserName: item.createUserName,
+        createDate: item.createDate,
+      };
       this.showIMG = true;
     },
-    getTouchIMG_phone(url) {
-      this.enlargeIMG = url;
+    getTouchIMG_phone(item) {
+      this.enlargeIMG = item.links;
+      this.enContent = {
+        createUserName: item.createUserName,
+        createDate: item.createDate,
+      };
       this.showIMG_phone = true;
     },
     showIntroduce(data) {
       this.$router.push({
         name: "equipmentInfo",
-        params: { class: data.title },
+        params: { id: data.id },
       });
     },
+    getAlbumTitle() {
+      this.$api.getclassrooms({ id: this.$route.params.id }).then((res) => {
+        this.albumTitle = res.data.result.title;
+      });
+    },
+    getList() {
+      this.$api.classroomPics(this.listQuery).then((res) => {
+        this.classData = res.data.data;
+      });
+    },
+    getMenu() {
+      this.$api.classrooms(this.classListQuery).then((res) => {
+        this.anotherClassList = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getAlbumTitle();
+    this.getList();
+    this.getMenu();
   },
 };
 </script>

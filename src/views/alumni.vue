@@ -56,19 +56,19 @@
           <div class="w-100">
             <div
               class="alumniTable w-100 d-flex align-items-center flex-row"
-              v-for="(item, index) in 6"
+              v-for="(item, index) in alumniData"
               :key="index"
             >
               <p class="m-0" style="min-width: 220px; max-width: 220px">
-                2013-11-22
+                {{ item.releaseDate | moment("YYYY-MM-DD") }}
               </p>
-              <p class="m-0">2013年陸寶企業股份有限公司實習成果</p>
-              <p class="m-0 ml-auto">陳怡君</p>
+              <p class="m-0">{{ item.title }}</p>
+              <p class="m-0 ml-auto">{{ item.author }}</p>
             </div>
 
-            <div class="w-100 mt-90">
+            <!-- <div class="w-100 mt-90">
               <Pagination :needPage="true" :pageNumber="5" />
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -88,13 +88,19 @@
           </div>
           <div
             class="w-100 alumniCard__content"
-            v-for="(item, index1) in 6"
+            v-for="(item, index1) in alumniData"
             :key="index1"
           >
             <el-row class="py-20">
-              <el-col class="text-center" :span="10">2013-11-22</el-col>
+              <el-col class="text-center" :span="10">
+                <p class="m-0">
+                  {{ item.releaseDate | moment("YYYY-MM-DD") }}
+                </p>
+              </el-col>
               <el-col class="text-left" :span="14">
-                2013年陸寶企業股份有限公司實習成果
+                <p class="m-0">
+                  {{ item.title }}
+                </p>
               </el-col>
             </el-row>
           </div>
@@ -117,6 +123,12 @@ export default {
   },
   data() {
     return {
+      listQuery: {
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      alumniData: [],
       alumniSort: [
         {
           pathURL: "alumni",
@@ -148,6 +160,16 @@ export default {
         return countYear;
       };
     },
+  },
+  methods: {
+    getList() {
+      this.$api.alumni(this.listQuery).then((res) => {
+        this.alumniData = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
