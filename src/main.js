@@ -13,9 +13,9 @@ import api from "@/api/apis.js";
 import "@/assets/all.scss"
 
 Vue.use(ElementUI)
+Vue.use(require('vue-moment'))
 Vue.use(VueAxios, axios)
 Vue.use(VueAwesomeSwiper)
-Vue.use(require('vue-moment'))
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 

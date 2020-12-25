@@ -1,6 +1,6 @@
 <template>
   <div id="HomePage">
-    <!-- banner -->
+    <!-- banner||OK -->
     <Carousel />
     <div class="d-none d-mb-block">
       <!-- contest winning -->
@@ -55,11 +55,11 @@
               <!------------------------------>
             </div>
           </div>
-          <div
+          <!-- <div
             class="w-100 mt-30 d-flex align-items-center justify-content-center"
           >
             <Pagination :needPage="true" :pageNumber="5" />
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- students works -->
@@ -120,18 +120,20 @@
               <div class="mt-50" style="margin-left: 20%">
                 <div
                   class="collapseCard-child mt-20"
-                  v-for="item in 3"
-                  :key="item"
+                  v-for="item in newsData"
+                  :key="item.id"
                 >
                   <div
                     class="h-100 d-flex align-items-center justify-content-between"
                   >
                     <div>
-                      <p class="m-0">MAY.09.2020-{{ item }}</p>
+                      <p class="m-0">
+                        {{ item.releaseDate | moment("YYYY-MM-DD") }}
+                      </p>
                     </div>
                     <div>
                       <p class="m-0">
-                        2020新一代設計展 展覽時間2020年5月22日(五)-5月25日(一)
+                        {{ item.title }}
                       </p>
                     </div>
                     <div @click="goNews()">
@@ -597,6 +599,30 @@ export default {
   },
   data() {
     return {
+      newsData: [],
+      craftsList: [
+        {
+          name_ch: "陶瓷",
+          name_en: "CERAMICS",
+          imgURL: require("@/assets/images/craft/craft_1.png"),
+        },
+        {
+          name_ch: "金工",
+          name_en: "METALWORKING",
+          imgURL: require("@/assets/images/craft/craft_2.png"),
+        },
+        {
+          name_ch: "木工",
+          name_en: "WOODWORKING",
+          imgURL: require("@/assets/images/craft/craft_3.png"),
+        },
+        {
+          name_ch: "產品",
+          name_en: "PRODUCTION",
+          imgURL: require("@/assets/images/craft/craft_4.png"),
+        },
+      ],
+
       accessList: [
         {
           code: "address",
@@ -673,28 +699,7 @@ export default {
           ],
         },
       ],
-      craftsList: [
-        {
-          name_ch: "陶瓷",
-          name_en: "SYS_CLASSTYPE_CERAMICS",
-          imgURL: require("@/assets/images/craft/craft_1.png"),
-        },
-        {
-          name_ch: "金工",
-          name_en: "METALWORKING",
-          imgURL: require("@/assets/images/craft/craft_2.png"),
-        },
-        {
-          name_ch: "木工",
-          name_en: "WOODWORKING",
-          imgURL: require("@/assets/images/craft/craft_3.png"),
-        },
-        {
-          name_ch: "產品",
-          name_en: "PRODUCT",
-          imgURL: require("@/assets/images/craft/craft_4.png"),
-        },
-      ],
+
       getTraffic: "",
       phone_contestList: [
         {
@@ -742,7 +747,7 @@ export default {
         {
           imgURL: require("@/assets/images/craft/craft_1.png"),
           name_ch: "陶瓷",
-          name_en: "SYS_CLASSTYPE_CERAMICS",
+          name_en: "CERAMICS",
         },
         {
           imgURL: require("@/assets/images/craft/craft_2.png"),
@@ -771,8 +776,43 @@ export default {
       this.$router.push({ name: "bulletin" });
     },
     goCraft(sortName) {
-      this.$router.push({ name: "crafts", params: { sort: sortName } });
+      let paramsVal;
+      switch (sortName) {
+        case "CERAMICS":
+          paramsVal = "SYS_CLASSTYPE_CERAMICS";
+          break;
+        case "METALWORKING":
+          paramsVal = "SYS_CLASSTYPE_METAL";
+          break;
+        case "WOODWORKING":
+          paramsVal = "SYS_CLASSTYPE_WOOD";
+          break;
+        case "PRODUCTION":
+          paramsVal = "SYS_CLASSTYPE_PROD";
+          break;
+        default:
+          break;
+      }
+      this.$router.push({
+        name: "crafts",
+        params: { sort: "SYS_CLASSTYPE_CERAMICS" },
+      });
     },
+    getNews() {
+      const vm = this;
+      const listQuery = {
+        NewsTypeId: "SYS_NEWS_DEPARTMENT",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      };
+      vm.$api.news(listQuery).then((res) => {
+        vm.newsData = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getNews();
   },
 };
 </script>

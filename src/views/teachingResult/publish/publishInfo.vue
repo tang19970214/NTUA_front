@@ -1,6 +1,14 @@
 <template>
   <div id="publishInfo">
     <div class="web d-none d-mb-block">
+      <div
+        class="w-100 pb-10 goPrev d-flex align-items-center flex-row cur-pointer"
+        @click="goPrev()"
+      >
+        <img src="@/assets/images/icon/arrowLeft.png" alt="回上一頁" />
+        <strong class="font-s-24 pl-10">回上一頁</strong>
+      </div>
+
       <div class="publishInfoBG pb-150">
         <div class="authorCard">
           <div class="p-100 d-flex align-items-start flex-row">
@@ -8,8 +16,8 @@
               class="d-flex align-items-center justify-content-center flex-column"
             >
               <img
-                src="@/assets/images/teacher/fullTime/teacher4.jpg"
-                alt="梁家豪"
+                :src="teacherList.pic"
+                :alt="teacherList.name"
                 height="300px"
               />
               <div class="d-flex align-items-start flex-row mt-20">
@@ -58,15 +66,11 @@
             <div
               class="profile d-flex flex-column justify-content-between ml-40"
             >
-              <div
-                class="d-flex flex-row"
-                v-for="(item, index) in teacherList.leftInfo"
-                :key="'TLL__' + index"
-              >
+              <div class="d-flex flex-row">
                 <div
                   class="profile__title profile__title-left text-right pl-20"
                 >
-                  {{ item.title }}
+                  姓名
                 </div>
                 <img
                   class="pt-12 px-10"
@@ -76,22 +80,14 @@
                   width="60px"
                 />
                 <div class="profile__context profile__context-left">
-                  {{ item.context }}
+                  {{ teacherList.name }}
                 </div>
               </div>
-            </div>
-            <div
-              class="profile d-flex flex-column justify-content-between ml-60"
-            >
-              <div
-                class="d-flex flex-row"
-                v-for="(item, index) in teacherList.rightInfo"
-                :key="'TLL__' + index"
-              >
+              <div class="d-flex flex-row">
                 <div
-                  class="profile__title profile__title-right text-right pl-20"
+                  class="profile__title profile__title-left text-right pl-20"
                 >
-                  {{ item.title }}
+                  Office_Hour
                 </div>
                 <img
                   class="pt-12 px-10"
@@ -100,19 +96,160 @@
                   height="1px"
                   width="60px"
                 />
-                <div class="profile__context profile__context-right">
-                  {{ item.context }}
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.officeHour }}
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  聯絡電話
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.contactTel }}
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  傳真
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.fax }}
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  聯絡地址
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.addr }}
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  服務單位_部門
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  工藝設計學系
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="profile d-flex flex-column justify-content-between ml-40"
+            >
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  類別
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.memberTypeName }}
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  職稱
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.jobTitle }}
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  授課領域
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.teachClass }}
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div
+                  class="profile__title profile__title-left text-right pl-20"
+                >
+                  研究專長
+                </div>
+                <img
+                  class="pt-12 px-10"
+                  src="@/assets/images/icon/dashLine.png"
+                  alt=""
+                  height="1px"
+                  width="60px"
+                />
+                <div class="profile__context profile__context-left">
+                  {{ teacherList.research }}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="text-left pl-60">
-          <p class="Txt-title" @click="goPrev()">研究發表</p>
+        <div class="text-left pl-60" v-if="$route.params.author == '梁家豪'">
+          <p class="Txt-title">研究發表</p>
         </div>
 
-        <div class="publishCard">
+        <div class="publishCard" v-if="$route.params.author == '梁家豪'">
           <div
             class="p-60 publishCard__menu"
             v-for="item in menuList"
@@ -185,10 +322,21 @@
             </div>
           </div>
         </div>
+        <div class="w-100">
+          <div class="pt-50 d-flex align-items-center justify-content-center">
+            <div
+              class="pb-10 goPrev d-flex d-inline-flex align-items-center flex-row cur-pointer"
+              @click="goPrev()"
+            >
+              <img src="@/assets/images/icon/arrowLeft.png" alt="回上一頁" />
+              <strong class="font-s-24 pl-10">回上一頁</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="phone d-block d-mb-none pt-70 pb-50">
+    <!-- <div class="phone d-block d-mb-none pt-70 pb-50">
       <div class="publishInfoTitle w-100 d-flex align-items-center flex-row">
         <a class="pl-20" @click="goPrev()">
           <img src="@/assets/images/icon/arrowLeft.png" alt="" />
@@ -341,7 +489,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -354,53 +502,21 @@ export default {
   },
   data() {
     return {
-      teacherList: {
-        leftInfo: [
-          {
-            title: "姓名",
-            context: "梁家豪",
-          },
-          {
-            title: "Office_Hour",
-            context: "二、三、四",
-          },
-          {
-            title: "聯絡電話",
-            context: "ext.2120",
-          },
-          {
-            title: "傳真",
-            context: "(02)8965-3024",
-          },
-          {
-            title: "聯絡地址",
-            context: "22058新北市板橋區大觀路一段59號工藝設計系",
-          },
-          {
-            title: "服務單位_部門",
-            context: "工藝設計學系",
-          },
-        ],
-        rightInfo: [
-          {
-            title: "類別",
-            context: "專任教授",
-          },
-          {
-            title: "職稱",
-            context: "副教授",
-          },
-          {
-            title: "授課領域",
-            context:
-              "陶瓷工作坊、創作與設計研究(日碩)、畢業專題(陶瓷組)、工藝創作研究(職碩)",
-          },
-          {
-            title: "研究專長",
-            context: "陶藝、工藝美學",
-          },
-        ],
+      memberListQuery: {
+        MemberTypeId: "",
+        page: 1,
+        limit: 20,
+        key: undefined,
       },
+      publishListQuery: {
+        TeachTypeId: "SYS_TEACH_RESEARCHPUBLIC",
+        Years: "",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      teacherList: [],
+      publishData: [],
       menuList: [
         {
           value: 1,
@@ -414,36 +530,8 @@ export default {
               code: "B",
               title: "B 專書中之輪文",
             },
-            // {
-            //   code: "C",
-            //   title: "C 主編之專書",
-            // },
-            // {
-            //   code: "D",
-            //   title: "D 學位論文",
-            // },
-            // {
-            //   code: "E",
-            //   title: "E 研討會論文",
-            // },
-            // {
-            //   code: "F",
-            //   title: "F 譯著",
-            // },
-            // {
-            //   code: "G",
-            //   title: "G 其他",
-            // },
-            // {
-            //   code: "H",
-            //   title: "H 展覽經驗",
-            // },
           ],
         },
-        // {
-        //   value: 2,
-        //   title: "研究計畫一覽",
-        // },
       ],
       infoList: {
         A: [
@@ -535,6 +623,24 @@ export default {
     openTheses(code) {
       this.chooseThesis = code;
     },
+    getMemberList() {
+      this.$api.members(this.memberListQuery).then((res) => {
+        this.teacherList = res.data.data.filter((data) => {
+          return data.name === this.$route.params.author;
+        })[0];
+      });
+    },
+    getPublishList() {
+      this.$api.award(this.publishListQuery).then((res) => {
+        this.publishData = res.data.data.filter((data) => {
+          return data.author === this.$route.params.author;
+        })[0];
+      });
+    },
+  },
+  mounted() {
+    this.getMemberList();
+    this.getPublishList();
   },
 };
 </script>
@@ -544,6 +650,13 @@ export default {
   .web {
     padding-top: 420px;
     margin-left: 120px;
+    .goPrev {
+      color: #ceb87f;
+      transition: all 0.6s;
+      &:hover {
+        letter-spacing: 0.5rem;
+      }
+    }
     .publishInfoBG {
       background: #fff;
       .authorCard {
@@ -581,8 +694,8 @@ export default {
             letter-spacing: 0.1em;
             color: #ffffff;
             &-left {
-              min-width: 430px;
-              max-width: 430px;
+              min-width: 360px;
+              max-width: 360px;
             }
             &-right {
               min-width: 350px;

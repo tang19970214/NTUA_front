@@ -49,12 +49,12 @@
                       </el-row>
                     </div>
                   </div>
-                  <!-- <div
+                  <div
                     class="w-100 text-left mt-20 teacherList__introduce-goPublishInfo"
-                    @click="goPublishInfo(item.name)"
+                    @click="goPublishInfo(item)"
                   >
                     <p class="m-0">研究發表</p>
-                  </div> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -106,13 +106,13 @@
                     />
                   </a>
                 </div>
-                <!-- <div class="w-100 d-flex flex-column">
+                <div class="w-100 d-flex flex-column">
                 <router-link
-                  :to="{ name: 'publishInfo', params: { author: '劉家豪' } }"
+                  :to="{ name: 'publishInfo', params: { author: items.author } }"
                 >
                   研究發表
                 </router-link>
-              </div> -->
+              </div>
               </div>
             </div>
           </div>
@@ -152,8 +152,8 @@ export default {
     };
   },
   methods: {
-    goPublishInfo(name) {
-      this.$router.push({ name: "publishInfo", params: { author: name } });
+    goPublishInfo(data) {
+      this.$router.push({ name: "publishInfo", params: { author: data.author } });
     },
     showTeacherInfo(data) {
       this.showInfo[data?.key] = !this.showInfo[data?.key];

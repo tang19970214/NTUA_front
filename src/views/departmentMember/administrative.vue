@@ -101,13 +101,13 @@
                     />
                   </a>
                 </div>
-                <!-- <div class="w-100 d-flex flex-column">
+                <div class="w-100 d-flex flex-column">
                 <router-link
-                  :to="{ name: 'publishInfo', params: { author: '劉家豪' } }"
+                  :to="{ name: 'publishInfo', params: { author: items.author } }"
                 >
                   研究發表
                 </router-link>
-              </div> -->
+              </div>
               </div>
             </div>
           </div>

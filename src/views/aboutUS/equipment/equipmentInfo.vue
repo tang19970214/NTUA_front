@@ -136,13 +136,13 @@
               :key="index2"
             >
               <img
-                :src="item.imgURL"
+                :src="item.coverPic"
                 alt=""
                 width="200px"
                 @click="showIntroduce(item)"
               />
-              <div class="mt-20 text-center">
-                <strong>{{ item.title }}</strong>
+              <div class="mt-10 text-center">
+                <strong class="font-s-14">{{ item.title }}</strong>
               </div>
             </div>
           </div>

@@ -22,9 +22,9 @@
         </el-col>
       </el-row>
 
-      <div class="w-100 mt-70">
+      <!-- <div class="w-100 mt-70">
         <Pagination :needPage="true" :pageNumber="5" />
-      </div>
+      </div> -->
     </div>
 
     <div class="phone d-block d-mb-none">
@@ -70,48 +70,6 @@ export default {
         key: undefined,
       },
       awardData: [],
-      // awardData: [
-      //   {
-      //     year: "2020",
-      //     date: "SEP.14",
-      //     content:
-      //       "恭喜!本系校友南宇陽(106年日碩班畢業)獲得「2020 Taitung Craft Award 臺東工藝獎」 佳作殊榮",
-      //   },
-      //   {
-      //     year: "2020",
-      //     date: "SEP.11",
-      //     content:
-      //       "賀!本系盧逸仙榮獲「第一屆皮革設計大賽」配飾類銀奨、廖于萱榮獲佳作！",
-      //   },
-      //   {
-      //     year: "2020",
-      //     date: "SEP.11",
-      //     content: "賀! 本系梁家豪老師獲頒「台灣陶瓷學會優秀青年會員獎」",
-      //   },
-      //   {
-      //     year: "2020",
-      //     date: "AUG.28",
-      //     content:
-      //       "賀!本系校友與同學獲得「2020光寶創新獎」 國際設計大賽特別獎項	",
-      //   },
-      //   {
-      //     year: "2020",
-      //     date: "MAY.05",
-      //     content:
-      //       "賀! 本系同學與校友獲得「2020新北市國際金屬工藝大賽」1金獎1銀獎與3佳作",
-      //   },
-      //   {
-      //     year: "2020",
-      //     date: "APR.23",
-      //     content: "賀! 本系同學入圍「金點新秀設計獎」多項獎項殊榮",
-      //   },
-      //   {
-      //     year: "2020",
-      //     date: "FEB.27",
-      //     content:
-      //       "賀!本校工藝設計學系同學榮獲「晃-第四屆TJDMA國際珠寶金工設計競賽」金銀獎等獎項",
-      //   },
-      // ],
     };
   },
   methods: {

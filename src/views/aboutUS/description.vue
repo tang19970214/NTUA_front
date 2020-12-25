@@ -12,8 +12,16 @@
           :key="'EL_' + index"
         >
           <el-col :span="4">
-            <div class="">
-              <img :src="item.imgURL" alt="" />
+            <div class="catalog__darkBG">
+              <div
+                class="p-20 d-flex align-items-center justify-content-around flex-column"
+                v-for="items in item.directoryList"
+                :key="items.value"
+              >
+                <p class="m-0 py-10">{{ items.method_first }}</p>
+                <p class="m-0 py-10">{{ items.method_second }}</p>
+                <strong class="pt-20">{{ items.title }}</strong>
+              </div>
             </div>
           </el-col>
           <el-col :span="20">
@@ -390,6 +398,14 @@ export default {
       eduList: [
         {
           imgURL: require("@/assets/images/goal.png"),
+          directoryList: [
+            {
+              value: 1,
+              method_first: "日間學士班",
+              method_second: "進修學士班",
+              title: "教育目標",
+            },
+          ],
           list: [
             {
               context:
@@ -407,6 +423,14 @@ export default {
         },
         {
           imgURL: require("@/assets/images/goal.png"),
+          directoryList: [
+            {
+              value: 2,
+              method_first: "日間碩士班",
+              method_second: "進修碩士班",
+              title: "教育目標",
+            },
+          ],
           list: [
             {
               context: "培養具備「工藝設計」理論研究與作品創作能力的專業人才。",
@@ -421,18 +445,35 @@ export default {
         },
         {
           imgURL: require("@/assets/images/goal.png"),
+          directoryList: [
+            {
+              value: 3,
+              method_first: "二年制",
+              method_second: "在職專班",
+              title: "教育目標",
+            },
+          ],
           list: [
             {
               context:
                 "本系為配合政府鼓勵社會在職人士參與終身學習之方針，發揮途修 推廣教育之功能，故課程之設計以加強社會在職人士之設計理念、 人文素養及鑑賞能力為主要目標，並依不同領域之工藝專長開設相 關課程，以期提升更高層次之專業能力。",
             },
             {
-              context: "工藝設計的內容包括實用與美觀，半最終的目標則在「創造力」的 開發，即設計課程在培養學生具備「擴散式思考」及「收斂是思考」 的能力，建立靈活而柔軟的創造思考習慣，以及選擇取捨的專業判 斷能力，除了增加造型發想與設計相關課程之外，透露經常賦予具 想像空間的命運，提供學生寬廣的思考與嘗識的機會，以便激發想 像力，培養創造力，進而達到進修推廣教育的理想目標。",
+              context:
+                "工藝設計的內容包括實用與美觀，半最終的目標則在「創造力」的 開發，即設計課程在培養學生具備「擴散式思考」及「收斂是思考」 的能力，建立靈活而柔軟的創造思考習慣，以及選擇取捨的專業判 斷能力，除了增加造型發想與設計相關課程之外，透露經常賦予具 想像空間的命運，提供學生寬廣的思考與嘗識的機會，以便激發想 像力，培養創造力，進而達到進修推廣教育的理想目標。",
             },
           ],
         },
         {
           imgURL: require("@/assets/images/goal.png"),
+          directoryList: [
+            {
+              value: 4,
+              method_first: "學士班",
+              method_second: "",
+              title: "能力綱目",
+            },
+          ],
           list: [
             {
               context: "工藝創作之能",
@@ -459,6 +500,14 @@ export default {
         },
         {
           imgURL: require("@/assets/images/goal.png"),
+          directoryList: [
+            {
+              value: 5,
+              method_first: "碩士班",
+              method_second: "",
+              title: "能力綱目",
+            },
+          ],
           list: [
             {
               context: "創作與鑑賞能力",
@@ -650,6 +699,20 @@ export default {
         border-bottom: 2px solid #c4c4c4;
         &:last-child {
           border-bottom: none;
+        }
+      }
+      &__darkBG {
+        width: 200px;
+        height: 200px;
+        background: #2d2d2d;
+        color: #ceb87f;
+        line-height: 160%;
+        letter-spacing: 0.12em;
+        p {
+          font-size: 24px;
+        }
+        strong {
+          font-size: 36px;
         }
       }
       &__content {

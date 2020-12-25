@@ -7,19 +7,19 @@
       </div>
       <div class="w-100">
         <div
-          class="newsCard__table w-100 d-flex align-items-center flex-row"
+          class="newsCard__table d-flex align-items-center flex-row"
           v-for="(item, index) in internshipResultMsg"
           :key="'BT__' + index"
         >
           <p class="m-0" style="min-width: 220px; max-width: 220px">
-            {{ item.title }}
+            {{ item.releaseDate | moment("YYYY-MM-DD") }}
           </p>
-          <p class="m-0">{{ item.context }}</p>
+          <p class="m-0">{{ item.title }}</p>
         </div>
 
-        <div class="w-100 mt-90">
+        <!-- <div class="w-100 mt-90">
           <Pagination :needPage="true" :pageNumber="5" />
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -40,8 +40,10 @@
             :key="index1"
           >
             <el-row class="py-20">
-              <el-col class="text-center" :span="10">{{ item.title }}</el-col>
-              <el-col class="text-left" :span="14">{{ item.context }}</el-col>
+              <el-col class="text-center" :span="10">{{
+                item.releaseDate | moment("YYYY-MM-DD")
+              }}</el-col>
+              <el-col class="text-left" :span="14">{{ item.title }}</el-col>
             </el-row>
           </div>
         </div>
@@ -59,13 +61,25 @@ export default {
   },
   data() {
     return {
-      internshipResultMsg: [
-        {
-          title: "2013-11-22",
-          context: "2013年陸寶企業股份有限公司實習成果",
-        },
-      ],
+      listQuery: {
+        TeachTypeId: "SYS_TEACH_4C",
+        Years: "",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      internshipResultMsg: [],
     };
+  },
+  methods: {
+    getList() {
+      this.$api.award(this.listQuery).then((res) => {
+        this.internshipResultMsg = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -74,11 +88,10 @@ export default {
 #internshipResult {
   .web {
     background: #2d2d2d;
-    padding: 120px 220px 75px 60px;
+    padding: 120px 220px 120px 60px;
     margin-left: 0;
     .newsCard {
       &__title {
-        width: 100%;
         padding: 40px 30px;
         background: #c4c4c4;
         font-size: 18px;

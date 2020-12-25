@@ -26,7 +26,7 @@
                 <p class="m-0">系友</p>
                 <p class="m-0">優秀表現</p>
               </div>
-              <div class="w-100">
+              <!-- <div class="w-100">
                 <div
                   class="w-100 d-flex justify-content-end newsCard-title_chooseYear"
                 >
@@ -40,7 +40,7 @@
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

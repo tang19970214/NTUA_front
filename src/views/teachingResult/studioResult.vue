@@ -20,7 +20,10 @@
                 <div class="pt-10 craftCard-borTop">
                   <router-link
                     class="text-decoration-none"
-                    :to="{ name: 'crafts', params: { sort: item.name_en } }"
+                    :to="{
+                      name: 'crafts',
+                      params: { sort: 'SYS_CLASSTYPE_CERAMICS' },
+                    }"
                     >VIEW MORE</router-link
                   >
                 </div>
@@ -35,8 +38,8 @@
             <el-col
               class="mb-40"
               :span="8"
-              v-for="(item, index1) in worksList"
-              :key="index1"
+              v-for="item in worksList"
+              :key="item.id"
             >
               <div
                 class="w-100 d-flex align-items-center justify-content-center flex-column"
@@ -44,7 +47,11 @@
                 <div
                   class="w-100 d-flex align-items-center justify-content-center"
                 >
-                  <img :src="item.imgURL" alt="" />
+                  <img
+                    :src="item.contents"
+                    :alt="item.title"
+                    @click="getTouchIMG(item)"
+                  />
                 </div>
                 <div
                   class="studioCard__content w-100 d-flex align-items-center justify-content-center mt-40"
@@ -54,18 +61,18 @@
               </div>
             </el-col>
           </el-row>
-          <div
+          <!-- <div
             class="w-100 py-50 d-flex align-items-center justify-content-center"
           >
             <Pagination :needPage="true" :pageNumber="5" />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
 
     <div class="phone d-block d-mb-none">
-      <div class="pl-30 pt-70 pb-80 mb-100">
-        <div class="studioBG">
+      <div class="pl-30 pt-70 pb-60 mb-80">
+        <div class="craftsBG">
           <div class="px-25 studioBG__trans">
             <el-row>
               <el-col :span="12" v-for="(item, index1) in crafts" :key="index1">
@@ -94,6 +101,124 @@
             </el-row>
           </div>
         </div>
+
+        <div class="studioBG mt-50">
+          <el-row>
+            <el-col :span="12" v-for="item in worksList" :key="item.id">
+              <div class="p-10">
+                <div
+                  class="studioBG__info w-100 d-flex align-items-center justify-content-center flex-column"
+                >
+                  <img
+                    :src="item.contents"
+                    alt=""
+                    width="100%"
+                    @click="getTouchIMG_phone(item)"
+                  />
+                  <strong class="mt-15 pt-10 px-20">{{ item.title }}</strong>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal -->
+    <div class="modal" v-if="showIMG">
+      <div class="modal__content">
+        <div class="w-100 d-flex align-items-center justify-content-center">
+          <div class="pos-relative">
+            <div class="classCard w-100">
+              <div class="p-100">
+                <div class="w-100 d-flex align-items-end flex-row">
+                  <img :src="enlargeIMG" alt="" width="700px" />
+                  <div class="classCard__introduce d-inline-flex">
+                    <div class="px-50 pt-60 pb-80">
+                      <div
+                        class="w-100 classCard__introduce-title text-left pb-5"
+                      >
+                        <strong>{{ enContent.title }}</strong>
+                      </div>
+                      <div class="w-100 pr-60 classCard__introduce-content">
+                        <el-row class="pt-10">
+                          <el-col :span="12">上傳時間</el-col>
+                          <el-col :span="12">{{
+                            enContent.createDate | moment("YYYY-MM-DD")
+                          }}</el-col>
+                        </el-row>
+                        <el-row class="pt-10">
+                          <el-col :span="12">上傳者</el-col>
+                          <el-col :span="12">
+                            {{ enContent.createUserName }}
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pos-absolute t-0 r-0 mt-20 mr-20">
+              <div
+                class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
+                @click="showIMG = false"
+              >
+                <i class="el-icon-close"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" v-if="showIMG_phone">
+      <div class="modal__content">
+        <div class="w-100 d-flex align-items-center justify-content-center">
+          <div class="classCardPhone w-100">
+            <div class="px-30 pt-10 pb-40">
+              <div
+                class="w-100 d-flex align-items-center justify-content-end mb-10"
+              >
+                <div
+                  class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
+                  @click="showIMG_phone = false"
+                >
+                  <i class="el-icon-close"></i>
+                </div>
+              </div>
+
+              <div
+                class="w-100 d-flex align-items-end justify-content-center flex-column"
+              >
+                <img :src="enlargeIMG" alt="" width="100%" />
+                <div class="w-100 classCardPhone__introduce">
+                  <div class="px-30 py-10">
+                    <div
+                      class="w-100 classCardPhone__introduce-title text-left pb-5"
+                    >
+                      <strong>{{ enContent.title }}</strong>
+                    </div>
+                    <div class="w-100 pr-60 classCardPhone__introduce-content">
+                      <el-row class="pt-10">
+                        <el-col :span="12">上傳時間</el-col>
+                        <el-col :span="12">{{
+                          enContent.createDate | moment("YYYY-MM-DD")
+                        }}</el-col>
+                      </el-row>
+                      <el-row class="pt-10">
+                        <el-col :span="12">上傳者</el-col>
+                        <el-col :span="12">
+                          {{ enContent.createUserName }}
+                        </el-col>
+                      </el-row>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -108,6 +233,13 @@ export default {
   },
   data() {
     return {
+      listQuery: {
+        TeachTypeId: "SYS_TEACH_WORKSHOP",
+        Years: "",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
       crafts: [
         {
           imgURL: require("@/assets/images/craft/craft_1.png"),
@@ -117,58 +249,53 @@ export default {
         {
           imgURL: require("@/assets/images/craft/craft_2.png"),
           name_ch: "金工",
-          name_en: "METALWORKING",
+          name_en: "METAL",
         },
         {
           imgURL: require("@/assets/images/craft/craft_3.png"),
           name_ch: "木工",
-          name_en: "WOODWORKING",
+          name_en: "WOOD",
         },
         {
           imgURL: require("@/assets/images/craft/craft_4.png"),
           name_ch: "產品",
-          name_en: "PRODUCT",
+          name_en: "PRODUCTION",
         },
       ],
-      worksList: [
-        {
-          imgURL: require("@/assets/images/studio/studio1.png"),
-          title: "陶瓷作品20",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio2.png"),
-          title: "陶瓷作品21",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio3.png"),
-          title: "陶瓷作品22",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio4.png"),
-          title: "陶瓷作品23",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio5.png"),
-          title: "陶瓷作品24",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio6.png"),
-          title: "陶瓷作品25",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio7.png"),
-          title: "陶瓷作品26",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio8.png"),
-          title: "陶瓷作品27",
-        },
-        {
-          imgURL: require("@/assets/images/studio/studio9.png"),
-          title: "陶瓷作品28",
-        },
-      ],
+      worksList: [],
+      enlargeIMG: "",
+      enContent: {},
+      showIMG: false,
+      showIMG_phone: false,
     };
+  },
+  methods: {
+    getTouchIMG(item) {
+      this.enlargeIMG = item.contents;
+      this.enContent = {
+        title: item.title,
+        createUserName: item.createUserName,
+        createDate: item.createDate,
+      };
+      this.showIMG = true;
+    },
+    getTouchIMG_phone(item) {
+      this.enlargeIMG = item.contents;
+      this.enContent = {
+        title: item.title,
+        createUserName: item.createUserName,
+        createDate: item.createDate,
+      };
+      this.showIMG_phone = true;
+    },
+    getList() {
+      this.$api.award(this.listQuery).then((res) => {
+        this.worksList = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -265,7 +392,7 @@ export default {
 
   .phone {
     background: white;
-    .studioBG {
+    .craftsBG {
       background: #2d2d2d;
       &__trans {
         transform: translateY(-2rem);
@@ -287,6 +414,85 @@ export default {
           color: #ceb87f;
         }
       }
+    }
+    .studioBG {
+      background: #2d2d2d;
+      &__info {
+        strong {
+          border-top: 1px solid #ceb87f;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .classCard {
+    background: #fff;
+    border-radius: 8px;
+    &__introduce {
+      background: #2d2d2d;
+      &-title {
+        border-bottom: 1px solid #ceb87f;
+        color: #ceb87f;
+        font-size: 18px;
+      }
+      &-content {
+        .el-col {
+          &:first-child {
+            color: #ceb87f;
+            font-weight: bold;
+            font-size: 16px;
+          }
+          &:last-child {
+            color: #fff;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .classCardPhone {
+    background: #fff;
+    border-radius: 8px;
+    &__introduce {
+      background: #2d2d2d;
+      &-title {
+        border-bottom: 1px solid #ceb87f;
+        color: #ceb87f;
+        font-size: 18px;
+        line-height: 21px;
+      }
+      &-content {
+        .el-col {
+          &:first-child {
+            color: #ceb87f;
+            font-size: 14px;
+            line-height: 16px;
+          }
+          &:last-child {
+            color: #fff;
+            font-size: 14px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .closeBtn {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 2px solid #ceb87f;
+    border-radius: 50%;
+    color: #ceb87f;
+    font-size: 32px;
+    transition: all 0.5s;
+    &:hover {
+      background: #ceb87f;
+      border: 2px solid #ceb87f;
+      color: #fff;
     }
   }
 }

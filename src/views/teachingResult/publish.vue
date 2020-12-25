@@ -29,9 +29,9 @@
         </el-col>
       </el-row>
 
-      <div class="w-100 mt-150">
+      <!-- <div class="w-100 mt-150">
         <Pagination :needPage="true" :pageNumber="5" />
-      </div>
+      </div> -->
     </div>
 
     <div class="phone d-block d-mb-none">
@@ -85,12 +85,10 @@ export default {
   },
   methods: {
     goPublishInfo(data) {
-      if (data.author == "梁家豪") {
-        this.$router.push({
-          name: "publishInfo",
-          params: { author: data.author },
-        });
-      }
+      this.$router.push({
+        name: "publishInfo",
+        params: { author: data.author },
+      });
     },
     getList() {
       this.$api.award(this.listQuery).then((res) => {

@@ -15,7 +15,13 @@
           <div class="bookContent">
             <strong class="m-0 bookContent-title">{{ item.title }}</strong>
             <div class="bookContent-directions">
-              <p class="m-0">{{ item.summary }}</p>
+              <p
+                class="m-0"
+                v-for="(items, index) in item.summary.split('\n')"
+                :key="'SMR__' + index"
+              >
+                {{ items }}
+              </p>
             </div>
             <div class="d-flex align-items-center justify-content-end mt-18">
               <router-link
@@ -49,9 +55,14 @@
               <div class="w-100">
                 <strong>{{ item.title }}</strong>
               </div>
-              <div class="px-40 text-left mb-20">
-                <p class="m-0">{{ item.summary }}</p>
-                <!-- <p class="m-0">{{ item.location }}</p> -->
+              <div class="px-30 text-left mb-20">
+                <p
+                  class="m-0"
+                  v-for="(items, index) in item.summary.split('\n')"
+                  :key="'PSMR__' + index"
+                >
+                  {{ items }}
+                </p>
               </div>
               <div class="w-100">
                 <router-link
@@ -121,7 +132,7 @@ export default {
       border: 2px solid #596164;
       box-sizing: border-box;
       width: 475px;
-      height: 250px;
+      min-height: 250px;
       padding: 65px 30px 20px 65px;
       &-title {
         font-weight: bold;

@@ -25,7 +25,7 @@
               <div class="w-100">
                 <p class="m-0">{{ getPathName(newsSort) }}</p>
               </div>
-              <div class="w-100">
+              <!-- <div class="w-100">
                 <div
                   class="w-100 d-flex justify-content-center newsCard-title_chooseYear"
                 >
@@ -39,7 +39,7 @@
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
