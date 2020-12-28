@@ -8,6 +8,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
+import Vue2Editor from "vue2-editor";
 
 import api from "@/api/apis.js";
 import "@/assets/all.scss"
@@ -16,6 +17,7 @@ Vue.use(ElementUI)
 Vue.use(require('vue-moment'))
 Vue.use(VueAxios, axios)
 Vue.use(VueAwesomeSwiper)
+Vue.use(Vue2Editor)
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 

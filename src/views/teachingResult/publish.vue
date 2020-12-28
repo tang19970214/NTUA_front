@@ -87,7 +87,7 @@ export default {
     goPublishInfo(data) {
       this.$router.push({
         name: "publishInfo",
-        params: { author: data.author },
+        params: { author: data.title },
       });
     },
     getList() {

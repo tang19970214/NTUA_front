@@ -33,6 +33,9 @@ const api = {
   award(params) {
     return req("get", "departmentteachs/load", params);
   },
+  memberDatas(params) {
+    return req("get", "departmentMemberDatas/load", params);
+  },
   /* 展覽紀錄、活動花絮 */
   record(params) {
     return req("get", "departmentActivityAlbums/load", params);

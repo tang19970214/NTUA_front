@@ -153,7 +153,7 @@ export default {
   },
   methods: {
     goPublishInfo(data) {
-      this.$router.push({ name: "publishInfo", params: { author: data.author } });
+      this.$router.push({ name: "publishInfo", params: { author: data.id } });
     },
     showTeacherInfo(data) {
       this.showInfo[data?.key] = !this.showInfo[data?.key];

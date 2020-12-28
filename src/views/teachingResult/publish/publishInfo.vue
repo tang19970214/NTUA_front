@@ -245,83 +245,227 @@
           </div>
         </div>
 
-        <div class="text-left pl-60" v-if="$route.params.author == '梁家豪'">
+        <div class="text-left pl-60">
           <p class="Txt-title">研究發表</p>
         </div>
 
-        <div class="publishCard" v-if="$route.params.author == '梁家豪'">
-          <div
-            class="p-60 publishCard__menu"
-            v-for="item in menuList"
-            :key="item.value"
-          >
-            <div
-              class="w-100 d-flex align-items-center justify-content-between"
+        <div class="publishInfoCard" v-if="getInfo">
+          <el-collapse v-model="activeNames">
+            <el-collapse-item
+              :title="key"
+              :name="key"
+              v-for="(item, key) in publishData"
+              :key="item.id"
             >
-              <p class="m-0">{{ item.title }}</p>
-              <div @click="openPublishInfo(item.value)">
-                <img
-                  class="cur-pointer"
-                  src="@/assets/images/icon/arrowDown_icon.png"
-                  alt=""
-                  width="32px"
-                />
-              </div>
-            </div>
-
-            <div
-              class="mt-40 publishCard__menu-content w-100 d-flex align-items-center flex-column"
-              v-if="publishInfoOpen"
-            >
-              <div class="infoList w-100 d-flex align-items-start flex-row">
-                <div class="infoList__leftBlock">
-                  <div
-                    class="w-100 pb-15 text-left"
-                    v-for="(items, index) in item.thesisList"
-                    :key="'TL__' + index"
+              <div class="publishInfoCard__content">
+                <el-row v-if="key == '研究發表'">
+                  <el-col
+                    class="publishInfoCard__content--leftBlock pb-50"
+                    :span="4"
                   >
-                    <p
-                      class="m-0 cur-pointer d-inline-flex"
-                      :class="{
-                        'infoList__leftBlock-active':
-                          items.code == chooseThesis,
-                      }"
-                      @click="openTheses(items.code)"
+                    <ul class="m-0">
+                      <li
+                        class="py-5"
+                        v-for="(items, index__1) in item"
+                        :key="'PB1__' + index__1"
+                      >
+                        <p
+                          class="m-0 d-inline-flex"
+                          :class="{
+                            activeColor: chooseMenuName == items.title,
+                          }"
+                          @click="openPublishInfo(items, index__1)"
+                        >
+                          {{ items.title }}
+                        </p>
+                      </li>
+                    </ul>
+                  </el-col>
+                  <el-col class="" :span="20">
+                    <div
+                      class="mr-120 ml-30 publishInfoCard__content--rightBlock"
                     >
-                      {{ items.title }}
-                    </p>
+                      <div class="p-30">
+                        <vue-editor
+                          v-model="item[chooseInfoKey].contents"
+                          :disabled="true"
+                        />
+                      </div>
+                    </div>
+                  </el-col>
+                </el-row>
+                <div
+                  class="publishInfoCard__content--table"
+                  v-else-if="key == '研究計畫' || key == '產學合作計畫'"
+                >
+                  <div class="px-50">
+                    <div class="w-100 header">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
+                      >
+                        <el-col :span="3">年度</el-col>
+                        <el-col :span="5">計畫名稱</el-col>
+                        <el-col :span="3">參與人</el-col>
+                        <el-col :span="3">擔任之工作</el-col>
+                        <el-col :span="3">計畫時間</el-col>
+                        <el-col :span="3">補助/委託機構</el-col>
+                        <el-col :span="2">附件檔案/參考連結</el-col>
+                        <el-col :span="2">備註</el-col>
+                      </el-row>
+                    </div>
+                    <div class="w-100 body">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
+                        v-for="(items, index__2) in item"
+                        :key="'PB2__' + index__2"
+                      >
+                        <el-col :span="3">{{ items.year }}</el-col>
+                        <el-col :span="5">{{ items.title }}</el-col>
+                        <el-col :span="3">{{ items.joinMember }}</el-col>
+                        <el-col :span="3">{{ items.jobTitle }}</el-col>
+                        <el-col :span="3">
+                          <div
+                            class="w-100 d-flex flex-column align-items-center justify-content-center"
+                          >
+                            <p class="m-0">
+                              {{ items.startDate | moment("YYYY-MM-DD") }}
+                            </p>
+
+                            <p class="m-0">
+                              {{ items.endDate | moment("YYYY-MM-DD") }}
+                            </p>
+                          </div>
+                        </el-col>
+                        <el-col :span="3">{{ items.mechanismName }}</el-col>
+                        <el-col :span="2"
+                          >{{ items.annexFile }}/{{ items.links }}</el-col
+                        >
+                        <el-col :span="2">{{ items.remark }}</el-col>
+                      </el-row>
+                    </div>
                   </div>
                 </div>
                 <div
-                  class="infoList__rightBlock"
-                  v-if="chooseThesis && !!item.thesisList"
+                  class="publishInfoCard__content--table"
+                  v-else-if="key == '校內榮譽' || key == '校外榮譽'"
                 >
-                  <div class="p-20">
-                    <div
-                      class="py-20 infoList__rightBlock-text w-100 d-flex align-items-center flex-row"
-                      v-for="(item, index) in infoList[chooseThesis]"
-                      :key="'IL__' + index"
-                    >
-                      <span
-                        class="d-flex align-items-center justify-content-center"
+                  <div class="px-50">
+                    <div class="w-100 header">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
                       >
-                        <img :src="item.downloadIMG" alt="" width="26px" />
-                      </span>
-                      <span
-                        class="d-flex align-items-center justify-content-center"
+                        <el-col :span="3">得獎年度</el-col>
+                        <el-col class="px-80 text-left">獎項名稱</el-col>
+                        <el-col class="text-left" :span="5">頒獎單位</el-col>
+                      </el-row>
+                    </div>
+                    <div class="w-100 body">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
+                        v-for="(items, index__2) in item"
+                        :key="'PB2__' + index__2"
                       >
-                        <img :src="item.pathIMG" alt="" width="26px" />
-                      </span>
-                      <div class="w-100">
-                        <p class="m-0">{{ item.context }}</p>
-                      </div>
+                        <el-col :span="3">{{ items.year }}</el-col>
+                        <el-col class="px-80 text-left">
+                          {{ items.title }}
+                        </el-col>
+                        <el-col class="text-left" :span="5">
+                          {{ items.mechanismName }}
+                        </el-col>
+                      </el-row>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="publishInfoCard__content--table"
+                  v-else-if="key == '學歷'"
+                >
+                  <div class="px-50">
+                    <div class="w-100 header">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
+                      >
+                        <el-col :span="6">學校名稱</el-col>
+                        <el-col :span="3">國別</el-col>
+                        <el-col :span="6">系所</el-col>
+                        <el-col :span="3">國別</el-col>
+                        <el-col :span="6">系所</el-col>
+                      </el-row>
+                    </div>
+                    <div class="w-100 body">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
+                        v-for="(items, index__2) in item"
+                        :key="'PB2__' + index__2"
+                      >
+                        <el-col :span="6">{{ items.title }}</el-col>
+                        <el-col :span="3"> {{ items.mechanismName }}</el-col>
+                        <el-col :span="6">{{ items.contents }}</el-col>
+                        <el-col :span="3">{{ items.jobTitle }}</el-col>
+                        <el-col :span="6">
+                          <div
+                            class="w-100 d-flex flex-column align-items-center justify-content-center"
+                          >
+                            <p class="m-0">
+                              {{ items.startDate | moment("YYYY-MM-DD") }}
+                            </p>
+                            <p class="m-0">
+                              {{ items.endDate | moment("YYYY-MM-DD") }}
+                            </p>
+                          </div>
+                        </el-col>
+                      </el-row>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="publishInfoCard__content--table"
+                  v-else-if="key == '經歷'"
+                >
+                  <div class="px-50">
+                    <div class="w-100 header">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
+                      >
+                        <el-col :span="6">服務機關</el-col>
+                        <el-col :span="6">部門/系所</el-col>
+                        <el-col :span="6">擔任職務</el-col>
+                        <el-col :span="6">起迄年月</el-col>
+                      </el-row>
+                    </div>
+                    <div class="w-100 body">
+                      <el-row
+                        class="py-40 d-flex align-items-center text-center"
+                        v-for="(items, index__2) in item"
+                        :key="'PB2__' + index__2"
+                      >
+                        <el-col :span="6">{{ items.title }}</el-col>
+                        <el-col :span="6"> {{ items.mechanismName }}</el-col>
+                        <el-col :span="6">{{ items.jobTitle }}</el-col>
+                        <el-col :span="6">
+                          <div
+                            class="w-100 d-flex flex-column align-items-center justify-content-center"
+                          >
+                            <p class="m-0">
+                              {{ items.startDate | moment("YYYY-MM-DD") }}
+                            </p>
+                            <p class="m-0">
+                              {{ items.endDate | moment("YYYY-MM-DD") }}
+                            </p>
+                          </div>
+                        </el-col>
+                      </el-row>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
+        <div class="p-60 text-center publishInfoCard-noData" v-else>
+          查無數據
+        </div>
+
         <div class="w-100">
           <div class="pt-50 d-flex align-items-center justify-content-center">
             <div
@@ -509,14 +653,18 @@ export default {
         key: undefined,
       },
       publishListQuery: {
-        TeachTypeId: "SYS_TEACH_RESEARCHPUBLIC",
-        Years: "",
+        MemberId: this.$route.params.author,
+        DataTypeId: "",
         page: 1,
         limit: 20,
         key: undefined,
       },
       teacherList: [],
       publishData: [],
+      getInfo: false,
+      activeNames: "",
+      chooseInfoKey: 0,
+      chooseMenuName: "期刊論文",
       menuList: [
         {
           value: 1,
@@ -614,11 +762,9 @@ export default {
     goPrev() {
       this.$router.go(-1);
     },
-    openPublishInfo() {
-      this.publishInfoOpen = !this.publishInfoOpen;
-      if (!this.publishInfoOpen) {
-        this.chooseThesis = false;
-      }
+    openPublishInfo(item, key) {
+      this.chooseInfoKey = key;
+      this.chooseMenuName = item.title;
     },
     openTheses(code) {
       this.chooseThesis = code;
@@ -626,15 +772,26 @@ export default {
     getMemberList() {
       this.$api.members(this.memberListQuery).then((res) => {
         this.teacherList = res.data.data.filter((data) => {
-          return data.name === this.$route.params.author;
+          return data.id === this.$route.params.author;
         })[0];
       });
     },
     getPublishList() {
-      this.$api.award(this.publishListQuery).then((res) => {
-        this.publishData = res.data.data.filter((data) => {
-          return data.author === this.$route.params.author;
-        })[0];
+      this.$api.memberDatas(this.publishListQuery).then((res) => {
+        if (res.data.data.length > 0) {
+          this.getInfo = true;
+        } else {
+          this.getInfo = false;
+        }
+        this.publishData = res.data.data;
+        let obj = {};
+        res.data.data.map((i) => {
+          Object.keys(obj).includes(i.dataTypeName)
+            ? (obj = obj)
+            : (obj[i.dataTypeName] = []);
+          obj[i.dataTypeName].push(i);
+        });
+        this.publishData = obj;
       });
     },
   },
@@ -710,6 +867,83 @@ export default {
       font-size: 64px;
       line-height: 75px;
       color: #ceb87f;
+    }
+    .publishInfoCard {
+      width: calc(100% - 150px);
+      .el-collapse-item {
+        &__header {
+          background: #2d2d2d;
+          color: #ffffff;
+          font-size: 24px;
+          padding: 50px;
+        }
+        &__content {
+          padding-bottom: 0;
+        }
+      }
+      &__content {
+        background: #2d2d2d;
+        &--leftBlock {
+          color: #ffffff;
+          font-size: 20px;
+          padding-left: 50px;
+          padding-right: 50px;
+          ul {
+            list-style-type: upper-alpha;
+            li > p {
+              &:hover {
+                color: #ceb87f;
+                font-weight: bold;
+                cursor: pointer;
+              }
+            }
+          }
+          .activeColor {
+            color: #ceb87f;
+            font-weight: bold;
+          }
+        }
+        &--rightBlock {
+          background: #ffffff;
+          color: #2d2d2d;
+          font-size: 18px;
+          .ql-toolbar {
+            display: none !important;
+          }
+          .ql-container {
+            border: none !important;
+            ol {
+              padding-left: 0;
+            }
+          }
+        }
+        &--table {
+          .header {
+            background: #c4c4c4;
+            color: #2d2d2d;
+            font-size: 18px;
+            font-weight: bold;
+          }
+          .body {
+            background: transparent;
+            color: #ffffff;
+            font-size: 20px;
+            .el-row {
+              border-bottom: 1px solid #000000;
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+      }
+
+      &-noData {
+        background: #2d2d2d;
+        font-size: 28px;
+        color: #ffffff;
+        font-weight: bold;
+      }
     }
     .publishCard {
       width: calc(100% - 150px);
