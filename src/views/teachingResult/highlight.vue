@@ -26,7 +26,7 @@
             <div class="d-flex align-items-center justify-content-end mt-18">
               <router-link
                 class="bookContent-viewMore text-decoration-none"
-                :to="{ name: 'highlightInfo' }"
+                :to="{ name: 'highlightInfo', params: { id: item.id } }"
               >
                 VIEW MORE
               </router-link>

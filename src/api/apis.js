@@ -40,6 +40,9 @@ const api = {
   record(params) {
     return req("get", "departmentActivityAlbums/load", params);
   },
+  departmentAlbemPics(params) {
+    return req("get", "departmentAlbemPics/loadByAlbumId", params);
+  },
   /* 系所成員 */
   members(params) {
     return req("get", "departmentMembers/load", params);

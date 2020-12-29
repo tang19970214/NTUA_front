@@ -3,7 +3,7 @@
     <div class="web d-none d-mb-block">
       <p class="m-0 Txt-title">Latest news</p>
       <div class="mt-70 newsCard">
-        <div class="newsCard-sortText">
+        <div class="newsCard__sortText">
           <router-link
             class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
             :class="{ active: $route.name == item.pathURL }"
@@ -19,33 +19,18 @@
 
         <LoadShowIMG />
 
-        <div class="w-100 newsCard-title">
+        <div class="w-100 newsCard__title">
           <div class="p-60">
             <div class="w-100 d-flex flex-row">
               <div class="w-100">
                 <p class="m-0">{{ getPathName(newsSort) }}</p>
               </div>
-              <!-- <div class="w-100">
-                <div
-                  class="w-100 d-flex justify-content-center newsCard-title_chooseYear"
-                >
-                  <select>
-                    <option
-                      :value="item"
-                      v-for="item in getYearGrouop()"
-                      :key="item"
-                    >
-                      {{ item }}
-                    </option>
-                  </select>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
 
-        <div class="newsCard-contentCard">
-          <div class="newsCard-contentCard_title d-flex align-items-center">
+        <div class="newsCard__contentCard">
+          <div class="newsCard__contentCard--title d-flex align-items-center">
             <p class="m-0" style="min-width: 220px; max-width: 220px">
               公告日期
             </p>
@@ -134,7 +119,7 @@ export default {
     .newsCard {
       background-color: white;
       padding-bottom: 90px;
-      &-sortText {
+      &__sortText {
         position: absolute;
         right: 0;
         z-index: 100;
@@ -156,14 +141,14 @@ export default {
         color: #563f05;
         font-weight: bold;
       }
-      &-title {
+      &__title {
         p {
           width: 130px;
           font-size: 64px;
           line-height: 75px;
           color: #ceb87f;
         }
-        &_chooseYear {
+        &--chooseYear {
           select {
             width: 150px;
             height: 35px;
@@ -178,19 +163,18 @@ export default {
           }
         }
       }
-      &-contentCard {
+      &__contentCard {
         background: #2d2d2d;
         padding: 130px 220px 50px 60px;
-        &_title {
+        &--title {
           width: 100%;
+          font-size: 22px;
+          font-weight: bold;
           padding: 40px 30px;
           background: #c4c4c4;
         }
       }
     }
-  }
-
-  .phone {
   }
 }
 </style>

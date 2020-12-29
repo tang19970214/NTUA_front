@@ -106,13 +106,16 @@
                     />
                   </a>
                 </div>
-                <div class="w-100 d-flex flex-column">
+              </div>
+              <div class="w-100">
                 <router-link
-                  :to="{ name: 'publishInfo', params: { author: items.author } }"
+                  :to="{
+                    name: 'publishInfo',
+                    params: { author: item.id },
+                  }"
                 >
                   研究發表
                 </router-link>
-              </div>
               </div>
             </div>
           </div>
@@ -310,7 +313,7 @@ export default {
             border-left: 2px solid #c4c4c4;
             color: #2d2d2d;
             overflow: hidden;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;

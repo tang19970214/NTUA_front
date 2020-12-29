@@ -26,7 +26,7 @@
             <div class="d-flex align-items-center justify-content-end mt-18">
               <router-link
                 class="bookContent-viewMore text-decoration-none"
-                :to="{ name: 'recordInfo', params: { art: item.title } }"
+                :to="{ name: 'recordInfo', params: { id: item.id } }"
               >
                 VIEW MORE
               </router-link>
@@ -67,7 +67,7 @@
               <div class="w-100">
                 <router-link
                   class="px-20 pt-10 text-decoration-none"
-                  :to="{ name: 'recordInfo', params: { art: item.title } }"
+                  :to="{ name: 'recordInfo', params: { id: item.id } }"
                 >
                   VIEW MORE
                 </router-link>

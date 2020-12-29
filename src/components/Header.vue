@@ -8,29 +8,28 @@
       </router-link>
       <!-- MENU -->
       <div>
-        <img
-          class="pos-menu"
-          src="../assets/images/logo/logo_header_1.png"
-          alt="menu"
-        />
-        <img
-          v-show="!scrollLeftTop"
-          class="pos-menuText"
-          src="../assets/images/logo/logo_header_2.png"
-          alt="Crafts & Design Department"
-        />
-        <img
-          class="pos-search"
-          src="../assets/images/icon/search.png"
-          alt="search_btn"
-          @click="openSearch()"
-        />
-        <img
-          class="pos-menuList"
-          src="../assets/images/icon/menuList.png"
-          alt="menuList_btn"
+        <span
+          class="pos-menu d-flex align-items-center justify-content-center cur-pointer"
           @click="openMenu()"
-        />
+        >
+          <img
+            src="../assets/images/icon/menuList.png"
+            alt="導覽列"
+            width="48px"
+          />
+        </span>
+
+        <span
+          class="pos-search d-flex align-items-center justify-content-center cur-pointer"
+          @click="openSearch()"
+        >
+          <img
+            src="../assets/images/icon/search.png"
+            alt="搜尋"
+            width="25px"
+            v-if="!clickSearch"
+          />
+        </span>
       </div>
       <!-- left bar -->
       <div class="leftBar">
@@ -65,9 +64,20 @@
         v-if="clickSearch"
         @mouseleave="hiddenSearch()"
       >
-        <el-input v-model="getKeyword" class="input-with-select" clearable>
-          <el-button slot="append" icon="el-icon-search"></el-button>
-        </el-input>
+        <el-input
+          v-model="getKeyword"
+          placeholder="請輸入些關鍵字"
+          class="input-with-select"
+          clearable
+        ></el-input>
+        <span class="pos-absolute searchBox__btn">
+          <img
+            src="../assets/images/icon/search_black.png"
+            alt="搜尋按鈕"
+            width="25px"
+          />
+        </span>
+
         <div class="w-100 mt-10">
           <span
             class="referWord cur-pointer"
@@ -189,7 +199,7 @@ export default {
   data() {
     return {
       scrollTop: "",
-      scrollLeftTop: false,
+      // scrollLeftTop: false,
       clickSearch: false,
       clickOpen: false,
       getMenu: {
@@ -493,13 +503,13 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   watch: {
-    scrollTop(val) {
-      if (this.scrollTop > 200) {
-        this.scrollLeftTop = true;
-      } else {
-        this.scrollLeftTop = false;
-      }
-    },
+    // scrollTop(val) {
+    //   if (this.scrollTop > 200) {
+    //     this.scrollLeftTop = true;
+    //   } else {
+    //     this.scrollLeftTop = false;
+    //   }
+    // },
   },
 };
 </script>
@@ -515,32 +525,28 @@ export default {
       z-index: 99;
     }
     &-menu {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #df281d;
       position: fixed;
-      top: 0;
-      right: 0;
+      top: 25px;
+      right: 95px;
+      // margin-top: 25px;
+      // margin-left: 95px;
       z-index: 99;
-    }
-    &-menuText {
-      position: fixed;
-      top: 0;
-      right: 0;
-      z-index: 99;
-      margin-top: 200px;
-      margin-right: 50px;
     }
     &-search {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #df281d;
       position: fixed;
-      top: 3rem;
-      right: 14rem;
+      // margin-top: 25px;
+      // margin-left: 200px;
+      top: 25px;
+      right: 200px;
       z-index: 99;
-      cursor: pointer;
-    }
-    &-menuList {
-      position: fixed;
-      top: 2.5rem;
-      right: 6rem;
-      z-index: 99;
-      cursor: pointer;
     }
   }
   .searchBox {
@@ -551,9 +557,9 @@ export default {
     right: 0;
     width: 300px;
     height: 120px;
-    .el-input-group__append {
-      background: white;
-      border: 0;
+    .el-input__inner {
+      opacity: 0.7;
+      border-radius: 20px;
     }
     .referWord {
       background: #c4c4c4;
@@ -570,6 +576,11 @@ export default {
       &:hover {
         opacity: 1;
       }
+    }
+    &__btn {
+      z-index: 100;
+      top: 11px;
+      right: 14px;
     }
   }
   .circleMenu {

@@ -191,8 +191,8 @@ export default {
 <style lang="scss">
 #workCamp {
   .web {
-    padding-top: 0;
-    margin-left: 0;
+    padding-top: 0 !important;
+    margin-left: 0 !important;
     .workCard {
       padding: 50px 200px 180px 40px;
       background: #2d2d2d;

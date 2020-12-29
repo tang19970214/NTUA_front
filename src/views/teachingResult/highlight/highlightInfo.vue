@@ -1,9 +1,16 @@
 <template>
   <div id="highlightInfo">
     <div class="web d-none d-mb-block">
+      <div
+        class="w-100 pb-10 goPrev d-flex align-items-center flex-row cur-pointer"
+        @click="goBackHighlight()"
+      >
+        <img src="@/assets/images/icon/arrowLeft.png" alt="回上一頁" />
+        <strong class="font-s-24 pl-10">回上一頁</strong>
+      </div>
       <div class="w-100 bg-white pb-80">
         <div class="p-60 text-left">
-          <p class="Txt-title" @click="goBackHighlight()">活動花絮</p>
+          <p class="Txt-title">活動花絮</p>
         </div>
         <div class="w-100 highlightCard">
           <div class="px-150 py-30">
@@ -17,17 +24,19 @@
                 <div
                   class="highlightCard__info w-100 d-flex align-items-center justify-content-center flex-column"
                 >
-                  <img
-                    :src="item.imgURL"
-                    alt=""
-                    @click="getTouchIMG(item.imgURL)"
-                  />
+                  <img :src="item.pic" alt="" @click="getTouchIMG(item)" />
                   <span class="mt-40 mb-10"></span>
                   <p class="m-0 text-center">{{ item.title }}</p>
                 </div>
               </el-col>
             </el-row>
           </div>
+        </div>
+        <div class="w-100 mt-30 text-center">
+          <span class="goPrev cur-pointer" @click="goBackHighlight()">
+            <img src="@/assets/images/icon/arrowLeft.png" alt="回上一頁" />
+            <strong class="font-s-24 pl-10">回上一頁</strong>
+          </span>
         </div>
       </div>
     </div>
@@ -53,10 +62,10 @@
               >
                 <div class="px-15">
                   <img
-                    :src="item.imgURL"
+                    :src="item.pic"
                     alt=""
                     width="100%"
-                    @click="getTouchIMG(item.imgURL)"
+                    @click="getTouchIMG(item)"
                   />
                 </div>
                 <div
@@ -92,23 +101,25 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <div class="px-30">
-                  <img :src="enlargeIMG" alt="" width="100%" />
+                  <img :src="selectInfo.pic" alt="" width="100%" />
                 </div>
                 <div class="w-100 classCardPhone__introduce">
-                  <div class="px-30 py-10">
+                  <div class="px-30 py-10 d-flex align-items-center justify-content-center flex-column">
                     <div
                       class="w-100 classCardPhone__introduce-title text-left pb-5"
                     >
-                      <strong>展覽空間</strong>
+                      <strong>{{ selectInfo.title }}</strong>
                     </div>
-                    <div class="w-100 pr-60 classCardPhone__introduce-content">
+                    <div class="w-100 pr-60 classCardPhone__introduce-content text-center">
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
-                        <el-col :span="12">2019-05-24</el-col>
+                        <el-col :span="12">
+                          {{ selectInfo.uploadTime | moment("YYYY-MM-DD") }}
+                        </el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
-                        <el-col :span="12">admin</el-col>
+                        <el-col :span="12">{{ selectInfo.uploadUser }}</el-col>
                       </el-row>
                     </div>
                   </div>
@@ -140,37 +151,25 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <div class="px-30">
-                  <img :src="enlargeIMG" alt="" width="100%" />
+                  <img :src="selectInfo.pic" alt="" width="100%" />
                 </div>
-                <!-- <div
-                  class="w-100 my-20 d-flex align-items-center justify-content-between"
-                >
-                  <img
-                    src="@/assets/images/arrowLeft_btn.png"
-                    alt=""
-                    width="32px"
-                  />
-                  <img
-                    src="@/assets/images/arrowRight_btn.png"
-                    alt=""
-                    width="32px"
-                  />
-                </div> -->
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
                       class="w-100 classCardPhone__introduce-title text-left pb-5"
                     >
-                      <strong>展覽空間</strong>
+                      <strong>{{ selectInfo.title }}</strong>
                     </div>
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
-                        <el-col :span="12">2019-05-24</el-col>
+                        <el-col :span="12">
+                          {{ selectInfo.uploadTime | moment("YYYY-MM-DD") }}
+                        </el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
-                        <el-col :span="12">admin</el-col>
+                        <el-col :span="12">{{ selectInfo.uploadUser }}</el-col>
                       </el-row>
                     </div>
                   </div>
@@ -193,33 +192,14 @@ export default {
   },
   data() {
     return {
-      highlightList: [
-        {
-          imgURL: require("@/assets/images/highlight/highlight1.png"),
-          title: "2018中川衛教授金工鑲嵌演講",
-        },
-        {
-          imgURL: require("@/assets/images/highlight/highlight2.png"),
-          title: "2018（第七屆）工藝創作與文創設計學術研討會暨木藝工作營",
-        },
-        {
-          imgURL: require("@/assets/images/highlight/highlight3.png"),
-          title: "2017（第六屆）工藝創作與文創設計學術研討會暨產品工作營",
-        },
-        {
-          imgURL: require("@/assets/images/highlight/highlight4.png"),
-          title: "李英嘉老師示範木工圓鋸機操作方式",
-        },
-        {
-          imgURL: require("@/assets/images/highlight/highlight5.png"),
-          title: "2016（第五屆）工藝創作與文創設計學術研討會 暨金工工作營",
-        },
-        {
-          imgURL: require("@/assets/images/highlight/highlight6.png"),
-          title: "2015（第四屆）工藝創作與文創設計研討會 暨陶瓷柴燒工作營",
-        },
-      ],
-      enlargeIMG: "",
+      listQuery: {
+        AlbumId: this.$route.params.id,
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      highlightList: [],
+      selectInfo: {},
       showIMG: false,
       showIMG_phone: false,
     };
@@ -228,14 +208,32 @@ export default {
     goBackHighlight() {
       this.$router.push({ name: "highlight" });
     },
-    getTouchIMG(url) {
-      this.enlargeIMG = url;
+    getTouchIMG(data) {
+      this.selectInfo = {
+        pic: data.pic,
+        title: data.title,
+        uploadTime: data.createDate,
+        uploadUser: data.createUserName,
+      };
       this.showIMG = true;
     },
-    getTouchIMG_phone(url) {
-      this.enlargeIMG = url;
+    getTouchIMG_phone(data) {
+      this.selectInfo = {
+        pic: data.pic,
+        title: data.title,
+        uploadTime: data.createDate,
+        uploadUser: data.createUserName,
+      };
       this.showIMG_phone = true;
     },
+    getList() {
+      this.$api.departmentAlbemPics(this.listQuery).then((res) => {
+        this.highlightList = res.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -245,6 +243,13 @@ export default {
   .web {
     padding-top: 420px;
     margin-left: 120px;
+    .goPrev {
+      color: #ceb87f;
+      transition: all 0.6s;
+      &:hover {
+        letter-spacing: 0.5rem;
+      }
+    }
     .Txt-title {
       width: 130px;
       font-size: 64px;
@@ -256,6 +261,13 @@ export default {
       &__info {
         min-height: 500px;
         max-height: 500px;
+        img {
+          transition: all 0.6s;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+        }
         span {
           width: 120px;
           border: 1px solid #ceb87f;
@@ -287,7 +299,7 @@ export default {
     .highlightInfo {
       background: #2d2d2d;
       &__content {
-        min-height: 430px;
+        min-height: 350px;
         span {
           border-top: 1px solid #ceb87f;
           width: 120px;
@@ -307,6 +319,7 @@ export default {
     &__introduce {
       background: #2d2d2d;
       &-title {
+        max-width: 260px;
         border-bottom: 1px solid #ceb87f;
         color: #ceb87f;
         font-size: 18px;

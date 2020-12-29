@@ -11,7 +11,7 @@
     <div class="w-100 d-block d-mb-none pt-60">
       <swiper class="swiper" :options="swiperOption">
         <swiper-slide v-for="item in bannerURL" :key="item.id">
-          <img :src="item.pic" alt="" width="100%" />
+          <img :src="item.pic" alt="" width="100%" height="210px%" />
         </swiper-slide>
       </swiper>
     </div>

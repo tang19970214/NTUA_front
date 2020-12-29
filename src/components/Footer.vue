@@ -167,7 +167,7 @@ export default {
     &_left {
       width: 70%;
       background: #52505a;
-      z-index: 100;
+      z-index: 90;
       &-contact {
         padding: 50px 120px;
       }

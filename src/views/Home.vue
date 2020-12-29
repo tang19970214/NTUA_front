@@ -1,9 +1,9 @@
 <template>
   <div id="HomePage">
-    <!-- banner||OK -->
+    <!-- banner| OK -->
     <Carousel />
     <div class="d-none d-mb-block">
-      <!-- contest winning -->
+      <!-- contest winning | ok -->
       <div class="w-100 mt-90" style="margin-bottom: 250px">
         <TitleText textAlign="center" textTitle="CONTEST WINNING" />
         <div
@@ -19,19 +19,20 @@
               <div
                 class="w-100 h-100 text-center pos-relative"
                 style="width: 500px"
-                v-for="item in 3"
-                :key="item"
+                v-for="item in awardData"
+                :key="item.id"
               >
-                <div class="w-100">
-                  <img
-                    src="@/assets/images/CONTEST-WINNING/Digiwood.jpg"
-                    width="100%"
-                    alt=""
-                  />
+                <div class="w-100 pos-relative">
+                  <el-image
+                    style="width: 100%; height: 300px"
+                    :src="item.pics"
+                    fit="cover"
+                  ></el-image>
+                  <!-- <img :src="item.pics" width="100%" alt="" /> -->
                   <span
                     class="introduceCard d-flex align-items-end justify-content-between"
                   >
-                    <p class="m-0">DIGIWOOD{{ item }}</p>
+                    <p class="m-0">{{ item.title }}</p>
                     <span class="mr-25 cur-pointer">
                       <router-link :to="{ name: 'award' }">
                         <img
@@ -45,24 +46,25 @@
                 </div>
                 <div class="contest__content">
                   <div class="w-100 d-flex justify-content-end">
-                    2020 | 07.28
+                    {{ item.releaseDate | moment("YYYY | MM.DD") }}
                   </div>
-                  <div class="text-left" style="max-width: 380px">
-                    目前市場上主流的機殼，多以塑膠、金屬、玻璃為主，且設計常與家居環境衝突
+                  <div
+                    class="text-left contest__content--editor"
+                    style="max-width: 380px"
+                  >
+                    <vue-editor
+                      v-model="item.contents"
+                      :disabled="true"
+                    ></vue-editor>
                   </div>
                 </div>
               </div>
               <!------------------------------>
             </div>
           </div>
-          <!-- <div
-            class="w-100 mt-30 d-flex align-items-center justify-content-center"
-          >
-            <Pagination :needPage="true" :pageNumber="5" />
-          </div> -->
         </div>
       </div>
-      <!-- students works -->
+      <!-- students works | ok -->
       <div class="w-100" style="margin-bottom: 265px">
         <TitleText textAlign="center" textTitle="STUDENTS WORKS" />
         <div class="w-100 mt-60">
@@ -73,7 +75,7 @@
             <div class="pos-relative">
               <img
                 class="zIndex-1"
-                src="@/assets/images/STUDENTS-WORKS/1597628561678@2x.jpg"
+                :src="worksList[getWorkNum].contents"
                 width="600px"
                 alt=""
               />
@@ -89,11 +91,23 @@
           <div
             class="w-100 d-flex align-items-center justify-content-center mt-60"
           >
-            <Pagination />
+            <a
+              class="cur-pointer d-flex align-items-center px-20"
+              @click="works_prev()"
+            >
+              <img src="@/assets/images/arrowLeft_btn.png" alt="" />
+            </a>
+
+            <a
+              class="cur-pointer d-flex align-items-center px-20"
+              @click="works_next()"
+            >
+              <img src="@/assets/images/arrowRight_btn.png" alt="" />
+            </a>
           </div>
         </div>
       </div>
-      <!-- what's new -->
+      <!-- what's new | ok -->
       <div class="w-100">
         <TitleText textAlign="start" textTitle="WHAT'S NEW" />
         <div class="w-100 mt-60">
@@ -150,7 +164,7 @@
           </div>
         </div>
       </div>
-      <!-- crafts -->
+      <!-- crafts | ok -->
       <div class="w-100" style="margin-top: 250px">
         <div class="introduce-bg ml-120">
           <div class="d-flex align-items-center justify-content-around">
@@ -268,31 +282,36 @@
     <!-- phone -->
     <div class="phoneScreen d-block d-mb-none">
       <div class="px-30 pt-20 pb-40">
-        <!-- contest winning -->
+        <!-- contest winning | ok -->
         <div class="contest w-100 mb-30">
           <TitleText textTitle="CONTEST WINNING" />
           <div class="contest-limitWidth w-100 mt-10 d-flex align-items-start">
             <div
               class="contest-card d-flex flex-column"
-              v-for="(item, index) in phone_contestList"
-              :key="'CT_' + index"
+              v-for="item in awardData"
+              :key="item.id"
             >
               <router-link :to="{ name: 'award' }">
-                <img :src="item.imgURL" alt="" width="100%" />
+                <img :src="item.pics" alt="" width="100%" height="120px" />
               </router-link>
               <div
                 class="contest-card_title w-100 d-flex align-items-center justify-content-between py-10"
               >
                 <p class="m-0">{{ item.title }}</p>
-                <p class="m-0">{{ item.date }}</p>
+                <p class="m-0">
+                  {{ item.releaseDate | moment("YYYY | MM.DD") }}
+                </p>
               </div>
               <div class="contest-card_content w-100">
-                <p class="m-0">{{ item.content }}</p>
+                <vue-editor
+                  v-model="item.contents"
+                  :disabled="true"
+                ></vue-editor>
               </div>
             </div>
           </div>
         </div>
-        <!-- students works -->
+        <!-- students works | ok -->
         <div class="students w-100 mb-50">
           <TitleText textTitle="STUDENTS WORKS" />
           <div class="w-100 mt-15">
@@ -309,8 +328,9 @@
               <div class="pos-relative">
                 <img
                   class="zIndex-1"
-                  src="@/assets/images/STUDENTS-WORKS/1597628561678@2x_phone.png"
+                  :src="worksList[getWorkNum].contents"
                   alt=""
+                  width="160px"
                 />
                 <router-link
                   class="students-viewBtn"
@@ -328,11 +348,23 @@
             <div
               class="w-100 d-flex align-items-center justify-content-center mt-20"
             >
-              <Pagination />
+              <a
+                class="cur-pointer d-flex align-items-center px-20"
+                @click="works_prev()"
+              >
+                <img src="@/assets/images/arrowLeft_btn.png" alt="" />
+              </a>
+
+              <a
+                class="cur-pointer d-flex align-items-center px-20"
+                @click="works_next()"
+              >
+                <img src="@/assets/images/arrowRight_btn.png" alt="" />
+              </a>
             </div>
           </div>
         </div>
-        <!-- what's new -->
+        <!-- what's new | ok -->
         <div class="whatsnew w-100 mb-100">
           <div class="w-100 d-flex align-items-center justify-content-between">
             <TitleText textTitle="WHAT'S NEW" />
@@ -351,20 +383,17 @@
           <div class="w-100 mt-10">
             <div
               class="whatsnew-content w-100 d-flex align-items-center flex-column mt-30"
-              v-for="(item, index) in phone_whatsnewList"
+              v-for="(item, index) in newsData"
               :key="'WN_' + index"
             >
               <div class="whatsnew-content_title w-100">
-                <p class="m-0">{{ item.date }}</p>
+                <p class="m-0">{{ item.releaseDate | moment("YYYY.MM.DD") }}</p>
               </div>
               <div
-                class="whatsnew-content_context w-100 d-flex align-items-center justify-content-between mt-15 pb-10"
+                class="whatsnew-content_context w-100 d-flex align-items-center justify-content-between mt-10 pb-10"
               >
                 <div class="d-flex justify-content-start flex-column">
-                  <p class="m-0">{{ item.newsName }}</p>
-                  <p class="m-0" v-if="item.newsDateTime">
-                    {{ item.newsDateTime }}
-                  </p>
+                  <p class="m-0">{{ item.title }}</p>
                 </div>
                 <div class="ml-auto">
                   <img
@@ -377,7 +406,7 @@
             </div>
           </div>
         </div>
-        <!-- crafts -->
+        <!-- crafts | ok -->
         <div class="crafts w-100 mb-50">
           <div class="craftsCard">
             <div class="p-20 d-flex align-items-center justify-content-start">
@@ -599,7 +628,11 @@ export default {
   },
   data() {
     return {
+      awardData: [],
+      worksList: [],
       newsData: [],
+      worksNum: "",
+      getWorkNum: 0,
       craftsList: [
         {
           name_ch: "陶瓷",
@@ -772,6 +805,18 @@ export default {
       console.log(data);
       this.getTraffic = data.code;
     },
+    works_prev() {
+      if (this.getWorkNum > 0) {
+        this.getWorkNum = this.getWorkNum - 1;
+        console.log(this.getWorkNum);
+      }
+    },
+    works_next() {
+      if (this.getWorkNum < this.worksNum - 1) {
+        this.getWorkNum = this.getWorkNum + 1;
+        console.log(this.worksNum);
+      }
+    },
     goNews() {
       this.$router.push({ name: "bulletin" });
     },
@@ -798,12 +843,39 @@ export default {
         params: { sort: "SYS_CLASSTYPE_CERAMICS" },
       });
     },
+    getAward() {
+      const vm = this;
+      const listQuery = {
+        teachTypeId: "SYS_TEACH_COMPETITION",
+        page: 1,
+        limit: 3,
+        key: undefined,
+      };
+      vm.$api.award(listQuery).then((res) => {
+        vm.awardData = res.data.data;
+      });
+    },
+    getWorks() {
+      const vm = this;
+      const listQuery = {
+        TeachTypeId: "SYS_TEACH_WORKSHOP",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      };
+      vm.$api.award(listQuery).then((res) => {
+        console.log(res.data.data);
+        vm.worksList = res.data.data;
+        vm.worksNum = res.data.data.length;
+      });
+    },
     getNews() {
       const vm = this;
       const listQuery = {
         NewsTypeId: "SYS_NEWS_DEPARTMENT",
+        Years: "",
         page: 1,
-        limit: 20,
+        limit: 5,
         key: undefined,
       };
       vm.$api.news(listQuery).then((res) => {
@@ -812,6 +884,8 @@ export default {
     },
   },
   mounted() {
+    this.getAward();
+    this.getWorks();
     this.getNews();
   },
 };
@@ -823,6 +897,27 @@ export default {
   .contest {
     &__content {
       color: #52505a;
+      &--editor {
+        .ql-editor {
+          min-height: 50px;
+          p {
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+          }
+        }
+        .ql-toolbar {
+          display: none !important;
+        }
+        .ql-container {
+          border: none !important;
+          ol {
+            padding-left: 0;
+          }
+        }
+      }
     }
   }
   .introduceCard {
@@ -831,10 +926,15 @@ export default {
     background: rgba(255, 255, 255, 0.7);
     display: inline-block;
     position: absolute;
-    bottom: 4.2rem;
     left: 0;
+    bottom: 0;
+    bottom: 0.25rem;
     p {
-      font-size: 36px;
+      width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 28px;
       line-height: 42px;
       color: #52505a;
     }
@@ -963,9 +1063,13 @@ export default {
         &_title {
           p {
             &:first-child {
+              max-width: 85px;
               font-size: 14px;
               line-height: 16px;
               color: #ceb87f;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
             }
             &:last-child {
               font-size: 12px;
@@ -979,6 +1083,26 @@ export default {
           line-height: 14px;
           letter-spacing: 0.05em;
           color: #8c8f90;
+          .ql-editor {
+            min-height: 50px;
+            padding: 0;
+            p {
+              overflow: hidden;
+              -webkit-line-clamp: 2;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+            }
+          }
+          .ql-toolbar {
+            display: none !important;
+          }
+          .ql-container {
+            border: none !important;
+            ol {
+              padding-left: 0;
+            }
+          }
         }
       }
     }

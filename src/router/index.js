@@ -243,7 +243,7 @@ const routes = [{
     }
   },
   {
-    path: '/recordInfo/:art',
+    path: '/recordInfo/:id',
     name: 'recordInfo',
     component: () => import('../views/teachingResult/record/recordInfo.vue'),
     meta: {
@@ -251,7 +251,7 @@ const routes = [{
     }
   },
   {
-    path: '/highlightInfo',
+    path: '/highlightInfo/:id',
     name: 'highlightInfo',
     component: () => import('../views/teachingResult/highlight/highlightInfo.vue'),
     meta: {

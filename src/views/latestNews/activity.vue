@@ -2,9 +2,10 @@
   <div id="activity">
     <div class="web d-none d-mb-block">
       <div
-        class="activityTable w-100 d-flex align-items-center flex-row"
+        class="activityTable w-100 d-flex align-items-center flex-row cur-pointer"
         v-for="(item, index) in activityMsg"
         :key="'AT__' + index"
+        @click="viewInfo(item)"
       >
         <p class="m-0" style="min-width: 220px; max-width: 220px">
           {{ item.releaseDate | moment("YYYY-MM-DD") }}
@@ -42,6 +43,50 @@
         </div>
       </div>
     </div>
+
+    <!-- modal -->
+    <div class="modal d-flex justify-content-center" v-if="showNewsInfo">
+      <div class="modal__content">
+        <div
+          class="p-40 pos-relative d-flex align-items-start justify-content-center flex-column"
+        >
+          <div class="p-10 modal__content--tag">
+            <span class="d-inline-flex">活動訊息</span>
+          </div>
+          <div
+            class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20"
+          >
+            <label>TITLE</label>
+            <strong>{{ selectNews.title }}</strong>
+          </div>
+          <div
+            class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20"
+          >
+            <label>UPDATE</label>
+            <p class="m-0">
+              {{ selectNews.releaseDate | moment("YYYY-MM-DD") }}
+            </p>
+          </div>
+          <div class="w-100 modal__content--summary mt-30">
+            <p class="m-0">{{ selectNews.summury }}</p>
+          </div>
+          <div class="w-100 modal__content--card mt-20">
+            <vue-editor
+              v-model="selectNews.contents"
+              :disabled="true"
+            ></vue-editor>
+          </div>
+          <div class="pos-absolute t-0 r-0 mt-20 mr-20">
+            <div
+              class="modal__close d-flex align-items-center justify-content-center cur-pointer"
+              @click="showNewsInfo = false"
+            >
+              <i class="el-icon-close"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -61,9 +106,15 @@ export default {
         key: undefined,
       },
       activityMsg: [],
+      selectNews: {},
+      showNewsInfo: false,
     };
   },
   methods: {
+    viewInfo(data) {
+      this.showNewsInfo = true;
+      this.selectNews = data;
+    },
     goActivityInfo() {
       this.$router.push({ name: "activityInfo" });
     },
@@ -82,16 +133,20 @@ export default {
 <style lang="scss">
 #activity {
   .web {
-    padding-top: 0;
-    margin-left: 0;
+    padding-top: 0 !important;
+    margin-left: 0 !important;
     .activityTable {
       padding: 30px;
       border-bottom: 1px solid #000000;
+      transition: all 0.6s;
       p {
         font-size: 20px;
         line-height: 25px;
         letter-spacing: 0.2em;
         color: #ffffff;
+      }
+      &:hover {
+        background: #4d4d4d;
       }
     }
   }
@@ -128,6 +183,79 @@ export default {
           color: #596164;
         }
       }
+    }
+  }
+
+  .modal {
+    &__content {
+      width: 50%;
+      overflow-y: auto;
+      background: #c4c4c4;
+      border-radius: 8px;
+      &--tag {
+        background: #2d2d2d;
+        font-size: 18px;
+        letter-spacing: 0.2em;
+        color: #ffffff;
+      }
+      &--title {
+        font-size: 14px;
+        letter-spacing: 0.2em;
+        color: #2d2d2d;
+      }
+      &--update {
+        font-size: 14px;
+        letter-spacing: 0.2em;
+        label {
+          color: #2d2d2d;
+        }
+        p {
+          color: #ffffff;
+        }
+      }
+      &--summary {
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 0.2em;
+        color: #f29126;
+      }
+      &--card {
+        background: #ffffff;
+        .ql-editor {
+          min-height: 50px;
+        }
+        .ql-toolbar {
+          display: none !important;
+        }
+        .ql-container {
+          border: none !important;
+          ol {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+    &__close {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 2px solid #231815;
+      border-radius: 50%;
+      transition: all 0.6s;
+      &:hover {
+        background: #ffffff;
+        border: 2px solid #596164;
+      }
+      i {
+        font-size: 28px;
+        font-weight: bold;
+        &:hover {
+          color: #596164;
+        }
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 0px;
     }
   }
 }

@@ -45,7 +45,7 @@
                 class="w-100 d-flex align-items-center justify-content-center flex-column"
               >
                 <div
-                  class="w-100 d-flex align-items-center justify-content-center"
+                  class="studioCard__workPic w-100 d-flex align-items-center justify-content-center"
                 >
                   <img
                     :src="item.contents"
@@ -303,8 +303,8 @@ export default {
 <style lang="scss">
 #studioResult {
   .web {
-    padding-top: 0;
-    margin-left: 0;
+    padding-top: 0 !important;
+    margin-left: 0 !important;
     margin-top: 60px;
     .studioBG {
       height: 500px;
@@ -378,6 +378,15 @@ export default {
     }
     .studioCard {
       background: #2d2d2d;
+      &__workPic {
+        img {
+          transition: all 0.6s;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+      }
       &__content {
         p {
           border-top: 1px solid #ceb87f;
