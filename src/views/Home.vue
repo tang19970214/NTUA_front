@@ -2,6 +2,7 @@
   <div id="HomePage">
     <!-- banner| OK -->
     <Carousel />
+    <!-- web -->
     <div class="d-none d-mb-block">
       <!-- contest winning | ok -->
       <div class="w-100 mt-90" style="margin-bottom: 250px">
@@ -15,7 +16,6 @@
             <div
               class="w-100 d-flex align-items-center justify-content-around mx-35"
             >
-              <!------------------------------>
               <div
                 class="w-100 h-100 text-center pos-relative"
                 style="width: 500px"
@@ -28,7 +28,6 @@
                     :src="item.pics"
                     fit="cover"
                   ></el-image>
-                  <!-- <img :src="item.pics" width="100%" alt="" /> -->
                   <span
                     class="introduceCard d-flex align-items-end justify-content-between"
                   >
@@ -59,13 +58,16 @@
                   </div>
                 </div>
               </div>
-              <!------------------------------>
             </div>
           </div>
         </div>
       </div>
       <!-- students works | ok -->
-      <div class="w-100" style="margin-bottom: 265px">
+      <div
+        class="w-100"
+        style="margin-bottom: 265px"
+        v-if="worksList.length > 0"
+      >
         <TitleText textAlign="center" textTitle="STUDENTS WORKS" />
         <div class="w-100 mt-60">
           <div class="w-100 d-flex align-items-center justify-content-center">
@@ -133,7 +135,7 @@
             <div class="w-100">
               <div class="mt-50" style="margin-left: 20%">
                 <div
-                  class="collapseCard-child mt-20"
+                  class="collapseCard__child mt-20"
                   v-for="item in newsData"
                   :key="item.id"
                 >
@@ -166,7 +168,7 @@
       </div>
       <!-- crafts | ok -->
       <div class="w-100" style="margin-top: 250px">
-        <div class="introduce-bg ml-120">
+        <div class="introduceBg ml-120">
           <div class="d-flex align-items-center justify-content-around">
             <div
               class="d-flex align-items-center justify-content-center pos-relative"
@@ -182,7 +184,7 @@
                   <p class="m-0">{{ item.name_ch }}</p>
                   <p class="m-0">{{ item.name_en }}</p>
                 </div>
-                <div class="pt-10 craftCard-borTop">
+                <div class="pt-10 craftCard__borTop">
                   <a
                     class="text-decoration-none cur-pointer"
                     @click="goCraft(item.name_en)"
@@ -201,50 +203,86 @@
         <div
           class="mt-120 px-120 d-flex align-items-center justify-content-center"
         >
-          <div class="w-100">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.82818192357!2d121.44544191544658!3d25.005953645568127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346802ac9d6c823d%3A0x83607782804de78!2zMjIw5paw5YyX5biC5p2_5qmL5Y2A5aSn6KeA6Lev5LiA5q61NTnomZ8!5e0!3m2!1szh-TW!2stw!4v1604289041271!5m2!1szh-TW!2stw"
-              width="100%"
-              height="700"
-              frameborder="0"
-              style="border: 0"
-              allowfullscreen=""
-              aria-hidden="false"
-              tabindex="0"
-            ></iframe>
-          </div>
+          <div
+            class="w-100 h-100"
+            style="height: 700px"
+            id="map"
+            ref="map"
+          ></div>
 
-          <div class="w-100 localCard d-flex flex-column">
-            <div
-              class="localCard-info px-90 d-flex justify-content-between pt-50 pb-35"
-              v-for="(item, index) in accessList"
-              :key="'AL_' + index"
-            >
-              <div>
-                <p class="m-0">{{ item.title }}</p>
-              </div>
+          <div class="w-100 local">
+            <div class="w-100 localCard d-flex flex-column">
+              <div
+                class="localCard__info px-90 d-flex align-items-start flex-row pb-35"
+                :class="{ 'pt-50': item.title !== '交通' }"
+                v-for="(item, index) in accessList"
+                :key="'AL_' + index"
+              >
+                <div class="localCard__info--title">
+                  <p class="m-0" :class="{ 'pt-50': item.title == '交通' }">
+                    {{ item.title }}
+                  </p>
+                </div>
 
-              <div
-                class="localCard-info_map d-flex flex-column"
-                v-if="item.code == 'address'"
-              >
-                <p class="m-0">{{ item.value }}</p>
-                <button class="mt-40">
-                  <a
-                    class="text-decoration-none"
-                    href="https://goo.gl/maps/67MWRHAoppzHiKP87"
-                    target="_blank"
-                  >
-                    GOOGLE MAP
-                  </a>
-                </button>
-              </div>
-              <div
-                class="d-flex flex-column"
-                v-else-if="item.code == 'traffic'"
-              >
                 <div
-                  class="d-flex justify-content-between flex-column localCard-info_traffic"
+                  class="localCard__info--map d-flex flex-column"
+                  v-if="item.code == 'address'"
+                >
+                  <p class="m-0">{{ item.value }}</p>
+                  <span class="mt-40">
+                    <a
+                      class="text-decoration-none py-6 px-25"
+                      href="https://goo.gl/maps/67MWRHAoppzHiKP87"
+                      target="_blank"
+                    >
+                      GOOGLE MAP
+                    </a>
+                  </span>
+                </div>
+                <div
+                  class="w-100 d-flex flex-column localCard__info--traf"
+                  v-else-if="item.code == 'traffic'"
+                >
+                  <el-collapse v-model="activeNames">
+                    <el-collapse-item
+                      :title="items.transportation"
+                      :name="items.transportation"
+                      v-for="(items, key) in item.list"
+                      :key="'LST__' + key"
+                    >
+                      <div
+                        class="w-100 content"
+                        v-for="(cxt, index_1) in items.options"
+                        :key="'OPT__' + index_1"
+                      >
+                        <p class="m-0">
+                          {{ cxt.title }}
+                        </p>
+                        <ul class="m-0 p-0">
+                          <li class="py-20" v-if="cxt.context">
+                            {{ cxt.context }}
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="w-100 content">
+                        <p class="m-0 pb-20">
+                          接駁公車資訊請至以下網站　詢：
+                          <a href="http://eec.ntua.edu.tw/bus/" target="_blank"
+                            >http://eec.ntua.edu.tw/bus/
+                          </a>
+                        </p>
+                        <p class="m-0 pb-20">
+                          更多交通資訊請參閱新北市市政府乘車資訊服務系統網站，網址：
+                          <a href="http://e-bus.tpc.gov.tw/" target="_blank"
+                            >http://e-bus.tpc.gov.tw/
+                          </a>
+                        </p>
+                      </div>
+                    </el-collapse-item>
+                  </el-collapse>
+
+                  <!-- <div
+                  class="d-flex justify-content-between flex-column localCard__info--traffic"
                   style="width: 480px"
                   v-for="(items, index) in item.list"
                   :key="'TF_' + index"
@@ -268,10 +306,11 @@
                       {{ traffic.context }}
                     </div>
                   </div>
+                </div> -->
                 </div>
-              </div>
-              <div v-else>
-                <p class="m-0">{{ item.value }}</p>
+                <div v-else>
+                  <p class="m-0">{{ item.value }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -285,9 +324,9 @@
         <!-- contest winning | ok -->
         <div class="contest w-100 mb-30">
           <TitleText textTitle="CONTEST WINNING" />
-          <div class="contest-limitWidth w-100 mt-10 d-flex align-items-start">
+          <div class="contest__limitWidth w-100 mt-10 d-flex align-items-start">
             <div
-              class="contest-card d-flex flex-column"
+              class="contest__card d-flex flex-column"
               v-for="item in awardData"
               :key="item.id"
             >
@@ -295,14 +334,14 @@
                 <img :src="item.pics" alt="" width="100%" height="120px" />
               </router-link>
               <div
-                class="contest-card_title w-100 d-flex align-items-center justify-content-between py-10"
+                class="contest__card--title w-100 d-flex align-items-center justify-content-between py-10"
               >
                 <p class="m-0">{{ item.title }}</p>
                 <p class="m-0">
                   {{ item.releaseDate | moment("YYYY | MM.DD") }}
                 </p>
               </div>
-              <div class="contest-card_content w-100">
+              <div class="contest__card--content w-100">
                 <vue-editor
                   v-model="item.contents"
                   :disabled="true"
@@ -312,12 +351,12 @@
           </div>
         </div>
         <!-- students works | ok -->
-        <div class="students w-100 mb-50">
+        <div class="students w-100 mb-50" v-if="worksList.length > 0">
           <TitleText textTitle="STUDENTS WORKS" />
           <div class="w-100 mt-15">
             <div class="w-100 d-flex align-items-center justify-content-center">
               <div
-                class="w-100 d-flex align-items-center justify-content-center students-slash"
+                class="w-100 d-flex align-items-center justify-content-center students__slash"
               >
                 <img
                   src="../assets/images/icon/背景線.png"
@@ -333,7 +372,7 @@
                   width="160px"
                 />
                 <router-link
-                  class="students-viewBtn"
+                  class="students__viewBtn"
                   :to="{ name: 'studioResult' }"
                 >
                   <img src="@/assets/images/view_btn.png" alt="" width="60px" />
@@ -369,7 +408,7 @@
           <div class="w-100 d-flex align-items-center justify-content-between">
             <TitleText textTitle="WHAT'S NEW" />
             <div
-              class="whatsnew-viewBtn ml-auto d-flex align-items-center flex-row pb-10"
+              class="whatsnew__viewBtn ml-auto d-flex align-items-center flex-row pb-10"
             >
               <p class="m-0 pr-20">VIEW MORE</p>
               <img
@@ -382,15 +421,15 @@
           </div>
           <div class="w-100 mt-10">
             <div
-              class="whatsnew-content w-100 d-flex align-items-center flex-column mt-30"
+              class="whatsnew__content w-100 d-flex align-items-center flex-column mt-30"
               v-for="(item, index) in newsData"
               :key="'WN_' + index"
             >
-              <div class="whatsnew-content_title w-100">
+              <div class="whatsnew__content--title w-100">
                 <p class="m-0">{{ item.releaseDate | moment("YYYY.MM.DD") }}</p>
               </div>
               <div
-                class="whatsnew-content_context w-100 d-flex align-items-center justify-content-between mt-10 pb-10"
+                class="whatsnew__content--context w-100 d-flex align-items-center justify-content-between mt-10 pb-10"
               >
                 <div class="d-flex justify-content-start flex-column">
                   <p class="m-0">{{ item.title }}</p>
@@ -419,7 +458,7 @@
                   width="110px"
                 />
                 <div
-                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
                   <div class="py-10">
                     <p class="m-0">陶瓷</p>
@@ -441,7 +480,7 @@
                   width="110px"
                 />
                 <div
-                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
                   <div class="py-10">
                     <p class="m-0">金工</p>
@@ -463,7 +502,7 @@
                   width="110px"
                 />
                 <div
-                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
                   <div class="py-10">
                     <p class="m-0">木工</p>
@@ -485,7 +524,7 @@
                   width="110px"
                 />
                 <div
-                  class="craftsCard-info d-flex align-items-center justify-content-center flex-column"
+                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
                   <div class="py-10">
                     <p class="m-0">產品</p>
@@ -518,14 +557,14 @@
           </div>
 
           <div class="w-100">
-            <div class="access-infoCard d-flex align-items-center p-15">
+            <div class="access__infoCard d-flex align-items-center p-15">
               <div
-                class="access-infoCard_title d-flex align-items-start justify-content-start"
+                class="access__infoCard--title d-flex align-items-start justify-content-start"
               >
                 地址
               </div>
               <div
-                class="access-infoCard_content w-100 d-flex flex-column align-items-center text-center"
+                class="access__infoCard--content w-100 d-flex flex-column align-items-center text-center"
               >
                 <p class="m-0">新北市22058板橋區大觀路一段59號</p>
                 <button class="mt-10 ml-10 mr-auto px-15 py-5">
@@ -538,71 +577,71 @@
                 </button>
               </div>
             </div>
-            <div class="access-infoCard d-flex align-items-center p-15">
+            <div class="access__infoCard d-flex align-items-center p-15">
               <div
-                class="access-infoCard_title d-flex align-items-center justify-content-start"
+                class="access__infoCard--title d-flex align-items-center justify-content-start"
               >
                 電話
               </div>
               <div
-                class="access-infoCard_content w-100 d-flex align-items-center"
+                class="access__infoCard--content w-100 d-flex align-items-center"
               >
                 <p class="m-0">02-2272-2181　　#2111</p>
               </div>
             </div>
-            <div class="access-infoCard d-flex align-items-center p-15">
+            <div class="access__infoCard d-flex align-items-center p-15">
               <div
-                class="access-infoCard_title d-flex align-items-center justify-content-start"
+                class="access__infoCard--title d-flex align-items-center justify-content-start"
               >
                 MAIL
               </div>
               <div
-                class="access-infoCard_content w-100 d-flex align-items-center justify-content-end"
+                class="access__infoCard--content w-100 d-flex align-items-center justify-content-end"
               >
                 <p class="m-0">cd@ntua.edu.tw</p>
               </div>
             </div>
-            <div class="access-infoCard d-flex align-items-center p-15">
+            <div class="access__infoCard d-flex align-items-center p-15">
               <div
-                class="access-infoCard_title d-flex align-items-center justify-content-start"
+                class="access__infoCard--title d-flex align-items-center justify-content-start"
               >
                 交通
               </div>
               <div
-                class="access-infoCard_content w-100 d-flex align-items-center justify-content-between"
+                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
               >
                 <p class="m-0">捷運</p>
                 <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
               </div>
             </div>
-            <div class="access-infoCard d-flex align-items-center p-15">
+            <div class="access__infoCard d-flex align-items-center p-15">
               <div
-                class="access-infoCard_title d-flex align-items-center justify-content-start"
+                class="access__infoCard--title d-flex align-items-center justify-content-start"
               ></div>
               <div
-                class="access-infoCard_content w-100 d-flex align-items-center justify-content-between"
+                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
               >
                 <p class="m-0">公車</p>
                 <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
               </div>
             </div>
-            <div class="access-infoCard d-flex align-items-center p-15">
+            <div class="access__infoCard d-flex align-items-center p-15">
               <div
-                class="access-infoCard_title d-flex align-items-center justify-content-start"
+                class="access__infoCard--title d-flex align-items-center justify-content-start"
               ></div>
               <div
-                class="access-infoCard_content w-100 d-flex align-items-center justify-content-between"
+                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
               >
                 <p class="m-0">火車</p>
                 <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
               </div>
             </div>
-            <div class="access-infoCard d-flex align-items-center p-15">
+            <div class="access__infoCard d-flex align-items-center p-15">
               <div
-                class="access-infoCard_title d-flex align-items-center justify-content-start"
+                class="access__infoCard--title d-flex align-items-center justify-content-start"
               ></div>
               <div
-                class="access-infoCard_content w-100 d-flex align-items-center justify-content-between"
+                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
               >
                 <p class="m-0">接駁車</p>
                 <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
@@ -628,6 +667,7 @@ export default {
   },
   data() {
     return {
+      map: document.getElementById("map"),
       awardData: [],
       worksList: [],
       newsData: [],
@@ -655,7 +695,6 @@ export default {
           imgURL: require("@/assets/images/craft/craft_4.png"),
         },
       ],
-
       accessList: [
         {
           code: "address",
@@ -696,10 +735,33 @@ export default {
               options: [
                 {
                   context:
-                    "1.捷運板橋站（文化路捷運3號出口）臺灣藝術大學 搭乘701、264、793公車至國立臺灣藝術大學",
+                    "1.701公車（台北－>迴龍）－>板橋車站（文化路捷運3號出口）－>臺灣藝術大學",
                 },
                 {
-                  context: "2.浮洲火車站下車－>國立臺灣藝術大學",
+                  context:
+                    "2.702公車（板橋公車總站－>三峽）板橋公車總站－>臺灣藝術大學",
+                },
+                {
+                  context:
+                    "3.234公車（西門－>板橋）西門捷運站－>板橋公車站－>亞東技術學院－>臺灣藝術大學",
+                },
+                {
+                  context:
+                    "4.264公車（蘆洲－>板橋）板橋車站（文化路捷運3號出口）－>臺灣藝術大學",
+                },
+                {
+                  context:
+                    "5.793公車（木柵－>樹林）板橋車站（文化路捷運3號出口）－>臺灣藝術大學",
+                },
+                {
+                  context:
+                    "6.臺北客運F502（浮洲地區－>板橋公車站）板橋區公所（捷運府中站）－>臺灣藝術大學",
+                },
+                {
+                  context: "7.接駁公車捷運府中站－>臺灣藝術大學",
+                },
+                {
+                  remark: "*（尖峰時刻約20分鐘一班，詳情請看接駁公車時刻表）",
                 },
               ],
             },
@@ -709,7 +771,7 @@ export default {
               options: [
                 {
                   context:
-                    "1.捷運板橋站（文化路捷運3號出口）臺灣藝術大學 搭乘701、264、793公車至國立臺灣藝術大學",
+                    "1.板橋新火車站下車－>國立台灣藝術大學板橋新火車站步行至文化路搭聯營264、701公車、臺北客運793，或至板橋公車總站搭702公車至國立台灣藝術大學",
                 },
                 {
                   context: "2.浮洲火車站下車－>國立臺灣藝術大學",
@@ -721,18 +783,24 @@ export default {
               transportation: "接駁車",
               options: [
                 {
-                  context:
-                    "1.捷運板橋站（文化路捷運3號出口）臺灣藝術大學 搭乘701、264、793公車至國立臺灣藝術大學",
+                  title:
+                    "自97年9月8日（星期一）起改由台北客運公司替本校服務，請搭乘同學注意並持續支持。",
                 },
                 {
-                  context: "2.浮洲火車站下車－>國立臺灣藝術大學",
+                  title: "搭車位置",
+                },
+                {
+                  context: "1.本校：影劇大樓前廣場",
+                },
+                {
+                  context: "2.府中捷運站：三號出口，步行至警察局旁的候車亭",
                 },
               ],
             },
           ],
         },
       ],
-
+      activeNames: "",
       getTraffic: "",
       phone_contestList: [
         {
@@ -801,6 +869,202 @@ export default {
     };
   },
   methods: {
+    initMap() {
+      this.map = new google.maps.Map(document.getElementById("map"), {
+        center: {
+          //原始中心點
+          lat: 25.00507,
+          lng: 121.4483,
+        }, // 中心點座標, // 中心點座標
+        zoom: 20, // 1-20，數字愈大，地圖愈細：1是世界地圖，20就會到街道
+        maxZoom: 20,
+        minZoom: 17,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        // roadmap 顯示默認道路地圖視圖。
+        // satellite 顯示 Google 地球衛星圖像。
+        // hybrid 顯示正常和衛星視圖的混合。
+        // terrain 顯示基於地形信息的物理地圖。
+        mapTypeId: "roadmap",
+        // 需要再前往修改，https://mapstyle.withgoogle.com/
+        styles: [
+          {
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#f5f5f5",
+              },
+            ],
+          },
+          {
+            elementType: "labels.icon",
+            stylers: [
+              {
+                visibility: "off",
+              },
+            ],
+          },
+          {
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#616161",
+              },
+            ],
+          },
+          {
+            elementType: "labels.text.stroke",
+            stylers: [
+              {
+                color: "#f5f5f5",
+              },
+            ],
+          },
+          {
+            featureType: "administrative.land_parcel",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#bdbdbd",
+              },
+            ],
+          },
+          {
+            featureType: "poi",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#eeeeee",
+              },
+            ],
+          },
+          {
+            featureType: "poi",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#757575",
+              },
+            ],
+          },
+          {
+            featureType: "poi.park",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#e5e5e5",
+              },
+            ],
+          },
+          {
+            featureType: "poi.park",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#9e9e9e",
+              },
+            ],
+          },
+          {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#ffffff",
+              },
+            ],
+          },
+          {
+            featureType: "road.arterial",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#757575",
+              },
+            ],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#dadada",
+              },
+            ],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#616161",
+              },
+            ],
+          },
+          {
+            featureType: "road.local",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#9e9e9e",
+              },
+            ],
+          },
+          {
+            featureType: "transit.line",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#e5e5e5",
+              },
+            ],
+          },
+          {
+            featureType: "transit.station",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#eeeeee",
+              },
+            ],
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#c9c9c9",
+              },
+            ],
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#9e9e9e",
+              },
+            ],
+          },
+        ],
+      });
+
+      let marker = new google.maps.Marker({
+        //原始中心點
+        position: {
+          lat: 25.00507,
+          lng: 121.4483,
+        },
+        icon: require("@/assets/images/icon/mapIcon.svg"),
+        map: this.map,
+      });
+
+      // dD.setMap(this.map);
+    },
     openTrafficInfo(data) {
       console.log(data);
       this.getTraffic = data.code;
@@ -884,6 +1148,7 @@ export default {
     },
   },
   mounted() {
+    this.initMap();
     this.getAward();
     this.getWorks();
     this.getNews();
@@ -971,14 +1236,14 @@ export default {
     height: 65px;
     color: #77767b;
     border-bottom: 1px solid #c4c4c4;
-    &-child {
+    &__child {
       width: 100%;
       color: #77767b;
       height: 60px;
       border-bottom: 1px solid #c4c4c4;
     }
   }
-  .introduce-bg {
+  .introduceBg {
     background: #2d2d2d;
     min-height: 500px;
   }
@@ -999,45 +1264,83 @@ export default {
       line-height: 21px;
       color: #ceb87f;
     }
-    &-borTop {
+    &__borTop {
       border-top: 1px solid #ceb87f;
     }
   }
-  .localCard {
-    background: #2d2d2d;
-    height: 700px;
-    overflow-y: auto;
-    &-info {
-      font-size: 24px;
-      line-height: 30px;
-      letter-spacing: 0.2em;
-      color: white;
-      border-bottom: 1px solid #d4cbcc;
-      &_map {
-        button {
-          width: 235px;
-          height: 45px;
-          font-size: 18px;
-          line-height: 180%;
-          letter-spacing: 0.25em;
-          color: #2d2d2d;
+  .local {
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
+    .localCard {
+      background: #2d2d2d;
+      height: 700px;
+      overflow-y: auto;
+      &__info {
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0.2em;
+        color: white;
+        border-bottom: 1px solid #d4cbcc;
+        &--title {
+          min-width: 8vw;
+        }
+        &--map {
+          // button {
+          //   width: 235px;
+          //   height: 45px;
+          //   font-size: 18px;
+          //   line-height: 180%;
+          //   letter-spacing: 0.25em;
+          //   color: #2d2d2d;
           a {
+            background: #ffffff;
             font-size: 18px;
             line-height: 180%;
             letter-spacing: 0.25em;
             color: #2d2d2d;
           }
+          // }
         }
-      }
-      &_traffic {
-        &:first-child {
-          padding-top: 0px;
+        &--traf {
+          .el-collapse {
+            border-top: none;
+            &-item {
+              &__header {
+                background: #2d2d2d;
+                color: #ffffff;
+                font-size: 24px;
+                padding-top: 40px;
+                padding-bottom: 40px;
+              }
+              &__content {
+                padding-bottom: 0;
+              }
+            }
+          }
+          .content {
+            background: #2d2d2d;
+            font-size: 24px;
+            letter-spacing: 0.2em;
+            color: #ffffff;
+            a {
+              color: #ffffff;
+              &:hover {
+                color: #ceb87f;
+              }
+            }
+          }
         }
-        &:last-child {
-          border-bottom: none;
+        &--traffic {
+          &:first-child {
+            padding-top: 0px;
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+          padding: 50px 0px;
+          border-bottom: 1px solid #d4cbcc;
         }
-        padding: 50px 0px;
-        border-bottom: 1px solid #d4cbcc;
       }
     }
   }
@@ -1050,17 +1353,17 @@ export default {
     background: white;
     border-radius: 20px 20px 0px 0px;
     .contest {
-      &-limitWidth {
+      &__limitWidth {
         overflow-x: auto;
       }
-      &-card {
+      &__card {
         min-width: 155px;
         max-width: 155px;
         margin-right: 15px;
         &:last-child {
           margin-right: 0;
         }
-        &_title {
+        &--title {
           p {
             &:first-child {
               max-width: 85px;
@@ -1078,7 +1381,7 @@ export default {
             }
           }
         }
-        &_content {
+        &--content {
           font-size: 12px;
           line-height: 14px;
           letter-spacing: 0.05em;
@@ -1107,13 +1410,13 @@ export default {
       }
     }
     .students {
-      &-slash {
+      &__slash {
         position: absolute;
         background-repeat: no-repeat;
         height: 65px;
         z-index: 0;
       }
-      &-viewBtn {
+      &__viewBtn {
         z-index: 2;
         position: absolute;
         bottom: 0;
@@ -1135,7 +1438,7 @@ export default {
       }
     }
     .whatsnew {
-      &-viewBtn {
+      &__viewBtn {
         border-bottom: 1px solid #d4cbcc;
         p {
           font-weight: 500;
@@ -1144,14 +1447,14 @@ export default {
           color: #596164;
         }
       }
-      &-content {
-        &_title {
+      &__content {
+        &--title {
           font-weight: 500;
           font-size: 12px;
           line-height: 14px;
           color: #d4cbcc;
         }
-        &_context {
+        &--context {
           font-size: 14px;
           line-height: 16px;
           color: #596164;
@@ -1192,10 +1495,10 @@ export default {
       }
     }
     .access {
-      &-infoCard {
+      &__infoCard {
         background: #2d2d2d;
         border-bottom: 1px solid #d4cbcc;
-        &_title {
+        &--title {
           min-width: 60px;
           max-width: 60px;
           font-size: 14px;
@@ -1203,7 +1506,7 @@ export default {
           letter-spacing: 0.2em;
           color: #ffffff;
         }
-        &_content {
+        &--content {
           font-size: 14px;
           line-height: 16px;
           letter-spacing: 0.2em;
