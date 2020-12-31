@@ -5,7 +5,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-    publicPath: "/NTUA_front/dist/",
+    publicPath: "/Client/",
     lintOnSave: process.env.NODE_ENV !== "production",
     devServer: {
         port: 1804, // 端口

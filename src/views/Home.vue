@@ -869,6 +869,13 @@ export default {
     };
   },
   methods: {
+    checkUserLoad() {
+      if (window.sessionStorage.getItem("firstLoad")) {
+        this.firstLoad = false;
+      } else {
+        this.firstLoad = true;
+      }
+    },
     initMap() {
       this.map = new google.maps.Map(document.getElementById("map"), {
         center: {
