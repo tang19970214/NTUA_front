@@ -460,15 +460,17 @@
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
-                  <div class="py-10">
-                    <p class="m-0">陶瓷</p>
+                  <div class="p-10">
+                    <div class="p-10">
+                      <p class="m-0">陶瓷</p>
+                    </div>
+                    <a
+                      class="text-decoration-none mt-10"
+                      @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
+                    >
+                      VIEW MORE
+                    </a>
                   </div>
-                  <a
-                    class="text-decoration-none mt-10"
-                    @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
-                  >
-                    VIEW MORE
-                  </a>
                 </div>
               </div>
               <div
@@ -482,15 +484,17 @@
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
-                  <div class="py-10">
-                    <p class="m-0">金工</p>
+                  <div class="p-10">
+                    <div class="py-10">
+                      <p class="m-0">金工</p>
+                    </div>
+                    <a
+                      class="text-decoration-none mt-10"
+                      @click="goCraft('METALWORKING')"
+                    >
+                      VIEW MORE
+                    </a>
                   </div>
-                  <a
-                    class="text-decoration-none mt-10"
-                    @click="goCraft('METALWORKING')"
-                  >
-                    VIEW MORE
-                  </a>
                 </div>
               </div>
               <div
@@ -504,15 +508,17 @@
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
-                  <div class="py-10">
-                    <p class="m-0">木工</p>
+                  <div class="p-10">
+                    <div class="py-10">
+                      <p class="m-0">木工</p>
+                    </div>
+                    <a
+                      class="text-decoration-none mt-10"
+                      @click="goCraft('WOODWORKING')"
+                    >
+                      VIEW MORE
+                    </a>
                   </div>
-                  <a
-                    class="text-decoration-none mt-10"
-                    @click="goCraft('WOODWORKING')"
-                  >
-                    VIEW MORE
-                  </a>
                 </div>
               </div>
               <div
@@ -526,15 +532,17 @@
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
                 >
-                  <div class="py-10">
-                    <p class="m-0">產品</p>
+                  <div class="p-10">
+                    <div class="py-10">
+                      <p class="m-0">產品</p>
+                    </div>
+                    <a
+                      class="text-decoration-none mt-10"
+                      @click="goCraft('PRODUCT')"
+                    >
+                      VIEW MORE
+                    </a>
                   </div>
-                  <a
-                    class="text-decoration-none mt-10"
-                    @click="goCraft('PRODUCT')"
-                  >
-                    VIEW MORE
-                  </a>
                 </div>
               </div>
             </div>
@@ -543,20 +551,92 @@
         <!-- access -->
         <div class="access w-100">
           <TitleText textTitle="ACCESS" />
-          <div class="w-100 mt-20">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.82818192357!2d121.44544191544658!3d25.005953645568127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346802ac9d6c823d%3A0x83607782804de78!2zMjIw5paw5YyX5biC5p2_5qmL5Y2A5aSn6KeA6Lev5LiA5q61NTnomZ8!5e0!3m2!1szh-TW!2stw!4v1604289041271!5m2!1szh-TW!2stw"
-              width="100%"
-              height="450"
-              frameborder="0"
-              style="border: 0"
-              allowfullscreen=""
-              aria-hidden="false"
-              tabindex="0"
-            ></iframe>
-          </div>
+          <div
+            class="w-100 h-100"
+            style="height: 450px"
+            id="map_phone"
+            ref="map"
+          ></div>
 
           <div class="w-100">
+            <div class="w-100 d-flex flex-column">
+              <div
+                class="access__infoCard px-15 pb-15 d-flex align-items-start flex-row"
+                :class="{ 'pt-15': item.title !== '交通' }"
+                v-for="(item, index) in accessList"
+                :key="'AL_' + index"
+              >
+                <div class="access__infoCard--title">
+                  <p class="m-0" :class="{ 'pt-15': item.title == '交通' }">
+                    {{ item.title }}
+                  </p>
+                </div>
+
+                <div
+                  class="access__infoCard--content d-flex flex-column"
+                  v-if="item.code == 'address'"
+                >
+                  <p class="m-0">{{ item.value }}</p>
+                  <span class="mt-20">
+                    <a
+                      class="text-decoration-none py-6 px-25"
+                      href="https://goo.gl/maps/67MWRHAoppzHiKP87"
+                      target="_blank"
+                    >
+                      GOOGLE MAP
+                    </a>
+                  </span>
+                </div>
+                <div
+                  class="w-100 d-flex flex-column access__infoCard--traf"
+                  v-else-if="item.code == 'traffic'"
+                >
+                  <el-collapse v-model="activeNames">
+                    <el-collapse-item
+                      :title="items.transportation"
+                      :name="items.transportation"
+                      v-for="(items, key) in item.list"
+                      :key="'LST__' + key"
+                    >
+                      <div
+                        class="w-100 content"
+                        v-for="(cxt, index_1) in items.options"
+                        :key="'OPT__' + index_1"
+                      >
+                        <p class="m-0">
+                          {{ cxt.title }}
+                        </p>
+                        <ul class="m-0 p-0">
+                          <li class="py-10" v-if="cxt.context">
+                            {{ cxt.context }}
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="w-100 content">
+                        <p class="m-0 pb-10">
+                          接駁公車資訊請至以下網站　詢：
+                          <a href="http://eec.ntua.edu.tw/bus/" target="_blank"
+                            >http://eec.ntua.edu.tw/bus/
+                          </a>
+                        </p>
+                        <p class="m-0 pb-10">
+                          更多交通資訊請參閱新北市市政府乘車資訊服務系統網站，網址：
+                          <a href="http://e-bus.tpc.gov.tw/" target="_blank"
+                            >http://e-bus.tpc.gov.tw/
+                          </a>
+                        </p>
+                      </div>
+                    </el-collapse-item>
+                  </el-collapse>
+                </div>
+                <div class="access__infoCard--content" v-else>
+                  <p class="m-0">{{ item.value }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="w-100">
             <div class="access__infoCard d-flex align-items-center p-15">
               <div
                 class="access__infoCard--title d-flex align-items-start justify-content-start"
@@ -647,7 +727,7 @@
                 <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -668,6 +748,7 @@ export default {
   data() {
     return {
       map: document.getElementById("map"),
+      map_phone: document.getElementById("map_phone"),
       awardData: [],
       worksList: [],
       newsData: [],
@@ -1060,6 +1141,186 @@ export default {
         ],
       });
 
+      this.map_phone = new google.maps.Map(
+        document.getElementById("map_phone"),
+        {
+          center: {
+            lat: 25.00507,
+            lng: 121.4483,
+          },
+          zoom: 20,
+          maxZoom: 20,
+          minZoom: 17,
+          zoomControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: false,
+          rotateControl: false,
+          fullscreenControl: false,
+          mapTypeId: "roadmap",
+          styles: [
+            {
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#f5f5f5",
+                },
+              ],
+            },
+            {
+              elementType: "labels.icon",
+              stylers: [
+                {
+                  visibility: "off",
+                },
+              ],
+            },
+            {
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#616161",
+                },
+              ],
+            },
+            {
+              elementType: "labels.text.stroke",
+              stylers: [
+                {
+                  color: "#f5f5f5",
+                },
+              ],
+            },
+            {
+              featureType: "administrative.land_parcel",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#bdbdbd",
+                },
+              ],
+            },
+            {
+              featureType: "poi",
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#eeeeee",
+                },
+              ],
+            },
+            {
+              featureType: "poi",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#757575",
+                },
+              ],
+            },
+            {
+              featureType: "poi.park",
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#e5e5e5",
+                },
+              ],
+            },
+            {
+              featureType: "poi.park",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#9e9e9e",
+                },
+              ],
+            },
+            {
+              featureType: "road",
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#ffffff",
+                },
+              ],
+            },
+            {
+              featureType: "road.arterial",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#757575",
+                },
+              ],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#dadada",
+                },
+              ],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#616161",
+                },
+              ],
+            },
+            {
+              featureType: "road.local",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#9e9e9e",
+                },
+              ],
+            },
+            {
+              featureType: "transit.line",
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#e5e5e5",
+                },
+              ],
+            },
+            {
+              featureType: "transit.station",
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#eeeeee",
+                },
+              ],
+            },
+            {
+              featureType: "water",
+              elementType: "geometry",
+              stylers: [
+                {
+                  color: "#c9c9c9",
+                },
+              ],
+            },
+            {
+              featureType: "water",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  color: "#9e9e9e",
+                },
+              ],
+            },
+          ],
+        }
+      );
+
       let marker = new google.maps.Marker({
         //原始中心點
         position: {
@@ -1069,8 +1330,15 @@ export default {
         icon: require("@/assets/images/icon/mapIcon.svg"),
         map: this.map,
       });
-
-      // dD.setMap(this.map);
+      let marker_phone = new google.maps.Marker({
+        //原始中心點
+        position: {
+          lat: 25.00507,
+          lng: 121.4483,
+        },
+        icon: require("@/assets/images/icon/mapIcon.svg"),
+        map: this.map_phone,
+      });
     },
     openTrafficInfo(data) {
       console.log(data);
@@ -1135,7 +1403,6 @@ export default {
         key: undefined,
       };
       vm.$api.award(listQuery).then((res) => {
-        console.log(res.data.data);
         vm.worksList = res.data.data;
         vm.worksNum = res.data.data.length;
       });
@@ -1293,13 +1560,6 @@ export default {
           min-width: 8vw;
         }
         &--map {
-          // button {
-          //   width: 235px;
-          //   height: 45px;
-          //   font-size: 18px;
-          //   line-height: 180%;
-          //   letter-spacing: 0.25em;
-          //   color: #2d2d2d;
           a {
             background: #ffffff;
             font-size: 18px;
@@ -1307,7 +1567,6 @@ export default {
             letter-spacing: 0.25em;
             color: #2d2d2d;
           }
-          // }
         }
         &--traf {
           .el-collapse {
@@ -1475,9 +1734,8 @@ export default {
         width: calc(100% + 30px);
         // height: 190px;
         background: #2d2d2d;
-        &-info {
-          width: 75px;
-          height: 75px;
+        &__info {
+          transform: translateY(-0.7rem);
           border: 1px solid #596164;
           box-sizing: border-box;
           div {
@@ -1509,7 +1767,6 @@ export default {
           min-width: 60px;
           max-width: 60px;
           font-size: 14px;
-          line-height: 17px;
           letter-spacing: 0.2em;
           color: #ffffff;
         }
@@ -1524,12 +1781,37 @@ export default {
             white-space: nowrap;
             max-width: 220px;
           }
-          button {
+          a {
+            font-size: 14px;
+            letter-spacing: 0.25em;
+            color: #2d2d2d;
+            background: #ffffff;
+          }
+        }
+        &--traf {
+          .el-collapse {
+            border-top: none;
+            &-item {
+              &__header {
+                background: #2d2d2d;
+                color: #ffffff;
+                font-size: 14px;
+              }
+              &__content {
+                padding-bottom: 0;
+              }
+            }
+          }
+          .content {
+            background: #2d2d2d;
+            font-size: 4px;
+            letter-spacing: 0.2em;
+            color: #ffffff;
             a {
-              font-size: 14px;
-              line-height: 180%;
-              letter-spacing: 0.25em;
-              color: #2d2d2d;
+              color: #ffffff;
+              &:hover {
+                color: #ceb87f;
+              }
             }
           }
         }

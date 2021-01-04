@@ -3,23 +3,46 @@
     <div class="web d-none d-mb-block">
       <p class="m-0 Txt-title">Seminar/Work Camp website</p>
       <div class="mt-70 newsCard">
-        <div class="newsCard-sortText">
-          <router-link
+        <div class="newsCard__sortText">
+          <!-- <router-link
             class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
             :class="{ active: $route.name == item.pathURL }"
             :to="{ name: item.pathURL }"
             v-for="(item, index) in websiteSort"
             :key="'NS__' + index"
-          >
-            <p class="m-0">{{ item.pathName }}</p>
-            <i class="el-icon-minus"></i>
-            <p class="m-0">0{{ index + 1 }}</p>
-          </router-link>
+          > -->
+            <div
+              class="mr-35 mb-15"
+              v-for="(item, index) in websiteSort"
+              :key="'NS__' + index"
+            >
+              <a
+                class="d-flex align-items-center justify-content-end flex-row text-decoration-none"
+                :href="item.path"
+                target="_blank"
+                v-if="item.path"
+              >
+                <p class="m-0">{{ item.pathName }}</p>
+                <i class="el-icon-minus"></i>
+                <p class="m-0">0{{ index + 1 }}</p>
+              </a>
+              <router-link
+                class="d-flex align-items-center justify-content-end flex-row text-decoration-none"
+                :class="{ active: $route.name == item.pathURL }"
+                :to="{ name: item.pathURL }"
+                v-else
+              >
+                <p class="m-0">{{ item.pathName }}</p>
+                <i class="el-icon-minus"></i>
+                <p class="m-0">0{{ index + 1 }}</p>
+              </router-link>
+            </div>
+          <!-- </router-link> -->
         </div>
 
         <LoadShowIMG />
 
-        <div class="w-100 newsCard-title">
+        <div class="w-100 newsCard__title">
           <div class="p-60">
             <div class="w-100 d-flex flex-row">
               <div class="w-100">
@@ -74,6 +97,7 @@ export default {
           pathName: "工作營",
         },
         {
+          path: "https://crafts.ntua.edu.tw/CDC2009/main.php",
           pathURL: "seminar",
           pathName: "研討會",
         },
@@ -122,7 +146,7 @@ export default {
     .newsCard {
       background-color: white;
       margin-bottom: 90px;
-      &-sortText {
+      &__sortText {
         position: absolute;
         right: 0;
         z-index: 100;
@@ -144,7 +168,7 @@ export default {
         color: #563f05;
         font-weight: bold;
       }
-      &-title {
+      &__title {
         p {
           font-size: 64px;
           line-height: 75px;

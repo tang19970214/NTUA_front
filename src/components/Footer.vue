@@ -18,12 +18,14 @@
                   class="block_left-icon w-100 d-flex align-items-center flex-row mt-20"
                 >
                   <span
-                    class="mr-50 cur-pointer"
+                    class="mr-50"
                     v-for="(items, index) in item.icon"
                     :key="'IC_' + index"
                   >
-                    <img :src="items.url" alt="" width="50px" />
-                    <img :src="items.hoverUrl" alt="" width="50px" />
+                    <a :href="items.path" target="_blank">
+                      <img :src="items.url" alt="" width="50px" />
+                      <img :src="items.hoverUrl" alt="" width="50px" />
+                    </a>
                   </span>
                 </div>
               </div>
@@ -56,7 +58,9 @@
             v-for="(item, index) in contactForPhone"
             :key="'CFP_' + index"
           >
-            <img :src="item.imgURL" alt="" />
+            <a :href="item.path" target="_blank">
+              <img :src="item.imgURL" alt="" />
+            </a>
           </div>
         </div>
         <router-link to="/">
@@ -93,14 +97,20 @@ export default {
           text: "Follow us",
           icon: [
             {
+              value: "facebook",
+              path: "https://www.facebook.com/crafts.ntua.edu.tw",
               url: require("@/assets/images/icon/FB_icon.png"),
               hoverUrl: require("@/assets/images/icon/FB_icon_hover.png"),
             },
             {
+              value: "instagram",
+              path: "https://www.instagram.com/the_absence_of_authors/",
               url: require("@/assets/images/icon/IG_icon.png"),
               hoverUrl: require("@/assets/images/icon/IG_icon_hover.png"),
             },
             {
+              value: "youtube",
+              path: "https://www.youtube.com/channel/UC9vt9X8uPxWtIO7mWEAyyDw",
               url: require("@/assets/images/icon/YT_icon.png"),
               hoverUrl: require("@/assets/images/icon/YT_icon_hover.png"),
             },
@@ -110,37 +120,49 @@ export default {
           text: "Contact us",
           icon: [
             {
+              value: "home",
+              path: "https://www.ntua.edu.tw/",
               url: require("@/assets/images/icon/address_icon.png"),
               hoverUrl: require("@/assets/images/icon/address_icon_hover.png"),
             },
             {
+              value: "mail",
+              path: "mailto:cd@ntua.edu.tw",
               url: require("@/assets/images/icon/email_icon.png"),
               hoverUrl: require("@/assets/images/icon/email_icon_hover.png"),
-            },
-            {
-              url: require("@/assets/images/icon/phone_icon.png"),
-              hoverUrl: require("@/assets/images/icon/phone_icon_hover.png"),
             },
           ],
         },
       ],
       contactForPhone: [
         {
+          value: "facebook",
+          path: "https://www.facebook.com/crafts.ntua.edu.tw",
           imgURL: require("@/assets/images/icon/FB_icon.png"),
         },
         {
+          value: "instagram",
+          path: "https://www.instagram.com/the_absence_of_authors/",
           imgURL: require("@/assets/images/icon/IG_icon.png"),
         },
         {
+          value: "youtube",
+          path: "https://www.youtube.com/channel/UC9vt9X8uPxWtIO7mWEAyyDw",
           imgURL: require("@/assets/images/icon/YT_icon.png"),
         },
         {
+          value: "home",
+          path: "https://www.ntua.edu.tw/",
           imgURL: require("@/assets/images/icon/address_icon.png"),
         },
         {
+          value: "mail",
+          path: "mailto:cd@ntua.edu.tw",
           imgURL: require("@/assets/images/icon/email_icon.png"),
         },
         {
+          value: "phone",
+          path: "tel:+886-2-22722181",
           imgURL: require("@/assets/images/icon/phone_icon.png"),
         },
       ],

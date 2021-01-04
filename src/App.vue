@@ -1,10 +1,20 @@
 <template>
   <div id="app">
     <div class="setVideo pos-relative text-center" v-if="firstLoad">
+      <div class="w-100 h-100 d-none d-mb-block">
+        <img
+          src="./assets/images/initial_movie/loadVideo.gif"
+          alt=""
+          height="100%"
+        />
+      </div>
+
       <img
+        class="d-block d-mb-none"
+        style="padding-top: 30vh"
         src="./assets/images/initial_movie/loadVideo.gif"
         alt=""
-        height="100%"
+        width="100%"
       />
 
       <div class="pos-absolute t-0 r-0 mt-30 mr-30">
@@ -56,7 +66,7 @@ export default {
       if (this.firstLoad) {
         window.setTimeout(() => {
           this.$store.commit("SETFIRSTLOAD", false);
-        }, 10000);
+        }, 11000);
       }
     },
   },

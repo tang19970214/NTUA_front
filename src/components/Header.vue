@@ -35,34 +35,34 @@
       <div class="leftBar">
         <img src="../assets/images/icon/leftBar.png" alt="" />
         <div class="d-flex align-items-center flex-column" style="width: 60px">
-          <span class="cur-pointer">
-            <img
-              class="mt-11"
-              src="../assets/images/icon/FB_icon_1.png"
-              alt="Facebook"
-            />
-          </span>
-          <span class="cur-pointer">
-            <img
-              class="mt-22"
-              src="../assets/images/icon/ig_icon_1.png"
-              alt="Instagram"
-            />
-          </span>
-          <span class="cur-pointer">
-            <img
-              class="mt-22"
-              src="../assets/images/icon/YT_icon_1.png"
-              alt="Youtube"
-            />
-          </span>
+          <a
+            class="mt-11"
+            href="https://www.facebook.com/crafts.ntua.edu.tw"
+            target="_blank"
+          >
+            <img src="../assets/images/icon/FB_icon_1.png" alt="Facebook" />
+          </a>
+          <a
+            class="mt-22"
+            href="https://www.instagram.com/the_absence_of_authors/"
+            target="_blank"
+          >
+            <img src="../assets/images/icon/ig_icon_1.png" alt="Instagram" />
+          </a>
+          <a
+            class="mt-22"
+            href="https://www.youtube.com/channel/UC9vt9X8uPxWtIO7mWEAyyDw"
+            target="_blank"
+          >
+            <img src="../assets/images/icon/YT_icon_1.png" alt="Youtube" />
+          </a>
         </div>
       </div>
       <!-- search -->
       <div
         class="searchBox d-flex align-items-center justify-content-center flex-column"
         v-if="clickSearch"
-        @mouseleave="hiddenSearch()"
+        @mouseleave="clickSearch = false"
       >
         <el-input
           v-model="getKeyword"
@@ -103,7 +103,12 @@
               :key="'GLM__' + index"
               @click="goNextPage(item)"
             >
-              {{ item.name }}
+              <a :href="item.path" target="_blank" v-if="item.path">
+                {{ item.name }}
+              </a>
+              <p class="m-0" v-else>
+                {{ item.name }}
+              </p>
             </li>
           </ul>
         </div>
@@ -117,7 +122,12 @@
               :key="'GRM__' + index"
               @click="goNextPage(item)"
             >
-              {{ item.name }}
+              <a :href="item.path" target="_blank" v-if="item.path">
+                {{ item.name }}
+              </a>
+              <p class="m-0" v-else>
+                {{ item.name }}
+              </p>
             </li>
           </ul>
         </div>
@@ -166,7 +176,16 @@
               @click="goNextPage(item)"
             >
               <p class="m-0 pb-10">{{ item.value }}</p>
-              {{ item.text }}
+              <a
+                :href="item.path"
+                target="_blank"
+                v-if="item.path"
+                style="writing-mode: vertical-lr"
+                >{{ item.text }}</a
+              >
+              <p class="m-0" v-else style="writing-mode: vertical-lr">
+                {{ item.text }}
+              </p>
             </li>
           </ul>
 
@@ -181,9 +200,22 @@
                 :key="items.value"
                 @click="goNextPage_phone(items)"
               >
-                <span>{{ items.value }}</span>
-                <div class="w-100 d-flex align-items-center">
-                  <label>{{ items.text }}</label>
+                <a
+                  class="text-decoration-none"
+                  :href="items.path"
+                  target="_blank"
+                  v-if="items.path"
+                >
+                  <span>{{ items.value }}</span>
+                  <div class="w-100 d-flex align-items-center">
+                    <label>{{ items.text }}</label>
+                  </div>
+                </a>
+                <div v-else>
+                  <span>{{ items.value }}</span>
+                  <div class="w-100 d-flex align-items-center">
+                    <label>{{ items.text }}</label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -199,7 +231,6 @@ export default {
   data() {
     return {
       scrollTop: "",
-      // scrollLeftTop: false,
       clickSearch: false,
       clickOpen: false,
       getMenu: {
@@ -215,6 +246,7 @@ export default {
             name: "系友專區",
           },
           {
+            path: "https://giving.ntua.edu.tw/",
             mainPath: "",
             pathName: "",
             name: "捐款專區",
@@ -237,11 +269,13 @@ export default {
             name: "系所簡介及課程",
           },
           {
+            path: "https://aca.ntua.edu.tw/catalog.aspx?ca=18",
             mainPath: "",
             pathName: "",
             name: "系所規定與申請表",
           },
           {
+            path: "https://aca.ntua.edu.tw/list.aspx?ca=217",
             mainPath: "",
             pathName: "",
             name: "招生資訊",
@@ -286,6 +320,7 @@ export default {
         },
         {
           value: "03",
+          path: "https://aca.ntua.edu.tw/catalog.aspx?ca=18",
           text: "系所規定與申請表",
           mainPath: "",
           pathName: "",
@@ -293,6 +328,7 @@ export default {
         {
           value: "04",
           text: "招生資訊",
+          path: "https://aca.ntua.edu.tw/list.aspx?ca=217",
           mainPath: "",
           pathName: "",
         },
@@ -323,6 +359,7 @@ export default {
         {
           value: "09",
           text: "捐款專區",
+          path: "https://giving.ntua.edu.tw/",
           mainPath: "",
           pathName: "",
         },
@@ -432,6 +469,7 @@ export default {
           {
             value: "02",
             text: "研討會",
+            path: "https://crafts.ntua.edu.tw/CDC2009/main.php",
             mainPath: "website",
             pathName: "seminar",
           },
@@ -468,9 +506,6 @@ export default {
     },
     openSearch() {
       this.clickSearch = !this.clickSearch;
-    },
-    hiddenSearch(data) {
-      this.clickSearch = false;
     },
     openMenu() {
       this.clickOpen = !this.clickOpen;
@@ -532,9 +567,26 @@ export default {
       position: fixed;
       top: 25px;
       right: 95px;
-      // margin-top: 25px;
-      // margin-left: 95px;
       z-index: 99;
+      transition: all 0.8s;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        z-index: 1;
+        opacity: 0;
+        background-color: rgba(255, 255, 255, 0.25);
+        transition: all 0.3s;
+        transform: scale(0.2, 0.2);
+      }
+      &:hover:before {
+        opacity: 1;
+        transform: scale(1, 1);
+      }
     }
     &-search {
       width: 70px;
@@ -542,11 +594,28 @@ export default {
       border-radius: 50%;
       background: #df281d;
       position: fixed;
-      // margin-top: 25px;
-      // margin-left: 200px;
       top: 25px;
       right: 200px;
       z-index: 99;
+      transition: all 0.8s;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        z-index: 1;
+        opacity: 0;
+        background-color: rgba(255, 255, 255, 0.25);
+        transition: all 0.3s;
+        transform: scale(0.2, 0.2);
+      }
+      &:hover:before {
+        opacity: 1;
+        transform: scale(1, 1);
+      }
     }
   }
   .searchBox {
@@ -594,19 +663,26 @@ export default {
     border-radius: 50%;
     background-color: rgba(89, 86, 86, 0.8);
     div > ul > li {
-      font-size: 24px;
-      line-height: 28px;
-      color: #ded9d5;
       margin-bottom: 18px;
-      cursor: pointer;
-      &:hover {
-        background: white;
-        color: #ceb87f;
+      p,
+      a {
+        text-decoration: none;
+        font-size: 24px;
+        line-height: 28px;
+        color: #ded9d5;
+        cursor: pointer;
+        &:hover {
+          background: white;
+          color: #ceb87f;
+        }
       }
     }
     .stayPage {
-      background: white;
-      color: #ceb87f;
+      a,
+      p {
+        background: white;
+        color: #ceb87f;
+      }
     }
   }
   .leftBar {
@@ -647,20 +723,25 @@ export default {
         writing-mode: vertical-lr;
         color: white;
         overflow-x: auto;
-        ul {
+        ul > li {
           font-size: 24px;
           font-weight: bold;
           line-height: 28px;
-          color: #ded9d5;
           list-style-type: none;
           height: 18rem;
-          li > p {
+          p,
+          a {
+            color: #ded9d5;
+            text-decoration: none;
             white-space: nowrap;
             writing-mode: horizontal-tb;
           }
         }
         .stayPage {
-          color: #ceb87f;
+          a,
+          p {
+            color: #ceb87f;
+          }
         }
         &__submenu {
           writing-mode: horizontal-tb;
