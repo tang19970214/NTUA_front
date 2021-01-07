@@ -165,7 +165,7 @@ export default {
       &-sortText {
         position: absolute;
         right: 0;
-        z-index: 100;
+        z-index: 10;
         margin-top: 45px;
         a {
           font-weight: 400;

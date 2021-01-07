@@ -2,6 +2,7 @@
   <div id="header">
     <!-- web -->
     <div class="d-none d-mb-block">
+      <div class="headerBG" v-if="scrollLeftTop"></div>
       <!-- LOGO -->
       <router-link to="/">
         <img class="pos-logo" src="../assets/NTUA_LOGO.svg" alt="NTUA_LOGO" />
@@ -231,6 +232,7 @@ export default {
   data() {
     return {
       scrollTop: "",
+      scrollLeftTop: false,
       clickSearch: false,
       clickOpen: false,
       getMenu: {
@@ -538,13 +540,13 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   watch: {
-    // scrollTop(val) {
-    //   if (this.scrollTop > 200) {
-    //     this.scrollLeftTop = true;
-    //   } else {
-    //     this.scrollLeftTop = false;
-    //   }
-    // },
+    scrollTop(val) {
+      if (this.scrollTop > 400) {
+        this.scrollLeftTop = true;
+      } else {
+        this.scrollLeftTop = false;
+      }
+    },
   },
 };
 </script>
@@ -552,10 +554,18 @@ export default {
 <style lang="scss">
 #header {
   z-index: 9999;
+  .headerBG {
+    position: fixed;
+    z-index: 98;
+    width: 100%;
+    height: 120px;
+    background: rgba(96, 96, 97, 0.8);
+  }
   .pos {
     &-logo {
       position: fixed;
       top: 0%;
+      margin-top: 20px;
       left: 2rem;
       z-index: 99;
     }
@@ -688,7 +698,7 @@ export default {
   .leftBar {
     position: fixed;
     z-index: 99;
-    margin-top: 7rem;
+    margin-top: 8rem;
     left: 1rem;
   }
 

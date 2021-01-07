@@ -104,16 +104,22 @@
                   <img :src="selectInfo.pic" alt="" width="100%" />
                 </div>
                 <div class="w-100 classCardPhone__introduce">
-                  <div class="px-30 py-10 d-flex align-items-center justify-content-center flex-column">
+                  <div
+                    class="px-30 py-10 d-flex align-items-center justify-content-center flex-column"
+                  >
                     <div
                       class="w-100 classCardPhone__introduce-title text-left pb-5"
                     >
                       <strong>{{ selectInfo.title }}</strong>
                     </div>
-                    <div class="w-100 classCardPhone__introduce-content text-center">
+                    <div
+                      class="w-100 classCardPhone__introduce-content text-center"
+                    >
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
-                        <el-col :span="12">{{ selectInfo.uploadTime | moment("YYYY-MM-DD") }}</el-col>
+                        <el-col :span="12">{{
+                          selectInfo.uploadTime | moment("YYYY-MM-DD")
+                        }}</el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
@@ -161,7 +167,9 @@
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
-                        <el-col :span="12">{{ selectInfo.uploadTime | moment("YYYY-MM-DD") }}</el-col>
+                        <el-col :span="12">{{
+                          selectInfo.uploadTime | moment("YYYY-MM-DD")
+                        }}</el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
@@ -304,6 +312,11 @@ export default {
           font-weight: bold;
           font-size: 14px;
           color: #ffffff;
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
         }
       }
     }

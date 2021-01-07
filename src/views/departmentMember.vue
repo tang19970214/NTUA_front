@@ -32,7 +32,7 @@
     </div>
 
     <div class="phone d-block d-mb-none pt-70">
-      <PhoneTitle :title="getPathName(departmentMemberSort)" :filterDate="true" />
+      <PhoneTitle :title="getPathName(departmentMemberSort)" :filterDate="false" />
     </div>
 
     <div class="w-100">
@@ -101,7 +101,7 @@ export default {
       &-sortText {
         position: absolute;
         right: 0;
-        z-index: 100;
+        z-index: 10;
         margin-top: 45px;
         a {
           font-weight: 400;

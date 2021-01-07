@@ -6,7 +6,10 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/',
     name: 'Home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/Home.vue'),
+    meta: {
+      goTop: true
+    }
   },
   {
     path: '/latestNews',
@@ -271,9 +274,16 @@ const routes = [{
 const router = new VueRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
-    return {
-      x: 0,
-      y: 0
+    if (to.meta.goTop) {
+      return {
+        x: 0,
+        y: 0
+      }
+    } else {
+      return {
+        x: 0,
+        y: 450
+      }
     }
   }
 })

@@ -63,24 +63,26 @@
           <div class="w-100">
             <p class="m-0 font-s-28">相關空間</p>
           </div>
-          <div
-            class="anotherClass w-100 d-flex align-items-center justify-content-start flex-row mt-40"
-          >
+          <div class="w-100 anotherClass">
             <div
-              class="mx-15 d-flex align-items-center justify-content-center flex-column"
-              v-for="(item, index) in anotherClassList"
-              :key="'ACL__' + index"
+              class="anotherClass__content w-100 d-flex align-items-center justify-content-start flex-row mt-40"
             >
-              <img
-                class="cur-pointer"
-                :src="item.coverPic"
-                alt=""
-                @click="showIntroduce(item)"
-                v-if="item.id !== $route.params.id"
-              />
-              <img :src="item.coverPic" alt="" v-else />
-              <div class="mt-20">
-                <strong>{{ item.title }}</strong>
+              <div
+                class="mx-15 d-flex align-items-center justify-content-center flex-column"
+                v-for="(item, index) in anotherClassList"
+                :key="'ACL__' + index"
+              >
+                <img
+                  class="cur-pointer"
+                  :src="item.coverPic"
+                  alt=""
+                  @click="showIntroduce(item)"
+                  v-if="item.id !== $route.params.id"
+                />
+                <img :src="item.coverPic" alt="" v-else />
+                <div class="mt-20">
+                  <strong>{{ item.title }}</strong>
+                </div>
               </div>
             </div>
           </div>
@@ -359,16 +361,35 @@ export default {
       }
     }
     .anotherClass {
-      overflow-x: auto;
-      strong {
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 160%;
-        color: #2d2d2d;
+      &__content {
+        overflow-x: auto;
+        strong {
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 160%;
+          color: #2d2d2d;
+        }
+        img:hover {
+          transition: all 0.4s;
+          opacity: 0.8;
+        }
       }
-      img:hover {
-        transition: all 0.4s;
-        opacity: 0.8;
+      ::-webkit-scrollbar-track-piece {
+        //滾動條凹槽的顏色，還可以設定邊框屬性
+        background-color: #f8f8f8;
+      }
+      ::-webkit-scrollbar {
+        //滾動條的寬度
+        // width: 9px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        //滾動條的設定
+        background-color: #dddddd;
+        background-clip: padding-box;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #bbb;
       }
     }
   }

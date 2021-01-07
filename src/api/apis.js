@@ -55,6 +55,10 @@ const api = {
   relatedlink(params) {
     return req("get", "relatedLinks/load", params);
   },
+  /* 學分表 */
+  singleFile(params) {
+    return req("get", "singleFiles/load", params);
+  },
 };
 
 export default api;

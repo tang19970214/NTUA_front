@@ -36,7 +36,7 @@
           @click="goAwardInfo(item)"
         >
           <div class="awardCard-date">
-            <div class="p-15 d-flex flex-column align-items-center">
+            <div class="px-10 py-15 d-flex flex-column align-items-center">
               <p class="m-0">{{ item.releaseDate | moment("YYYY") }}</p>
               <span class="my-8"></span>
               <p class="m-0">{{ item.releaseDate | moment("MM-DD") }}</p>

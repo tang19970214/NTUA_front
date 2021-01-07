@@ -607,7 +607,7 @@
                           {{ cxt.title }}
                         </p>
                         <ul class="m-0 p-0">
-                          <li class="py-10" v-if="cxt.context">
+                          <li class="py-10 font-s-13" v-if="cxt.context">
                             {{ cxt.context }}
                           </li>
                         </ul>
@@ -1477,7 +1477,7 @@ export default {
       line-height: 42px;
       color: #52505a;
     }
-    span:hover {
+    span {
       padding: 5px;
       background: white;
       border: 2px solid #ceb87f;

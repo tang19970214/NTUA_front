@@ -1,5 +1,6 @@
 <template>
   <div id="description">
+    <!-- web -->
     <div class="web d-none d-mb-block">
       <div class="title">
         <p class="m-0">系教育目錄與能力綱目</p>
@@ -38,66 +39,90 @@
 
       <div class="rules">
         <div class="w-100 d-flex justify-content-between">
-          <div class="w-100 d-flex align-items-center flex-column">
-            <div class="w-100 mb-45 ml-150">
-              <p class="m-0 rules__title">課程規劃原則</p>
-            </div>
-            <div
-              class="w-100 mb-60"
-              v-for="(item, index) in ruleList"
-              :key="'EL_' + index"
-            >
-              <img
-                class="pos-absolute"
-                :src="item.imgURL"
-                alt=""
-                height="190px"
-              />
-              <div class="rules__Card">
-                <div
-                  class="h-100 pl-120 pr-90 d-flex align-items-center justify-content-center"
-                >
-                  {{ item.context }}
+          <!-- 規劃 -->
+          <div class="w-100">
+            <div class="p-20 d-flex align-items-center flex-column">
+              <div class="w-100 mb-45 ml-150">
+                <p class="m-0 rules__title">課程規劃原則</p>
+              </div>
+              <div
+                class="w-100 mb-60"
+                v-for="(item, index) in ruleList"
+                :key="'EL_' + index"
+              >
+                <img
+                  class="pos-absolute"
+                  :src="item.imgURL"
+                  alt=""
+                  height="190px"
+                />
+                <div class="rules__Card">
+                  <div
+                    class="h-100 pl-120 pr-90 d-flex align-items-center justify-content-center"
+                  >
+                    {{ item.context }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="w-100 d-flex align-items-center flex-column ml-100">
-            <div class="w-100 mb-45">
-              <p class="m-0 rules__title">Download</p>
-            </div>
-            <div class="w-100">
-              <div class="downloadCard d-flex flex-column">
-                <div
-                  class="px-80 py-15 downloadCard__download d-flex align-items-center"
-                >
-                  <p class="m-0">五種學制地圖</p>
-                  <img src="@/assets/images/icon/pdf_icon.png" alt="" />
-                </div>
-                <div class="px-80 py-15 downloadCard__title">
-                  各年度課程科目學分表查詢
-                </div>
-                <div class="w-100 downloadCard__content">
-                  <div class="p-30">
-                    <div
-                      class="d-flex align-items-center justify-content-center my-30"
-                      v-for="(item, index) in downloadList"
-                      :key="'DL_' + index"
-                    >
-                      <div
-                        class="downloadCard__content-blackTag d-flex align-items-center justify-content-center"
+          <!-- 學制 -->
+          <div class="w-100">
+            <div class="p-20 d-flex align-items-center flex-column">
+              <div class="w-100 mb-45">
+                <p class="m-0 rules__title">Download</p>
+              </div>
+              <div class="w-100">
+                <div class="w-100 downloadCard d-flex flex-column">
+                  <div
+                    class="px-80 py-15 downloadCard__download d-flex align-items-center"
+                  >
+                    <p class="m-0">五種學制地圖</p>
+                    <span v-for="item in getEduMap" :key="item.id">
+                      <el-tooltip
+                        effect="light"
+                        content="檔案下載"
+                        placement="bottom"
                       >
-                        {{ item.tagName }}
-                      </div>
+                        <a
+                          class="d-flex align-items-center justify-content-center ml-20"
+                          :href="item.fileLink"
+                          :download="item.fileName"
+                          target="_blank"
+                        >
+                          <img src="@/assets/images/icon/pdf_icon.png" alt="" />
+                        </a>
+                      </el-tooltip>
+                    </span>
+                  </div>
+                  <div class="px-80 py-15 downloadCard__title">
+                    各年度課程科目學分表查詢
+                  </div>
+                  <div class="w-100 downloadCard__content">
+                    <div class="py-20 px-30">
                       <div
-                        class="w-100 d-flex align-items-center justify-content-between downloadCard__content-list my-10"
+                        class="d-flex align-items-center justify-content-center mt-20 mb-30"
+                        v-for="(item, key) in downloadList"
+                        :key="'DL_' + key"
                       >
-                        <div class="w-100 text-right px-25">
-                          {{ item.leftYear }}
-                        </div>
-                        <div class="w-100 text-left px-25">
-                          {{ item.rightYear }}
+                        <div
+                          class="w-100 py-20 d-flex align-items-center justify-content-center downloadCard__content-list pos-relative"
+                        >
+                          <a
+                            class="px-10"
+                            :href="items.fileLink"
+                            :download="items.fileLink"
+                            target="_blank"
+                            v-for="items in item"
+                            :key="items.id"
+                          >
+                            {{ items.fileName }}
+                          </a>
+                          <div
+                            class="downloadCard__content-blackTag p-10 d-flex align-items-center justify-content-center pos-absolute l-0 t-0"
+                          >
+                            {{ key }}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -208,6 +233,7 @@
       </div>
     </div>
 
+    <!-- phone -->
     <div class="phone d-block d-mb-none">
       <div class="courseCard bg-white">
         <div class="p-20 courseCard__title">
@@ -388,6 +414,12 @@
 export default {
   data() {
     return {
+      listQuery: {
+        TypeId: "",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
       topFlag: true,
       scrollTop: "",
       triangleBlock: {
@@ -541,33 +573,7 @@ export default {
             "規劃各式專業選修學程，落實分科教育，以建構學生「七項核心能力」為目標。",
         },
       ],
-      downloadList: [
-        {
-          tagName: "日間學士",
-          leftYear: "108",
-          rightYear: "109",
-        },
-        {
-          tagName: "進修學士",
-          leftYear: "108",
-          rightYear: "109",
-        },
-        {
-          tagName: "二年在職",
-          leftYear: "108",
-          rightYear: "109",
-        },
-        {
-          tagName: "日間碩士",
-          leftYear: "108",
-          rightYear: "109",
-        },
-        {
-          tagName: "碩士在職",
-          leftYear: "108",
-          rightYear: "109",
-        },
-      ],
+      downloadList: [],
       depIntroduce: [
         {
           titleName: "系所發展",
@@ -622,7 +628,17 @@ export default {
       showGoal: false,
       goalKey: "",
       goalData: {},
+      getEduMap: [],
     };
+  },
+  computed: {
+    filterGoal(data) {
+      return (data) => {
+        this.goalData = data[this.goalKey];
+        console.log(this.goalData.list);
+        return this.goalData.list;
+      };
+    },
   },
   methods: {
     openGoal(key) {
@@ -635,17 +651,28 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop;
     },
-  },
-  computed: {
-    filterGoal(data) {
-      return (data) => {
-        this.goalData = data[this.goalKey];
-        console.log(this.goalData.list);
-        return this.goalData.list;
-      };
+    getList() {
+      this.$api.singleFile(this.listQuery).then((res) => {
+        let mapdata = res.data.data.filter(
+          (data) => data.typeId == "SYS_SINGLEFILE_MAP"
+        );
+        this.getEduMap = mapdata ? mapdata : [];
+        let newArr = res.data.data.filter(
+          (data) => data.typeId !== "SYS_SINGLEFILE_MAP"
+        );
+        let obj = {};
+        newArr.map((i) => {
+          Object.keys(obj).includes(i.typeName)
+            ? (obj = obj)
+            : (obj[i.typeName] = []);
+          obj[i.typeName].push(i);
+        });
+        this.downloadList = obj;
+      });
     },
   },
   mounted() {
+    this.getList();
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
@@ -653,25 +680,23 @@ export default {
   },
   watch: {
     scrollTop(val) {
-      if (this.scrollTop > 2000) {
+      if (this.scrollTop > 3300) {
         if (this.topFlag) {
           this.triangleBlock.top = true;
-          console.log("this.topFlag=false");
           this.topFlag = false;
         }
       } else {
         if (!this.topFlag) {
           this.triangleBlock.top = false;
-          console.log("asfdadsf");
           this.topFlag = true;
         }
       }
-      if (this.scrollTop > 2300) {
+      if (this.scrollTop > 3600) {
         this.triangleBlock.middle = true;
       } else {
         this.triangleBlock.middle = false;
       }
-      if (this.scrollTop > 2600) {
+      if (this.scrollTop > 3900) {
         this.triangleBlock.bottom = true;
       } else {
         this.triangleBlock.bottom = false;
@@ -684,8 +709,8 @@ export default {
 <style lang="scss">
 #description {
   .web {
-    margin-left: 0;
-    padding-top: 0;
+    margin-left: 0 !important;
+    padding-top: 0 !important;
     .title {
       padding: 30px 200px 0px 200px;
       font-size: 48px;
@@ -750,9 +775,7 @@ export default {
         letter-spacing: 0.15em;
         color: #596164;
       }
-
       .downloadCard {
-        width: 560px;
         height: 690px;
         &__download {
           font-size: 24px;
@@ -775,12 +798,9 @@ export default {
           height: 553px;
           overflow-y: auto;
           &-blackTag {
-            position: absolute;
-            left: 0;
-            margin-left: 1rem;
-            margin-bottom: 6rem;
-            width: 125px;
-            height: 50px;
+            white-space: nowrap;
+            transform: translateY(-1rem);
+            margin-left: -0.5rem;
             background: #2d2d2d;
             font-size: 20px;
             line-height: 160%;
@@ -788,9 +808,16 @@ export default {
             color: #ceb87f;
           }
           &-list {
-            width: 480px;
-            height: 80px;
             background: #ffffff;
+            a {
+              font-size: 18px;
+              letter-spacing: 0.37em;
+              color: #596164;
+              &:hover {
+                color: #ceb87f;
+                font-weight: bold;
+              }
+            }
           }
         }
       }
@@ -809,15 +836,6 @@ export default {
         line-height: 160%;
         letter-spacing: 0.05em;
         color: #40172d;
-      }
-      &__block {
-        img:last-child {
-          // opacity: 0;
-          // animation-name: scrollToShow;
-          // animation-duration: 0.5s;
-          // animation-fill-mode: forwards;
-          // animation-play-state: paused;
-        }
       }
     }
   }
@@ -980,7 +998,6 @@ export default {
     //滾動條的設定
     background-color: #dddddd;
     background-clip: padding-box;
-    // min-height: 28px;
   }
   ::-webkit-scrollbar-thumb:hover {
     background-color: #bbb;

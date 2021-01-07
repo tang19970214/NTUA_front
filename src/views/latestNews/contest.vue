@@ -76,6 +76,51 @@
               :disabled="true"
             ></vue-editor>
           </div>
+          <div class="w-100 mt-40" v-if="selectNews.attachedFile">
+            <strong class="font-s-24">附檔</strong>
+            <p class="m-0 mt-10">
+              （本網站建議使用Chrome瀏覽器以避免系統問題）
+            </p>
+            <div class="w-100 d-flex flex-row flex-wrap mt-20">
+              <el-row class="w-100">
+                <el-col
+                  :xl="4"
+                  :lg="6"
+                  v-for="item in selectNews.attachedFile"
+                  :key="item.id"
+                >
+                  <div
+                    class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10"
+                    @mouseenter="showfileInfo(item)"
+                    @mouseleave="closefileInfo(item)"
+                  >
+                    <a
+                      v-if="!fileInfo[item.id]"
+                      :href="item.files"
+                      :download="item.files"
+                      target="_blank"
+                    >
+                      <img
+                        src="@/assets/images/icon/pdf_icon.png"
+                        :alt="item.fileName"
+                        width="40px"
+                      />
+                    </a>
+                    <div class="w-100 h-100 backCard" v-else>
+                      <a
+                        class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none"
+                        :href="item.files"
+                        :download="item.files"
+                        target="_blank"
+                      >
+                        <strong>{{ item.fileName }}</strong>
+                      </a>
+                    </div>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+          </div>
           <div class="pos-absolute t-0 r-0 mt-20 mr-20">
             <div
               class="modal__close d-flex align-items-center justify-content-center cur-pointer"
@@ -108,15 +153,30 @@ export default {
       contestMsg: [],
       selectNews: {},
       showNewsInfo: false,
+      fileInfo: {},
     };
   },
   methods: {
     viewInfo(data) {
       this.showNewsInfo = true;
       this.selectNews = data;
+      this.selectNews.attachedFile = JSON.parse(data.attachedFile);
     },
     goContestInfo() {
       this.$router.push({ name: "contestInfo" });
+    },
+    showfileInfo(data) {
+      this.fileInfo = [this.selectNews].reduce(
+        (a, b) => ((a[b.id] = true), a),
+        {}
+      );
+      this.fileInfo[data?.id] = !this.fileInfo[data?.id];
+    },
+    closefileInfo(data) {
+      this.fileInfo = [this.selectNews].reduce(
+        (a, b) => ((a[b.id] = false), a),
+        {}
+      );
     },
     getList() {
       this.$api.news(this.listQuery).then((res) => {
@@ -231,6 +291,26 @@ export default {
           border: none !important;
           ol {
             padding-left: 0;
+          }
+        }
+      }
+      &--fileCard {
+        border: 1px solid #ffffff;
+        width: 140px;
+        height: 100px;
+        background: transparent;
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        .backCard {
+          background: #ffffff;
+          strong {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            color: #000000;
           }
         }
       }

@@ -42,8 +42,10 @@
           <div
             class="block_right-bottom d-flex align-items-center justify-content-center"
           >
-            <img src="@/assets/images/logo/footer_logo.png" alt="" />
-            <img src="@/assets/images/logo/footer_logo_hover.png" alt="" />
+            <router-link to="/">
+              <img src="@/assets/images/logo/footer_logo.png" alt="" />
+              <img src="@/assets/images/logo/footer_logo_hover.png" alt="" />
+            </router-link>
           </div>
         </div>
       </div>
