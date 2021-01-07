@@ -46,7 +46,7 @@
           >
             <span class="p-10">{{ item.titleType }}</span>
             <div class="d-flex align-items-center">
-              <p class="m-0 mr-5">{{ item.author }}</p>
+              <p class="m-0 mr-10">{{ item.author }}</p>
               <img
                 src="@/assets/images/arrowRight_btn.png"
                 alt=""
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="p-15 publishCard__content">
-            <p class="m-0">{{ item.contents }}</p>
+            <p class="m-0" @click="goPublishInfo(item)">{{ item.contents }}</p>
           </div>
         </div>
       </div>

@@ -4,9 +4,9 @@
     <div class="d-none d-mb-block">
       <div class="headerBG" v-if="scrollLeftTop"></div>
       <!-- LOGO -->
-      <router-link to="/">
+      <a href="https://www.ntua.edu.tw/" target="_blank">
         <img class="pos-logo" src="../assets/NTUA_LOGO.svg" alt="NTUA_LOGO" />
-      </router-link>
+      </a>
       <!-- MENU -->
       <div>
         <span
@@ -34,8 +34,11 @@
       </div>
       <!-- left bar -->
       <div class="leftBar">
-        <img src="../assets/images/icon/leftBar.png" alt="" />
-        <div class="d-flex align-items-center flex-column" style="width: 60px">
+        <router-link to="/">
+          <img src="../assets/images/icon/leftBar.png" alt="" width="50px" height="580px" />
+        </router-link>
+        <div class="leftBar__transBlock"></div>
+        <div class="d-flex align-items-center flex-column" style="width: 50px">
           <a
             class="mt-11"
             href="https://www.facebook.com/crafts.ntua.edu.tw"
@@ -700,6 +703,15 @@ export default {
     z-index: 99;
     margin-top: 8rem;
     left: 1rem;
+    &__transBlock {
+      position: absolute;
+      top: 0;
+      margin-top: 60px;
+      width: 50px;
+      height: 520px;
+      background: transparent;
+      z-index: 100;
+    }
   }
 
   // phone

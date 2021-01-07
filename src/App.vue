@@ -4,7 +4,7 @@
       <div class="w-100 h-100 d-none d-mb-block">
         <img
           src="./assets/images/initial_movie/loadVideo.gif"
-          alt=""
+          alt="開場動畫"
           height="100%"
         />
       </div>
@@ -13,7 +13,7 @@
         class="d-block d-mb-none"
         style="padding-top: 30vh"
         src="./assets/images/initial_movie/loadVideo.gif"
-        alt=""
+        alt="開場動畫"
         width="100%"
       />
 
@@ -66,7 +66,7 @@ export default {
       if (this.firstLoad) {
         window.setTimeout(() => {
           this.$store.commit("SETFIRSTLOAD", false);
-        }, 11000);
+        }, 10500);
       }
     },
   },
@@ -88,8 +88,8 @@ export default {
     width: 100%;
     height: 100vh;
     &__ignore {
-      width: 100px;
-      height: 100px;
+      width: 5rem;
+      height: 5rem;
       border-radius: 50%;
       background: #52505a;
       &:hover {

@@ -314,13 +314,21 @@
               <div class="p-30">
                 <div
                   class="w-100 subjectCard d-flex align-items-center justify-content-center py-10 pos-relative"
-                  v-for="(item, index2) in downloadList"
-                  :key="index2"
+                  v-for="(item, key) in downloadList"
+                  :key="'DLL__' + key"
                 >
-                  <p class="m-0 mx-10">{{ item.leftYear }}</p>
-                  <p class="m-0 mx-10">{{ item.rightYear }}</p>
+                  <a
+                    class="px-5"
+                    :href="items.fileLink"
+                    :download="items.fileLink"
+                    target="_blank"
+                    v-for="items in item"
+                    :key="items.id"
+                  >
+                    {{ items.fileName }}
+                  </a>
                   <span class="subjectCard__tag p-6 pos-absolute t-0 l-0">
-                    <p class="m-0">{{ item.tagName }}</p>
+                    <p class="m-0">{{ key }}</p>
                   </span>
                 </div>
               </div>

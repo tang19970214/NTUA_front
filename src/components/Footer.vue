@@ -54,36 +54,43 @@
     <!-- phone -->
     <div class="footerForPhone d-block d-mb-none">
       <div class="w-100 d-flex flex-column">
-        <div class="footerForPhone-community w-100 py-20 d-flex">
+        <div class="footerForPhone-community w-100 py-10 d-flex align-items-center justify-content-around">
           <div
-            class="d-flex align-items-center mx-20"
+            class="d-flex align-items-center"
             v-for="(item, index) in contactForPhone"
             :key="'CFP_' + index"
           >
             <a :href="item.path" target="_blank">
-              <img :src="item.imgURL" alt="" />
+              <img :src="item.imgURL" alt="" width="40px" />
             </a>
           </div>
         </div>
-        <router-link to="/">
-          <div
-            class="footerForPhone-logo d-flex align-items-center justify-content-center flex-column"
-          >
-            <div class="px-60 pt-20 pb-40">
-              <img
-                src="../assets/images/logo/footer_logo.svg"
-                alt=""
-                width="100%"
-              />
-              <img
-                class="mt-30"
-                src="../assets/images/logo/footer_logo.png"
-                alt=""
-                width="100%"
-              />
+        <div
+          class="footerForPhone-logo d-flex align-items-center justify-content-center flex-column"
+        >
+          <div class="px-60 pt-20 pb-40">
+            <div class="w-100 d-flex align-items-center justify-content-center">
+              <a href="https://www.ntua.edu.tw/" target="_blank">
+                <img
+                  src="../assets/images/logo/footer_logo.svg"
+                  alt=""
+                  width="100%"
+                />
+              </a>
+            </div>
+
+            <div class="w-100 align-items-center justify-content-center">
+              <router-link to="/">
+                <img
+                  class="mt-30"
+                  src="../assets/images/logo/footer_logo.png"
+                  alt=""
+                  width="100%"
+                />
+              </router-link>
             </div>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -278,7 +285,6 @@ export default {
   .footerForPhone {
     &-community {
       background: #52505a;
-      overflow-x: auto;
     }
     &-logo {
       background: #1a191e;

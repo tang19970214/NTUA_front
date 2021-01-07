@@ -276,6 +276,16 @@ export default {
       showIMG_phone: false,
     };
   },
+  watch: {
+    "$route.params"(newVal, oldVal) {
+      console.log(newVal);
+      this.listQuery.RoomId = newVal.id;
+      console.log(this.listQuery.RoomId);
+      this.getAlbumTitle();
+      this.getList();
+      this.getMenu();
+    },
+  },
   methods: {
     getTouchIMG(item) {
       this.enlargeIMG = item.links;
@@ -294,6 +304,7 @@ export default {
       this.showIMG_phone = true;
     },
     showIntroduce(data) {
+      console.log(data);
       this.$router.push({
         name: "equipmentInfo",
         params: { id: data.id },

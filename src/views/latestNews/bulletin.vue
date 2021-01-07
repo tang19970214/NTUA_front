@@ -164,7 +164,7 @@ export default {
       this.selectNews.attachedFile = JSON.parse(data.attachedFile);
     },
     goBulletinInfo(data) {
-      this.$router.push({ name: "bulletinInfo" });
+      this.$router.push({ name: "bulletinInfo", params: { id: data.id } });
     },
     showfileInfo(data) {
       this.fileInfo = [this.selectNews].reduce(

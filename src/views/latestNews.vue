@@ -44,7 +44,7 @@
     </div>
 
     <div class="phone d-block d-mb-none pt-70">
-      <PhoneTitle :title="getPathName(newsSort)" :filterDate="true" />
+      <PhoneTitle :title="getPathName(newsSort)" :filterDate="false" />
       <router-view></router-view>
     </div>
   </div>

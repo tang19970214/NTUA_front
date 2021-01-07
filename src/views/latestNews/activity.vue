@@ -162,8 +162,8 @@ export default {
       this.selectNews = data;
       this.selectNews.attachedFile = JSON.parse(data.attachedFile);
     },
-    goActivityInfo() {
-      this.$router.push({ name: "activityInfo" });
+    goActivityInfo(data) {
+      this.$router.push({ name: "activityInfo", params: {id: data.id} });
     },
     showfileInfo(data) {
       this.fileInfo = [this.selectNews].reduce(

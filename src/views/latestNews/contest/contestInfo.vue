@@ -9,60 +9,69 @@
       </div>
       <div class="w-100 newsInfo">
         <div class="px-20 pt-40 pb-90">
-          <div class="w-100 newsInfo__card">
+          <div
+            class="w-100 newsInfo__card"
+            v-for="item in contestMsg"
+            :key="item.id"
+          >
             <div class="w-100 d-flex flex-row">
               <div class="newsInfo__card-date">
                 <div class="p-15 d-flex flex-column align-items-center">
-                  <p class="m-0">2020</p>
+                  <p class="m-0">{{ item.releaseDate | moment("YYYY") }}</p>
                   <span class="my-8"></span>
-                  <p class="m-0">10-13</p>
+                  <p class="m-0">{{ item.releaseDate | moment("MM-DD") }}</p>
                 </div>
               </div>
               <div class="newsInfo__card-context d-flex align-items-center">
                 <div class="p-15">
                   <p class="m-0">
-                    轉知
-                    故宮博物院教育展資處辦理「2020故宮線上策展人計畫徵選活動」
+                    {{ item.title }}
                   </p>
                 </div>
               </div>
             </div>
             <div class="w-100 newsInfo__card-content">
               <div class="p-15">
+                <!-- summary -->
                 <div class="w-100 notice">
                   <p class="m-0">
-                    有章藝術博物館展場檔期於109年10月16日
-                    （五）開放第一階段申請，至11月6日止。
+                    {{ item.summury }}
                   </p>
                 </div>
-                <div class="w-100 mt-100">
+                <!-- contents -->
+                <div class="w-100 mt-10 context">
+                  <vue-editor v-model="item.contents"></vue-editor>
+                </div>
+                <!-- file -->
+                <div class="w-100" v-if="item.attachedFile">
                   <div
                     class="downloadCard py-25 mb-15"
-                    v-for="(item, index1) in downloadList"
+                    v-for="(items, index1) in item.attachedFile"
                     :key="index1"
                   >
                     <el-row class="d-flex align-items-center">
-                      <el-col :span="6">
+                      <el-col :span="8">
                         <div
                           class="w-100 d-flex align-items-center justify-content-center"
                         >
-                          <img
-                            src="@/assets/images/icon/pdf_icon.png"
-                            alt=""
-                            v-if="item.file"
-                          />
+                          <a
+                            :href="items.files"
+                            :download="items.files"
+                            target="_blank"
+                          >
+                            <img
+                              src="@/assets/images/icon/pdf_icon.png"
+                              alt=""
+                            />
+                          </a>
                         </div>
                       </el-col>
-                      <el-col :span="18">
+                      <el-col :span="16">
                         <div
                           class="w-100 d-flex align-items-center justify-content-center flex-column"
                         >
-                          <p
-                            class="m-0"
-                            v-for="(items, index2) in item.option"
-                            :key="index2"
-                          >
-                            {{ items.context }}
+                          <p class="m-0">
+                            {{ items.fileName }}
                           </p>
                         </div>
                       </el-col>
@@ -87,20 +96,29 @@ export default {
   },
   data() {
     return {
-      downloadList: [
-        {
-          file: true,
-          option: [
-            {
-              context: "線上申請",
-            },
-            {
-              context: "系統審核流程說明",
-            },
-          ],
-        },
-      ],
+      listQuery: {
+        NewsTypeId: "SYS_NEWS_COMPETITION",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      contestMsg: [],
     };
+  },
+  methods: {
+    getList() {
+      this.$api.news(this.listQuery).then((res) => {
+        this.contestMsg = res.data.data.filter(
+          (arr) => arr.id === this.$route.params.id
+        );
+        this.contestMsg[0].attachedFile = JSON.parse(
+          this.contestMsg[0].attachedFile
+        );
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -155,6 +173,20 @@ export default {
           line-height: 17px;
           letter-spacing: 0.2em;
           color: #596164;
+        }
+        .context {
+          .ql-editor {
+            min-height: 100px;
+          }
+          .ql-toolbar {
+            display: none !important;
+          }
+          .ql-container {
+            border: none !important;
+            ol {
+              padding-left: 0;
+            }
+          }
         }
         p {
           font-size: 14px;

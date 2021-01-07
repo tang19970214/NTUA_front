@@ -41,10 +41,21 @@
             :key="index1"
           >
             <el-row class="py-20">
-              <el-col class="text-center" :span="10">{{
-                item.releaseDate | moment("YYYY-MM-DD")
-              }}</el-col>
-              <el-col class="text-left" :span="14">{{ item.title }}</el-col>
+              <el-col class="text-center" :span="10">
+                <div
+                  class="d-flex align-items-center justify-content-center flex-column"
+                >
+                  <p class="m-0">
+                    {{ item.releaseDate | moment("YYYY") }}
+                  </p>
+                  <p class="m-0">
+                    {{ item.releaseDate | moment("MM-DD") }}
+                  </p>
+                </div>
+              </el-col>
+              <el-col class="text-left resultCard__content--text" :span="14">
+                <p class="m-0">{{ item.title }}</p>
+              </el-col>
             </el-row>
           </div>
         </div>
@@ -242,6 +253,13 @@ export default {
         line-height: 17px;
         letter-spacing: 0.2em;
         color: #ffffff;
+        &--text {
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+        }
       }
     }
   }

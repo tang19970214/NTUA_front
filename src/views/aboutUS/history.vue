@@ -156,6 +156,9 @@
                 >
                   <div class="w-100 text-center">
                     <div class="px-50">
+                      <div class="w-100 text-left mb-20">
+                        <strong>{{ getEducationInfo.name }}</strong>
+                      </div>
                       <img
                         :src="getEducationInfo.options.imgURL"
                         alt=""
@@ -327,6 +330,7 @@ export default {
       this.getEducationInfo = data;
     },
     openPeriod_phone(data) {
+      console.log(data);
       this.showPeriod_phone = true;
       this.getEducationInfo = data;
     },
@@ -357,7 +361,6 @@ export default {
         color: #596164;
       }
     }
-
     .education {
       width: 280px;
       height: 100px;
@@ -451,6 +454,10 @@ export default {
     background: #52505a;
     border-radius: 40px;
     &__content {
+      strong {
+        color: #ceb87f;
+        font-size: 18px;
+      }
       &-yearCard {
         background: #52505a;
         border-radius: 5px;

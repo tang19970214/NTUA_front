@@ -121,9 +121,9 @@
           </div>
           <div class="teacherCard__name">
             <div class="p-10 d-flex flex-row justify-content-between">
-              <div class="d-flex flex-column">
+              <div class="d-flex flex-row">
                 <p class="m-0">{{ item.name }}</p>
-                <p class="m-0">{{ item.subName }}</p>
+                <p class="m-0 pt-10">{{ item.subName }}</p>
               </div>
               <div
                 class="d-flex align-items-center"

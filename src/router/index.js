@@ -3,6 +3,11 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err);
+};
+
 const routes = [{
     path: '/',
     name: 'Home',
@@ -198,7 +203,7 @@ const routes = [{
   },
 
   {
-    path: '/bulletinInfo',
+    path: '/bulletinInfo/:id',
     name: 'bulletinInfo',
     component: () => import('../views/latestNews/bulletin/bulletinInfo.vue'),
     meta: {
@@ -206,7 +211,7 @@ const routes = [{
     }
   },
   {
-    path: '/contestInfo',
+    path: '/contestInfo/:id',
     name: 'contestInfo',
     component: () => import('../views/latestNews/contest/contestInfo.vue'),
     meta: {
@@ -214,7 +219,7 @@ const routes = [{
     }
   },
   {
-    path: '/activityInfo',
+    path: '/activityInfo/:id',
     name: 'activityInfo',
     component: () => import('../views/latestNews/activity/activityInfo.vue'),
     meta: {
@@ -274,7 +279,7 @@ const routes = [{
 const router = new VueRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
-    if (to.meta.goTop) {
+    if (to.meta.goTop || document.body.clientWidth <= 1280) {
       return {
         x: 0,
         y: 0

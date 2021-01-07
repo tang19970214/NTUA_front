@@ -23,11 +23,13 @@
                 :key="item.id"
               >
                 <div class="w-100 pos-relative">
-                  <el-image
-                    style="width: 100%; height: 300px"
-                    :src="item.pics"
-                    fit="cover"
-                  ></el-image>
+                  <router-link :to="{ name: 'award' }">
+                    <el-image
+                      style="width: 100%; height: 300px"
+                      :src="item.pics"
+                      fit="cover"
+                    ></el-image>
+                  </router-link>
                   <span
                     class="introduceCard d-flex align-items-end justify-content-between"
                   >
@@ -117,12 +119,13 @@
             <div style="width: 330px">
               <div class="w-100 collapseCard">
                 <div
-                  class="h-100 d-flex align-items-center justify-content-between"
+                  class="h-100 d-flex align-items-center justify-content-between cur-pointer"
+                  @click="goNews()"
                 >
                   <div>
                     <strong>VIEW MORE</strong>
                   </div>
-                  <div @click="goNews()">
+                  <div>
                     <img
                       class="cur-pointer"
                       src="@/assets/images/arrowRight_btn.png"
@@ -140,7 +143,8 @@
                   :key="item.id"
                 >
                   <div
-                    class="h-100 d-flex align-items-center justify-content-between"
+                    class="h-100 d-flex align-items-center justify-content-between cur-pointer"
+                    @click="goNews(id)"
                   >
                     <div>
                       <p class="m-0">
@@ -152,7 +156,7 @@
                         {{ item.title }}
                       </p>
                     </div>
-                    <div @click="goNews()">
+                    <div>
                       <img
                         class="cur-pointer"
                         src="@/assets/images/arrowRight_btn.png"
@@ -176,21 +180,17 @@
               v-for="(item, index) in craftsList"
               :key="'CF__' + index"
             >
-              <img :src="item.imgURL" alt="" />
+              <img :src="item.imgURL" alt="" @click="goCraft(item.name_en)" />
               <div
                 class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
+                @click="goCraft(item.name_en)"
               >
                 <div class="mb-30">
                   <p class="m-0">{{ item.name_ch }}</p>
                   <p class="m-0">{{ item.name_en }}</p>
                 </div>
                 <div class="pt-10 craftCard__borTop">
-                  <a
-                    class="text-decoration-none cur-pointer"
-                    @click="goCraft(item.name_en)"
-                  >
-                    VIEW MORE
-                  </a>
+                  <a class="text-decoration-none cur-pointer"> VIEW MORE </a>
                 </div>
               </div>
             </div>
@@ -409,13 +409,13 @@
             <TitleText textTitle="WHAT'S NEW" />
             <div
               class="whatsnew__viewBtn ml-auto d-flex align-items-center flex-row pb-10"
+              @click="goNews()"
             >
               <p class="m-0 pr-20">VIEW MORE</p>
               <img
                 src="@/assets/images/arrowRight_btn.png"
                 alt=""
                 width="24px"
-                @click="goNews()"
               />
             </div>
           </div>
@@ -430,16 +430,13 @@
               </div>
               <div
                 class="whatsnew__content--context w-100 d-flex align-items-center justify-content-between mt-10 pb-10"
+                @click="goNewsInfo(item.id)"
               >
-                <div class="d-flex justify-content-start flex-column">
+                <div class="d-flex justify-content-start flex-column mr-10">
                   <p class="m-0">{{ item.title }}</p>
                 </div>
                 <div class="ml-auto">
-                  <img
-                    src="@/assets/images/arrowRight_btn.png"
-                    alt=""
-                    @click="goNews()"
-                  />
+                  <img src="@/assets/images/arrowRight_btn.png" alt="" />
                 </div>
               </div>
             </div>
@@ -456,20 +453,17 @@
                   src="@/assets/images/craft/craft_1.png"
                   alt=""
                   width="110px"
+                  @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
                 />
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
+                  @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
                 >
                   <div class="p-10">
                     <div class="p-10">
                       <p class="m-0">陶瓷</p>
                     </div>
-                    <a
-                      class="text-decoration-none mt-10"
-                      @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
-                    >
-                      VIEW MORE
-                    </a>
+                    <a class="text-decoration-none mt-10"> VIEW MORE </a>
                   </div>
                 </div>
               </div>
@@ -480,20 +474,17 @@
                   src="@/assets/images/craft/craft_2.png"
                   alt=""
                   width="110px"
+                  @click="goCraft('METALWORKING')"
                 />
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
+                  @click="goCraft('METALWORKING')"
                 >
                   <div class="p-10">
                     <div class="py-10">
                       <p class="m-0">金工</p>
                     </div>
-                    <a
-                      class="text-decoration-none mt-10"
-                      @click="goCraft('METALWORKING')"
-                    >
-                      VIEW MORE
-                    </a>
+                    <a class="text-decoration-none mt-10"> VIEW MORE </a>
                   </div>
                 </div>
               </div>
@@ -504,20 +495,17 @@
                   src="@/assets/images/craft/craft_3.png"
                   alt=""
                   width="110px"
+                  @click="goCraft('WOODWORKING')"
                 />
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
+                  @click="goCraft('WOODWORKING')"
                 >
                   <div class="p-10">
                     <div class="py-10">
                       <p class="m-0">木工</p>
                     </div>
-                    <a
-                      class="text-decoration-none mt-10"
-                      @click="goCraft('WOODWORKING')"
-                    >
-                      VIEW MORE
-                    </a>
+                    <a class="text-decoration-none mt-10"> VIEW MORE </a>
                   </div>
                 </div>
               </div>
@@ -528,20 +516,17 @@
                   src="@/assets/images/craft/craft_4.png"
                   alt=""
                   width="110px"
+                  @click="goCraft('PRODUCT')"
                 />
                 <div
                   class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
+                  @click="goCraft('PRODUCT')"
                 >
                   <div class="p-10">
                     <div class="py-10">
                       <p class="m-0">產品</p>
                     </div>
-                    <a
-                      class="text-decoration-none mt-10"
-                      @click="goCraft('PRODUCT')"
-                    >
-                      VIEW MORE
-                    </a>
+                    <a class="text-decoration-none mt-10"> VIEW MORE </a>
                   </div>
                 </div>
               </div>
@@ -552,7 +537,7 @@
         <div class="access w-100">
           <TitleText textTitle="ACCESS" />
           <div
-            class="w-100 h-100"
+            class="w-100 h-100 mt-20"
             style="height: 450px"
             id="map_phone"
             ref="map"
@@ -607,7 +592,7 @@
                           {{ cxt.title }}
                         </p>
                         <ul class="m-0 p-0">
-                          <li class="py-10 font-s-13" v-if="cxt.context">
+                          <li class="py-10" v-if="cxt.context">
                             {{ cxt.context }}
                           </li>
                         </ul>
@@ -1341,7 +1326,6 @@ export default {
       });
     },
     openTrafficInfo(data) {
-      console.log(data);
       this.getTraffic = data.code;
     },
     works_prev() {
@@ -1358,6 +1342,9 @@ export default {
     },
     goNews() {
       this.$router.push({ name: "bulletin" });
+    },
+    goNewsInfo(id) {
+      this.$router.push({ name: "bulletinInfo", params: { id: id } });
     },
     goCraft(sortName) {
       let paramsVal;
@@ -1804,7 +1791,7 @@ export default {
           }
           .content {
             background: #2d2d2d;
-            font-size: 4px;
+            font-size: 13px;
             letter-spacing: 0.2em;
             color: #ffffff;
             a {

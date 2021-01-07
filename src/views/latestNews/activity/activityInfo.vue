@@ -9,100 +9,73 @@
       </div>
       <div class="w-100 newsInfo">
         <div class="px-20 pt-40 pb-90">
-          <div class="w-100 newsInfo__card">
+          <div
+            class="w-100 newsInfo__card"
+            v-for="item in activityInfo"
+            :key="item.id"
+          >
             <div class="w-100 d-flex flex-row">
               <div class="newsInfo__card-date">
                 <div class="p-15 d-flex flex-column align-items-center">
-                  <p class="m-0">2020</p>
+                  <p class="m-0">{{ item.releaseDate | moment("YYYY") }}</p>
                   <span class="my-8"></span>
-                  <p class="m-0">10-08</p>
+                  <p class="m-0">{{ item.releaseDate | moment("MM-DD") }}</p>
                 </div>
               </div>
               <div class="newsInfo__card-context d-flex align-items-center">
                 <div class="p-15">
                   <p class="m-0">
-                    轉知中華民國對外貿易發展協會主辦「跨世代設計美學與大師有約–台灣
-                    設計X精品美學」講座
+                    {{ item.title }}
                   </p>
                 </div>
               </div>
             </div>
             <div class="w-100 newsInfo__card-content">
               <div class="p-15">
-                <div class="w-100 notice d-flex align-items-center flex-column">
-                  <div class="w-100">
-                    <p class="m-0">
-                      邀請實踐大學設計學院官政能榮譽講座教授、
-                      台灣設計研究院張基義院長與設計系學生及品
-                      牌廠商近距離交流，追溯由設計師的美感創想
-                      ，轉變為產品的過程及要點，將經驗傳承給設
-                      計新血、以及所有希望將台灣設計帶往國際市
-                      場的優秀人才，鼓勵師生參與。 活動內容如下：
-                    </p>
-                  </div>
-                  <div class="w-100 mt-10">
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="4">主題｜</el-col>
-                      <el-col :span="20">台灣X設計</el-col>
-                    </el-row>
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="4">講師｜</el-col>
-                      <el-col :span="20">
-                        實踐大學設計學院 榮譽講座教授 －官政能 教授
+                <!-- summary -->
+                <div class="w-100 notice">
+                  <p class="m-0">
+                    {{ item.summury }}
+                  </p>
+                </div>
+                <!-- contents -->
+                <div class="w-100 mt-10 context">
+                  <vue-editor v-model="item.contents"></vue-editor>
+                </div>
+                <!-- file -->
+                <div class="w-100" v-if="item.attachedFile">
+                  <div
+                    class="downloadCard py-25 mb-15"
+                    v-for="(items, index1) in item.attachedFile"
+                    :key="index1"
+                  >
+                    <el-row class="d-flex align-items-center">
+                      <el-col :span="8">
+                        <div
+                          class="w-100 d-flex align-items-center justify-content-center"
+                        >
+                          <a
+                            :href="items.files"
+                            :download="items.files"
+                            target="_blank"
+                          >
+                            <img
+                              src="@/assets/images/icon/pdf_icon.png"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                      </el-col>
+                      <el-col :span="16">
+                        <div
+                          class="w-100 d-flex align-items-center justify-content-center flex-column"
+                        >
+                          <p class="m-0">
+                            {{ items.fileName }}
+                          </p>
+                        </div>
                       </el-col>
                     </el-row>
-                    <el-row class="w-100 mt-20 mb-5">
-                      <el-col :span="4">主題｜</el-col>
-                      <el-col :span="20">台灣X設計 講師</el-col>
-                    </el-row>
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="4">講師｜</el-col>
-                      <el-col :span="20">台灣設計研究院 — 張基義 院長</el-col>
-                    </el-row>
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="7">報名連結｜</el-col>
-                      <el-col :span="17">
-                        https://www.surveycake. com/s/eanpV
-                      </el-col>
-                    </el-row>
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="7">活動時間｜</el-col>
-                      <el-col :span="17">
-                        2020 年 10月18日(日) 13:00 - 16:00
-                      </el-col>
-                    </el-row>
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="7">報到地點｜</el-col>
-                      <el-col :span="17">
-                        南港台灣精品館<br />（南港展覽館一館三樓）
-                      </el-col>
-                    </el-row>
-                  </div>
-
-                  <div class="w-100">
-                    <p class="m-0">
-                      *可搭乘捷運板南線、文湖線至南港展覽館站
-                      下車，板南線請由1號出口、文湖線由2號出口出站。
-                    </p>
-                  </div>
-
-                  <div class="w-100 mt-10">
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="7">報名費用｜</el-col>
-                      <el-col :span="17">免費 </el-col>
-                    </el-row>
-                    <el-row class="w-100 mb-5">
-                      <el-col :span="4">備註｜</el-col>
-                      <el-col :span="20">限額120人，額滿為止。</el-col>
-                    </el-row>
-                  </div>
-
-                  <div class="w-100">
-                    <p class="m-0">
-                      除有與大師對談之機會，活動當天至台灣精品
-                      館參觀互動亦可獲得精美好禮，
-                      另將提供參與學生學習時數證明，敬邀貴校師 生報名參加。
-                    </p>
                   </div>
                 </div>
               </div>
@@ -123,6 +96,13 @@ export default {
   },
   data() {
     return {
+      listQuery: {
+        NewsTypeId: "SYS_NEWS_ACTIVITY",
+        page: 1,
+        limit: 20,
+        key: undefined,
+      },
+      activityInfo: [],
       downloadList: [
         {
           file: true,
@@ -137,6 +117,21 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    getList() {
+      this.$api.news(this.listQuery).then((res) => {
+        this.activityInfo = res.data.data.filter(
+          (arr) => arr.id === this.$route.params.id
+        );
+        this.activityInfo[0].attachedFile = JSON.parse(
+          this.activityInfo[0].attachedFile
+        );
+      });
+    },
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -192,6 +187,21 @@ export default {
           letter-spacing: 0.2em;
           color: #596164;
         }
+        .context {
+          .ql-editor {
+            min-height: 100px;
+          }
+          .ql-toolbar {
+            display: none !important;
+          }
+          .ql-container {
+            border: none !important;
+            ol {
+              padding-left: 0;
+            }
+          }
+        }
+
         p {
           font-size: 14px;
           line-height: 17px;

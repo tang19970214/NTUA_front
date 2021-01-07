@@ -10,7 +10,9 @@
           :key="'RD__' + index"
         >
           <div class="bookIMG">
-            <img :src="item.coverPic" alt="" />
+            <router-link :to="{ name: 'recordInfo', params: { id: item.id } }">
+              <img :src="item.coverPic" alt="" />
+            </router-link>
           </div>
           <div class="bookContent">
             <strong class="m-0 bookContent-title">{{ item.title }}</strong>
@@ -48,7 +50,9 @@
           :key="index1"
         >
           <div class="px-40">
-            <img :src="item.coverPic" alt="" width="100%" />
+            <router-link :to="{ name: 'recordInfo', params: { id: item.id } }">
+              <img :src="item.coverPic" alt="" width="100%" />
+            </router-link>
           </div>
           <div class="w-100 text-center">
             <div class="pt-40 pb-10 recordCard__content">
