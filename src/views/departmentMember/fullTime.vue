@@ -76,7 +76,7 @@
         :key="fetch.id"
       >
         <div
-          class="teacherCard d-flex align-items-center flex-row mr-40"
+          class="teacherCard d-flex align-items-center flex-row pr-40"
           v-for="(item, index1) in fetch"
           :key="index1"
         >

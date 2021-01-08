@@ -235,7 +235,15 @@ const routes = [{
     }
   },
   {
-    path: '/awardInfo',
+    path: '/alumniInfo/:id',
+    name: 'alumniInfo',
+    component: () => import('../views/alumni/alumniInfo.vue'),
+    meta: {
+      mainPage: "alumni"
+    }
+  },
+  {
+    path: '/awardInfo/:id',
     name: 'awardInfo',
     component: () => import('../views/teachingResult/award/awardInfo.vue'),
     meta: {
@@ -270,6 +278,14 @@ const routes = [{
     path: '/studioResultInfo/:craft',
     name: 'studioResultInfo',
     component: () => import('../views/teachingResult/studioResult/studioResultInfo.vue'),
+    meta: {
+      mainPage: "teachingResult"
+    }
+  },
+  {
+    path: '/internshipResultInfo/:id',
+    name: 'internshipResultInfo',
+    component: () => import('../views/teachingResult/internshipResult/internshipResultInfo.vue'),
     meta: {
       mainPage: "teachingResult"
     }

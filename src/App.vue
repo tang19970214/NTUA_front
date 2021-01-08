@@ -33,7 +33,11 @@
           <div
             class="goTopBtn d-flex align-items-center justify-content-center"
           >
-            <img src="./assets/images/icon/top_icon.png" alt="回到頂端" />
+            <img
+              src="./assets/images/icon/dataimage.svg"
+              alt="回到頂部"
+              width="40px"
+            />
           </div>
         </el-backtop>
       </div>

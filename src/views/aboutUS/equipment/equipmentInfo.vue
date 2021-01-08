@@ -1,5 +1,6 @@
 <template>
   <div id="equipmentInfo">
+    <!-- web -->
     <div class="web d-none d-mb-block">
       <div class="w-100 text-left">
         <p class="Txt-title">教學設備與空間</p>
@@ -30,12 +31,12 @@
                     <div
                       class="introduceCard__classIMG w-100 d-flex justify-content-center"
                     >
-                      <img
-                        class="cur-pointer"
+                      <el-image
                         :src="item.links"
-                        alt=""
-                        @click="getTouchIMG(item)"
-                      />
+                        fit="cover"
+                        style="width: 380px; height: 300px"
+                        @click="getTouchIMG(index)"
+                      ></el-image>
                     </div>
 
                     <div
@@ -90,6 +91,7 @@
       </div>
     </div>
 
+    <!-- phone -->
     <div class="phone d-block d-mb-none pt-70">
       <div
         class="equipmentInfo__Title w-100 d-flex align-items-center flex-row"
@@ -103,17 +105,21 @@
       <div class="equipmentInfo__card mt-5">
         <div class="p-20">
           <el-row>
-            <el-col :span="12" v-for="item in classData" :key="item.id">
+            <el-col
+              :span="12"
+              v-for="(item, index1) in classData"
+              :key="item.id"
+            >
               <div class="p-10">
                 <div
                   class="equipmentInfo__card-information w-100 d-flex align-items-center justify-content-center flex-column"
                 >
-                  <img
+                  <el-image
                     :src="item.links"
-                    alt=""
-                    width="100%"
-                    @click="getTouchIMG_phone(item)"
-                  />
+                    fit="cover"
+                    style="width: 100%; height: 100px"
+                    @click="getTouchIMG_phone(index1)"
+                  ></el-image>
                   <strong class="mt-15 pt-10 px-20">展覽空間</strong>
                 </div>
               </div>
@@ -160,27 +166,54 @@
             <div class="classCard w-100">
               <div class="p-100">
                 <div class="w-100 d-flex align-items-end flex-row">
-                  <img :src="enlargeIMG" alt="" width="700px" />
-                  <div class="classCard__introduce d-inline-flex">
-                    <div class="px-50 pt-60 pb-80">
-                      <div
-                        class="w-100 classCard__introduce-title text-left pb-5"
-                      >
-                        <strong>展覽空間</strong>
+                  <img :src="classData[selectNum].links" alt="" width="700px" />
+                  <div
+                    class="d-flex align-items-center justify-content-center flex-column"
+                  >
+                    <div
+                      class="d-flex align-items-center justify-content-between"
+                    >
+                      <div class="w-100 text-right">
+                        <img
+                          v-if="selectNum > 0"
+                          class="mr-20 cur-pointer"
+                          src="@/assets/images/arrowLeft_btn.png"
+                          alt="上一張"
+                          @click="prevPic"
+                        />
                       </div>
-                      <div class="w-100 pr-60 classCard__introduce-content">
-                        <el-row class="pt-10">
-                          <el-col :span="12">上傳時間</el-col>
-                          <el-col :span="12">{{
-                            enContent.createDate | moment("YYYY-MM-DD")
-                          }}</el-col>
-                        </el-row>
-                        <el-row class="pt-10">
-                          <el-col :span="12">上傳者</el-col>
-                          <el-col :span="12">
-                            {{ enContent.createUserName }}
-                          </el-col>
-                        </el-row>
+                      <div class="w-100 text-left">
+                        <img
+                          v-if="selectNum < listCount"
+                          class="ml-20 cur-pointer"
+                          src="@/assets/images/arrowRight_btn.png"
+                          alt="下一張"
+                          @click="nextPic"
+                        />
+                      </div>
+                    </div>
+                    <div class="classCard__introduce d-inline-flex">
+                      <div class="px-50 pt-60 pb-80">
+                        <div
+                          class="w-100 classCard__introduce-title text-left pb-5"
+                        >
+                          <strong>展覽空間</strong>
+                        </div>
+                        <div class="w-100 pr-60 classCard__introduce-content">
+                          <el-row class="pt-10">
+                            <el-col :span="12">上傳時間</el-col>
+                            <el-col :span="12">{{
+                              classData[selectNum].createDate
+                                | moment("YYYY-MM-DD")
+                            }}</el-col>
+                          </el-row>
+                          <el-row class="pt-10">
+                            <el-col :span="12">上傳者</el-col>
+                            <el-col :span="12">
+                              {{ classData[selectNum].createUserName }}
+                            </el-col>
+                          </el-row>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -215,11 +248,10 @@
                   <i class="el-icon-close"></i>
                 </div>
               </div>
-
               <div
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
-                <img :src="enlargeIMG" alt="" width="100%" />
+                <img :src="classData[selectNum].links" alt="" width="100%" />
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
@@ -227,17 +259,39 @@
                     >
                       <strong>展覽空間</strong>
                     </div>
+                    <div
+                      class="w-100 d-flex align-items-center justify-content-between my-8"
+                    >
+                      <div class="w-100 text-right">
+                        <img
+                          v-if="selectNum > 0"
+                          class="mr-20 cur-pointer"
+                          src="@/assets/images/arrowLeft_btn.png"
+                          alt="上一張"
+                          @click="prevPic"
+                        />
+                      </div>
+                      <div class="w-100 text-left">
+                        <img
+                          v-if="selectNum < listCount"
+                          class="ml-20 cur-pointer"
+                          src="@/assets/images/arrowRight_btn.png"
+                          alt="下一張"
+                          @click="nextPic"
+                        />
+                      </div>
+                    </div>
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
                         <el-col :span="12">{{
-                          enContent.createDate | moment("YYYY-MM-DD")
+                          classData[selectNum].createDate | moment("YYYY-MM-DD")
                         }}</el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
                         <el-col :span="12">
-                          {{ enContent.createUserName }}
+                          {{ classData[selectNum].createUserName }}
                         </el-col>
                       </el-row>
                     </div>
@@ -270,37 +324,27 @@ export default {
       albumTitle: "",
       classData: [],
       anotherClassList: [],
-      enlargeIMG: "",
-      enContent: {},
+      listCount: "",
+      selectNum: "",
       showIMG: false,
       showIMG_phone: false,
     };
   },
   watch: {
     "$route.params"(newVal, oldVal) {
-      console.log(newVal);
       this.listQuery.RoomId = newVal.id;
-      console.log(this.listQuery.RoomId);
       this.getAlbumTitle();
       this.getList();
       this.getMenu();
     },
   },
   methods: {
-    getTouchIMG(item) {
-      this.enlargeIMG = item.links;
-      this.enContent = {
-        createUserName: item.createUserName,
-        createDate: item.createDate,
-      };
+    getTouchIMG(num) {
+      this.selectNum = num;
       this.showIMG = true;
     },
-    getTouchIMG_phone(item) {
-      this.enlargeIMG = item.links;
-      this.enContent = {
-        createUserName: item.createUserName,
-        createDate: item.createDate,
-      };
+    getTouchIMG_phone(num) {
+      this.selectNum = num;
       this.showIMG_phone = true;
     },
     showIntroduce(data) {
@@ -315,9 +359,16 @@ export default {
         this.albumTitle = res.data.result.title;
       });
     },
+    prevPic() {
+      this.selectNum--;
+    },
+    nextPic() {
+      this.selectNum++;
+    },
     getList() {
       this.$api.classroomPics(this.listQuery).then((res) => {
         this.classData = res.data.data;
+        this.listCount = res.data.count - 1;
       });
     },
     getMenu() {
@@ -357,6 +408,7 @@ export default {
       .introduceCard {
         background: #2d2d2d;
         &__classIMG {
+          cursor: pointer;
           img:hover {
             transition: all 0.4s;
             opacity: 0.6;

@@ -23,7 +23,7 @@
                 <div
                   class="recordCard__info w-100 d-flex align-items-center justify-content-start flex-column"
                 >
-                  <img :src="item.pic" alt="" @click="getTouchIMG(item)" />
+                  <img :src="item.pic" alt="" @click="getTouchIMG(index)" />
                   <span class="mt-40 mb-10"></span>
                   <p class="m-0 text-center">{{ item.title }}</p>
                 </div>
@@ -60,12 +60,12 @@
                 class="recordInfo__content w-100 d-flex align-items-center justify-content-start flex-column"
               >
                 <div class="px-15">
-                  <img
+                  <el-image
                     :src="item.pic"
-                    alt=""
-                    width="100%"
-                    @click="getTouchIMG_phone(item)"
-                  />
+                    fit="cover"
+                    style="width: 100%; height: 100px"
+                    @click="getTouchIMG_phone(index1)"
+                  ></el-image>
                 </div>
                 <div
                   class="px-5 d-flex flex-column align-items-center justify-content-center"
@@ -101,7 +101,29 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <div class="w-100">
-                  <img :src="selectInfo.pic" alt="" width="100%" />
+                  <img :src="recordList[selectNum].pic" alt="" width="100%" />
+                </div>
+                <div
+                  class="w-100 d-flex align-items-center justify-content-between my-8"
+                >
+                  <div class="w-100 text-right">
+                    <img
+                      v-if="selectNum > 0"
+                      class="mr-20 cur-pointer"
+                      src="@/assets/images/arrowLeft_btn.png"
+                      alt="上一張"
+                      @click="prevPic"
+                    />
+                  </div>
+                  <div class="w-100 text-left">
+                    <img
+                      v-if="selectNum < listCount"
+                      class="ml-20 cur-pointer"
+                      src="@/assets/images/arrowRight_btn.png"
+                      alt="下一張"
+                      @click="nextPic"
+                    />
+                  </div>
                 </div>
                 <div class="w-100 classCardPhone__introduce">
                   <div
@@ -110,20 +132,25 @@
                     <div
                       class="w-100 classCardPhone__introduce-title text-left pb-5"
                     >
-                      <strong>{{ selectInfo.title }}</strong>
+                      <strong>{{ recordList[selectNum].title }}</strong>
                     </div>
                     <div
                       class="w-100 classCardPhone__introduce-content text-center"
                     >
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
-                        <el-col :span="12">{{
-                          selectInfo.uploadTime | moment("YYYY-MM-DD")
-                        }}</el-col>
+                        <el-col :span="12">
+                          {{
+                            recordList[selectNum].createDate
+                              | moment("YYYY-MM-DD")
+                          }}
+                        </el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
-                        <el-col :span="12">{{ selectInfo.uploadUser }}</el-col>
+                        <el-col :span="12">
+                          {{ recordList[selectNum].createUserName }}
+                        </el-col>
                       </el-row>
                     </div>
                   </div>
@@ -155,25 +182,52 @@
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
                 <div class="px-30">
-                  <img :src="selectInfo.pic" alt="" width="100%" />
+                  <img :src="recordList[selectNum].pic" alt="" width="100%" />
+                </div>
+                <div
+                  class="w-100 d-flex align-items-center justify-content-between my-8"
+                >
+                  <div class="w-100 text-right">
+                    <img
+                      v-if="selectNum > 0"
+                      class="mr-20 cur-pointer"
+                      src="@/assets/images/arrowLeft_btn.png"
+                      alt="上一張"
+                      @click="prevPic"
+                    />
+                  </div>
+                  <div class="w-100 text-left">
+                    <img
+                      v-if="selectNum < listCount || listCount > 1"
+                      class="ml-20 cur-pointer"
+                      src="@/assets/images/arrowRight_btn.png"
+                      alt="下一張"
+                      @click="nextPic"
+                    />
+                  </div>
                 </div>
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
                       class="w-100 classCardPhone__introduce-title text-left pb-5"
                     >
-                      <strong>{{ selectInfo.title }}</strong>
+                      <strong>{{ recordList[selectNum].title }}</strong>
                     </div>
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
-                        <el-col :span="12">{{
-                          selectInfo.uploadTime | moment("YYYY-MM-DD")
-                        }}</el-col>
+                        <el-col :span="12">
+                          {{
+                            recordList[selectNum].createDate
+                              | moment("YYYY-MM-DD")
+                          }}
+                        </el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
-                        <el-col :span="12">{{ selectInfo.uploadUser }}</el-col>
+                        <el-col :span="12">
+                          {{ recordList[selectNum].createUserName }}
+                        </el-col>
                       </el-row>
                     </div>
                   </div>
@@ -203,7 +257,8 @@ export default {
         key: undefined,
       },
       recordList: [],
-      selectInfo: {},
+      listCount: "",
+      selectNum: "",
       showIMG: false,
       showIMG_phone: false,
     };
@@ -212,27 +267,24 @@ export default {
     goBackRecord() {
       this.$router.push({ name: "record" });
     },
-    getTouchIMG(data) {
-      this.selectInfo = {
-        pic: data.pic,
-        title: data.title,
-        uploadTime: data.createDate,
-        uploadUser: data.createUserName,
-      };
+    getTouchIMG(num) {
+      this.selectNum = num;
       this.showIMG = true;
     },
-    getTouchIMG_phone(data) {
-      this.selectInfo = {
-        pic: data.pic,
-        title: data.title,
-        uploadTime: data.createDate,
-        uploadUser: data.createUserName,
-      };
+    getTouchIMG_phone(num) {
+      this.selectNum = num;
       this.showIMG_phone = true;
+    },
+    prevPic() {
+      this.selectNum--;
+    },
+    nextPic() {
+      this.selectNum++;
     },
     getList() {
       this.$api.departmentAlbemPics(this.listQuery).then((res) => {
         this.recordList = res.data.data;
+        this.listCount = res.data.count - 1;
       });
     },
   },
@@ -303,7 +355,6 @@ export default {
     .recordInfo {
       background: #2d2d2d;
       &__content {
-        min-height: 190px;
         span {
           border-top: 1px solid #ceb87f;
           width: 120px;

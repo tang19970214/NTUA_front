@@ -1,5 +1,6 @@
 <template>
   <div id="studioResult">
+    <!-- web -->
     <div class="web d-none d-mb-block">
       <div class="w-100 h-100 studioBG">
         <div class="d-flex justify-content-around studioGroup">
@@ -8,7 +9,12 @@
             v-for="(item, index) in crafts"
             :key="index"
           >
-            <img :src="item.imgURL" class="m-item-image w-100" />
+            <img
+              :src="item.imgURL"
+              class="m-item-image w-100 cur-pointer"
+              v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }"
+              @click="filterType(item.value)"
+            />
             <div class="m-item-title d-flex justify-content-center">
               <div
                 class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-40 pb-20"
@@ -18,13 +24,11 @@
                   <p class="m-0">{{ item.name_en }}</p>
                 </div>
                 <div class="pt-10 craftCard-borTop">
-                  <router-link
-                    class="text-decoration-none"
-                    :to="{
-                      name: 'crafts',
-                      params: { sort: 'SYS_CLASSTYPE_CERAMICS' },
-                    }"
-                    >VIEW MORE</router-link
+                  <a
+                    v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }"
+                    class="text-decoration-none cur-pointer"
+                    @click="filterType(item.value)"
+                    >VIEW MORE</a
                   >
                 </div>
               </div>
@@ -32,13 +36,13 @@
           </div>
         </div>
       </div>
-      <div class="w-100 studioCard mt-60">
-        <div class="px-150 py-20">
+      <div id="works" class="w-100 studioCard mt-60">
+        <div class="px-150 py-30" v-if="worksList.length > 0">
           <el-row>
             <el-col
               class="mb-40"
               :span="8"
-              v-for="item in worksList"
+              v-for="(item, index_1) in worksList"
               :key="item.id"
             >
               <div
@@ -47,11 +51,12 @@
                 <div
                   class="studioCard__workPic w-100 d-flex align-items-center justify-content-center"
                 >
-                  <img
-                    :src="item.contents"
-                    :alt="item.title"
-                    @click="getTouchIMG(item)"
-                  />
+                  <el-image
+                    :src="item.pics"
+                    fit="cover"
+                    style="width: 380px; height: 300px"
+                    @click="getTouchIMG(index_1)"
+                  ></el-image>
                 </div>
                 <div
                   class="studioCard__content w-100 d-flex align-items-center justify-content-center mt-40"
@@ -67,9 +72,14 @@
             <Pagination :needPage="true" :pageNumber="5" />
           </div> -->
         </div>
+
+        <div class="w-100 py-50 text-center" v-else>
+          <label class="font-s-36">尚無作品</label>
+        </div>
       </div>
     </div>
 
+    <!-- phone -->
     <div class="phone d-block d-mb-none">
       <div class="pl-30 pt-70 pb-60 mb-80">
         <div class="craftsBG">
@@ -79,21 +89,33 @@
                 <div
                   class="w-100 d-flex align-items-center justify-content-center flex-column"
                 >
-                  <img :src="item.imgURL" alt="" width="110px" />
+                  <img
+                    :src="item.imgURL"
+                    alt=""
+                    width="110px"
+                    v-scroll-to="{
+                      el: '#worksPhone',
+                      offset: 500,
+                      duration: 1000,
+                    }"
+                    @click="filterType(item.value)"
+                  />
                   <div class="b-0 craftCard">
                     <div class="p-10">
                       <div class="p-10 craftCard__title text-center">
                         <p class="m-0">{{ item.name_ch }}</p>
                       </div>
-                      <router-link
-                        class="text-decoration-none"
-                        :to="{
-                          name: 'studioResultInfo',
-                          params: { craft: item.name_en },
+                      <a
+                        v-scroll-to="{
+                          el: '#worksPhone',
+                          offset: 500,
+                          duration: 1000,
                         }"
+                        class="text-decoration-none"
+                        @click="filterType(item.value)"
                       >
                         VIEW MORE
-                      </router-link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -102,24 +124,36 @@
           </div>
         </div>
 
-        <div class="studioBG mt-50">
-          <el-row>
-            <el-col :span="12" v-for="item in worksList" :key="item.id">
+        <div id="worksPhone" class="studioBG mt-50">
+          <el-row v-if="worksList.length > 0">
+            <el-col
+              :span="12"
+              v-for="(item, index_2) in worksList"
+              :key="item.id"
+            >
               <div class="p-10">
                 <div
                   class="studioBG__info w-100 d-flex align-items-center justify-content-center flex-column"
                 >
-                  <img
-                    :src="item.contents"
-                    alt=""
-                    width="100%"
-                    @click="getTouchIMG_phone(item)"
-                  />
-                  <strong class="mt-15 pt-10 px-20">{{ item.title }}</strong>
+                  <el-image
+                    :src="item.pics"
+                    fit="cover"
+                    style="width: 150px; height: 120px"
+                    @click="getTouchIMG_phone(index_2)"
+                  ></el-image>
+                  <div class="w-100 text-center">
+                    <strong class="mt-15 pt-10 px-10">{{ item.title }}</strong>
+                  </div>
                 </div>
               </div>
             </el-col>
           </el-row>
+
+          <div class="w-100" v-else>
+            <div class="py-50 text-center">
+              <label class="font-s-28">尚無作品</label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -132,27 +166,56 @@
             <div class="classCard w-100">
               <div class="p-100">
                 <div class="w-100 d-flex align-items-end flex-row">
-                  <img :src="enlargeIMG" alt="" width="700px" />
-                  <div class="classCard__introduce d-inline-flex">
-                    <div class="px-50 pt-60 pb-80">
-                      <div
-                        class="w-100 classCard__introduce-title text-left pb-5"
-                      >
-                        <strong>{{ enContent.title }}</strong>
+                  <img :src="worksList[selectNum].pics" alt="" width="700px" />
+                  <div
+                    class="d-flex align-items-center justify-content-center flex-column"
+                  >
+                    <div
+                      class="d-flex align-items-center justify-content-between"
+                    >
+                      <div class="w-100 text-right">
+                        <img
+                          v-if="selectNum > 0"
+                          class="mr-20 cur-pointer"
+                          src="@/assets/images/arrowLeft_btn.png"
+                          alt="上一張"
+                          @click="prevPic"
+                        />
                       </div>
-                      <div class="w-100 pr-60 classCard__introduce-content">
-                        <el-row class="pt-10">
-                          <el-col :span="12">上傳時間</el-col>
-                          <el-col :span="12">{{
-                            enContent.createDate | moment("YYYY-MM-DD")
-                          }}</el-col>
-                        </el-row>
-                        <el-row class="pt-10">
-                          <el-col :span="12">上傳者</el-col>
-                          <el-col :span="12">
-                            {{ enContent.createUserName }}
-                          </el-col>
-                        </el-row>
+                      <div class="w-100 text-left">
+                        <img
+                          v-if="selectNum < listCount"
+                          class="ml-20 cur-pointer"
+                          src="@/assets/images/arrowRight_btn.png"
+                          alt="下一張"
+                          @click="nextPic"
+                        />
+                      </div>
+                    </div>
+                    <div class="classCard__introduce d-inline-flex">
+                      <div class="px-50 pt-60 pb-80">
+                        <div
+                          class="w-100 classCard__introduce-title text-left pb-5"
+                        >
+                          <strong>{{ worksList[selectNum].title }}</strong>
+                        </div>
+                        <div class="w-100 pr-60 classCard__introduce-content">
+                          <el-row class="pt-10">
+                            <el-col :span="12">上傳時間</el-col>
+                            <el-col :span="12">
+                              {{
+                                worksList[selectNum].createDate
+                                  | moment("YYYY-MM-DD")
+                              }}
+                            </el-col>
+                          </el-row>
+                          <el-row class="pt-10">
+                            <el-col :span="12">上傳者</el-col>
+                            <el-col :span="12">
+                              {{ worksList[selectNum].createUserName }}
+                            </el-col>
+                          </el-row>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -191,25 +254,47 @@
               <div
                 class="w-100 d-flex align-items-end justify-content-center flex-column"
               >
-                <img :src="enlargeIMG" alt="" width="100%" />
+                <img :src="worksList[selectNum].pics" alt="" width="100%" />
+                <div
+                  class="w-100 d-flex align-items-center justify-content-between my-8"
+                >
+                  <div class="w-100 text-right">
+                    <img
+                      v-if="selectNum > 0"
+                      class="mr-20 cur-pointer"
+                      src="@/assets/images/arrowLeft_btn.png"
+                      alt="上一張"
+                      @click="prevPic"
+                    />
+                  </div>
+                  <div class="w-100 text-left">
+                    <img
+                      v-if="selectNum < listCount"
+                      class="ml-20 cur-pointer"
+                      src="@/assets/images/arrowRight_btn.png"
+                      alt="下一張"
+                      @click="nextPic"
+                    />
+                  </div>
+                </div>
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
                     <div
                       class="w-100 classCardPhone__introduce-title text-left pb-5"
                     >
-                      <strong>{{ enContent.title }}</strong>
+                      <strong>{{ worksList[selectNum].title }}</strong>
                     </div>
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
                       <el-row class="pt-10">
                         <el-col :span="12">上傳時間</el-col>
                         <el-col :span="12">{{
-                          enContent.createDate | moment("YYYY-MM-DD")
+                          worksList[selectNum].createDate | moment("YYYY-MM-DD")
                         }}</el-col>
                       </el-row>
                       <el-row class="pt-10">
                         <el-col :span="12">上傳者</el-col>
                         <el-col :span="12">
-                          {{ enContent.createUserName }}
+                          {{ worksList[selectNum].createUserName }}
                         </el-col>
                       </el-row>
                     </div>
@@ -234,7 +319,8 @@ export default {
   data() {
     return {
       listQuery: {
-        TeachTypeId: "SYS_TEACH_WORKSHOP",
+        teachTypeId: "SYS_TEACH_WORKSHOP",
+        classTypeId: "",
         Years: "",
         page: 1,
         limit: 20,
@@ -245,52 +331,57 @@ export default {
           imgURL: require("@/assets/images/craft/craft_1.png"),
           name_ch: "陶瓷",
           name_en: "CERAMICS",
+          value: "SYS_CLASSTYPE_CERAMICS",
         },
         {
           imgURL: require("@/assets/images/craft/craft_2.png"),
           name_ch: "金工",
           name_en: "METAL",
+          value: "SYS_CLASSTYPE_METAL",
         },
         {
           imgURL: require("@/assets/images/craft/craft_3.png"),
           name_ch: "木工",
           name_en: "WOOD",
+          value: "SYS_CLASSTYPE_WOOD",
         },
         {
           imgURL: require("@/assets/images/craft/craft_4.png"),
           name_ch: "產品",
           name_en: "PRODUCTION",
+          value: "SYS_CLASSTYPE_PRODUCTION",
         },
       ],
       worksList: [],
-      enlargeIMG: "",
-      enContent: {},
+      listCount: "",
+      selectNum: "",
       showIMG: false,
       showIMG_phone: false,
     };
   },
   methods: {
-    getTouchIMG(item) {
-      this.enlargeIMG = item.contents;
-      this.enContent = {
-        title: item.title,
-        createUserName: item.createUserName,
-        createDate: item.createDate,
-      };
+    getTouchIMG(num) {
+      this.selectNum = num;
       this.showIMG = true;
     },
-    getTouchIMG_phone(item) {
-      this.enlargeIMG = item.contents;
-      this.enContent = {
-        title: item.title,
-        createUserName: item.createUserName,
-        createDate: item.createDate,
-      };
+    getTouchIMG_phone(num) {
+      this.selectNum = num;
       this.showIMG_phone = true;
+    },
+    filterType(type) {
+      this.listQuery.classTypeId = type;
+      this.getList();
+    },
+    prevPic() {
+      this.selectNum--;
+    },
+    nextPic() {
+      this.selectNum++;
     },
     getList() {
       this.$api.award(this.listQuery).then((res) => {
         this.worksList = res.data.data;
+        this.listCount = res.data.count - 1;
       });
     },
   },
@@ -396,6 +487,10 @@ export default {
           color: #ffffff;
         }
       }
+      label {
+        color: #ceb87f;
+        font-weight: bold;
+      }
     }
   }
 
@@ -430,7 +525,17 @@ export default {
         strong {
           border-top: 1px solid #ceb87f;
           color: #ffffff;
+          overflow: hidden;
+          -webkit-line-clamp: 1;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
         }
+      }
+      label {
+        color: #ceb87f;
+        font-weight: bold;
+        letter-spacing: 0.2em;
       }
     }
   }

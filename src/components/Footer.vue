@@ -185,7 +185,7 @@ export default {
         if (top <= 0) {
           clearInterval(timeTop);
         }
-      }, 5);
+      }, 15);
     },
   },
 };

@@ -330,7 +330,6 @@ export default {
       this.getEducationInfo = data;
     },
     openPeriod_phone(data) {
-      console.log(data);
       this.showPeriod_phone = true;
       this.getEducationInfo = data;
     },

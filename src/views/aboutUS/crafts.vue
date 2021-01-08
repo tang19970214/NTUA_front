@@ -7,7 +7,12 @@
           v-for="(item, index) in crafts"
           :key="index"
         >
-          <img :src="item.imgURL" class="m-item-image w-100" />
+          <img
+            :src="item.imgURL"
+            v-scroll-to="{ el: '#crafts', offset: 580, duration: 1500 }"
+            class="m-item-image w-100 cur-pointer"
+            @click="showIntroduce(item)"
+          />
           <div class="m-item-title d-flex justify-content-center">
             <div
               class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
@@ -18,6 +23,7 @@
               </div>
               <div class="pt-10 craftCard-borTop">
                 <a
+                  v-scroll-to="{ el: '#crafts', offset: 580, duration: 1500 }"
                   class="text-decoration-none cur-pointer"
                   @click="showIntroduce(item)"
                 >
@@ -29,7 +35,7 @@
         </div>
       </div>
 
-      <div class="w-100 mt-60">
+      <div id="crafts" class="w-100 mt-60">
         <div class="craftIntroduce">
           <div class="w-100">
             <p class="m-0 craftIntroduce-title">
@@ -118,7 +124,7 @@
     </div>
 
     <div class="phone crafts d-block d-mb-none">
-      <div class="pl-50 pt-70 pb-20">
+      <div class="pl-20 py-20">
         <div class="w-100">
           <div
             class="crafts__Card pl-30 d-flex align-items-center justify-content-start"
@@ -154,9 +160,9 @@
         </div>
 
         <div class="bg-white">
-          <div class="pl-50 pt-20 pb-40">
+          <div class="pl-20 pt-20 pb-40">
             <div
-              class="crafts__host pl-50 mb-10"
+              class="crafts__host pl-15 mb-10"
               v-for="item in craftsContent"
               :key="item.id"
             >
@@ -322,6 +328,25 @@ export default {
         this.craftsListQuery.RoomTypeId = "SYS_CLASSROOM_" + data.name_en;
       }
       this.getCrafts();
+      // let top = document.documentElement.scrollTop || document.body.scrollTop;
+      // const timeTop = setInterval(() => {
+      //   document.body.scrollTop = document.documentElement.scrollTop = top += 1600;
+      //   if (top >= 1600) {
+      //   clearInterval(timeTop);
+      //   }
+      // }, 500);
+      // console.log(top, timeTop);
+
+      // let scrollTop =
+      //   window.pageYOffset ||
+      //   document.documentElement.scrollTop ||
+      //   document.body.scrollTop;
+      // let currentTop = scrollTop;
+      // function step() {
+      //   window.scrollTo(0, 1600);
+      //   currentTop += 5;
+      // }
+      // window.requestAnimationFrame(step);
     },
     getList() {
       this.$api.crafts(this.listQuery).then((res) => {

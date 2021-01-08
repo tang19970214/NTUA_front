@@ -79,7 +79,7 @@
             <div class="pos-relative">
               <img
                 class="zIndex-1"
-                :src="worksList[getWorkNum].contents"
+                :src="worksList[getWorkNum].pics"
                 width="600px"
                 alt=""
               />
@@ -367,7 +367,7 @@
               <div class="pos-relative">
                 <img
                   class="zIndex-1"
-                  :src="worksList[getWorkNum].contents"
+                  :src="worksList[getWorkNum].pics"
                   alt=""
                   width="160px"
                 />
@@ -1712,6 +1712,13 @@ export default {
           line-height: 16px;
           color: #596164;
           border-bottom: 1px solid #d4cbcc;
+          p {
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+          }
         }
       }
     }

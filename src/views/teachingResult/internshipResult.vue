@@ -31,17 +31,18 @@
         >
           <div class="w-100 resultCard__title">
             <el-row class="py-20">
-              <el-col class="text-center" :span="10">公告日期</el-col>
-              <el-col class="text-left" :span="14">標題</el-col>
+              <el-col class="text-center" :span="8">公告日期</el-col>
+              <el-col class="text-left" :span="16">標題</el-col>
             </el-row>
           </div>
           <div
             class="w-100 resultCard__content"
             v-for="(item, index1) in internshipResultMsg"
             :key="index1"
+            @click="goInfo(item.id)"
           >
             <el-row class="py-20">
-              <el-col class="text-center" :span="10">
+              <el-col class="text-center" :span="8">
                 <div
                   class="d-flex align-items-center justify-content-center flex-column"
                 >
@@ -53,7 +54,7 @@
                   </p>
                 </div>
               </el-col>
-              <el-col class="text-left resultCard__content--text" :span="14">
+              <el-col class="text-left resultCard__content--text" :span="16">
                 <p class="m-0">{{ item.title }}</p>
               </el-col>
             </el-row>
@@ -190,6 +191,9 @@ export default {
         (a, b) => ((a[b.id] = false), a),
         {}
       );
+    },
+    goInfo(id) {
+      this.$router.push({ name: "internshipResultInfo", params: { id: id } });
     },
     getList() {
       this.$api.award(this.listQuery).then((res) => {

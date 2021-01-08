@@ -9,6 +9,7 @@ import VueAxios from 'vue-axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
 import Vue2Editor from "vue2-editor";
+var VueScrollTo = require('vue-scrollto');
 
 import api from "@/api/apis.js";
 import "@/assets/all.scss"
@@ -18,6 +19,7 @@ Vue.use(require('vue-moment'))
 Vue.use(VueAxios, axios)
 Vue.use(VueAwesomeSwiper)
 Vue.use(Vue2Editor)
+Vue.use(VueScrollTo)
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 

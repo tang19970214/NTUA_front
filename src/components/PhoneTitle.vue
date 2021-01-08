@@ -1,7 +1,7 @@
 <template>
   <div id="phoneTitle">
     <div class="px-20 py-10 d-flex align-items-center justify-content-between">
-      <p class="m-0">{{ title }}</p>
+      <strong class="m-0">{{ title }}</strong>
       <select v-if="filterDate">
         <option value="2020">2020</option>
       </select>
@@ -26,7 +26,7 @@ export default {
 
 <style lang="scss">
 #phoneTitle {
-  p {
+  strong {
     font-size: 24px;
     line-height: 28px;
     color: #ceb87f;

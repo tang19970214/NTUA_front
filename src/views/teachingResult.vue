@@ -58,7 +58,16 @@
     </div>
 
     <div class="phone d-block d-mb-none pt-70">
-      <PhoneTitle :title="getPathName(teachingSort)" :filterDate="false" />
+      <div class="w-100 d-flex align-items-center flex-row">
+        <div class="ml-20">
+          <img
+            src="@/assets/images/icon/arrowLeft.png"
+            alt="返回上一頁"
+            @click="goPrev"
+          />
+        </div>
+        <PhoneTitle :title="getPathName(teachingSort)" :filterDate="false" />
+      </div>
       <router-view></router-view>
     </div>
   </div>
@@ -71,7 +80,7 @@ import PhoneTitle from "@/components/PhoneTitle.vue";
 export default {
   components: {
     LoadShowIMG,
-    PhoneTitle
+    PhoneTitle,
   },
   data() {
     return {
@@ -125,6 +134,11 @@ export default {
         countYear.reverse();
         return countYear;
       };
+    },
+  },
+  methods: {
+    goPrev() {
+      this.$router.go(-1);
     },
   },
 };
