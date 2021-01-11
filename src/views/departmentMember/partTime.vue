@@ -33,7 +33,10 @@
                           <img src="@/assets/images/icon/dashLine.png" alt="" />
                         </el-col>
                         <el-col :span="13" v-if="items.title == 'MAIL'">
-                          <a :href="'mailto:' + items.summary" v-if="items.summary">
+                          <a
+                            :href="'mailto:' + items.summary"
+                            v-if="items.summary"
+                          >
                             <img
                               src="@/assets/images/icon/email.png"
                               alt="email link"
@@ -67,7 +70,7 @@
         :key="fetch.id"
       >
         <div
-          class="teacherCard d-flex align-items-center flex-row mr-40"
+          class="teacherCard d-flex align-items-center flex-row"
           v-for="(item, index1) in fetch"
           :key="index1"
         >
@@ -104,21 +107,21 @@
                   </a>
                 </div>
                 <div class="w-100 d-flex flex-column">
-                <router-link
-                  :to="{ name: 'publishInfo', params: { author: items.author } }"
-                >
-                  研究發表
-                </router-link>
-              </div>
+                  <router-link
+                    :to="{
+                      name: 'publishInfo',
+                      params: { author: items.author },
+                    }"
+                  >
+                    研究發表
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
           <div class="teacherCard__name">
             <div class="p-10 d-flex flex-row justify-content-between">
-              <div class="d-flex flex-row">
-                <p class="m-0">{{ item.name }}</p>
-                <p class="m-0 pt-10">{{ item.subName }}</p>
-              </div>
+              <p class="m-0">{{ item.name }} {{ item.subName }}</p>
               <div
                 class="d-flex align-items-center"
                 @click="showTeacherInfo(item)"
@@ -277,6 +280,8 @@ export default {
     .cardBlock {
       overflow-x: auto;
       .teacherCard {
+        min-width: 290px;
+        max-width: 290px;
         &__information {
           width: 200px;
           height: 257px;
@@ -309,6 +314,9 @@ export default {
             font-weight: bold;
             letter-spacing: 0.8em;
             color: #2d2d2d;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
         }
       }

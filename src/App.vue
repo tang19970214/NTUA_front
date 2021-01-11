@@ -12,7 +12,7 @@
       <img
         class="d-block d-mb-none"
         style="padding-top: 30vh"
-        src="./assets/images/initial_movie/loadVideo.gif"
+        src="./assets/images/initial_movie/loadVideo1.gif"
         alt="開場動畫"
         width="100%"
       />
@@ -57,6 +57,12 @@ export default {
     Header,
     Footer,
   },
+  // data() {
+  //   return {
+  //     phoneGIF: require(),
+  //     asdf: 
+  //   }
+  // },
   computed: {
     firstLoad() {
       return this.$store.state.firstLoad;
@@ -70,7 +76,7 @@ export default {
       if (this.firstLoad) {
         window.setTimeout(() => {
           this.$store.commit("SETFIRSTLOAD", false);
-        }, 10500);
+        }, 10000);
       }
     },
   },

@@ -76,7 +76,7 @@
         :key="fetch.id"
       >
         <div
-          class="teacherCard d-flex align-items-center flex-row pr-40"
+          class="teacherCard d-flex align-items-center flex-row"
           v-for="(item, index1) in fetch"
           :key="index1"
         >
@@ -121,10 +121,7 @@
           </div>
           <div class="teacherCard__name">
             <div class="p-10 d-flex flex-row justify-content-between">
-              <div class="d-flex flex-row">
-                <p class="m-0">{{ item.name }}</p>
-                <p class="m-0 pt-10">{{ item.subName }}</p>
-              </div>
+              <p class="m-0">{{ item.name }} {{ item.subName }}</p>
               <div
                 class="d-flex align-items-center"
                 @click="showTeacherInfo(item)"
@@ -297,6 +294,8 @@ export default {
     .cardBlock {
       overflow-x: auto;
       .teacherCard {
+        min-width: 290px;
+        max-width: 290px;
         &__information {
           width: 200px;
           height: 257px;
@@ -332,6 +331,9 @@ export default {
             font-weight: bold;
             letter-spacing: 0.8em;
             color: #2d2d2d;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
         }
       }
