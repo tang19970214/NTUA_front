@@ -11,7 +11,7 @@
 
       <img
         class="d-block d-mb-none"
-        style="padding-top: 30vh"
+        style="padding-top: 20vh"
         src="./assets/images/initial_movie/loadVideo1.gif"
         alt="開場動畫"
         width="100%"

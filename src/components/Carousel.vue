@@ -14,7 +14,7 @@
       <swiper class="swiper" :options="swiperOption">
         <swiper-slide v-for="item in bannerURL" :key="item.id">
           <a :href="item.links" target="_blank">
-            <img :src="item.pic" alt="" width="100%" height="210px" />
+            <img :src="item.pic" alt="" width="100%" height="250px" />
           </a>
         </swiper-slide>
       </swiper>
