@@ -174,11 +174,7 @@ export default {
       this.showNewsInfo = true;
       this.selectNews = data;
       this.selectNews.annexFile = JSON.parse(data.annexFile);
-      console.log(this.selectNews);
     },
-    // goPublish() {
-    //   this.$router.push({ name: "publish" });
-    // },
     goAwardInfo(id) {
       this.$router.push({ name: "awardInfo", params: { id: id } });
     },
@@ -195,13 +191,15 @@ export default {
         {}
       );
     },
-    getList() {
-      this.$api.award(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.award(this.listQuery).then((res) => {
         this.awardData = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

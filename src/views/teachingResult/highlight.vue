@@ -67,7 +67,7 @@
               <div class="w-100">
                 <router-link
                   class="px-20 pt-10 text-decoration-none"
-                  :to="{ name: 'highlightInfo', params: {id: item.id} }"
+                  :to="{ name: 'highlightInfo', params: { id: item.id } }"
                 >
                   VIEW MORE
                 </router-link>
@@ -100,13 +100,15 @@ export default {
     };
   },
   methods: {
-    getList() {
-      this.$api.record(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.record(this.listQuery).then((res) => {
         this.highlightData = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

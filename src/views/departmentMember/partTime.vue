@@ -155,8 +155,8 @@ export default {
     showTeacherInfo(data) {
       this.showInfo[data?.key] = !this.showInfo[data?.key];
     },
-    getList() {
-      this.$api.members(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.members(this.listQuery).then((res) => {
         const memberData = [];
         res.data.data.forEach((item, index) => {
           const resetData = {
@@ -195,10 +195,12 @@ export default {
           }
         });
         this.teacherList_phone = teacherListSplit;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

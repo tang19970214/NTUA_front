@@ -96,7 +96,12 @@
                     </span>
                   </div>
                   <div class="px-80 py-15 downloadCard__title">
-                    各年度課程科目學分表查詢
+                    <a
+                      href="https://aca.ntua.edu.tw/article.aspx?ca=211&id=140"
+                      target="_blank"
+                    >
+                      各年度課程科目學分表查詢
+                    </a>
                   </div>
                   <div class="w-100 downloadCard__content">
                     <div class="py-20 px-30">
@@ -659,8 +664,8 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop;
     },
-    getList() {
-      this.$api.singleFile(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.singleFile(this.listQuery).then((res) => {
         let mapdata = res.data.data.filter(
           (data) => data.typeId == "SYS_SINGLEFILE_MAP"
         );
@@ -676,10 +681,12 @@ export default {
           obj[i.typeName].push(i);
         });
         this.downloadList = obj;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
     window.addEventListener("scroll", this.handleScroll);
   },
@@ -794,11 +801,16 @@ export default {
           border-bottom: 1px solid #ffffff;
         }
         &__title {
-          font-size: 24px;
-          line-height: 160%;
-          letter-spacing: 0.37em;
           background: #2d2d2d;
-          color: #ceb87f;
+          a {
+            font-size: 24px;
+            line-height: 160%;
+            letter-spacing: 0.37em;
+            color: #ceb87f;
+            &:hover {
+              font-weight: bold;
+            }
+          }
         }
         &__content {
           position: relative;

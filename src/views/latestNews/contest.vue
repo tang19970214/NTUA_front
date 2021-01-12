@@ -178,13 +178,15 @@ export default {
         {}
       );
     },
-    getList() {
-      this.$api.news(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.news(this.listQuery).then((res) => {
         this.contestMsg = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

@@ -90,13 +90,15 @@ export default {
         params: { author: data.title },
       });
     },
-    getList() {
-      this.$api.award(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.award(this.listQuery).then((res) => {
         this.publishData = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

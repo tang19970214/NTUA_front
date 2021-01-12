@@ -119,18 +119,20 @@ export default {
     };
   },
   methods: {
-    getList() {
-      this.$api.news(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.news(this.listQuery).then((res) => {
         this.activityInfo = res.data.data.filter(
           (arr) => arr.id === this.$route.params.id
         );
         this.activityInfo[0].attachedFile = JSON.parse(
           this.activityInfo[0].attachedFile
         );
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

@@ -104,13 +104,15 @@ export default {
     };
   },
   methods: {
-    getList() {
-      this.$api.record(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.record(this.listQuery).then((res) => {
         this.recordData = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

@@ -89,13 +89,15 @@ export default {
         params: { id: data.id },
       });
     },
-    getList() {
-      this.$api.classrooms(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.classrooms(this.listQuery).then((res) => {
         this.equipment = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

@@ -195,13 +195,15 @@ export default {
     goInfo(id) {
       this.$router.push({ name: "internshipResultInfo", params: { id: id } });
     },
-    getList() {
-      this.$api.award(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.award(this.listQuery).then((res) => {
         this.internshipResultMsg = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

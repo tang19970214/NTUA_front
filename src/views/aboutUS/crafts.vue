@@ -328,29 +328,11 @@ export default {
         this.craftsListQuery.RoomTypeId = "SYS_CLASSROOM_" + data.name_en;
       }
       this.getCrafts();
-      // let top = document.documentElement.scrollTop || document.body.scrollTop;
-      // const timeTop = setInterval(() => {
-      //   document.body.scrollTop = document.documentElement.scrollTop = top += 1600;
-      //   if (top >= 1600) {
-      //   clearInterval(timeTop);
-      //   }
-      // }, 500);
-      // console.log(top, timeTop);
-
-      // let scrollTop =
-      //   window.pageYOffset ||
-      //   document.documentElement.scrollTop ||
-      //   document.body.scrollTop;
-      // let currentTop = scrollTop;
-      // function step() {
-      //   window.scrollTo(0, 1600);
-      //   currentTop += 5;
-      // }
-      // window.requestAnimationFrame(step);
     },
-    getList() {
-      this.$api.crafts(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.crafts(this.listQuery).then((res) => {
         this.craftsContent = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
     getCrafts() {
@@ -360,6 +342,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
     this.getCrafts();
   },

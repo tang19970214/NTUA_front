@@ -281,14 +281,16 @@ export default {
     nextPic() {
       this.selectNum++;
     },
-    getList() {
-      this.$api.departmentAlbemPics(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.departmentAlbemPics(this.listQuery).then((res) => {
         this.recordList = res.data.data;
         this.listCount = res.data.count - 1;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

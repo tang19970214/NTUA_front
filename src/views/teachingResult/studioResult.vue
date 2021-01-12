@@ -378,14 +378,16 @@ export default {
     nextPic() {
       this.selectNum++;
     },
-    getList() {
-      this.$api.award(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.award(this.listQuery).then((res) => {
         this.worksList = res.data.data;
         this.listCount = res.data.count - 1;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

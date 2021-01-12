@@ -128,8 +128,8 @@ export default {
     },
   },
   methods: {
-    getList() {
-      this.$api.relatedlink(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.relatedlink(this.listQuery).then((res) => {
         const linksListSplit = [];
         res.data.data.forEach((item, index, arr) => {
           if (index % 2 === 0) {
@@ -138,10 +138,12 @@ export default {
         });
         this.linksList = linksListSplit;
         this.linksList_phone = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

@@ -52,7 +52,11 @@
                         <div
                           class="w-100 d-flex align-items-center justify-content-center"
                         >
-                          <a :href="items.files" :download="items.files" target="_blank">
+                          <a
+                            :href="items.files"
+                            :download="items.files"
+                            target="_blank"
+                          >
                             <img
                               src="@/assets/images/icon/pdf_icon.png"
                               alt=""
@@ -100,18 +104,20 @@ export default {
     };
   },
   methods: {
-    getList() {
-      this.$api.news(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.news(this.listQuery).then((res) => {
         this.bulletinMsg = res.data.data.filter(
           (arr) => arr.id === this.$route.params.id
         );
         this.bulletinMsg[0].attachedFile = JSON.parse(
           this.bulletinMsg[0].attachedFile
         );
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

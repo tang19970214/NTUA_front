@@ -267,13 +267,15 @@ export default {
     goInfo(id) {
       this.$router.push({ name: "alumniInfo", params: { id: id } });
     },
-    getList() {
-      this.$api.alumni(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.alumni(this.listQuery).then((res) => {
         this.alumniData = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

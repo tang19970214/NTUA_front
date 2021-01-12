@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Loading />
     <div class="setVideo pos-relative text-center" v-if="firstLoad">
       <div class="w-100 h-100 d-none d-mb-block">
         <img
@@ -51,16 +52,18 @@
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import Loading from "@/components/Loading.vue";
 
 export default {
   components: {
     Header,
     Footer,
+    Loading,
   },
   // data() {
   //   return {
   //     phoneGIF: require(),
-  //     asdf: 
+  //     asdf:
   //   }
   // },
   computed: {

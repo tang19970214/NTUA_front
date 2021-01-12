@@ -97,16 +97,18 @@ export default {
     };
   },
   methods: {
-    getList() {
-      this.$api.alumni(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.alumni(this.listQuery).then((res) => {
         this.alumniMsg = res.data.data.filter(
           (arr) => arr.id === this.$route.params.id
         );
         this.alumniMsg[0].annexFile = JSON.parse(this.alumniMsg[0].annexFile);
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

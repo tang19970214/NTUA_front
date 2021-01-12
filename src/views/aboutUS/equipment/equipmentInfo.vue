@@ -354,16 +354,16 @@ export default {
         params: { id: data.id },
       });
     },
-    getAlbumTitle() {
-      this.$api.getclassrooms({ id: this.$route.params.id }).then((res) => {
-        this.albumTitle = res.data.result.title;
-      });
-    },
     prevPic() {
       this.selectNum--;
     },
     nextPic() {
       this.selectNum++;
+    },
+    getAlbumTitle() {
+      this.$api.getclassrooms({ id: this.$route.params.id }).then((res) => {
+        this.albumTitle = res.data.result.title;
+      });
     },
     getList() {
       this.$api.classroomPics(this.listQuery).then((res) => {
@@ -371,13 +371,15 @@ export default {
         this.listCount = res.data.count - 1;
       });
     },
-    getMenu() {
-      this.$api.classrooms(this.classListQuery).then((res) => {
+    async getMenu() {
+      await this.$api.classrooms(this.classListQuery).then((res) => {
         this.anotherClassList = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getAlbumTitle();
     this.getList();
     this.getMenu();

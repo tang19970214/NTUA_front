@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    firstLoad: true
+    firstLoad: true,
+    loading: false
   },
   mutations: {
     SETFIRSTLOAD(state, payload) {
       state.firstLoad = payload;
+    },
+    SETLOADING(state, payload) {
+      state.loading = payload;
     }
   },
   actions: {},

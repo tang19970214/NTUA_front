@@ -948,8 +948,8 @@ export default {
         })[0];
       });
     },
-    getPublishList() {
-      this.$api.memberDatas(this.publishListQuery).then((res) => {
+    async getPublishList() {
+      await this.$api.memberDatas(this.publishListQuery).then((res) => {
         if (res.data.data.length > 0) {
           this.getInfo = true;
         } else {
@@ -964,10 +964,12 @@ export default {
           obj[i.dataTypeName].push(i);
         });
         this.publishData = obj;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getMemberList();
     this.getPublishList();
   },

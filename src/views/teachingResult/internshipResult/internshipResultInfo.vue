@@ -101,18 +101,20 @@ export default {
     };
   },
   methods: {
-    getList() {
-      this.$api.award(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.award(this.listQuery).then((res) => {
         this.internshipResultMsg = res.data.data.filter(
           (arr) => arr.id === this.$route.params.id
         );
         this.internshipResultMsg[0].annexFile = JSON.parse(
           this.internshipResultMsg[0].annexFile
         );
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

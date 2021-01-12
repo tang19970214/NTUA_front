@@ -106,18 +106,20 @@ export default {
     };
   },
   methods: {
-    getList() {
-      this.$api.news(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.news(this.listQuery).then((res) => {
         this.contestMsg = res.data.data.filter(
           (arr) => arr.id === this.$route.params.id
         );
         this.contestMsg[0].attachedFile = JSON.parse(
           this.contestMsg[0].attachedFile
         );
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };

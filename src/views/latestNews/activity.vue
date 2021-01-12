@@ -163,7 +163,7 @@ export default {
       this.selectNews.attachedFile = JSON.parse(data.attachedFile);
     },
     goActivityInfo(data) {
-      this.$router.push({ name: "activityInfo", params: {id: data.id} });
+      this.$router.push({ name: "activityInfo", params: { id: data.id } });
     },
     showfileInfo(data) {
       this.fileInfo = [this.selectNews].reduce(
@@ -178,13 +178,15 @@ export default {
         {}
       );
     },
-    getList() {
-      this.$api.news(this.listQuery).then((res) => {
+    async getList() {
+      await this.$api.news(this.listQuery).then((res) => {
         this.activityMsg = res.data.data;
+        this.$store.commit("SETLOADING", false);
       });
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.getList();
   },
 };
