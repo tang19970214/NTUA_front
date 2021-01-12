@@ -1,14 +1,14 @@
 <template>
-  <div class="relatedLink">
+  <div id="provision">
     <div class="web d-none d-mb-block">
-      <p class="m-0 Txt-title">Related links</p>
+      <p class="m-0 Txt-title">Provision</p>
       <div class="mt-70 newsCard">
-        <div class="newsCard-sortText">
+        <div class="newsCard__sortText">
           <router-link
             class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
             :class="{ active: $route.name == item.pathURL }"
             :to="{ name: item.pathURL }"
-            v-for="(item, index) in relatedLinkSort"
+            v-for="(item, index) in newsSort"
             :key="'NS__' + index"
           >
             <p class="m-0">{{ item.pathName }}</p>
@@ -19,60 +19,42 @@
 
         <LoadShowIMG />
 
-        <div class="w-100 newsCard-title">
+        <div class="w-100 newsCard__title">
           <div class="p-60">
             <div class="w-100 d-flex flex-row">
               <div class="w-100">
-                <p class="m-0">{{ getPathName(relatedLinkSort) }}</p>
+                <p class="m-0">{{ getPathName(newsSort) }}</p>
               </div>
-              <!-- <div class="w-100">
-                <div
-                  class="w-100 d-flex justify-content-end newsCard-title_chooseYear"
-                >
-                  <select>
-                    <option
-                      :value="item"
-                      v-for="item in getYearGrouop()"
-                      :key="item"
-                    >
-                      {{ item }}
-                    </option>
-                  </select>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
 
-        <div class="newsCard-contentCard">
+        <div class="newsCard__contentCard">
+          <div class="newsCard__contentCard--title d-flex align-items-center">
+            <p class="m-0" style="min-width: 220px; max-width: 220px">
+              公告日期
+            </p>
+            <p class="m-0">標題</p>
+          </div>
           <div class="w-100">
-            <div
-              class="relatedLinkTable w-100 d-flex align-items-center justify-content-between flex-row"
-              v-for="item in linksList"
-              :key="item.id"
-            >
-              <p class="m-0" v-for="(items, index) in item" :key="index">
-                {{ items.title }}
-              </p>
-            </div>
+            <router-view></router-view>
           </div>
         </div>
       </div>
     </div>
 
     <div class="phone d-block d-mb-none pt-70">
-      <PhoneTitle title="相關連結" :filterDate="false" />
-      <div class="p-30 relatedCard">
-        <div
-          class="w-100 relatedCard__content mb-30"
-          v-for="item in linksList_phone"
-          :key="item.id"
-        >
-          <p class="m-0 pb-20">
-            {{ item.title }}
-          </p>
+      <div class="w-100 d-flex align-items-center flex-row">
+        <div class="ml-20">
+          <img
+            src="@/assets/images/icon/arrowLeft.png"
+            alt="返回上一頁"
+            @click="goPrev"
+          />
         </div>
+        <PhoneTitle :title="getPathName(newsSort)" :filterDate="false" />
       </div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -88,19 +70,20 @@ export default {
   },
   data() {
     return {
-      relatedLinkSort: [
+      newsSort: [
         {
-          pathURL: "relatedLink",
-          pathName: "相關連結",
+          pathURL: "bachelor",
+          pathName: "學士班",
+        },
+        {
+          pathURL: "twoyears",
+          pathName: "二年制在職專班",
+        },
+        {
+          pathURL: "master",
+          pathName: "碩士班",
         },
       ],
-      listQuery: {
-        page: 1,
-        limit: 20,
-        key: undefined,
-      },
-      linksList: [],
-      linksList_phone: [],
     };
   },
   computed: {
@@ -128,29 +111,15 @@ export default {
     },
   },
   methods: {
-    async getList() {
-      await this.$api.relatedlink(this.listQuery).then((res) => {
-        const linksListSplit = [];
-        res.data.data.forEach((item, index, arr) => {
-          if (index % 2 === 0) {
-            return linksListSplit.push(arr.slice(index, index + 2));
-          }
-        });
-        this.linksList = linksListSplit;
-        this.linksList_phone = res.data.data;
-        this.$store.commit("SETLOADING", false);
-      });
+    goPrev() {
+      this.$router.go(-1);
     },
-  },
-  mounted() {
-    this.$store.commit("SETLOADING", true);
-    this.getList();
   },
 };
 </script>
 
 <style lang="scss">
-.relatedLink {
+#provision {
   .web {
     padding-top: 420px;
     margin-left: 120px;
@@ -164,7 +133,7 @@ export default {
     .newsCard {
       background-color: white;
       padding-bottom: 90px;
-      &-sortText {
+      &__sortText {
         position: absolute;
         right: 0;
         z-index: 10;
@@ -186,14 +155,14 @@ export default {
         color: #563f05;
         font-weight: bold;
       }
-      &-title {
+      &__title {
         p {
-          width: 130px;
+          width: 260px;
           font-size: 64px;
           line-height: 75px;
           color: #ceb87f;
         }
-        &_chooseYear {
+        &--chooseYear {
           select {
             width: 150px;
             height: 35px;
@@ -208,34 +177,15 @@ export default {
           }
         }
       }
-      &-contentCard {
+      &__contentCard {
         background: #2d2d2d;
-        padding: 60px 240px 170px 90px;
-        .relatedLinkTable {
-          padding: 30px;
-          border-bottom: 1px solid #000000;
-          p {
-            font-size: 20px;
-            line-height: 25px;
-            letter-spacing: 0.2em;
-            color: #ffffff;
-          }
-        }
-      }
-    }
-  }
-
-  .phone {
-    .relatedCard {
-      background: #2d2d2d;
-      min-height: calc(100vh - 490px);
-      &__content {
-        p {
-          font-size: 14px;
-          line-height: 17px;
-          letter-spacing: 0.2em;
-          color: #ffffff;
-          border-bottom: 1px solid #000000;
+        padding: 130px 220px 50px 60px;
+        &--title {
+          width: 100%;
+          font-size: 22px;
+          font-weight: bold;
+          padding: 40px 30px;
+          background: #c4c4c4;
         }
       }
     }

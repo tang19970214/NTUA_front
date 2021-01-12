@@ -29,6 +29,10 @@ const api = {
   crafts(params) {
     return req("get", "workshopDatas/load", params);
   },
+  /* 系所規定與申請表 */
+  departmentRule(params) {
+    return req("get", "departmentRules/loadClient", params);
+  },
   /* 競賽得獎、研究發表 */
   award(params) {
     return req("get", "departmentteachs/load", params);

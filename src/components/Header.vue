@@ -35,7 +35,12 @@
       <!-- left bar -->
       <div class="leftBar">
         <router-link to="/">
-          <img src="../assets/images/icon/leftBar.png" alt="" width="50px" height="580px" />
+          <img
+            src="../assets/images/icon/leftBar.png"
+            alt=""
+            width="50px"
+            height="580px"
+          />
         </router-link>
         <div class="leftBar__transBlock"></div>
         <div class="d-flex align-items-center flex-column" style="width: 50px">
@@ -198,7 +203,8 @@
               <div
                 class="menuList__submenu p-10 mx-10"
                 :class="{
-                  'menuList__submenu-active': items.pathName == $route.name,
+                  'menuList__submenu-active':
+                    items.pathName == $route.meta.subName,
                 }"
                 v-for="items in subList[$route.meta.mainPage]"
                 :key="items.value"
@@ -274,9 +280,8 @@ export default {
             name: "系所簡介及課程",
           },
           {
-            path: "https://aca.ntua.edu.tw/catalog.aspx?ca=18",
-            mainPath: "",
-            pathName: "",
+            mainPath: "provision",
+            pathName: "bachelor",
             name: "系所規定與申請表",
           },
           {
@@ -325,10 +330,9 @@ export default {
         },
         {
           value: "03",
-          path: "https://aca.ntua.edu.tw/catalog.aspx?ca=18",
           text: "系所規定與申請表",
-          mainPath: "",
-          pathName: "",
+          mainPath: "provision",
+          pathName: "bachelor",
         },
         {
           value: "04",
@@ -424,6 +428,26 @@ export default {
             text: "教學設備與空間",
             mainPath: "aboutUS",
             pathName: "equipment",
+          },
+        ],
+        provision: [
+          {
+            value: "01",
+            text: "學士班",
+            mainPath: "provision",
+            pathName: "bachelor",
+          },
+          {
+            value: "02",
+            text: "二年制在職專班",
+            mainPath: "provision",
+            pathName: "twoyears",
+          },
+          {
+            value: "03",
+            text: "碩士班",
+            mainPath: "provision",
+            pathName: "master",
           },
         ],
         teachingResult: [

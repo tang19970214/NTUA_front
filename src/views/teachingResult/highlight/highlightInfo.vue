@@ -25,7 +25,13 @@
                 <div
                   class="highlightCard__info w-100 d-flex align-items-center justify-content-center flex-column"
                 >
-                  <img :src="item.pic" alt="" @click="getTouchIMG(index)" />
+                  <!-- <img :src="item.pic" alt="" @click="getTouchIMG(index)" /> -->
+                  <el-image
+                    :src="item.pic"
+                    fit="cover"
+                    style="width: 300px; height: 380px"
+                    @click="getTouchIMG(index)"
+                  ></el-image>
                   <span class="mt-40 mb-10"></span>
                   <p class="m-0 text-center">{{ item.title }}</p>
                 </div>

@@ -16,6 +16,7 @@ const routes = [{
       goTop: true
     }
   },
+  // 最新消息
   {
     path: '/latestNews',
     component: () => import('../views/latestNews.vue'),
@@ -24,7 +25,8 @@ const routes = [{
         name: 'bulletin',
         component: () => import('../views/latestNews/bulletin.vue'),
         meta: {
-          mainPage: "latestNews"
+          mainPage: "latestNews",
+          subName: "bulletin"
         }
       },
       {
@@ -32,7 +34,8 @@ const routes = [{
         name: 'contest',
         component: () => import('../views/latestNews/contest.vue'),
         meta: {
-          mainPage: "latestNews"
+          mainPage: "latestNews",
+          subName: "contest"
         }
       },
       {
@@ -40,64 +43,13 @@ const routes = [{
         name: 'activity',
         component: () => import('../views/latestNews/activity.vue'),
         meta: {
-          mainPage: "latestNews"
+          mainPage: "latestNews",
+          subName: "activity"
         }
       }
     ]
   },
-  {
-    path: '/teachingResult',
-    component: () => import('../views/teachingResult.vue'),
-    children: [{
-        path: 'award',
-        name: 'award',
-        component: () => import('../views/teachingResult/award.vue'),
-        meta: {
-          mainPage: "teachingResult"
-        }
-      },
-      {
-        path: 'publish',
-        name: 'publish',
-        component: () => import('../views/teachingResult/publish.vue'),
-        meta: {
-          mainPage: "teachingResult"
-        }
-      },
-      {
-        path: 'record',
-        name: 'record',
-        component: () => import('../views/teachingResult/record.vue'),
-        meta: {
-          mainPage: "teachingResult"
-        }
-      },
-      {
-        path: 'highlight',
-        name: 'highlight',
-        component: () => import('../views/teachingResult/highlight.vue'),
-        meta: {
-          mainPage: "teachingResult"
-        }
-      },
-      {
-        path: 'internshipResult',
-        name: 'internshipResult',
-        component: () => import('../views/teachingResult/internshipResult.vue'),
-        meta: {
-          mainPage: "teachingResult"
-        }
-      },
-      {
-        path: 'studioResult',
-        name: 'studioResult',
-        component: () => import('../views/teachingResult/studioResult.vue'),
-        meta: {
-          mainPage: "teachingResult"
-        }
-      }
-    ]
-  },
+  // 系所簡介及課程
   {
     path: '/aboutUS',
     component: () => import('../views/aboutUS.vue'),
@@ -106,7 +58,8 @@ const routes = [{
         name: 'history',
         component: () => import('../views/aboutUS/history.vue'),
         meta: {
-          mainPage: "aboutUS"
+          mainPage: "aboutUS",
+          subName: "history"
         }
       },
       {
@@ -114,7 +67,8 @@ const routes = [{
         name: 'description',
         component: () => import('../views/aboutUS/description.vue'),
         meta: {
-          mainPage: "aboutUS"
+          mainPage: "aboutUS",
+          subName: "description"
         }
       },
       {
@@ -122,7 +76,8 @@ const routes = [{
         name: 'crafts',
         component: () => import('../views/aboutUS/crafts.vue'),
         meta: {
-          mainPage: "aboutUS"
+          mainPage: "aboutUS",
+          subName: "crafts"
         }
       },
       {
@@ -130,11 +85,106 @@ const routes = [{
         name: 'equipment',
         component: () => import('../views/aboutUS/equipment.vue'),
         meta: {
-          mainPage: "aboutUS"
+          mainPage: "aboutUS",
+          subName: "equipment"
         }
       }
     ]
   },
+  // 系所規定與申請表
+  {
+    path: '/provision',
+    component: () => import('../views/provision.vue'),
+    children: [{
+        path: 'bachelor',
+        name: 'bachelor',
+        component: () => import('../views/provision/bachelor.vue'),
+        meta: {
+          mainPage: "provision",
+          subName: "bachelor"
+        }
+      },
+      {
+        path: 'twoyears',
+        name: 'twoyears',
+        component: () => import('../views/provision/twoyears.vue'),
+        meta: {
+          mainPage: "provision",
+          subName: "twoyears"
+        }
+      },
+      {
+        path: 'master',
+        name: 'master',
+        component: () => import('../views/provision/master.vue'),
+        meta: {
+          mainPage: "provision",
+          subName: "master"
+        }
+      }
+    ]
+  },
+  // 教學成果
+  {
+    path: '/teachingResult',
+    component: () => import('../views/teachingResult.vue'),
+    children: [{
+        path: 'award',
+        name: 'award',
+        component: () => import('../views/teachingResult/award.vue'),
+        meta: {
+          mainPage: "teachingResult",
+          subName: "award"
+        }
+      },
+      {
+        path: 'publish',
+        name: 'publish',
+        component: () => import('../views/teachingResult/publish.vue'),
+        meta: {
+          mainPage: "teachingResult",
+          subName: "publish"
+        }
+      },
+      {
+        path: 'record',
+        name: 'record',
+        component: () => import('../views/teachingResult/record.vue'),
+        meta: {
+          mainPage: "teachingResult",
+          subName: "record"
+        }
+      },
+      {
+        path: 'highlight',
+        name: 'highlight',
+        component: () => import('../views/teachingResult/highlight.vue'),
+        meta: {
+          mainPage: "teachingResult",
+          subName: "highlight"
+        }
+      },
+      {
+        path: 'internshipResult',
+        name: 'internshipResult',
+        component: () => import('../views/teachingResult/internshipResult.vue'),
+        meta: {
+          mainPage: "teachingResult",
+          subName: "internshipResult"
+        }
+      },
+      {
+        path: 'studioResult',
+        name: 'studioResult',
+        component: () => import('../views/teachingResult/studioResult.vue'),
+        meta: {
+          mainPage: "teachingResult",
+          subName: "studioResult"
+        }
+      }
+    ]
+  },
+  // 研討會、工作營
   {
     path: '/website',
     component: () => import('../views/website.vue'),
@@ -143,7 +193,8 @@ const routes = [{
         name: 'seminar',
         component: () => import('../views/website/seminar.vue'),
         meta: {
-          mainPage: "website"
+          mainPage: "website",
+          subName: "seminar"
         }
       },
       {
@@ -151,11 +202,13 @@ const routes = [{
         name: 'workCamp',
         component: () => import('../views/website/workCamp.vue'),
         meta: {
-          mainPage: "website"
+          mainPage: "website",
+          subName: "workCamp"
         }
       }
     ]
   },
+  // 系所成員
   {
     path: '/departmentMember',
     component: () => import('../views/departmentMember.vue'),
@@ -164,7 +217,8 @@ const routes = [{
         name: 'fullTime',
         component: () => import('../views/departmentMember/fullTime.vue'),
         meta: {
-          mainPage: "departmentMember"
+          mainPage: "departmentMember",
+          subName: "fullTime"
         }
       },
       {
@@ -172,7 +226,8 @@ const routes = [{
         name: 'partTime',
         component: () => import('../views/departmentMember/partTime.vue'),
         meta: {
-          mainPage: "departmentMember"
+          mainPage: "departmentMember",
+          subName: "partTime"
         }
       },
       {
@@ -180,25 +235,30 @@ const routes = [{
         name: 'administrative',
         component: () => import('../views/departmentMember/administrative.vue'),
         meta: {
-          mainPage: "departmentMember"
+          mainPage: "departmentMember",
+          subName: "administrative"
         }
       }
     ]
   },
+  // 系友專區
   {
     path: '/alumni',
     name: 'alumni',
     component: () => import('../views/alumni.vue'),
     meta: {
-      mainPage: "alumni"
+      mainPage: "alumni",
+      subName: "alumni"
     }
   },
+  // 相關連結
   {
     path: '/relatedLink',
     name: 'relatedLink',
     component: () => import('../views/relatedLink.vue'),
     meta: {
-      mainPage: "relatedLink"
+      mainPage: "relatedLink",
+      subName: "relatedLink"
     }
   },
 
@@ -207,7 +267,8 @@ const routes = [{
     name: 'bulletinInfo',
     component: () => import('../views/latestNews/bulletin/bulletinInfo.vue'),
     meta: {
-      mainPage: "latestNews"
+      mainPage: "latestNews",
+      subName: "bulletin"
     }
   },
   {
@@ -215,7 +276,8 @@ const routes = [{
     name: 'contestInfo',
     component: () => import('../views/latestNews/contest/contestInfo.vue'),
     meta: {
-      mainPage: "latestNews"
+      mainPage: "latestNews",
+      subName: "contest"
     }
   },
   {
@@ -223,15 +285,45 @@ const routes = [{
     name: 'activityInfo',
     component: () => import('../views/latestNews/activity/activityInfo.vue'),
     meta: {
-      mainPage: "latestNews"
+      mainPage: "latestNews",
+      subName: "activity"
     }
   },
+  {
+    path: '/bachelorInfo/:id',
+    name: 'bachelorInfo',
+    component: () => import('../views/provision/bachelor/bachelorInfo.vue'),
+    meta: {
+      mainPage: "provision",
+      subName: "bachelor"
+    }
+  },
+  {
+    path: '/twoyearsInfo/:id',
+    name: 'twoyearsInfo',
+    component: () => import('../views/provision/twoyears/twoyearsInfo.vue'),
+    meta: {
+      mainPage: "provision",
+      subName: "twoyears"
+    }
+  },
+  {
+    path: '/masterInfo/:id',
+    name: 'masterInfo',
+    component: () => import('../views/provision/master/masterInfo.vue'),
+    meta: {
+      mainPage: "provision",
+      subName: "master"
+    }
+  },
+
   {
     path: '/equipmentInfo/:id',
     name: 'equipmentInfo',
     component: () => import('../views/aboutUS/equipment/equipmentInfo.vue'),
     meta: {
-      mainPage: "aboutUS"
+      mainPage: "aboutUS",
+      subName: "equipment"
     }
   },
   {
@@ -239,7 +331,8 @@ const routes = [{
     name: 'alumniInfo',
     component: () => import('../views/alumni/alumniInfo.vue'),
     meta: {
-      mainPage: "alumni"
+      mainPage: "alumni",
+      subName: "alumni"
     }
   },
   {
@@ -247,7 +340,8 @@ const routes = [{
     name: 'awardInfo',
     component: () => import('../views/teachingResult/award/awardInfo.vue'),
     meta: {
-      mainPage: "teachingResult"
+      mainPage: "teachingResult",
+      subName: "award"
     }
   },
   {
@@ -255,7 +349,8 @@ const routes = [{
     name: 'publishInfo',
     component: () => import('../views/teachingResult/publish/publishInfo.vue'),
     meta: {
-      mainPage: "teachingResult"
+      mainPage: "teachingResult",
+      subName: "publish"
     }
   },
   {
@@ -263,7 +358,8 @@ const routes = [{
     name: 'recordInfo',
     component: () => import('../views/teachingResult/record/recordInfo.vue'),
     meta: {
-      mainPage: "teachingResult"
+      mainPage: "teachingResult",
+      subName: "record"
     }
   },
   {
@@ -271,7 +367,8 @@ const routes = [{
     name: 'highlightInfo',
     component: () => import('../views/teachingResult/highlight/highlightInfo.vue'),
     meta: {
-      mainPage: "teachingResult"
+      mainPage: "teachingResult",
+      subName: "highlight"
     }
   },
   {
@@ -279,7 +376,8 @@ const routes = [{
     name: 'studioResultInfo',
     component: () => import('../views/teachingResult/studioResult/studioResultInfo.vue'),
     meta: {
-      mainPage: "teachingResult"
+      mainPage: "teachingResult",
+      subName: "studioResult"
     }
   },
   {
@@ -287,7 +385,8 @@ const routes = [{
     name: 'internshipResultInfo',
     component: () => import('../views/teachingResult/internshipResult/internshipResultInfo.vue'),
     meta: {
-      mainPage: "teachingResult"
+      mainPage: "teachingResult",
+      subName: "internshipResult"
     }
   },
 ]
