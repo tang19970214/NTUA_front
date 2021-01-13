@@ -44,7 +44,7 @@
                     >
                       <div class="pt-10 introduceCard__viewBtn text-center">
                         <a class="text-decoration-none cur-pointer px-20">
-                          展覽空間
+                          {{ item.description }}
                         </a>
                       </div>
                     </div>

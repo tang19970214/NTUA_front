@@ -101,7 +101,13 @@
               v-for="item in craftsData"
               :key="item.id"
             >
-              <img :src="item.coverPic" :alt="item.title" />
+              <!-- <img :src="item.coverPic" :alt="item.title" /> -->
+              <el-image
+                style="width: 550px"
+                :src="item.coverPic"
+                :alt="item.title"
+                fit="cover"
+              ></el-image>
               <div
                 class="craftIntroduce-Card d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
               >

@@ -11,7 +11,12 @@
           >
             <div class="creation">
               <div class="front">
-                <img :src="item.pic" alt="" width="350px" height="452px" />
+                <img
+                  :src="item.pic"
+                  :alt="item.name"
+                  width="350px"
+                  height="452px"
+                />
               </div>
               <div class="back">
                 <div
@@ -56,8 +61,8 @@
                 </div>
               </div>
             </div>
-            <div class="teacherList-rightBar">
-              <div class="py-20 px-10">
+            <div class="teacherList__rightBar">
+              <div class="py-20 px-10 d-flex flex-row align-items-center">
                 <p class="m-0">{{ item.name }}</p>
                 <p class="m-0">{{ item.subName }}</p>
               </div>
@@ -226,6 +231,9 @@ export default {
       top: 0;
       left: 0;
       backface-visibility: hidden;
+      img {
+        object-fit: cover;
+      }
     }
     .back {
       z-index: 999;
@@ -266,7 +274,7 @@ export default {
         }
       }
 
-      &-rightBar {
+      &__rightBar {
         height: 452px;
         background: #c4c4c4;
         writing-mode: vertical-lr;
@@ -275,6 +283,14 @@ export default {
         color: #2d2d2d;
         p {
           letter-spacing: 0.6em;
+          &:first-child {
+            min-height: 150px;
+          }
+          &:last-child {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
         }
       }
     }
