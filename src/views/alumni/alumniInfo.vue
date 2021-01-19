@@ -36,19 +36,15 @@
                 </div>
                 <!-- file -->
                 <div class="w-100 mt-10" v-if="item.annexFile">
-                  <div
-                    class="downloadCard py-25 mb-15"
-                    v-for="(items, index1) in item.annexFile"
-                    :key="index1"
-                  >
+                  <div class="downloadCard py-25 mb-15">
                     <el-row class="d-flex align-items-center">
                       <el-col :span="8">
                         <div
                           class="w-100 d-flex align-items-center justify-content-center"
                         >
                           <a
-                            :href="items.files"
-                            :download="items.files"
+                            :href="item.annexFile.files"
+                            :download="item.annexFile.fileName"
                             target="_blank"
                           >
                             <img
@@ -63,7 +59,7 @@
                           class="w-100 d-flex align-items-center justify-content-center flex-column"
                         >
                           <p class="m-0">
-                            {{ items.fileName }}
+                            {{ item.annexFile.fileName }}
                           </p>
                         </div>
                       </el-col>
@@ -103,6 +99,7 @@ export default {
           (arr) => arr.id === this.$route.params.id
         );
         this.alumniMsg[0].annexFile = JSON.parse(this.alumniMsg[0].annexFile);
+        console.log(this.alumniMsg);
         this.$store.commit("SETLOADING", false);
       });
     },
