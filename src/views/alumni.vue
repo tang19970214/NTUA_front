@@ -23,8 +23,7 @@
           <div class="p-60">
             <div class="w-100 d-flex flex-row">
               <div class="w-100">
-                <p class="m-0">系友</p>
-                <p class="m-0">優秀表現</p>
+                <p class="m-0">系友專區</p>
               </div>
             </div>
           </div>
@@ -36,20 +35,39 @@
               公告日期
             </p>
             <p class="m-0">標題</p>
-            <p class="m-0 ml-auto pr-10">得獎學生</p>
+            <p class="m-0 ml-auto pr-10">附件下載</p>
           </div>
           <div class="w-100">
             <div
               class="alumniTable w-100 d-flex align-items-center flex-row"
-              v-for="(item, index) in alumniData"
-              :key="index"
+              v-for="item in alumniData"
+              :key="item.id"
               @click="viewInfo(item)"
             >
               <p class="m-0" style="min-width: 220px; max-width: 220px">
                 {{ item.releaseDate | moment("YYYY-MM-DD") }}
               </p>
-              <p class="m-0">{{ item.title }}</p>
-              <p class="m-0 ml-auto">{{ item.author }}</p>
+              <p class="m-0">
+                {{ item.title }}
+              </p>
+              <span class="ml-auto" v-if="!!getFileObj(item.annexFile)[0]">
+                <a
+                  class="ml-auto"
+                  :href="items.files"
+                  :download="items.fileName"
+                  target="_blank"
+                  v-for="(items, index) in getFileObj(item.annexFile)"
+                  :key="'AF__' + index"
+                >
+                  <el-tooltip
+                    :content="items.fileName"
+                    placement="bottom"
+                    effect="light"
+                  >
+                    <img src="@/assets/images/icon/links.png" alt="" />
+                  </el-tooltip>
+                </a>
+              </span>
             </div>
 
             <!-- <div class="w-100 mt-90">
@@ -147,37 +165,32 @@
             </p>
             <div class="w-100 d-flex flex-row flex-wrap mt-20">
               <el-row class="w-100">
-                <el-col
-                  :xl="4"
-                  :lg="6"
-                  v-for="item in selectNews.annexFile"
-                  :key="item.id"
-                >
+                <el-col :xl="4" :lg="6">
                   <div
                     class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10"
-                    @mouseenter="showfileInfo(item)"
-                    @mouseleave="closefileInfo(item)"
+                    @mouseenter="showfileInfo(selectNews.annexFile)"
+                    @mouseleave="closefileInfo(selectNews.annexFile)"
                   >
                     <a
-                      v-if="!fileInfo[item.id]"
-                      :href="item.files"
-                      :download="item.files"
+                      v-if="!fileInfo[selectNews.annexFile.id]"
+                      :href="selectNews.annexFile.files"
+                      :download="selectNews.annexFile.files"
                       target="_blank"
                     >
                       <img
                         src="@/assets/images/icon/pdf_icon.png"
-                        :alt="item.fileName"
+                        :alt="selectNews.annexFile.fileName"
                         width="40px"
                       />
                     </a>
                     <div class="w-100 h-100 backCard" v-else>
                       <a
                         class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none"
-                        :href="item.files"
-                        :download="item.files"
+                        :href="selectNews.annexFile.files"
+                        :download="selectNews.annexFile.files"
                         target="_blank"
                       >
-                        <strong>{{ item.fileName }}</strong>
+                        <strong>{{ selectNews.annexFile.fileName }}</strong>
                       </a>
                     </div>
                   </div>
@@ -241,6 +254,12 @@ export default {
         return pName;
       };
     },
+    getFileObj() {
+      return (file) => {
+        let obj = file ? JSON.parse(file) : "";
+        return [obj];
+      };
+    },
   },
   methods: {
     goPrev() {
@@ -248,8 +267,14 @@ export default {
     },
     viewInfo(data) {
       this.showNewsInfo = true;
-      this.selectNews = data;
-      this.selectNews.annexFile = JSON.parse(data.annexFile);
+      const newVal = {
+        id: data.id,
+        title: data.title,
+        modifyDate: data.modifyDate,
+        contents: data.contents,
+        annexFile: data.annexFile ? JSON.parse(data.annexFile) : "",
+      };
+      this.selectNews = newVal;
     },
     showfileInfo(data) {
       this.fileInfo = [this.selectNews].reduce(
@@ -270,6 +295,9 @@ export default {
     async getList() {
       await this.$api.alumni(this.listQuery).then((res) => {
         this.alumniData = res.data.data;
+        // this.activityInfo[0].attachedFile = JSON.parse(
+        //   this.activityInfo[0].attachedFile
+        // );
         this.$store.commit("SETLOADING", false);
       });
     },
@@ -357,6 +385,17 @@ export default {
             line-height: 25px;
             letter-spacing: 0.2em;
             color: #ffffff;
+            overflow-wrap: anywhere;
+          }
+          a {
+            font-size: 20px;
+            line-height: 25px;
+            letter-spacing: 0.2em;
+            color: #ffffff;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
           &:hover {
             background: #596164;
