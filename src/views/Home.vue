@@ -5,58 +5,31 @@
     <!-- web -->
     <div class="d-none d-mb-block">
       <!-- contest winning | ok -->
-      <div class="w-100 mt-90" style="margin-bottom: 250px">
+      <div class="w-100 mt-90" style="margin-bottom: 200px">
         <TitleText textAlign="center" textTitle="CONTEST WINNING" />
-        <div
-          class="w-100 d-flex align-items-center justify-content-center flex-column mt-30"
-        >
-          <div
-            class="w-100 d-flex align-items-center justify-content-around flex-row"
-          >
-            <div
-              class="w-100 d-flex align-items-center justify-content-around mx-35"
-            >
-              <div
-                class="w-100 h-100 text-center pos-relative"
-                style="width: 500px"
-                v-for="item in awardData"
-                :key="item.id"
-              >
-                <div class="w-100 pos-relative">
+        <div class="w-100 d-flex align-items-center justify-content-center flex-column mt-30">
+          <div class="w-100 d-flex align-items-center justify-content-around flex-row">
+            <div class="w-100 d-flex align-items-start justify-content-around mx-35">
+              <div class="w-100 h-100 text-center pos-relative" style="width: 500px" v-for="item in awardData" :key="item.id">
+                <div class="mx-20 pos-relative">
                   <router-link :to="{ name: 'award' }">
-                    <el-image
-                      style="width: 100%; height: 300px"
-                      :src="item.pics"
-                      fit="cover"
-                    ></el-image>
+                    <el-image style="width: 100%; height: 300px" :src="item.pics" fit="cover"></el-image>
                   </router-link>
-                  <span
-                    class="introduceCard d-flex align-items-end justify-content-between"
-                  >
+                  <span class="introduceCard d-flex align-items-end justify-content-between">
                     <p class="m-0">{{ item.title }}</p>
                     <span class="mr-25 cur-pointer">
                       <router-link :to="{ name: 'award' }">
-                        <img
-                          class="d-flex align-items-center"
-                          src="@/assets/images/icon/door.png"
-                          alt=""
-                        />
+                        <img class="d-flex align-items-center" src="@/assets/images/icon/door.png" alt="" />
                       </router-link>
                     </span>
                   </span>
                 </div>
-                <div class="contest__content">
+                <div class="contest__content px-20">
                   <div class="w-100 d-flex justify-content-end">
                     {{ item.releaseDate | moment("YYYY | MM.DD") }}
                   </div>
-                  <div
-                    class="text-left contest__content--editor"
-                    style="max-width: 380px"
-                  >
-                    <vue-editor
-                      v-model="item.contents"
-                      :disabled="true"
-                    ></vue-editor>
+                  <div class="text-left contest__content--editor" style="max-width: 380px">
+                    <vue-editor v-model="item.contents" :disabled="true"></vue-editor>
                   </div>
                 </div>
               </div>
@@ -65,47 +38,25 @@
         </div>
       </div>
       <!-- students works | ok -->
-      <div
-        class="w-100"
-        style="margin-bottom: 265px"
-        v-if="worksList.length > 0"
-      >
+      <div class="w-100" style="margin-bottom: 250px" v-if="worksList.length > 0">
         <TitleText textAlign="center" textTitle="STUDENTS WORKS" />
         <div class="w-100 mt-60">
           <div class="w-100 d-flex align-items-center justify-content-center">
-            <div
-              class="w-100 d-flex align-items-center justify-content-center slash"
-            ></div>
+            <div class="w-100 d-flex align-items-center justify-content-center slash"></div>
             <div class="pos-relative">
-              <img
-                class="zIndex-1"
-                :src="worksList[getWorkNum].pics"
-                width="600px"
-                alt=""
-              />
-              <router-link
-                class="viewBtn pos-absolute b-0 r-0 zIndex-2"
-                :to="{ name: 'studioResult' }"
-              >
+              <img class="zIndex-1" :src="worksList[getWorkNum].pics" width="600px" alt="" />
+              <router-link class="viewBtn pos-absolute b-0 r-0 zIndex-2" :to="{ name: 'studioResult' }">
                 <img src="@/assets/images/view_btn.png" alt="" />
                 <img src="@/assets/images/view_btn_hover.png" alt="" />
               </router-link>
             </div>
           </div>
-          <div
-            class="w-100 d-flex align-items-center justify-content-center mt-60"
-          >
-            <a
-              class="cur-pointer d-flex align-items-center px-20"
-              @click="works_prev()"
-            >
+          <div class="w-100 d-flex align-items-center justify-content-center mt-60">
+            <a class="cur-pointer d-flex align-items-center px-20" @click="works_prev()">
               <img src="@/assets/images/arrowLeft_btn.png" alt="" />
             </a>
 
-            <a
-              class="cur-pointer d-flex align-items-center px-20"
-              @click="works_next()"
-            >
+            <a class="cur-pointer d-flex align-items-center px-20" @click="works_next()">
               <img src="@/assets/images/arrowRight_btn.png" alt="" />
             </a>
           </div>
@@ -118,34 +69,20 @@
           <div class="px-120 d-flex flex-row">
             <div style="width: 330px">
               <div class="w-100 collapseCard">
-                <div
-                  class="h-100 d-flex align-items-center justify-content-between cur-pointer"
-                  @click="goNews()"
-                >
+                <div class="h-100 d-flex align-items-center justify-content-between cur-pointer" @click="goNews()">
                   <div>
                     <strong>VIEW MORE</strong>
                   </div>
                   <div>
-                    <img
-                      class="cur-pointer"
-                      src="@/assets/images/arrowRight_btn.png"
-                      alt=""
-                    />
+                    <img class="cur-pointer" src="@/assets/images/arrowRight_btn.png" alt="" />
                   </div>
                 </div>
               </div>
             </div>
             <div class="w-100">
               <div class="mt-50" style="margin-left: 20%">
-                <div
-                  class="collapseCard__child mt-20"
-                  v-for="item in newsData"
-                  :key="item.id"
-                >
-                  <div
-                    class="h-100 d-flex align-items-center justify-content-between cur-pointer"
-                    @click="goNews(id)"
-                  >
+                <div class="collapseCard__child mt-20" v-for="item in newsData" :key="item.id">
+                  <div class="h-100 d-flex align-items-center justify-content-between cur-pointer" @click="goNews(id)">
                     <div>
                       <p class="m-0">
                         {{ item.releaseDate | moment("YYYY-MM-DD") }}
@@ -157,11 +94,7 @@
                       </p>
                     </div>
                     <div>
-                      <img
-                        class="cur-pointer"
-                        src="@/assets/images/arrowRight_btn.png"
-                        alt=""
-                      />
+                      <img class="cur-pointer" src="@/assets/images/arrowRight_btn.png" alt="" />
                     </div>
                   </div>
                 </div>
@@ -174,17 +107,9 @@
       <div class="w-100" style="margin-top: 250px">
         <div class="introduceBg ml-120">
           <div class="d-flex align-items-center justify-content-around">
-            <div
-              class="d-flex align-items-center justify-content-center pos-relative"
-              style="margin-top: -3rem"
-              v-for="(item, index) in craftsList"
-              :key="'CF__' + index"
-            >
+            <div class="d-flex align-items-center justify-content-center pos-relative" style="margin-top: -3rem" v-for="(item, index) in craftsList" :key="'CF__' + index">
               <img :src="item.imgURL" alt="" @click="goCraft(item.name_en)" />
-              <div
-                class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-                @click="goCraft(item.name_en)"
-              >
+              <div class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20" @click="goCraft(item.name_en)">
                 <div class="mb-30">
                   <p class="m-0">{{ item.name_ch }}</p>
                   <p class="m-0">{{ item.name_en }}</p>
@@ -200,61 +125,30 @@
       <!-- access -->
       <div class="w-100 pt-120 mb-80">
         <TitleText textAlign="center" textTitle="ACCESS" />
-        <div
-          class="mt-120 px-120 d-flex align-items-center justify-content-center"
-        >
-          <div
-            class="w-100 h-100"
-            style="height: 700px"
-            id="map"
-            ref="map"
-          ></div>
+        <div class="mt-100 px-120 d-flex align-items-center justify-content-center">
+          <div class="w-100 h-100" style="height: 700px" id="map" ref="map"></div>
 
           <div class="w-100 local">
             <div class="w-100 localCard d-flex flex-column">
-              <div
-                class="localCard__info px-90 d-flex align-items-start flex-row pb-35"
-                :class="{ 'pt-50': item.title !== '交通' }"
-                v-for="(item, index) in accessList"
-                :key="'AL_' + index"
-              >
+              <div class="localCard__info px-90 d-flex align-items-start flex-row pb-35" :class="{ 'pt-50': item.title !== '交通' }" v-for="(item, index) in accessList" :key="'AL_' + index">
                 <div class="localCard__info--title">
                   <p class="m-0" :class="{ 'pt-50': item.title == '交通' }">
                     {{ item.title }}
                   </p>
                 </div>
 
-                <div
-                  class="localCard__info--map d-flex flex-column"
-                  v-if="item.code == 'address'"
-                >
+                <div class="localCard__info--map d-flex flex-column" v-if="item.code == 'address'">
                   <p class="m-0">{{ item.value }}</p>
                   <span class="mt-40">
-                    <a
-                      class="text-decoration-none py-6 px-25"
-                      href="https://goo.gl/maps/67MWRHAoppzHiKP87"
-                      target="_blank"
-                    >
+                    <a class="text-decoration-none py-6 px-25" href="https://goo.gl/maps/67MWRHAoppzHiKP87" target="_blank">
                       GOOGLE MAP
                     </a>
                   </span>
                 </div>
-                <div
-                  class="w-100 d-flex flex-column localCard__info--traf"
-                  v-else-if="item.code == 'traffic'"
-                >
+                <div class="w-100 d-flex flex-column localCard__info--traf" v-else-if="item.code == 'traffic'">
                   <el-collapse v-model="activeNames">
-                    <el-collapse-item
-                      :title="items.transportation"
-                      :name="items.transportation"
-                      v-for="(items, key) in item.list"
-                      :key="'LST__' + key"
-                    >
-                      <div
-                        class="w-100 content"
-                        v-for="(cxt, index_1) in items.options"
-                        :key="'OPT__' + index_1"
-                      >
+                    <el-collapse-item :title="items.transportation" :name="items.transportation" v-for="(items, key) in item.list" :key="'LST__' + key">
+                      <div class="w-100 content" v-for="(cxt, index_1) in items.options" :key="'OPT__' + index_1">
                         <p class="m-0">
                           {{ cxt.title }}
                         </p>
@@ -267,14 +161,12 @@
                       <div class="w-100 content">
                         <p class="m-0 pb-20">
                           接駁公車資訊請至以下網站　詢：
-                          <a href="http://eec.ntua.edu.tw/bus/" target="_blank"
-                            >http://eec.ntua.edu.tw/bus/
+                          <a href="http://eec.ntua.edu.tw/bus/" target="_blank">http://eec.ntua.edu.tw/bus/
                           </a>
                         </p>
                         <p class="m-0 pb-20">
                           更多交通資訊請參閱新北市市政府乘車資訊服務系統網站，網址：
-                          <a href="http://e-bus.tpc.gov.tw/" target="_blank"
-                            >http://e-bus.tpc.gov.tw/
+                          <a href="http://e-bus.tpc.gov.tw/" target="_blank">http://e-bus.tpc.gov.tw/
                           </a>
                         </p>
                       </div>
@@ -325,27 +217,18 @@
         <div class="contest w-100 mb-30">
           <TitleText textTitle="CONTEST WINNING" />
           <div class="contest__limitWidth w-100 mt-10 d-flex align-items-start">
-            <div
-              class="contest__card d-flex flex-column"
-              v-for="item in awardData"
-              :key="item.id"
-            >
+            <div class="contest__card d-flex flex-column" v-for="item in awardData" :key="item.id">
               <router-link :to="{ name: 'award' }">
                 <img :src="item.pics" alt="" width="100%" height="120px" />
               </router-link>
-              <div
-                class="contest__card--title w-100 d-flex align-items-center justify-content-between py-10"
-              >
+              <div class="contest__card--title w-100 d-flex align-items-center justify-content-between py-10">
                 <p class="m-0">{{ item.title }}</p>
                 <p class="m-0">
                   {{ item.releaseDate | moment("YYYY | MM.DD") }}
                 </p>
               </div>
               <div class="contest__card--content w-100">
-                <vue-editor
-                  v-model="item.contents"
-                  :disabled="true"
-                ></vue-editor>
+                <vue-editor v-model="item.contents" :disabled="true"></vue-editor>
               </div>
             </div>
           </div>
@@ -355,49 +238,23 @@
           <TitleText textTitle="STUDENTS WORKS" />
           <div class="w-100 mt-15">
             <div class="w-100 d-flex align-items-center justify-content-center">
-              <div
-                class="w-100 d-flex align-items-center justify-content-center students__slash"
-              >
-                <img
-                  src="../assets/images/icon/背景線.png"
-                  alt=""
-                  width="100%"
-                />
+              <div class="w-100 d-flex align-items-center justify-content-center students__slash">
+                <img src="../assets/images/icon/背景線.png" alt="" width="100%" />
               </div>
               <div class="pos-relative">
-                <img
-                  class="zIndex-1"
-                  :src="worksList[getWorkNum].pics"
-                  alt=""
-                  width="160px"
-                />
-                <router-link
-                  class="students__viewBtn"
-                  :to="{ name: 'studioResult' }"
-                >
+                <img class="zIndex-1" :src="worksList[getWorkNum].pics" alt="" width="160px" />
+                <router-link class="students__viewBtn" :to="{ name: 'studioResult' }">
                   <img src="@/assets/images/view_btn.png" alt="" width="60px" />
-                  <img
-                    src="@/assets/images/view_btn_hover.png"
-                    alt=""
-                    width="60px"
-                  />
+                  <img src="@/assets/images/view_btn_hover.png" alt="" width="60px" />
                 </router-link>
               </div>
             </div>
-            <div
-              class="w-100 d-flex align-items-center justify-content-center mt-20"
-            >
-              <a
-                class="cur-pointer d-flex align-items-center px-20"
-                @click="works_prev()"
-              >
+            <div class="w-100 d-flex align-items-center justify-content-center mt-20">
+              <a class="cur-pointer d-flex align-items-center px-20" @click="works_prev()">
                 <img src="@/assets/images/arrowLeft_btn.png" alt="" />
               </a>
 
-              <a
-                class="cur-pointer d-flex align-items-center px-20"
-                @click="works_next()"
-              >
+              <a class="cur-pointer d-flex align-items-center px-20" @click="works_next()">
                 <img src="@/assets/images/arrowRight_btn.png" alt="" />
               </a>
             </div>
@@ -407,31 +264,17 @@
         <div class="whatsnew w-100 mb-100">
           <div class="w-100 d-flex align-items-center justify-content-between">
             <TitleText textTitle="WHAT'S NEW" />
-            <div
-              class="whatsnew__viewBtn ml-auto d-flex align-items-center flex-row pb-10"
-              @click="goNews()"
-            >
+            <div class="whatsnew__viewBtn ml-auto d-flex align-items-center flex-row pb-10" @click="goNews()">
               <p class="m-0 pr-20">VIEW MORE</p>
-              <img
-                src="@/assets/images/arrowRight_btn.png"
-                alt=""
-                width="24px"
-              />
+              <img src="@/assets/images/arrowRight_btn.png" alt="" width="24px" />
             </div>
           </div>
           <div class="w-100 mt-10">
-            <div
-              class="whatsnew__content w-100 d-flex align-items-center flex-column mt-30"
-              v-for="(item, index) in newsData"
-              :key="'WN_' + index"
-            >
+            <div class="whatsnew__content w-100 d-flex align-items-center flex-column mt-30" v-for="(item, index) in newsData" :key="'WN_' + index">
               <div class="whatsnew__content--title w-100">
                 <p class="m-0">{{ item.releaseDate | moment("YYYY.MM.DD") }}</p>
               </div>
-              <div
-                class="whatsnew__content--context w-100 d-flex align-items-center justify-content-between mt-10 pb-10"
-                @click="goNewsInfo(item.id)"
-              >
+              <div class="whatsnew__content--context w-100 d-flex align-items-center justify-content-between mt-10 pb-10" @click="goNewsInfo(item.id)">
                 <div class="d-flex justify-content-start flex-column mr-10">
                   <p class="m-0">{{ item.title }}</p>
                 </div>
@@ -446,19 +289,9 @@
         <div class="crafts w-100 mb-50">
           <div class="craftsCard">
             <div class="p-20 d-flex align-items-center justify-content-start">
-              <div
-                class="d-flex flex-column align-items-center justify-content-center"
-              >
-                <img
-                  src="@/assets/images/craft/craft_1.png"
-                  alt=""
-                  width="110px"
-                  @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
-                />
-                <div
-                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
-                  @click="goCraft('SYS_CLASSTYPE_CERAMICS')"
-                >
+              <div class="d-flex flex-column align-items-center justify-content-center">
+                <img src="@/assets/images/craft/craft_1.png" alt="" width="110px" @click="goCraft('SYS_CLASSTYPE_CERAMICS')" />
+                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('SYS_CLASSTYPE_CERAMICS')">
                   <div class="p-10">
                     <div class="p-10">
                       <p class="m-0">陶瓷</p>
@@ -467,19 +300,9 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="d-flex flex-column align-items-center justify-content-center ml-30"
-              >
-                <img
-                  src="@/assets/images/craft/craft_2.png"
-                  alt=""
-                  width="110px"
-                  @click="goCraft('METALWORKING')"
-                />
-                <div
-                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
-                  @click="goCraft('METALWORKING')"
-                >
+              <div class="d-flex flex-column align-items-center justify-content-center ml-30">
+                <img src="@/assets/images/craft/craft_2.png" alt="" width="110px" @click="goCraft('METALWORKING')" />
+                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('METALWORKING')">
                   <div class="p-10">
                     <div class="py-10">
                       <p class="m-0">金工</p>
@@ -488,19 +311,9 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="d-flex flex-column align-items-center justify-content-center ml-30"
-              >
-                <img
-                  src="@/assets/images/craft/craft_3.png"
-                  alt=""
-                  width="110px"
-                  @click="goCraft('WOODWORKING')"
-                />
-                <div
-                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
-                  @click="goCraft('WOODWORKING')"
-                >
+              <div class="d-flex flex-column align-items-center justify-content-center ml-30">
+                <img src="@/assets/images/craft/craft_3.png" alt="" width="110px" @click="goCraft('WOODWORKING')" />
+                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('WOODWORKING')">
                   <div class="p-10">
                     <div class="py-10">
                       <p class="m-0">木工</p>
@@ -509,19 +322,9 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="d-flex flex-column align-items-center justify-content-center ml-30"
-              >
-                <img
-                  src="@/assets/images/craft/craft_4.png"
-                  alt=""
-                  width="110px"
-                  @click="goCraft('PRODUCT')"
-                />
-                <div
-                  class="craftsCard__info d-flex align-items-center justify-content-center flex-column"
-                  @click="goCraft('PRODUCT')"
-                >
+              <div class="d-flex flex-column align-items-center justify-content-center ml-30">
+                <img src="@/assets/images/craft/craft_4.png" alt="" width="110px" @click="goCraft('PRODUCT')" />
+                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('PRODUCT')">
                   <div class="p-10">
                     <div class="py-10">
                       <p class="m-0">產品</p>
@@ -536,58 +339,29 @@
         <!-- access -->
         <div class="access w-100">
           <TitleText textTitle="ACCESS" />
-          <div
-            class="w-100 h-100 mt-20"
-            style="height: 450px"
-            id="map_phone"
-            ref="map"
-          ></div>
+          <div class="w-100 h-100 mt-20" style="height: 450px" id="map_phone" ref="map"></div>
 
           <div class="w-100">
             <div class="w-100 d-flex flex-column">
-              <div
-                class="access__infoCard px-15 pb-15 d-flex align-items-start flex-row"
-                :class="{ 'pt-15': item.title !== '交通' }"
-                v-for="(item, index) in accessList"
-                :key="'AL_' + index"
-              >
+              <div class="access__infoCard px-15 pb-15 d-flex align-items-start flex-row" :class="{ 'pt-15': item.title !== '交通' }" v-for="(item, index) in accessList" :key="'AL_' + index">
                 <div class="access__infoCard--title">
                   <p class="m-0" :class="{ 'pt-15': item.title == '交通' }">
                     {{ item.title }}
                   </p>
                 </div>
 
-                <div
-                  class="access__infoCard--content d-flex flex-column"
-                  v-if="item.code == 'address'"
-                >
+                <div class="access__infoCard--content d-flex flex-column" v-if="item.code == 'address'">
                   <p class="m-0">{{ item.value }}</p>
                   <span class="mt-20">
-                    <a
-                      class="text-decoration-none py-6 px-25"
-                      href="https://goo.gl/maps/67MWRHAoppzHiKP87"
-                      target="_blank"
-                    >
+                    <a class="text-decoration-none py-6 px-25" href="https://goo.gl/maps/67MWRHAoppzHiKP87" target="_blank">
                       GOOGLE MAP
                     </a>
                   </span>
                 </div>
-                <div
-                  class="w-100 d-flex flex-column access__infoCard--traf"
-                  v-else-if="item.code == 'traffic'"
-                >
+                <div class="w-100 d-flex flex-column access__infoCard--traf" v-else-if="item.code == 'traffic'">
                   <el-collapse v-model="activeNames">
-                    <el-collapse-item
-                      :title="items.transportation"
-                      :name="items.transportation"
-                      v-for="(items, key) in item.list"
-                      :key="'LST__' + key"
-                    >
-                      <div
-                        class="w-100 content"
-                        v-for="(cxt, index_1) in items.options"
-                        :key="'OPT__' + index_1"
-                      >
+                    <el-collapse-item :title="items.transportation" :name="items.transportation" v-for="(items, key) in item.list" :key="'LST__' + key">
+                      <div class="w-100 content" v-for="(cxt, index_1) in items.options" :key="'OPT__' + index_1">
                         <p class="m-0">
                           {{ cxt.title }}
                         </p>
@@ -600,14 +374,12 @@
                       <div class="w-100 content">
                         <p class="m-0 pb-10">
                           接駁公車資訊請至以下網站　詢：
-                          <a href="http://eec.ntua.edu.tw/bus/" target="_blank"
-                            >http://eec.ntua.edu.tw/bus/
+                          <a href="http://eec.ntua.edu.tw/bus/" target="_blank">http://eec.ntua.edu.tw/bus/
                           </a>
                         </p>
                         <p class="m-0 pb-10">
                           更多交通資訊請參閱新北市市政府乘車資訊服務系統網站，網址：
-                          <a href="http://e-bus.tpc.gov.tw/" target="_blank"
-                            >http://e-bus.tpc.gov.tw/
+                          <a href="http://e-bus.tpc.gov.tw/" target="_blank">http://e-bus.tpc.gov.tw/
                           </a>
                         </p>
                       </div>

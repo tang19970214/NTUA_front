@@ -6,22 +6,12 @@
         <div class="block_left">
           <div class="block_left-contact d-flex align-items-center flex-column">
             <div class="w-100 block_left-border">
-              <div
-                class="w-100 d-flex align-items-center text-left flex-column mb-35"
-                v-for="(item, index) in contactData"
-                :key="'CD__' + index"
-              >
+              <div class="w-100 d-flex align-items-center text-left flex-column mb-35" v-for="(item, index) in contactData" :key="'CD__' + index">
                 <div class="w-100">
                   <p class="m-0">{{ item.text }}</p>
                 </div>
-                <div
-                  class="block_left-icon w-100 d-flex align-items-center flex-row mt-20"
-                >
-                  <span
-                    class="mr-50"
-                    v-for="(items, index) in item.icon"
-                    :key="'IC_' + index"
-                  >
+                <div class="block_left-icon w-100 d-flex align-items-center flex-row mt-20">
+                  <span class="mr-50" v-for="(items, index) in item.icon" :key="'IC_' + index">
                     <a :href="items.path" target="_blank">
                       <img :src="items.url" alt="" width="50px" />
                       <img :src="items.hoverUrl" alt="" width="50px" />
@@ -33,15 +23,10 @@
           </div>
         </div>
         <div class="block_right d-flex align-items-center flex-column">
-          <div
-            class="block_right-top d-flex align-items-center justify-content-center"
-            @click="scrollToTop()"
-          >
+          <div class="block_right-top d-flex align-items-center justify-content-center" @click="scrollToTop()">
             <p class="m-0">TOP</p>
           </div>
-          <div
-            class="block_right-bottom d-flex align-items-center justify-content-center"
-          >
+          <div class="block_right-bottom d-flex align-items-center justify-content-center">
             <router-link to="/">
               <img src="@/assets/images/logo/footer_logo.png" alt="" />
               <img src="@/assets/images/logo/footer_logo_hover.png" alt="" />
@@ -55,38 +40,23 @@
     <div class="footerForPhone d-block d-mb-none">
       <div class="w-100 d-flex flex-column">
         <div class="footerForPhone-community w-100 py-10 d-flex align-items-center justify-content-around">
-          <div
-            class="d-flex align-items-center"
-            v-for="(item, index) in contactForPhone"
-            :key="'CFP_' + index"
-          >
+          <div class="d-flex align-items-center" v-for="(item, index) in contactForPhone" :key="'CFP_' + index">
             <a :href="item.path" target="_blank">
               <img :src="item.imgURL" alt="" width="40px" />
             </a>
           </div>
         </div>
-        <div
-          class="footerForPhone-logo d-flex align-items-center justify-content-center flex-column"
-        >
+        <div class="footerForPhone-logo d-flex align-items-center justify-content-center flex-column">
           <div class="px-60 pt-20 pb-40">
             <div class="w-100 d-flex align-items-center justify-content-center">
               <a href="https://www.ntua.edu.tw/" target="_blank">
-                <img
-                  src="../assets/images/logo/footer_logo.svg"
-                  alt=""
-                  width="100%"
-                />
+                <img src="../assets/images/logo/footer_logo.svg" alt="" width="100%" />
               </a>
             </div>
 
             <div class="w-100 align-items-center justify-content-center">
               <router-link to="/">
-                <img
-                  class="mt-30"
-                  src="../assets/images/logo/footer_logo.png"
-                  alt=""
-                  width="100%"
-                />
+                <img class="mt-30" src="../assets/images/logo/footer_logo.png" alt="" width="100%" />
               </router-link>
             </div>
           </div>
@@ -185,7 +155,7 @@ export default {
         if (top <= 0) {
           clearInterval(timeTop);
         }
-      }, 15);
+      }, 10);
     },
   },
 };
