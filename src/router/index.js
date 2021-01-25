@@ -371,15 +371,15 @@ const routes = [{
       subName: "highlight"
     }
   },
-  {
-    path: '/studioResultInfo/:craft',
-    name: 'studioResultInfo',
-    component: () => import('../views/teachingResult/studioResult/studioResultInfo.vue'),
-    meta: {
-      mainPage: "teachingResult",
-      subName: "studioResult"
-    }
-  },
+  // {
+  //   path: '/studioResultInfo/:craft',
+  //   name: 'studioResultInfo',
+  //   component: () => import('../views/teachingResult/studioResult/studioResultInfo.vue'),
+  //   meta: {
+  //     mainPage: "teachingResult",
+  //     subName: "studioResult"
+  //   }
+  // },
   {
     path: '/internshipResultInfo/:id',
     name: 'internshipResultInfo',

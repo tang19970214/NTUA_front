@@ -1,11 +1,7 @@
 <template>
   <div id="loadShowIMG">
     <div class="w-100 d-flex align-items-center flex-row">
-      <span
-        class="w-100 transBg"
-        v-for="(item, index) in artImg"
-        :key="'AI__' + index"
-      >
+      <span class="w-100 transBg" v-for="(item, index) in artImg" :key="'AI__' + index">
         <img :src="item.imgUrl" alt="" width="100%" />
       </span>
     </div>
@@ -18,13 +14,16 @@ export default {
     return {
       artImg: [
         {
-          imgUrl: require("@/assets/images/art/art1.png"),
+          imgUrl: require("@/assets/images/art/01.png"),
         },
         {
-          imgUrl: require("@/assets/images/art/art2.png"),
+          imgUrl: require("@/assets/images/art/02.png"),
         },
         {
-          imgUrl: require("@/assets/images/art/art3.png"),
+          imgUrl: require("@/assets/images/art/03.png"),
+        },
+        {
+          imgUrl: require("@/assets/images/art/04.png"),
         },
       ],
     };
@@ -34,11 +33,13 @@ export default {
 
 <style lang="scss">
 .transBg {
-  opacity: 0;
-  animation-name: loadShow;
-  animation-duration: 1.5s;
-  animation-delay: 0.8s;
-  animation-fill-mode: forwards;
+  img {
+    opacity: 0;
+    animation-name: loadShow;
+    animation-duration: 1.5s;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards;
+  }
 }
 
 @keyframes loadShow {

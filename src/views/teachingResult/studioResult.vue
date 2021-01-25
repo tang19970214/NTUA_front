@@ -3,33 +3,17 @@
     <!-- web -->
     <div class="web d-none d-mb-block">
       <div class="w-100 h-100 studioBG">
-        <div class="d-flex justify-content-around studioGroup">
-          <div
-            class="m-item d-flex align-items-center flex-column"
-            v-for="(item, index) in crafts"
-            :key="index"
-          >
-            <img
-              :src="item.imgURL"
-              class="m-item-image w-100 cur-pointer"
-              v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }"
-              @click="filterType(item.value)"
-            />
+        <div class="w-100 d-flex justify-content-around studioGroup">
+          <div class="m-item d-flex align-items-center flex-column" v-for="(item, index) in studioPic" :key="index">
+            <el-image style="width: 250px; height: 250px" :src="item.imgURL" fit="cover" v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }" @click="filterType(item.value)"></el-image>
             <div class="m-item-title d-flex justify-content-center">
-              <div
-                class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-40 pb-20"
-              >
+              <div class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-40 pb-20">
                 <div class="mb-30">
                   <p class="m-0">{{ item.name_ch }}</p>
                   <p class="m-0">{{ item.name_en }}</p>
                 </div>
                 <div class="pt-10 craftCard-borTop">
-                  <a
-                    v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }"
-                    class="text-decoration-none cur-pointer"
-                    @click="filterType(item.value)"
-                    >VIEW MORE</a
-                  >
+                  <a v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }" class="text-decoration-none cur-pointer" @click="filterType(item.value)">VIEW MORE</a>
                 </div>
               </div>
             </div>
@@ -37,40 +21,19 @@
         </div>
       </div>
       <div id="works" class="w-100 studioCard mt-60">
-        <div class="px-150 py-30" v-if="worksList.length > 0">
+        <div class="px-50 py-30" v-if="worksList.length > 0">
           <el-row>
-            <el-col
-              class="mb-40"
-              :span="8"
-              v-for="(item, index_1) in worksList"
-              :key="item.id"
-            >
-              <div
-                class="w-100 d-flex align-items-center justify-content-center flex-column"
-              >
-                <div
-                  class="studioCard__workPic w-100 d-flex align-items-center justify-content-center"
-                >
-                  <el-image
-                    :src="item.pics"
-                    fit="cover"
-                    style="width: 380px; height: 300px"
-                    @click="getTouchIMG(index_1)"
-                  ></el-image>
+            <el-col class="mb-40" :span="8" v-for="(item, index_1) in worksList" :key="item.id">
+              <div class="w-100 d-flex align-items-center justify-content-center flex-column">
+                <div class="studioCard__workPic w-100 d-flex align-items-center justify-content-center">
+                  <el-image :src="item.pics" fit="cover" style="width: 330px; height: 300px" @click="getTouchIMG(index_1)"></el-image>
                 </div>
-                <div
-                  class="studioCard__content w-100 d-flex align-items-center justify-content-center mt-40"
-                >
+                <div class="studioCard__content w-100 d-flex align-items-center justify-content-center mt-40">
                   <p class="m-0 d-inline-flex p-10">{{ item.title }}</p>
                 </div>
               </div>
             </el-col>
           </el-row>
-          <!-- <div
-            class="w-100 py-50 d-flex align-items-center justify-content-center"
-          >
-            <Pagination :needPage="true" :pageNumber="5" />
-          </div> -->
         </div>
 
         <div class="w-100 py-50 text-center" v-else>
@@ -83,37 +46,22 @@
     <div class="phone d-block d-mb-none">
       <div class="pl-30 pt-70 pb-60 mb-80">
         <div class="craftsBG">
-          <div class="px-25 studioBG__trans">
+          <div class="px-25">
             <el-row>
-              <el-col :span="12" v-for="(item, index1) in crafts" :key="index1">
-                <div
-                  class="w-100 d-flex align-items-center justify-content-center flex-column"
-                >
-                  <img
-                    :src="item.imgURL"
-                    alt=""
-                    width="110px"
-                    v-scroll-to="{
-                      el: '#worksPhone',
-                      offset: 500,
-                      duration: 1000,
-                    }"
-                    @click="filterType(item.value)"
-                  />
+              <el-col :span="12" v-for="(item, index1) in studioPic" :key="index1">
+                <div class="craftsBG__trans w-100 d-flex align-items-center justify-content-center flex-column">
+                  <el-image style="width: 120px; height: 120px" :src="item.imgURL" fit="cover" v-scroll-to="{el: '#worksPhone', offset: 500, duration: 1000, }" @click="filterType(item.value)"></el-image>
+
                   <div class="b-0 craftCard">
                     <div class="p-10">
                       <div class="p-10 craftCard__title text-center">
                         <p class="m-0">{{ item.name_ch }}</p>
                       </div>
-                      <a
-                        v-scroll-to="{
+                      <a v-scroll-to="{
                           el: '#worksPhone',
                           offset: 500,
                           duration: 1000,
-                        }"
-                        class="text-decoration-none"
-                        @click="filterType(item.value)"
-                      >
+                        }" class="text-decoration-none" @click="filterType(item.value)">
                         VIEW MORE
                       </a>
                     </div>
@@ -126,21 +74,10 @@
 
         <div id="worksPhone" class="studioBG mt-50">
           <el-row v-if="worksList.length > 0">
-            <el-col
-              :span="12"
-              v-for="(item, index_2) in worksList"
-              :key="item.id"
-            >
+            <el-col :span="12" v-for="(item, index_2) in worksList" :key="item.id">
               <div class="p-10">
-                <div
-                  class="studioBG__info w-100 d-flex align-items-center justify-content-center flex-column"
-                >
-                  <el-image
-                    :src="item.pics"
-                    fit="cover"
-                    style="width: 150px; height: 120px"
-                    @click="getTouchIMG_phone(index_2)"
-                  ></el-image>
+                <div class="studioBG__info w-100 d-flex align-items-center justify-content-center flex-column">
+                  <el-image :src="item.pics" fit="cover" class="w-100" @click="getTouchIMG_phone(index_2)"></el-image>
                   <div class="w-100 text-center">
                     <strong class="mt-15 pt-10 px-10">{{ item.title }}</strong>
                   </div>
@@ -167,36 +104,18 @@
               <div class="p-100">
                 <div class="w-100 d-flex align-items-end flex-row">
                   <img :src="worksList[selectNum].pics" alt="" width="700px" />
-                  <div
-                    class="d-flex align-items-center justify-content-center flex-column"
-                  >
-                    <div
-                      class="d-flex align-items-center justify-content-between"
-                    >
+                  <div class="d-flex align-items-center justify-content-center flex-column">
+                    <div class="d-flex align-items-center justify-content-between">
                       <div class="w-100 text-right">
-                        <img
-                          v-if="selectNum > 0"
-                          class="mr-20 cur-pointer"
-                          src="@/assets/images/arrowLeft_btn.png"
-                          alt="上一張"
-                          @click="prevPic"
-                        />
+                        <img v-if="selectNum > 0" class="mr-20 cur-pointer" src="@/assets/images/arrowLeft_btn.png" alt="上一張" @click="prevPic" />
                       </div>
                       <div class="w-100 text-left">
-                        <img
-                          v-if="selectNum < listCount"
-                          class="ml-20 cur-pointer"
-                          src="@/assets/images/arrowRight_btn.png"
-                          alt="下一張"
-                          @click="nextPic"
-                        />
+                        <img v-if="selectNum < listCount" class="ml-20 cur-pointer" src="@/assets/images/arrowRight_btn.png" alt="下一張" @click="nextPic" />
                       </div>
                     </div>
                     <div class="classCard__introduce d-inline-flex">
                       <div class="px-50 pt-60 pb-80">
-                        <div
-                          class="w-100 classCard__introduce-title text-left pb-5"
-                        >
+                        <div class="w-100 classCard__introduce-title text-left pb-5">
                           <strong>{{ worksList[selectNum].title }}</strong>
                         </div>
                         <div class="w-100 pr-60 classCard__introduce-content">
@@ -223,10 +142,7 @@
               </div>
             </div>
             <div class="pos-absolute t-0 r-0 mt-20 mr-20">
-              <div
-                class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
-                @click="showIMG = false"
-              >
+              <div class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3" @click="showIMG = false">
                 <i class="el-icon-close"></i>
               </div>
             </div>
@@ -240,48 +156,25 @@
         <div class="w-100 d-flex align-items-center justify-content-center">
           <div class="classCardPhone w-100">
             <div class="px-30 pt-10 pb-40">
-              <div
-                class="w-100 d-flex align-items-center justify-content-end mb-10"
-              >
-                <div
-                  class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
-                  @click="showIMG_phone = false"
-                >
+              <div class="w-100 d-flex align-items-center justify-content-end mb-10">
+                <div class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3" @click="showIMG_phone = false">
                   <i class="el-icon-close"></i>
                 </div>
               </div>
 
-              <div
-                class="w-100 d-flex align-items-end justify-content-center flex-column"
-              >
+              <div class="w-100 d-flex align-items-end justify-content-center flex-column">
                 <img :src="worksList[selectNum].pics" alt="" width="100%" />
-                <div
-                  class="w-100 d-flex align-items-center justify-content-between my-8"
-                >
+                <div class="w-100 d-flex align-items-center justify-content-between my-8">
                   <div class="w-100 text-right">
-                    <img
-                      v-if="selectNum > 0"
-                      class="mr-20 cur-pointer"
-                      src="@/assets/images/arrowLeft_btn.png"
-                      alt="上一張"
-                      @click="prevPic"
-                    />
+                    <img v-if="selectNum > 0" class="mr-20 cur-pointer" src="@/assets/images/arrowLeft_btn.png" alt="上一張" @click="prevPic" />
                   </div>
                   <div class="w-100 text-left">
-                    <img
-                      v-if="selectNum < listCount"
-                      class="ml-20 cur-pointer"
-                      src="@/assets/images/arrowRight_btn.png"
-                      alt="下一張"
-                      @click="nextPic"
-                    />
+                    <img v-if="selectNum < listCount" class="ml-20 cur-pointer" src="@/assets/images/arrowRight_btn.png" alt="下一張" @click="nextPic" />
                   </div>
                 </div>
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
-                    <div
-                      class="w-100 classCardPhone__introduce-title text-left pb-5"
-                    >
+                    <div class="w-100 classCardPhone__introduce-title text-left pb-5">
                       <strong>{{ worksList[selectNum].title }}</strong>
                     </div>
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
@@ -326,27 +219,27 @@ export default {
         limit: 20,
         key: undefined,
       },
-      crafts: [
+      studioPic: [
         {
-          imgURL: require("@/assets/images/craft/craft_1.png"),
+          imgURL: require("@/assets/images/studioPic/studio_1.jpg"),
           name_ch: "陶瓷",
           name_en: "CERAMICS",
           value: "SYS_CLASSTYPE_CERAMICS",
         },
         {
-          imgURL: require("@/assets/images/craft/craft_2.png"),
+          imgURL: require("@/assets/images/studioPic/studio_2.jpeg"),
           name_ch: "金工",
           name_en: "METAL",
           value: "SYS_CLASSTYPE_METAL",
         },
         {
-          imgURL: require("@/assets/images/craft/craft_3.png"),
+          imgURL: require("@/assets/images/studioPic/studio_3.jpg"),
           name_ch: "木工",
           name_en: "WOOD",
           value: "SYS_CLASSTYPE_WOOD",
         },
         {
-          imgURL: require("@/assets/images/craft/craft_4.png"),
+          imgURL: require("@/assets/images/studioPic/studio_4.jpeg"),
           name_ch: "產品",
           name_en: "PRODUCTION",
           value: "SYS_CLASSTYPE_PRODUCTION",
@@ -400,12 +293,10 @@ export default {
     margin-left: 0 !important;
     margin-top: 60px;
     .studioBG {
-      height: 500px;
+      height: 450px;
       background: #2d2d2d;
       .studioGroup {
-        width: calc(100% - 120px);
-        position: absolute;
-        margin-top: -50px;
+        transform: translateY(-2rem);
 
         .m-item-title {
           -webkit-box-ordinal-group: 2;
@@ -434,6 +325,7 @@ export default {
           height: 200px;
           border: 2px solid #596164;
           box-sizing: border-box;
+          transform: translateY(-1.5rem);
           p {
             font-weight: bold;
             font-size: 18px;
@@ -501,7 +393,7 @@ export default {
     .craftsBG {
       background: #2d2d2d;
       &__trans {
-        transform: translateY(-2rem);
+        transform: translateY(-1rem);
       }
       .craftCard {
         border: 1px solid #596164;
