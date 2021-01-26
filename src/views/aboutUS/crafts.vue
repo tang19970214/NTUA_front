@@ -211,9 +211,11 @@ export default {
   },
   methods: {
     showIntroduce(data) {
+      this.$store.commit("SETLOADING", true);
       this.getTitle(data.name_en);
       this.getRoomTypeId(data.name_en);
       this.getDataTypeId(data.name_en);
+      // this.$store.commit("SETLOADING", false);
     },
     getTitle(val) {
       let setName = {};
