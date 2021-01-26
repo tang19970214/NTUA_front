@@ -107,8 +107,8 @@
       <div class="w-100" style="margin-top: 250px">
         <div class="introduceBg ml-120">
           <div class="d-flex align-items-center justify-content-around">
-            <div class="d-flex align-items-center justify-content-center pos-relative" style="margin-top: -3rem" v-for="(item, index) in craftsList" :key="'CF__' + index">
-              <img :src="item.imgURL" alt="" @click="goCraft(item.name_en)" />
+            <div class="introduceBg__trans d-flex align-items-center justify-content-center flex-column" v-for="(item, index) in craftsList" :key="'CF__' + index">
+              <el-image :src="item.imgURL" fit="cover" @click="goCraft(item.name_en)"></el-image>
               <div class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20" @click="goCraft(item.name_en)">
                 <div class="mb-30">
                   <p class="m-0">{{ item.name_ch }}</p>
@@ -289,45 +289,14 @@
         <div class="crafts w-100 mb-50">
           <div class="craftsCard">
             <div class="p-20 d-flex align-items-center justify-content-start">
-              <div class="d-flex flex-column align-items-center justify-content-center">
-                <img src="@/assets/images/craft/craft_1.png" alt="" width="110px" @click="goCraft('SYS_CLASSTYPE_CERAMICS')" />
-                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('SYS_CLASSTYPE_CERAMICS')">
+              <div class="d-flex flex-column align-items-center justify-content-center px-8" v-for="item in craftsList" :key="item.id">
+                <!-- <img :src="item.imgURL" :alt="item.name_ch" width="110px" @click="goCraft(item.name_en)" /> -->
+                <el-image style="width: 110px; height: 110px" :src="item.imgURL" :alt="item.name_ch" fit="cover" @click="goCraft(item.name_en)"></el-image>
+
+                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft(item.name_en)">
                   <div class="p-10">
                     <div class="p-10">
-                      <p class="m-0">陶瓷</p>
-                    </div>
-                    <a class="text-decoration-none mt-10"> VIEW MORE </a>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex flex-column align-items-center justify-content-center ml-30">
-                <img src="@/assets/images/craft/craft_2.png" alt="" width="110px" @click="goCraft('METALWORKING')" />
-                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('METALWORKING')">
-                  <div class="p-10">
-                    <div class="py-10">
-                      <p class="m-0">金工</p>
-                    </div>
-                    <a class="text-decoration-none mt-10"> VIEW MORE </a>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex flex-column align-items-center justify-content-center ml-30">
-                <img src="@/assets/images/craft/craft_3.png" alt="" width="110px" @click="goCraft('WOODWORKING')" />
-                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('WOODWORKING')">
-                  <div class="p-10">
-                    <div class="py-10">
-                      <p class="m-0">木工</p>
-                    </div>
-                    <a class="text-decoration-none mt-10"> VIEW MORE </a>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex flex-column align-items-center justify-content-center ml-30">
-                <img src="@/assets/images/craft/craft_4.png" alt="" width="110px" @click="goCraft('PRODUCT')" />
-                <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft('PRODUCT')">
-                  <div class="p-10">
-                    <div class="py-10">
-                      <p class="m-0">產品</p>
+                      <p class="m-0">{{item.name_ch}}</p>
                     </div>
                     <a class="text-decoration-none mt-10"> VIEW MORE </a>
                   </div>
@@ -513,24 +482,28 @@ export default {
       getWorkNum: 0,
       craftsList: [
         {
+          id: 1,
           name_ch: "陶瓷",
           name_en: "CERAMICS",
-          imgURL: require("@/assets/images/craft/craft_1.png"),
+          imgURL: require("@/assets/images/craft/01.jpg"),
         },
         {
+          id: 2,
           name_ch: "金工",
           name_en: "METALWORKING",
-          imgURL: require("@/assets/images/craft/craft_2.png"),
+          imgURL: require("@/assets/images/craft/02.jpg"),
         },
         {
+          id: 3,
           name_ch: "木工",
           name_en: "WOODWORKING",
-          imgURL: require("@/assets/images/craft/craft_3.png"),
+          imgURL: require("@/assets/images/craft/03.jpg"),
         },
         {
+          id: 4,
           name_ch: "產品",
           name_en: "PRODUCTION",
-          imgURL: require("@/assets/images/craft/craft_4.png"),
+          imgURL: require("@/assets/images/craft/04.jpg"),
         },
       ],
       accessList: [
@@ -1055,26 +1028,26 @@ export default {
       this.$router.push({ name: "bulletinInfo", params: { id: id } });
     },
     goCraft(sortName) {
-      let paramsVal;
-      switch (sortName) {
-        case "CERAMICS":
-          paramsVal = "SYS_CLASSTYPE_CERAMICS";
-          break;
-        case "METALWORKING":
-          paramsVal = "SYS_CLASSTYPE_METAL";
-          break;
-        case "WOODWORKING":
-          paramsVal = "SYS_CLASSTYPE_WOOD";
-          break;
-        case "PRODUCTION":
-          paramsVal = "SYS_CLASSTYPE_PROD";
-          break;
-        default:
-          break;
-      }
+      // let paramsVal;
+      // switch (sortName) {
+      //   case "CERAMICS":
+      //     paramsVal = "SYS_CLASSTYPE_CERAMICS";
+      //     break;
+      //   case "METALWORKING":
+      //     paramsVal = "SYS_CLASSTYPE_METAL";
+      //     break;
+      //   case "WOODWORKING":
+      //     paramsVal = "SYS_CLASSTYPE_WOOD";
+      //     break;
+      //   case "PRODUCTION":
+      //     paramsVal = "SYS_CLASSROOM_PROD";
+      //     break;
+      //   default:
+      //     break;
+      // }
       this.$router.push({
         name: "crafts",
-        params: { sort: "SYS_CLASSTYPE_CERAMICS" },
+        params: { sort: sortName },
       });
     },
     getAward() {
@@ -1215,26 +1188,39 @@ export default {
   .introduceBg {
     background: #2d2d2d;
     min-height: 500px;
-  }
-  .craftCard {
-    position: absolute;
-    margin-top: 27rem;
-    width: 200px;
-    height: 200px;
-    border: 2px solid #596164;
-    box-sizing: border-box;
-    p {
-      font-weight: bold;
-      font-size: 18px;
-      color: white;
+    img {
+      width: 350px;
+      height: 350px;
     }
-    a {
-      font-size: 18px;
-      line-height: 21px;
-      color: #ceb87f;
+    @media (max-width: 1680px) {
+      img {
+        width: 250px;
+        height: 250px;
+      }
     }
-    &__borTop {
-      border-top: 1px solid #ceb87f;
+    &__trans {
+      transform: translateY(-2rem);
+    }
+
+    .craftCard {
+      width: 200px;
+      height: 200px;
+      border: 2px solid #596164;
+      box-sizing: border-box;
+      transform: translateY(-2rem);
+      p {
+        font-weight: bold;
+        font-size: 18px;
+        color: white;
+      }
+      a {
+        font-size: 18px;
+        line-height: 21px;
+        color: #ceb87f;
+      }
+      &__borTop {
+        border-top: 1px solid #ceb87f;
+      }
     }
   }
   .local {
@@ -1440,7 +1426,7 @@ export default {
           transform: translateY(-0.7rem);
           border: 1px solid #596164;
           box-sizing: border-box;
-          div {
+          div > div {
             border-bottom: 1px solid #ceb87f;
             p {
               font-weight: bold;

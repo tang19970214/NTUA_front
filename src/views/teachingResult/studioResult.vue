@@ -5,7 +5,7 @@
       <div class="w-100 h-100 studioBG">
         <div class="w-100 d-flex justify-content-around studioGroup">
           <div class="m-item d-flex align-items-center flex-column" v-for="(item, index) in studioPic" :key="index">
-            <el-image style="width: 250px; height: 250px" :src="item.imgURL" fit="cover" v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }" @click="filterType(item.value)"></el-image>
+            <el-image :src="item.imgURL" fit="cover" v-scroll-to="{ el: '#works', offset: -120, duration: 1500 }" @click="filterType(item.value)"></el-image>
             <div class="m-item-title d-flex justify-content-center">
               <div class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-40 pb-20">
                 <div class="mb-30">
@@ -221,25 +221,25 @@ export default {
       },
       studioPic: [
         {
-          imgURL: require("@/assets/images/studioPic/studio_1.jpg"),
+          imgURL: require("@/assets/images/studioPic/01.jpg"),
           name_ch: "陶瓷",
           name_en: "CERAMICS",
           value: "SYS_CLASSTYPE_CERAMICS",
         },
         {
-          imgURL: require("@/assets/images/studioPic/studio_2.jpeg"),
+          imgURL: require("@/assets/images/studioPic/02.jpg"),
           name_ch: "金工",
           name_en: "METAL",
           value: "SYS_CLASSTYPE_METAL",
         },
         {
-          imgURL: require("@/assets/images/studioPic/studio_3.jpg"),
+          imgURL: require("@/assets/images/studioPic/03.jpg"),
           name_ch: "木工",
           name_en: "WOOD",
           value: "SYS_CLASSTYPE_WOOD",
         },
         {
-          imgURL: require("@/assets/images/studioPic/studio_4.jpeg"),
+          imgURL: require("@/assets/images/studioPic/04.jpg"),
           name_ch: "產品",
           name_en: "PRODUCTION",
           value: "SYS_CLASSTYPE_PRODUCTION",
@@ -293,10 +293,20 @@ export default {
     margin-left: 0 !important;
     margin-top: 60px;
     .studioBG {
-      height: 450px;
+      min-height: 450px;
       background: #2d2d2d;
       .studioGroup {
         transform: translateY(-2rem);
+        img {
+          width: 350px;
+          height: 350px;
+        }
+        @media (max-width: 1680px) {
+          img {
+            width: 250px;
+            height: 250px;
+          }
+        }
 
         .m-item-title {
           -webkit-box-ordinal-group: 2;

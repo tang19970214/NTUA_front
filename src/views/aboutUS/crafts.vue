@@ -2,31 +2,16 @@
   <div id="crafts">
     <div class="web d-none d-mb-block">
       <div class="d-flex justify-content-around studioGroup">
-        <div
-          class="m-item d-flex align-items-center flex-column"
-          v-for="(item, index) in crafts"
-          :key="index"
-        >
-          <img
-            :src="item.imgURL"
-            v-scroll-to="{ el: '#crafts', offset: 580, duration: 1500 }"
-            class="m-item-image w-100 cur-pointer"
-            @click="showIntroduce(item)"
-          />
+        <div class="m-item d-flex align-items-center flex-column" v-for="(item, index) in crafts" :key="index">
+          <el-image class="m-item-image" :src="item.imgURL" fit="cover" v-scroll-to="{ el: '#crafts', offset: 580, duration: 1500 }" @click="showIntroduce(item)"></el-image>
           <div class="m-item-title d-flex justify-content-center">
-            <div
-              class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-            >
+            <div class="craftCard d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20">
               <div class="mb-30">
                 <p class="m-0">{{ item.name_ch }}</p>
                 <p class="m-0">{{ item.name_en }}</p>
               </div>
               <div class="pt-10 craftCard-borTop">
-                <a
-                  v-scroll-to="{ el: '#crafts', offset: 580, duration: 1500 }"
-                  class="text-decoration-none cur-pointer"
-                  @click="showIntroduce(item)"
-                >
+                <a v-scroll-to="{ el: '#crafts', offset: 580, duration: 1500 }" class="text-decoration-none cur-pointer" @click="showIntroduce(item)">
                   VIEW MORE
                 </a>
               </div>
@@ -49,23 +34,12 @@
           <div class="w-100 mt-70 bg-white craftIntroduce__card">
             <el-row>
               <el-col :span="6">
-                <div
-                  class="w-100 d-flex align-items-center justify-content-center mt-40"
-                  v-for="item in craftsContent"
-                  :key="item.id"
-                >
-                  <div
-                    class="craftIntroduce__card-leftBlock d-flex align-items-start justify-content-center"
-                    v-if="item.roomTypeId == 'SYS_CLASSDATA_MEMBER'"
-                  >
+                <div class="w-100 d-flex align-items-center justify-content-center mt-40" v-for="item in craftsContent" :key="item.id">
+                  <div class="craftIntroduce__card-leftBlock d-flex align-items-start justify-content-center" v-if="item.roomTypeId == 'SYS_CLASSDATA_MEMBER'">
                     <strong class="pl-15">{{ item.title }}</strong>
                     <span class="mx-10 mt-13"></span>
                     <div class="d-flex flex-column">
-                      <p
-                        class="m-0"
-                        v-for="(items, index) in item.summary.split('\n')"
-                        :key="'SMR__' + index"
-                      >
+                      <p class="m-0" v-for="(items, index) in item.summary.split('\n')" :key="'SMR__' + index">
                         {{ items }}
                       </p>
                     </div>
@@ -73,15 +47,8 @@
                 </div>
               </el-col>
               <el-col class="my-10" :span="18">
-                <div
-                  class="craftIntroduce__card-rightBlock w-100 d-flex align-items-center justify-content-start"
-                  v-for="item in craftsContent"
-                  :key="item.id"
-                >
-                  <div
-                    class="p-30 d-flex align-items-start flex-row"
-                    v-if="item.roomTypeId == 'SYS_CLASSDATA_CONTENT'"
-                  >
+                <div class="craftIntroduce__card-rightBlock w-100 d-flex align-items-center justify-content-start" v-for="item in craftsContent" :key="item.id">
+                  <div class="p-30 d-flex align-items-start flex-row" v-if="item.roomTypeId == 'SYS_CLASSDATA_CONTENT'">
                     <strong class="pl-15" v-if="item.title">
                       {{ item.title }}
                     </strong>
@@ -93,32 +60,16 @@
             </el-row>
           </div>
 
-          <div
-            class="w-100 mt-70 d-flex align-items-center justify-content-start"
-          >
-            <div
-              class="d-flex align-items-center justify-content-center flex-column pos-relative pr-30"
-              v-for="item in craftsData"
-              :key="item.id"
-            >
+          <div class="w-100 mt-70 d-flex align-items-center justify-content-start">
+            <div class="d-flex align-items-center justify-content-center flex-column pos-relative pr-30" v-for="item in craftsData" :key="item.id">
               <!-- <img :src="item.coverPic" :alt="item.title" /> -->
-              <el-image
-                style="width: 550px"
-                :src="item.coverPic"
-                :alt="item.title"
-                fit="cover"
-              ></el-image>
-              <div
-                class="craftIntroduce-Card d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20"
-              >
+              <el-image style="width: 550px" :src="item.coverPic" :alt="item.title" fit="cover"></el-image>
+              <div class="craftIntroduce-Card d-flex align-items-center justify-content-center flex-column text-center pt-45 pb-20">
                 <div class="mb-30">
                   <p class="m-0">{{ item.title }}</p>
                 </div>
                 <div class="pt-10 craftIntroduce-borTop">
-                  <router-link
-                    class="text-decoration-none"
-                    :to="{ name: 'equipment' }"
-                  >
+                  <router-link class="text-decoration-none" :to="{ name: 'equipment' }">
                     VIEW MORE
                   </router-link>
                 </div>
@@ -132,25 +83,15 @@
     <div class="phone crafts d-block d-mb-none">
       <div class="pl-20 py-20">
         <div class="w-100">
-          <div
-            class="crafts__Card pl-30 d-flex align-items-center justify-content-start"
-          >
-            <div
-              class="mx-15 d-flex flex-column align-items-center justify-content-center"
-              v-for="(item, index1) in crafts"
-              :key="index1"
-            >
-              <img :src="item.imgURL" alt="" width="110px" />
-              <div
-                class="crafts__Card-info d-flex align-items-center justify-content-center flex-column"
-              >
+          <div class="crafts__Card pl-10 d-flex align-items-center justify-content-start">
+            <div class="mx-16 mt-8 d-flex flex-column align-items-center justify-content-center" v-for="(item, index1) in crafts" :key="index1">
+              <el-image style="width: 110px; height: 110px" :src="item.imgURL" fit="cover" v-scroll-to="{ el: '#crafts', offset: 280, duration: 1500 }" @click="showIntroduce(item)"></el-image>
+
+              <div class="crafts__Card--info d-flex align-items-center justify-content-center flex-column px-8">
                 <div class="py-10">
                   <p class="m-0">{{ item.name_ch }}</p>
                 </div>
-                <a
-                  class="text-decoration-none mt-10"
-                  @click="showIntroduce(item)"
-                >
+                <a class="text-decoration-none mt-10" v-scroll-to="{ el: '#crafts', offset: 280, duration: 1500 }" @click="showIntroduce(item)">
                   VIEW MORE
                 </a>
               </div>
@@ -167,23 +108,12 @@
 
         <div class="bg-white">
           <div class="pl-20 pt-20 pb-40">
-            <div
-              class="crafts__host pl-15 mb-10"
-              v-for="item in craftsContent"
-              :key="item.id"
-            >
-              <div
-                class="w-100 d-flex align-items-start flex-row"
-                v-if="item.roomTypeId == 'SYS_CLASSDATA_MEMBER'"
-              >
+            <div class="crafts__host pl-15 mb-10" v-for="item in craftsContent" :key="item.id">
+              <div class="w-100 d-flex align-items-start flex-row" v-if="item.roomTypeId == 'SYS_CLASSDATA_MEMBER'">
                 <strong class="pl-20">{{ item.title }}</strong>
                 <span class="mx-10 pt-10"></span>
                 <div class="d-flex align-items-center flex-column">
-                  <p
-                    class="m-0"
-                    v-for="(items, index) in item.summary.split('\n')"
-                    :key="'SMR__' + index"
-                  >
+                  <p class="m-0" v-for="(items, index) in item.summary.split('\n')" :key="'SMR__' + index">
                     {{ items }}
                   </p>
                 </div>
@@ -192,23 +122,17 @@
 
             <div class="w-100 overflow-x crafts__studio">
               <div class="w-100" v-for="item in craftsContent" :key="item.id">
-                <div
-                  class="p-15 d-flex align-items-start flex-row"
-                  v-if="item.roomTypeId == 'SYS_CLASSDATA_CONTENT'"
-                >
+                <div class="p-15 d-flex align-items-start flex-row" v-if="item.roomTypeId == 'SYS_CLASSDATA_CONTENT'">
                   <strong class="pl-20" v-if="item.title">
                     {{ item.title }}
                   </strong>
                   <span class="mx-10 pt-10" v-if="item.title"></span>
                   <div class="d-flex align-items-center flex-column pr-20">
-                    <p
-                      class="m-0"
-                      :style="
+                    <p class="m-0" :style="
                         !item.title && craftsContent.length > 2
                           ? 'white-space: nowrap'
                           : ''
-                      "
-                    >
+                      ">
                       {{ item.summary }}
                     </p>
                   </div>
@@ -218,23 +142,12 @@
           </div>
         </div>
 
-        <div
-          class="w-100 crafts__studioClass d-flex align-items-center justify-content-start overflow-x"
-        >
-          <div
-            class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column px-20 pt-20"
-            v-for="item in craftsData"
-            :key="item.id"
-          >
+        <div class="w-100 crafts__studioClass d-flex align-items-center justify-content-start overflow-x">
+          <div class="crafts__studioClass-classroom d-flex align-items-center justify-content-center flex-column px-20 pt-20" v-for="item in craftsData" :key="item.id">
             <img :src="item.coverPic" :alt="item.title" width="200px" />
-            <div
-              class="px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column"
-            >
+            <div class="px-30 pt-40 pb-10 d-flex align-items-center justify-content-center flex-column">
               <strong>{{ item.title }}</strong>
-              <router-link
-                class="mt-10 px-20 pt-8 text-decoration-none"
-                :to="{ name: 'equipment' }"
-              >
+              <router-link class="mt-10 px-20 pt-8 text-decoration-none" :to="{ name: 'equipment' }">
                 VIEW MORE
               </router-link>
             </div>
@@ -257,38 +170,35 @@ export default {
     return {
       listQuery: {
         RoomTypeId: "",
-        DataTypeId: this.$route.params.sort,
+        DataTypeId: "",
         page: 1,
         limit: 20,
         key: undefined,
       },
       craftsListQuery: {
-        RoomTypeId:
-          getCraftId == "PRODUCTION"
-            ? "SYS_CLASSROOM_PROD"
-            : "SYS_CLASSROOM_" + getCraftId,
+        RoomTypeId: "",
         page: 1,
         limit: 20,
         key: undefined,
       },
       crafts: [
         {
-          imgURL: require("@/assets/images/craft/craft_1.png"),
+          imgURL: require("@/assets/images/craft/01.jpg"),
           name_ch: "陶瓷",
           name_en: "CERAMICS",
         },
         {
-          imgURL: require("@/assets/images/craft/craft_2.png"),
+          imgURL: require("@/assets/images/craft/02.jpg"),
           name_ch: "金工",
-          name_en: "METAL",
+          name_en: "METALWORKING",
         },
         {
-          imgURL: require("@/assets/images/craft/craft_3.png"),
+          imgURL: require("@/assets/images/craft/03.jpg"),
           name_ch: "木工",
-          name_en: "WOOD",
+          name_en: "WOODWORKING",
         },
         {
-          imgURL: require("@/assets/images/craft/craft_4.png"),
+          imgURL: require("@/assets/images/craft/04.jpg"),
           name_ch: "產品",
           name_en: "PRODUCTION",
         },
@@ -296,44 +206,88 @@ export default {
       craftsContent: [],
       craftsData: [],
       showCrafts: this.$route.params.sort,
-      craftsTitle: {
-        title_ch: "陶瓷工藝創作專業工坊",
-        title_en: "Ceramics Studio",
-      },
+      craftsTitle: {},
     };
   },
   methods: {
     showIntroduce(data) {
-      if (data.name_en == "CERAMICS") {
-        this.craftsTitle = {
-          title_ch: "陶瓷工藝創作專業工坊",
-          title_en: "Ceramics Studio",
-        };
-      } else if (data.name_en == "METAL") {
-        this.craftsTitle = {
-          title_ch: "金屬工藝創作專業工坊",
-          title_en: "Jewelry and Metal Arts Studio",
-        };
-      } else if (data.name_en == "WOOD") {
-        this.craftsTitle = {
-          title_ch: "木材工藝創作專業工坊",
-          title_en: "Woodworking Arts Studio",
-        };
-      } else if (data.name_en == "PRODUCTION") {
-        this.craftsTitle = {
-          title_ch: "產品設計與複媒創作專業工坊",
-          title_en: "Product Design Studio",
-        };
+      this.getTitle(data.name_en);
+      this.getRoomTypeId(data.name_en);
+      this.getDataTypeId(data.name_en);
+    },
+    getTitle(val) {
+      let setName = {};
+      switch (val) {
+        case "CERAMICS":
+          setName = {
+            title_ch: "陶瓷工藝創作專業工坊",
+            title_en: "Ceramics Studio",
+          };
+          break;
+        case "METALWORKING":
+          setName = {
+            title_ch: "金屬工藝創作專業工坊",
+            title_en: "Jewelry and Metal Arts Studio",
+          };
+          break;
+        case "WOODWORKING":
+          setName = {
+            title_ch: "木材工藝創作專業工坊",
+            title_en: "Woodworking Arts Studio",
+          };
+          break;
+        case "PRODUCTION":
+          setName = {
+            title_ch: "產品設計與複媒創作專業工坊",
+            title_en: "Product Design Studio",
+          };
+          break;
+        default:
+          break;
       }
-
-      this.listQuery.DataTypeId = "SYS_CLASSTYPE_" + data.name_en;
-      this.getList();
-      if (data.name_en == "PRODUCTION") {
-        this.craftsListQuery.RoomTypeId = "SYS_CLASSROOM_PROD";
-      } else {
-        this.craftsListQuery.RoomTypeId = "SYS_CLASSROOM_" + data.name_en;
+      this.craftsTitle = setName;
+    },
+    getRoomTypeId(val) {
+      let setVal = "";
+      switch (val) {
+        case "CERAMICS":
+          setVal = "SYS_CLASSROOM_CERAMICS";
+          break;
+        case "METALWORKING":
+          setVal = "SYS_CLASSROOM_METAL";
+          break;
+        case "WOODWORKING":
+          setVal = "SYS_CLASSROOM_WOOD";
+          break;
+        case "PRODUCTION":
+          setVal = "SYS_CLASSROOM_PROD";
+          break;
+        default:
+          break;
       }
+      this.craftsListQuery.RoomTypeId = setVal;
       this.getCrafts();
+    },
+    getDataTypeId(val) {
+      let setVal = "";
+      switch (val) {
+        case "CERAMICS":
+          setVal = "SYS_CLASSTYPE_CERAMICS";
+          break;
+        case "METALWORKING":
+          setVal = "SYS_CLASSTYPE_METAL";
+          break;
+        case "WOODWORKING":
+          setVal = "SYS_CLASSTYPE_WOOD";
+          break;
+        case "PRODUCTION":
+          setVal = "SYS_CLASSTYPE_PRODUCTION";
+          break;
+        default:
+          break;
+      }
+      this.listQuery.DataTypeId = setVal;
+      this.getList();
     },
     async getList() {
       await this.$api.crafts(this.listQuery).then((res) => {
@@ -349,8 +303,10 @@ export default {
   },
   mounted() {
     this.$store.commit("SETLOADING", true);
-    this.getList();
-    this.getCrafts();
+    let getCraftValue = this.$route.params.sort;
+    this.getTitle(getCraftValue);
+    this.getRoomTypeId(getCraftValue);
+    this.getDataTypeId(getCraftValue);
   },
 };
 </script>
@@ -363,26 +319,42 @@ export default {
     .studioGroup {
       width: 100%;
       background: #2d2d2d;
-
+      .m-item {
+        transform: translateY(-2rem);
+        img {
+          width: 350px;
+          height: 350px;
+        }
+        @media (max-width: 1680px) {
+          img {
+            width: 250px;
+            height: 250px;
+          }
+        }
+      }
       .m-item-title {
         -webkit-box-ordinal-group: 2;
         order: 1;
+        z-index: 5;
       }
 
       .m-item-image {
         -webkit-box-ordinal-group: 3;
         order: 2;
+        transform: translateY(-1.5rem);
       }
 
       > .m-item:nth-child(odd) {
         .m-item-title {
           -webkit-box-ordinal-group: 3;
           order: 2;
+          transform: translateY(-1.5rem);
         }
 
         .m-item-image {
           -webkit-box-ordinal-group: 2;
           order: 1;
+          transform: translateY(0rem);
         }
       }
 
@@ -449,7 +421,7 @@ export default {
       }
       &__card {
         &-leftBlock {
-          width: calc(100% - 120px);
+          width: 100%;
           font-size: 18px;
           line-height: 160%;
           color: #596164;
@@ -461,6 +433,16 @@ export default {
             max-width: 50px;
             height: 1px;
             background: #8c8f90;
+          }
+          @media (max-width: 1450px) {
+            width: calc(100% - 120px);
+            flex-direction: column;
+            strong {
+              margin-bottom: 16px;
+            }
+            span {
+              display: none;
+            }
           }
         }
         &-rightBlock {
@@ -488,10 +470,8 @@ export default {
     .crafts {
       &__Card {
         overflow-x: auto;
-        height: 190px;
         background: #2d2d2d;
-        &-info {
-          width: 75px;
+        &--info {
           height: 75px;
           transform: translateY(-0.8rem);
           border: 1px solid #596164;

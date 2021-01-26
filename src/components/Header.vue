@@ -9,109 +9,48 @@
       </a>
       <!-- MENU -->
       <div>
-        <span
-          class="pos-menu d-flex align-items-center justify-content-center cur-pointer"
-          @click="openMenu()"
-        >
-          <img
-            src="../assets/images/icon/menuList.png"
-            alt="導覽列"
-            width="48px"
-          />
+        <span class="pos-menu d-flex align-items-center justify-content-center cur-pointer" @click="openMenu()">
+          <img src="../assets/images/icon/menuList.png" alt="導覽列" width="48px" />
         </span>
 
-        <span
-          class="pos-search d-flex align-items-center justify-content-center cur-pointer"
-          @click="openSearch()"
-        >
-          <img
-            src="../assets/images/icon/search.png"
-            alt="搜尋"
-            width="25px"
-            v-if="!clickSearch"
-          />
+        <span class="pos-search d-flex align-items-center justify-content-center cur-pointer" @click="openSearch()">
+          <img src="../assets/images/icon/search.png" alt="搜尋" width="25px" v-if="!clickSearch" />
         </span>
       </div>
       <!-- left bar -->
       <div class="leftBar">
         <router-link to="/">
-          <img
-            src="../assets/images/icon/leftBar.png"
-            alt=""
-            width="50px"
-            height="580px"
-          />
+          <img src="../assets/images/icon/leftBar.png" alt="" width="50px" height="580px" />
         </router-link>
         <div class="leftBar__transBlock"></div>
         <div class="d-flex align-items-center flex-column" style="width: 50px">
-          <a
-            class="mt-11"
-            href="https://www.facebook.com/crafts.ntua.edu.tw"
-            target="_blank"
-          >
+          <a class="mt-11" href="https://www.facebook.com/crafts.ntua.edu.tw" target="_blank">
             <img src="../assets/images/icon/FB_icon_1.png" alt="Facebook" />
           </a>
-          <a
-            class="mt-22"
-            href="https://www.instagram.com/the_absence_of_authors/"
-            target="_blank"
-          >
+          <a class="mt-22" href="https://www.instagram.com/the_absence_of_authors/" target="_blank">
             <img src="../assets/images/icon/ig_icon_1.png" alt="Instagram" />
           </a>
-          <a
-            class="mt-22"
-            href="https://www.youtube.com/channel/UC9vt9X8uPxWtIO7mWEAyyDw"
-            target="_blank"
-          >
+          <a class="mt-22" href="https://www.youtube.com/channel/UC9vt9X8uPxWtIO7mWEAyyDw" target="_blank">
             <img src="../assets/images/icon/YT_icon_1.png" alt="Youtube" />
           </a>
         </div>
       </div>
       <!-- search -->
-      <div
-        class="searchBox d-flex align-items-center justify-content-center flex-column"
-        v-if="clickSearch"
-        @mouseleave="clickSearch = false"
-      >
-        <el-input
-          v-model="getKeyword"
-          placeholder="請輸入些關鍵字"
-          class="input-with-select"
-          clearable
-        ></el-input>
+      <div class="searchBox d-flex align-items-center justify-content-center flex-column" v-if="clickSearch" @mouseleave="clickSearch = false">
+        <el-input v-model="getKeyword" placeholder="請輸入些關鍵字" class="input-with-select" clearable></el-input>
         <span class="pos-absolute searchBox__btn">
-          <img
-            src="../assets/images/icon/search_black.png"
-            alt="搜尋按鈕"
-            width="25px"
-          />
+          <img src="../assets/images/icon/search_black.png" alt="搜尋按鈕" width="25px" />
         </span>
 
         <div class="w-100 mt-10">
-          <span
-            class="referWord cur-pointer"
-            v-for="(item, index) in referWord"
-            :key="'RW__' + index"
-            @click="selectKeyword(item)"
-            >{{ item.name }}</span
-          >
+          <span class="referWord cur-pointer" v-for="(item, index) in referWord" :key="'RW__' + index" @click="selectKeyword(item)">{{ item.name }}</span>
         </div>
       </div>
       <!-- menu -->
-      <div
-        class="circleMenu d-flex align-items-center justify-content-between flex-row"
-        v-if="clickOpen"
-      >
+      <div class="circleMenu d-flex align-items-center justify-content-between flex-row" v-if="clickOpen">
         <div style="width: 40%">
-          <ul
-            class="w-100 m-0 p-0 d-flex align-items-center justify-content-center flex-column list-none"
-          >
-            <li
-              :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
-              v-for="(item, index) in getMenu.leftMenu"
-              :key="'GLM__' + index"
-              @click="goNextPage(item)"
-            >
+          <ul class="w-100 m-0 p-0 d-flex align-items-center justify-content-center flex-column list-none">
+            <li :class="{ stayPage: item.mainPath == $route.meta.mainPage }" v-for="(item, index) in getMenu.leftMenu" :key="'GLM__' + index" @click="goNextPage(item)">
               <a :href="item.path" target="_blank" v-if="item.path">
                 {{ item.name }}
               </a>
@@ -122,15 +61,8 @@
           </ul>
         </div>
         <div style="width: 60%">
-          <ul
-            class="w-100 m-0 p-0 d-flex align-items-center justify-content-center flex-column list-none"
-          >
-            <li
-              :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
-              v-for="(item, index) in getMenu.rightMenu"
-              :key="'GRM__' + index"
-              @click="goNextPage(item)"
-            >
+          <ul class="w-100 m-0 p-0 d-flex align-items-center justify-content-center flex-column list-none">
+            <li :class="{ stayPage: item.mainPath == $route.meta.mainPage }" v-for="(item, index) in getMenu.rightMenu" :key="'GRM__' + index" @click="goNextPage(item)">
               <a :href="item.path" target="_blank" v-if="item.path">
                 {{ item.name }}
               </a>
@@ -146,23 +78,12 @@
     <!-- phone -->
     <div class="d-block d-mb-none">
       <div class="phoneScreen">
-        <div
-          class="pr-10 py-5 d-flex align-items-center justify-content-center"
-        >
+        <div class="pr-10 py-5 d-flex align-items-center justify-content-center">
           <router-link to="/">
-            <img
-              src="../assets/images/logo/NTUA_LOGO.svg"
-              alt="回到台藝大工藝系首頁"
-              width="150px"
-            />
+            <img src="../assets/images/logo/NTUA_LOGO.svg" alt="回到台藝大工藝系首頁" width="150px" />
           </router-link>
           <div class="pos-absolute t-0 r-0 mt-20 mr-20">
-            <img
-              src="../assets/images/icon/menuList-phone.png"
-              alt="menu"
-              width="35px"
-              @click="openMenuModal"
-            />
+            <img src="../assets/images/icon/menuList-phone.png" alt="menu" width="35px" @click="openMenuModal" />
           </div>
         </div>
       </div>
@@ -171,27 +92,11 @@
     <!-- phoneModal -->
     <div class="modal" v-if="menuModal">
       <div class="modal-content">
-        <div
-          class="menuList w-100 d-flex align-items-center justify-content-center flex-row"
-        >
-          <ul
-            class="w-100 m-0 p-0 d-flex align-items-start justify-content-start flex-column"
-          >
-            <li
-              class="px-10 d-flex"
-              :class="{ stayPage: item.mainPath == $route.meta.mainPage }"
-              v-for="item in menuList"
-              :key="item.value"
-              @click="goNextPage(item)"
-            >
+        <div class="menuList w-100 d-flex align-items-center justify-content-center flex-row">
+          <ul class="w-100 m-0 p-0 d-flex align-items-start justify-content-start flex-column">
+            <li class="px-10 d-flex" :class="{ stayPage: item.mainPath == $route.meta.mainPage }" v-for="item in menuList" :key="item.value" @click="goNextPage(item)">
               <p class="m-0 pb-10">{{ item.value }}</p>
-              <a
-                :href="item.path"
-                target="_blank"
-                v-if="item.path"
-                style="writing-mode: vertical-lr"
-                >{{ item.text }}</a
-              >
+              <a :href="item.path" target="_blank" v-if="item.path" style="writing-mode: vertical-lr">{{ item.text }}</a>
               <p class="m-0" v-else style="writing-mode: vertical-lr">
                 {{ item.text }}
               </p>
@@ -200,22 +105,11 @@
 
           <div class="w-100 overflow-x mt-60">
             <div class="px-30">
-              <div
-                class="menuList__submenu p-10 mx-10"
-                :class="{
+              <div class="menuList__submenu p-10 mx-10" :class="{
                   'menuList__submenu-active':
                     items.pathName == $route.meta.subName,
-                }"
-                v-for="items in subList[$route.meta.mainPage]"
-                :key="items.value"
-                @click="goNextPage_phone(items)"
-              >
-                <a
-                  class="text-decoration-none"
-                  :href="items.path"
-                  target="_blank"
-                  v-if="items.path"
-                >
+                }" v-for="items in subList[$route.meta.mainPage]" :key="items.value" @click="goNextPage_phone(items)">
+                <a class="text-decoration-none" :href="items.path" target="_blank" v-if="items.path">
                   <span>{{ items.value }}</span>
                   <div class="w-100 d-flex align-items-center">
                     <label>{{ items.text }}</label>
@@ -420,7 +314,7 @@ export default {
             pathName: "crafts",
             params: {
               title: "sort",
-              name: "SYS_CLASSTYPE_CERAMICS",
+              name: "CERAMICS",
             },
           },
           {
