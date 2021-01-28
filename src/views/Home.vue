@@ -975,8 +975,8 @@ export default {
       color: #52505a;
       &--editor {
         .ql-editor {
-          min-height: 120px;
-          max-height: 120px;
+          min-height: 125px;
+          max-height: 125px;
           overflow: hidden;
           p {
             overflow: hidden;
@@ -1047,6 +1047,7 @@ export default {
   }
   .slash {
     position: absolute;
+    left: 0;
     background: url("../assets/images/icon/背景線.png");
     background-repeat: no-repeat;
     height: 130px;
