@@ -19,7 +19,13 @@ module.exports = {
     },
     // svg配置
     chainWebpack(config) {
-
+        const entry = config.entry("app");
+        entry
+            .add("babel-polyfill") //一定要在首行引入，否则IE浏览器还是会报错
+            .end();
+        const svgRule = config.module.rule("svg");
+        svgRule.exclude.add(path.join(__dirname, "node_modules", "@ckeditor"));
+        
         config.module
             .rule("svg")
             .exclude.add(resolve("src/icons"))
