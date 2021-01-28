@@ -31,6 +31,9 @@
                   <div class="text-left contest__content--editor" style="max-width: 380px">
                     <vue-editor v-model="item.contents" :disabled="true"></vue-editor>
                   </div>
+                  <div class="w-100 text-right contest__content--view mt-8">
+                    <router-link :to="{name: 'award'}">VIEW MORE</router-link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -172,33 +175,6 @@
                       </div>
                     </el-collapse-item>
                   </el-collapse>
-
-                  <!-- <div
-                  class="d-flex justify-content-between flex-column localCard__info--traffic"
-                  style="width: 480px"
-                  v-for="(items, index) in item.list"
-                  :key="'TF_' + index"
-                >
-                  <div class="w-100 d-flex flex-row justify-content-between">
-                    <p class="m-0">{{ items.transportation }}</p>
-                    <img
-                      class="cur-pointer"
-                      src="@/assets/images/icon/arrowDown_icon.png"
-                      alt=""
-                      width="30px"
-                      @click="openTrafficInfo(items)"
-                    />
-                  </div>
-                  <div class="w-100" v-if="items.code == getTraffic">
-                    <div
-                      class="mt-30"
-                      v-for="(traffic, index) in items.options"
-                      :key="'OP_' + index"
-                    >
-                      {{ traffic.context }}
-                    </div>
-                  </div>
-                </div> -->
                 </div>
                 <div v-else>
                   <p class="m-0">{{ item.value }}</p>
@@ -290,9 +266,7 @@
           <div class="craftsCard">
             <div class="p-20 d-flex align-items-center justify-content-start">
               <div class="d-flex flex-column align-items-center justify-content-center px-8" v-for="item in craftsList" :key="item.id">
-                <!-- <img :src="item.imgURL" :alt="item.name_ch" width="110px" @click="goCraft(item.name_en)" /> -->
                 <el-image style="width: 110px; height: 110px" :src="item.imgURL" :alt="item.name_ch" fit="cover" @click="goCraft(item.name_en)"></el-image>
-
                 <div class="craftsCard__info d-flex align-items-center justify-content-center flex-column" @click="goCraft(item.name_en)">
                   <div class="p-10">
                     <div class="p-10">
@@ -313,6 +287,7 @@
           <div class="w-100">
             <div class="w-100 d-flex flex-column">
               <div class="access__infoCard px-15 pb-15 d-flex align-items-start flex-row" :class="{ 'pt-15': item.title !== '交通' }" v-for="(item, index) in accessList" :key="'AL_' + index">
+
                 <div class="access__infoCard--title">
                   <p class="m-0" :class="{ 'pt-15': item.title == '交通' }">
                     {{ item.title }}
@@ -327,6 +302,7 @@
                     </a>
                   </span>
                 </div>
+
                 <div class="w-100 d-flex flex-column access__infoCard--traf" v-else-if="item.code == 'traffic'">
                   <el-collapse v-model="activeNames">
                     <el-collapse-item :title="items.transportation" :name="items.transportation" v-for="(items, key) in item.list" :key="'LST__' + key">
@@ -355,105 +331,15 @@
                     </el-collapse-item>
                   </el-collapse>
                 </div>
+
                 <div class="access__infoCard--content" v-else>
                   <p class="m-0">{{ item.value }}</p>
                 </div>
+
               </div>
             </div>
           </div>
 
-          <!-- <div class="w-100">
-            <div class="access__infoCard d-flex align-items-center p-15">
-              <div
-                class="access__infoCard--title d-flex align-items-start justify-content-start"
-              >
-                地址
-              </div>
-              <div
-                class="access__infoCard--content w-100 d-flex flex-column align-items-center text-center"
-              >
-                <p class="m-0">新北市22058板橋區大觀路一段59號</p>
-                <button class="mt-10 ml-10 mr-auto px-15 py-5">
-                  <a
-                    class="text-decoration-none"
-                    href="https://goo.gl/maps/67MWRHAoppzHiKP87"
-                    target="_blank"
-                    >GOOGLE MAP</a
-                  >
-                </button>
-              </div>
-            </div>
-            <div class="access__infoCard d-flex align-items-center p-15">
-              <div
-                class="access__infoCard--title d-flex align-items-center justify-content-start"
-              >
-                電話
-              </div>
-              <div
-                class="access__infoCard--content w-100 d-flex align-items-center"
-              >
-                <p class="m-0">02-2272-2181　　#2111</p>
-              </div>
-            </div>
-            <div class="access__infoCard d-flex align-items-center p-15">
-              <div
-                class="access__infoCard--title d-flex align-items-center justify-content-start"
-              >
-                MAIL
-              </div>
-              <div
-                class="access__infoCard--content w-100 d-flex align-items-center justify-content-end"
-              >
-                <p class="m-0">cd@ntua.edu.tw</p>
-              </div>
-            </div>
-            <div class="access__infoCard d-flex align-items-center p-15">
-              <div
-                class="access__infoCard--title d-flex align-items-center justify-content-start"
-              >
-                交通
-              </div>
-              <div
-                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
-              >
-                <p class="m-0">捷運</p>
-                <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
-              </div>
-            </div>
-            <div class="access__infoCard d-flex align-items-center p-15">
-              <div
-                class="access__infoCard--title d-flex align-items-center justify-content-start"
-              ></div>
-              <div
-                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
-              >
-                <p class="m-0">公車</p>
-                <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
-              </div>
-            </div>
-            <div class="access__infoCard d-flex align-items-center p-15">
-              <div
-                class="access__infoCard--title d-flex align-items-center justify-content-start"
-              ></div>
-              <div
-                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
-              >
-                <p class="m-0">火車</p>
-                <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
-              </div>
-            </div>
-            <div class="access__infoCard d-flex align-items-center p-15">
-              <div
-                class="access__infoCard--title d-flex align-items-center justify-content-start"
-              ></div>
-              <div
-                class="access__infoCard--content w-100 d-flex align-items-center justify-content-between"
-              >
-                <p class="m-0">接駁車</p>
-                <img src="@/assets/images/icon/arrowDown_icon.png" alt="" />
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
@@ -1028,23 +914,6 @@ export default {
       this.$router.push({ name: "bulletinInfo", params: { id: id } });
     },
     goCraft(sortName) {
-      // let paramsVal;
-      // switch (sortName) {
-      //   case "CERAMICS":
-      //     paramsVal = "SYS_CLASSTYPE_CERAMICS";
-      //     break;
-      //   case "METALWORKING":
-      //     paramsVal = "SYS_CLASSTYPE_METAL";
-      //     break;
-      //   case "WOODWORKING":
-      //     paramsVal = "SYS_CLASSTYPE_WOOD";
-      //     break;
-      //   case "PRODUCTION":
-      //     paramsVal = "SYS_CLASSROOM_PROD";
-      //     break;
-      //   default:
-      //     break;
-      // }
       this.$router.push({
         name: "crafts",
         params: { sort: sortName },
@@ -1106,7 +975,9 @@ export default {
       color: #52505a;
       &--editor {
         .ql-editor {
-          min-height: 50px;
+          min-height: 120px;
+          max-height: 120px;
+          overflow: hidden;
           p {
             overflow: hidden;
             -webkit-line-clamp: 2;
@@ -1123,6 +994,13 @@ export default {
           ol {
             padding-left: 0;
           }
+        }
+      }
+      &--view {
+        a {
+          color: #ceb87f;
+          font-size: 18px;
+          font-weight: bold;
         }
       }
     }
