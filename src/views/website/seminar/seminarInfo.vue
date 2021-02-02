@@ -1,18 +1,18 @@
 <template>
-  <div id="contestInfo">
+  <div id="seminarInfo">
     <div class="d-block d-mb-none pt-70">
-      <div class="contestTitle w-100 d-flex align-items-center flex-row">
-        <router-link class="pl-20" :to="{ name: 'contest' }">
+      <div class="seminarTitle w-100 d-flex align-items-center flex-row">
+        <router-link class="pl-20" :to="{ name: 'seminar' }">
           <img src="@/assets/images/icon/arrowLeft.png" alt="" />
         </router-link>
-        <PhoneTitle title="競賽資訊" :filterDate="false" />
+        <PhoneTitle title="研討會 - 最新消息" :filterDate="false" />
       </div>
       <div class="w-100 newsInfo">
         <div class="px-20 pt-40 pb-90">
-          <div class="w-100 newsInfo__card" v-for="item in contestMsg" :key="item.id">
+          <div class="w-100 newsInfo__card" v-for="item in seminarMsg" :key="item.id">
             <div class="w-100 d-flex flex-row">
               <div class="newsInfo__card-date">
-                <div class="p-15 d-flex flex-column align-items-center">
+                <div class="px-10 py-20 d-flex flex-column align-items-center">
                   <p class="m-0">{{ item.releaseDate | moment("YYYY") }}</p>
                   <span class="my-8"></span>
                   <p class="m-0">{{ item.releaseDate | moment("MM-DD") }}</p>
@@ -20,9 +20,7 @@
               </div>
               <div class="newsInfo__card-context d-flex align-items-center">
                 <div class="p-15">
-                  <p class="m-0">
-                    {{ item.title }}
-                  </p>
+                  <p class="m-0">{{ item.title }}</p>
                 </div>
               </div>
             </div>
@@ -30,16 +28,16 @@
               <div class="p-15">
                 <!-- summary -->
                 <div class="w-100 notice">
-                  <p class="m-0">
+                  <label>
                     {{ item.summury }}
-                  </p>
+                  </label>
                 </div>
                 <!-- contents -->
                 <div class="w-100 mt-10 context">
-                  <vue-editor v-model="item.contents" :disabled="true"></vue-editor>
+                  <vue-editor v-model="item.contents"></vue-editor>
                 </div>
                 <!-- file -->
-                <div class="w-100" v-if="item.attachedFile">
+                <div class="w-100 mt-10" v-if="item.attachedFile">
                   <div class="downloadCard py-25 mb-15" v-for="(items, index1) in item.attachedFile" :key="index1">
                     <el-row class="d-flex align-items-center">
                       <el-col :span="8">
@@ -78,22 +76,22 @@ export default {
   data() {
     return {
       listQuery: {
-        NewsTypeId: "SYS_NEWS_COMPETITION",
+        NewsTypeId: "",
         page: 1,
         limit: 20,
         key: undefined,
       },
-      contestMsg: [],
+      seminarMsg: [],
     };
   },
   methods: {
     async getList() {
-      await this.$api.news(this.listQuery).then((res) => {
-        this.contestMsg = res.data.data.filter(
+      await this.$api.seminarNews(this.listQuery).then((res) => {
+        this.seminarMsg = res.data.data.filter(
           (arr) => arr.id === this.$route.params.id
         );
-        this.contestMsg[0].attachedFile = JSON.parse(
-          this.contestMsg[0].attachedFile
+        this.seminarMsg[0].attachedFile = JSON.parse(
+          this.seminarMsg[0].attachedFile
         );
         this.$store.commit("SETLOADING", false);
       });
@@ -107,8 +105,8 @@ export default {
 </script>
 
 <style lang="scss">
-#contestInfo {
-  .contestTitle {
+#seminarInfo {
+  .seminarTitle {
     a {
       animation-name: prevShowSlow;
       animation-duration: 2s;
@@ -155,7 +153,7 @@ export default {
           font-size: 14px;
           line-height: 17px;
           letter-spacing: 0.2em;
-          color: #596164;
+          color: #ceb87f;
         }
         .context {
           .ql-editor {

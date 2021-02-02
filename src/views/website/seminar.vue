@@ -1,93 +1,114 @@
 <template>
   <div id="seminar">
     <div class="web d-none d-mb-block">
-      <div class="workCard">
-        <div class="workCard-title">
-          <p class="m-0">「工不可沒‧藝不可失 」2019數位工藝工作營</p>
+      <div class="tabGroup">
+        <span class="tabGroup__tag p-8 mx-8" :class="{'tabGroup__tag--active': item.id == defaultId}" v-for="item in tabList" :key="item.id" @click="changeTab(item)">
+          <a>{{item.label}}</a>
+        </span>
+      </div>
+
+      <div class="workCard mt-16">
+        <div class="w-100" v-if="defaultId !== 1">
+          <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor>
         </div>
-        <div
-          class="w-100 workCard-content pt-40 pb-60"
-          v-for="(item, index) in seminarList"
-          :key="'SL_' + index"
-        >
-          <div class="w-100">
+        <div class="w-100" v-else>
+          <div class="newsTable w-100 d-flex align-items-center flex-row cur-pointer" v-for="item in newsList" :key="item.id" @click="viewInfo(item)">
+            <p class="m-0" style="min-width: 220px; max-width: 220px">
+              {{ item.releaseDate | moment("YYYY-MM-DD") }}
+            </p>
             <p class="m-0">{{ item.title }}</p>
           </div>
-
-          <el-row class="mt-30" style="color: white">
-            <el-col :span="3">
-              <div class="text-center">{{ item.author }}</div>
-            </el-col>
-            <el-col :span="21" v-if="item.author">
-              <div
-                class="pl-10 workCard-content_list"
-                v-for="(items, index) in item.content"
-                :key="'CT_' + index"
-              >
-                {{ items.context }}
-              </div>
-            </el-col>
-
-            <el-col :span="21" :offset="3" v-else>
-              <div
-                class="pl-10 workCard-content_list"
-                v-for="(items, index) in item.content"
-                :key="'CT_' + index"
-              >
-                {{ items.context }}
-              </div>
-            </el-col>
-          </el-row>
         </div>
       </div>
     </div>
 
     <div class="phone d-block d-mb-none">
-      <div class="px-10 py-50">
-        <PhoneTitle title="「工不可沒，藝不可失」" :filterDate="false" />
-        <PhoneTitle title="2019數位工藝工作營" :filterDate="false" />
-        <div class="px-20">
-          <div class="w-100 mt-30">
-            <div
-              class="w-100 workList pt-40 pb-50"
-              v-for="(item, index1) in seminarList"
-              :key="index1"
-            >
-              <div class="w-100">
-                <p class="m-0">
-                  {{ item.title }}
-                </p>
+      <div class="w-100">
+        <el-select class="w-100" placeholder="請選擇" no-data-text="暫無數據" v-model="defaultId" size="mini" @change="changeOption">
+          <el-option v-for="item in tabList" :key="item.id" :label="item.label" :value="item.id">
+          </el-option>
+        </el-select>
+      </div>
+
+      <div class="darkBG px-10 py-30">
+        <div class="w-100" v-if="defaultId !== 1">
+          <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor>
+        </div>
+        <div class="w-100 newsInfo" v-else>
+          <div class="w-100 newsInfo__card d-flex flex-row mb-15" v-for="item in newsList" :key="item.id" @click="goSeminarInfo(item.id)">
+            <div class="newsInfo__card-date">
+              <div class="p-15 d-flex flex-column align-items-center">
+                <p class="m-0">{{ item.releaseDate | moment("YYYY") }}</p>
+                <span class="my-8"></span>
+                <p class="m-0">{{ item.releaseDate | moment("MM-DD") }}</p>
               </div>
-
-              <el-row class="mt-30" style="color: white">
-                <el-col :span="4">
-                  <div class="text-center">{{ item.author }}</div>
-                </el-col>
-                <el-col :span="20" v-if="item.author">
-                  <div
-                    class="pl-10 workList__context"
-                    v-for="(items, index) in item.content"
-                    :key="'CT_' + index"
-                  >
-                    {{ items.context }}
-                  </div>
-                </el-col>
-
-                <el-col :span="24" v-else>
-                  <div
-                    class="pl-10 workList__context"
-                    v-for="(items, index) in item.content"
-                    :key="'CT_' + index"
-                  >
-                    {{ items.context }}
-                  </div>
-                </el-col>
-              </el-row>
+            </div>
+            <div class="newsInfo__card-context d-flex align-items-center">
+              <div class="p-15">
+                <p class="m-0">{{ item.title }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- modal -->
+    <div class="modal d-flex justify-content-center" v-if="showNewsInfo">
+      <div class="modal__content">
+        <div class="p-40">
+          <div class="w-100 pos-relative d-flex align-items-start justify-content-center flex-column">
+            <div class="p-10 modal__content--tag">
+              <span class="d-inline-flex">最新消息</span>
+            </div>
+            <div class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20">
+              <label>TITLE</label>
+              <strong>{{ selectNews.title }}</strong>
+            </div>
+            <div class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20">
+              <label>UPDATE</label>
+              <p class="m-0">
+                {{ selectNews.releaseDate | moment("YYYY-MM-DD") }}
+              </p>
+            </div>
+            <div class="w-100 modal__content--summary mt-30">
+              <p class="m-0">{{ selectNews.summury }}</p>
+            </div>
+            <div class="w-100 modal__content--card mt-20">
+              <vue-editor v-model="selectNews.contents" :disabled="true"></vue-editor>
+            </div>
+            <div class="w-100 mt-40" v-if="selectNews.attachedFile">
+              <strong class="font-s-24">附檔</strong>
+              <p class="m-0 mt-10">
+                （本網站建議使用Chrome瀏覽器以避免系統問題）
+              </p>
+              <div class="w-100 d-flex flex-row flex-wrap mt-20">
+                <el-row class="w-100">
+                  <el-col :xl="4" :lg="6" v-for="item in selectNews.attachedFile" :key="item.id">
+                    <div class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10" @mouseenter="showfileInfo(item)" @mouseleave="closefileInfo(item)">
+                      <a v-if="!fileInfo[item.id]" :href="item.files" :download="item.files" target="_blank">
+                        <img src="@/assets/images/icon/pdf_icon.png" :alt="item.fileName" width="40px" />
+                      </a>
+                      <div class="w-100 h-100 backCard" v-else>
+                        <a class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none" :href="item.files" :download="item.files" target="_blank">
+                          <strong>{{ item.fileName }}</strong>
+                        </a>
+                      </div>
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
+            <div class="pos-absolute t-0 r-0">
+              <div class="modal__close d-flex align-items-center justify-content-center cur-pointer" @click="showNewsInfo = false">
+                <i class="el-icon-close"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -100,90 +121,109 @@ export default {
   },
   data() {
     return {
-      seminarList: [
+      defaultId: "6755196327667736576",
+      tabList: [
         {
-          title: "（一）講師介紹",
-          author: "李明翰",
-          content: [
-            {
-              context: "現任 淡江大學建築學系數位製造與運算實驗室研究助理",
-            },
-            {
-              context: "學歷  2016 淡江大學建築碩士",
-            },
-            {
-              context: "      2013 淡江大學建築學士",
-            },
-          ],
+          id: 1,
+          label: "最新消息",
         },
         {
-          title: "（二）工作營方向   數位與工藝傢俱製造",
-          author: "",
-          content: [
-            {
-              context:
-                "過去客製化被視為少量且昂貴的，然而隨著近年來數位工具的發展，傳統設計流程已產生許多變化。以往統一規格、大量製造的生產導向已逐漸轉向大量客製化的設計流程；細究此轉變之原因，除了現代生活模式改變之外，資訊化時代下的設計輔助工具快速發展也是原因之一。",
-            },
-            {
-              context:
-                "藉由電腦輔助繪圖(CAD)、數位工具機(CAM)的協助，設計端與生產端的距離不再遙不可及，設計師的身分也由設計與繪圖的角色，轉變為可進行多樣化設計之生產者。本工作營之目標，旨於藉由數位工具之輔助，結合工藝設計之特長，嘗試將工藝美學推至更多樣的領域。",
-            },
-            {
-              context:
-                "工作營內容可粗略分為兩個階段：第一部分為參數化設計之操作，經由簡易的參數化模型設計出燈飾、椅凳等家具原型，再以數位機具製造基本模具，為下一階段與工藝結合作準備；第二階段則加入工藝技法的操作，透過學員本身所熟悉的工藝技法或加工方法，將其作品完成。期望透過這樣的嘗試，在學員既有工藝技法、美學基礎上，結合數位時代下的工具輔助，帶給學員新的思維與啟發。",
-            },
-          ],
+          id: "6755196327554490368",
+          label: "與會方式",
         },
         {
-          title: "（三）課程規劃",
-          author: "",
-          content: [
-            {
-              context:
-                "初階 2019/10/7(一)與10/8(二)上午10:00-下午16:00   臺藝大工藝大樓",
-            },
-            {
-              context:
-                "進階 2019/10/14(一)與10/15(二)上午10:00-下午16:00 臺藝大工藝大樓",
-            },
-            {
-              context:
-                "預計學員人數15位，學員必須參與初階與進階課程後製作完成1件作品於10/18研討會展示。",
-            },
-            {
-              context:
-                "每位學員需繳交500元保證金（待課程結束與完成作品會退還）。",
-            },
-          ],
+          id: "6755196327659347968",
+          label: "徵稿須知",
         },
         {
-          title: "（四）報名須知",
-          author: "",
-          content: [
-            {
-              context:
-                "1. 9/25-10/2開放線上報名 portal2.ntua.edu.tw/CAMS/page_02.asp",
-            },
-            {
-              context:
-                "2.此工作營提供免費午餐，不提供校內免費停車，請多利用大眾交通工具至本校。",
-            },
-            {
-              context: "3. 主辦單位對於報名參加本活動學生保留錄取與否之權利。",
-            },
-            {
-              context: "4. 此工作營提供免費午餐。",
-            },
-            {
-              context: "5. 不提供校內免費停車，請多利用大眾交通工具至本校。",
-            },
-            {
-              context: "6. 主辦單位對於報名參加本活動學生保留錄取與否之權利。",
-            },
-          ],
+          id: "6755196327667736576",
+          label: "活動主旨",
+        },
+        {
+          id: "6755196327676125184",
+          label: "活動議程",
+        },
+        {
+          id: "6755196327680319488",
+          label: "聯絡資訊",
+        },
+        {
+          id: "6755196327688708096",
+          label: "審稿規範",
         },
       ],
+      listQuery: {
+        NewsTypeId: "",
+        page: 1,
+        limit: 999,
+        key: undefined,
+      },
+      seminarList: {},
+      newsList: [],
+      showNewsInfo: false,
+      selectNews: {},
+      fileInfo: {},
     };
+  },
+  methods: {
+    async getList() {
+      await this.$api.seminarWorks({ id: this.defaultId }).then((res) => {
+        this.seminarList = res.data.result;
+        this.$store.commit("SETLOADING", false);
+      });
+    },
+    async getNews() {
+      await this.$api.seminarNews(this.listQuery).then((res) => {
+        this.newsList = res.data.data;
+        this.$store.commit("SETLOADING", false);
+      });
+    },
+    changeTab(item) {
+      this.$store.commit("SETLOADING", true);
+      this.defaultId = item.id;
+      if (item.label == "最新消息") {
+        this.getNews();
+      } else {
+        this.getList();
+      }
+    },
+    changeOption(getVal) {
+      this.$store.commit("SETLOADING", true);
+      this.defaultId = getVal;
+      const getItem = this.tabList.filter((res) => res.id == getVal);
+      if (getItem[0].label == "最新消息") {
+        this.getNews();
+      } else {
+        this.getList();
+      }
+    },
+    viewInfo(item) {
+      console.log(item);
+      this.showNewsInfo = true;
+      this.selectNews = item;
+      this.selectNews.attachedFile = JSON.parse(item.attachedFile);
+    },
+    showfileInfo(data) {
+      this.fileInfo = [this.selectNews].reduce(
+        (a, b) => ((a[b.id] = true), a),
+        {}
+      );
+      this.fileInfo[data?.id] = !this.fileInfo[data?.id];
+    },
+    closefileInfo(data) {
+      this.fileInfo = [this.selectNews].reduce(
+        (a, b) => ((a[b.id] = false), a),
+        {}
+      );
+    },
+    goSeminarInfo(id) {
+      this.$router.push({ name: "seminarInfo", params: { id: id } });
+    },
+  },
+  mounted() {
+    this.$store.commit("SETLOADING", true);
+    this.getList();
+    this.getNews();
   },
 };
 </script>
@@ -193,49 +233,206 @@ export default {
   .web {
     padding-top: 0 !important;
     margin-left: 0 !important;
+    .tabGroup {
+      padding-left: 60px;
+      &__tag {
+        border: 2px solid #ceb87f;
+        border-radius: 16px;
+        color: #ceb87f;
+        font-weight: bold;
+        transition: all 0.6s;
+        cursor: pointer;
+        &:hover {
+          background-color: #ceb87f;
+          color: #fff;
+        }
+        &--active {
+          background-color: #ceb87f;
+          color: #fff;
+        }
+      }
+    }
     .workCard {
       padding: 50px 200px 180px 40px;
       background: #2d2d2d;
-      &-title {
-        font-size: 24px;
-        line-height: 30px;
-        letter-spacing: 0.2em;
-        color: #ceb87f;
+
+      .ql-editor {
+        min-height: 100px;
       }
-      &-content {
-        font-size: 20px;
-        line-height: 25px;
-        letter-spacing: 0.2em;
-        color: #ffffff;
+
+      .ql-toolbar {
+        display: none !important;
+      }
+
+      .ql-container {
+        border: none !important;
+        ol {
+          padding-left: 0;
+        }
+      }
+
+      .newsTable {
+        padding: 30px;
         border-bottom: 1px solid #000000;
-        &_list {
-          padding-bottom: 20px;
-          &:last-child {
-            padding-bottom: 0;
-          }
+        transition: all 0.6s;
+        p {
+          font-size: 20px;
+          line-height: 25px;
+          letter-spacing: 0.2em;
+          color: #ffffff;
+        }
+        &:hover {
+          background: #4d4d4d;
         }
       }
     }
   }
 
   .phone {
-    background: #2d2d2d;
-    .workList {
-      font-size: 14px;
-      line-height: 17px;
-      letter-spacing: 0.2em;
-      color: #ffffff;
-      border-bottom: 1px solid #000000;
-      &:last-child {
-        border-bottom: none;
+    min-height: calc(100vh - 430px);
+    .darkBG {
+      background: #2d2d2d;
+
+      .ql-editor {
+        min-height: 100px;
       }
-      &__context {
-        padding-bottom: 10px;
-        overflow-wrap: break-word;
-        &:last-child {
-          padding-bottom: 0px;
+
+      .ql-toolbar {
+        display: none !important;
+      }
+
+      .ql-container {
+        border: none !important;
+        ol {
+          padding-left: 0;
         }
       }
+
+      .newsInfo {
+        background: #2d2d2d;
+        &__card {
+          background: #efefef;
+          border-radius: 8px;
+          &-date {
+            min-width: 85px;
+            white-space: nowrap;
+            div {
+              background: #ceb87f;
+              border-radius: 8px;
+              p {
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: 0.235em;
+                color: #ffffff;
+              }
+              span {
+                width: 20px;
+                height: 3px;
+                background: #ffffff;
+              }
+            }
+          }
+          &-context {
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: 0.2em;
+            color: #596164;
+          }
+        }
+      }
+    }
+  }
+
+  .modal {
+    &__content {
+      width: 50%;
+      overflow-y: auto;
+      background: #c4c4c4;
+      border-radius: 8px;
+      &--tag {
+        background: #2d2d2d;
+        font-size: 18px;
+        letter-spacing: 0.2em;
+        color: #ffffff;
+      }
+      &--title {
+        font-size: 14px;
+        letter-spacing: 0.2em;
+        color: #2d2d2d;
+      }
+      &--update {
+        font-size: 14px;
+        letter-spacing: 0.2em;
+        label {
+          color: #2d2d2d;
+        }
+        p {
+          color: #ffffff;
+        }
+      }
+      &--summary {
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 0.2em;
+        color: #f29126;
+      }
+      &--card {
+        background: #ffffff;
+        .ql-editor {
+          min-height: 50px;
+        }
+        .ql-toolbar {
+          display: none !important;
+        }
+        .ql-container {
+          border: none !important;
+          ol {
+            padding-left: 0;
+          }
+        }
+      }
+      &--fileCard {
+        border: 1px solid #ffffff;
+        width: 140px;
+        height: 100px;
+        background: transparent;
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        .backCard {
+          background: #ffffff;
+          strong {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            color: #000000;
+          }
+        }
+      }
+    }
+    &__close {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 2px solid #231815;
+      border-radius: 50%;
+      transition: all 0.6s;
+      &:hover {
+        background: #ffffff;
+        border: 2px solid #596164;
+      }
+      i {
+        font-size: 28px;
+        font-weight: bold;
+        &:hover {
+          color: #596164;
+        }
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 0px;
     }
   }
 }

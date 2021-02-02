@@ -47,6 +47,13 @@ const api = {
   departmentAlbemPics(params) {
     return req("get", "departmentAlbemPics/loadByAlbumId", params);
   },
+  /* 研討會&工作營 */
+  seminarNews(params) {
+    return req("get", "seminarNewss/loadClient", params);
+  },
+  seminarWorks(params) {
+    return req("get", "seminarWorks/get", params);
+  },
   /* 系所成員 */
   members(params) {
     return req("get", "departmentMembers/load", params);

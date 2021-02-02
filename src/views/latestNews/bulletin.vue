@@ -1,31 +1,18 @@
 <template>
   <div id="bulletin">
     <div class="web d-none d-mb-block">
-      <div
-        class="bulletinTable w-100 d-flex align-items-center flex-row cur-pointer"
-        v-for="(item, index) in bulletinMsg"
-        :key="'BT__' + index"
-        @click="viewInfo(item)"
-      >
+      <div class="bulletinTable w-100 d-flex align-items-center flex-row cur-pointer" v-for="(item, index) in bulletinMsg" :key="'BT__' + index" @click="viewInfo(item)">
         <p class="m-0" style="min-width: 220px; max-width: 220px">
           {{ item.releaseDate | moment("YYYY-MM-DD") }}
         </p>
         <p class="m-0">{{ item.title }}</p>
       </div>
-      <!-- <div class="w-100 mt-90">
-        <Pagination :needPage="true" :pageNumber="5" />
-      </div> -->
     </div>
 
     <div class="phone d-block d-mb-none">
       <div class="w-100 newsInfo">
         <div class="px-20 pt-40 pb-90">
-          <div
-            class="w-100 newsInfo__card d-flex flex-row mb-15"
-            v-for="(item, index1) in bulletinMsg"
-            :key="index1"
-            @click="goBulletinInfo(item)"
-          >
+          <div class="w-100 newsInfo__card d-flex flex-row mb-15" v-for="(item, index1) in bulletinMsg" :key="index1" @click="goBulletinInfo(item)">
             <div class="newsInfo__card-date">
               <div class="p-15 d-flex flex-column align-items-center">
                 <p class="m-0">{{ item.releaseDate | moment("YYYY") }}</p>
@@ -47,21 +34,15 @@
     <div class="modal d-flex justify-content-center" v-if="showNewsInfo">
       <div class="modal__content">
         <div class="p-40">
-          <div
-            class="w-100 pos-relative d-flex align-items-start justify-content-center flex-column"
-          >
+          <div class="w-100 pos-relative d-flex align-items-start justify-content-center flex-column">
             <div class="p-10 modal__content--tag">
               <span class="d-inline-flex">系辦公告</span>
             </div>
-            <div
-              class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20"
-            >
+            <div class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20">
               <label>TITLE</label>
               <strong>{{ selectNews.title }}</strong>
             </div>
-            <div
-              class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20"
-            >
+            <div class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20">
               <label>UPDATE</label>
               <p class="m-0">
                 {{ selectNews.releaseDate | moment("YYYY-MM-DD") }}
@@ -71,10 +52,7 @@
               <p class="m-0">{{ selectNews.summury }}</p>
             </div>
             <div class="w-100 modal__content--card mt-20">
-              <vue-editor
-                v-model="selectNews.contents"
-                :disabled="true"
-              ></vue-editor>
+              <vue-editor v-model="selectNews.contents" :disabled="true"></vue-editor>
             </div>
             <div class="w-100 mt-40" v-if="selectNews.attachedFile">
               <strong class="font-s-24">附檔</strong>
@@ -83,36 +61,13 @@
               </p>
               <div class="w-100 d-flex flex-row flex-wrap mt-20">
                 <el-row class="w-100">
-                  <el-col
-                    :xl="4"
-                    :lg="6"
-                    v-for="item in selectNews.attachedFile"
-                    :key="item.id"
-                  >
-                    <div
-                      class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10"
-                      @mouseenter="showfileInfo(item)"
-                      @mouseleave="closefileInfo(item)"
-                    >
-                      <a
-                        v-if="!fileInfo[item.id]"
-                        :href="item.files"
-                        :download="item.files"
-                        target="_blank"
-                      >
-                        <img
-                          src="@/assets/images/icon/pdf_icon.png"
-                          :alt="item.fileName"
-                          width="40px"
-                        />
+                  <el-col :xl="4" :lg="6" v-for="item in selectNews.attachedFile" :key="item.id">
+                    <div class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10" @mouseenter="showfileInfo(item)" @mouseleave="closefileInfo(item)">
+                      <a v-if="!fileInfo[item.id]" :href="item.files" :download="item.files" target="_blank">
+                        <img src="@/assets/images/icon/pdf_icon.png" :alt="item.fileName" width="40px" />
                       </a>
                       <div class="w-100 h-100 backCard" v-else>
-                        <a
-                          class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none"
-                          :href="item.files"
-                          :download="item.files"
-                          target="_blank"
-                        >
+                        <a class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none" :href="item.files" :download="item.files" target="_blank">
                           <strong>{{ item.fileName }}</strong>
                         </a>
                       </div>
@@ -122,10 +77,7 @@
               </div>
             </div>
             <div class="pos-absolute t-0 r-0">
-              <div
-                class="modal__close d-flex align-items-center justify-content-center cur-pointer"
-                @click="showNewsInfo = false"
-              >
+              <div class="modal__close d-flex align-items-center justify-content-center cur-pointer" @click="showNewsInfo = false">
                 <i class="el-icon-close"></i>
               </div>
             </div>

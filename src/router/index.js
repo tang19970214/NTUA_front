@@ -389,6 +389,15 @@ const routes = [{
       subName: "internshipResult"
     }
   },
+  {
+    path: '/seminarInfo/:id',
+    name: 'seminarInfo',
+    component: () => import('../views/website/seminar/seminarInfo.vue'),
+    meta: {
+      mainPage: "website",
+      subName: "seminar"
+    }
+  },
 ]
 
 const router = new VueRouter({
