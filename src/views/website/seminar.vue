@@ -9,7 +9,9 @@
 
       <div class="workCard mt-16">
         <div class="w-100" v-if="defaultId !== 1">
-          <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor>
+          <!-- <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor> -->
+          <!-- <ckeditor class="disEditor" :value="seminarList.contents" :config="setConfig" /> -->
+          <div v-html="seminarList.contents"></div>
         </div>
         <div class="w-100" v-else>
           <div class="newsTable w-100 d-flex align-items-center flex-row cur-pointer" v-for="item in newsList" :key="item.id" @click="viewInfo(item)">
@@ -32,7 +34,9 @@
 
       <div class="darkBG px-10 py-30">
         <div class="w-100" v-if="defaultId !== 1">
-          <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor>
+          <!-- <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor> -->
+          <!-- <ckeditor class="disEditor" :value="seminarList.contents" :config="setConfig" /> -->
+          <div class="w-100 ckInfo" v-html="seminarList.contents"></div>
         </div>
         <div class="w-100 newsInfo" v-else>
           <div class="w-100 newsInfo__card d-flex flex-row mb-15" v-for="item in newsList" :key="item.id" @click="goSeminarInfo(item.id)">
@@ -121,6 +125,12 @@ export default {
   },
   data() {
     return {
+      setConfig: {
+        readOnly: true,
+        uiColor: "#2d2d2d",
+        extraPlugins: "button,panelbutton,colorbutton",
+        dialog_backgroundCoverOpacity: 0,
+      },
       defaultId: "6755196327667736576",
       tabList: [
         {
@@ -256,21 +266,6 @@ export default {
       padding: 50px 200px 180px 40px;
       background: #2d2d2d;
 
-      .ql-editor {
-        min-height: 100px;
-      }
-
-      .ql-toolbar {
-        display: none !important;
-      }
-
-      .ql-container {
-        border: none !important;
-        ol {
-          padding-left: 0;
-        }
-      }
-
       .newsTable {
         padding: 30px;
         border-bottom: 1px solid #000000;
@@ -293,20 +288,37 @@ export default {
     .darkBG {
       background: #2d2d2d;
 
-      .ql-editor {
-        min-height: 100px;
-      }
+      .disEditor {
+        .cke {
+          &_contents {
+            min-height: calc(100vh - 210px);
+          }
 
-      .ql-toolbar {
-        display: none !important;
-      }
-
-      .ql-container {
-        border: none !important;
-        ol {
-          padding-left: 0;
+          &_top,
+          &_bottom {
+            display: none !important;
+          }
         }
       }
+
+      .ckInfo {
+        overflow-x: auto;
+      }
+
+      // .ql-editor {
+      //   min-height: 100px;
+      // }
+
+      // .ql-toolbar {
+      //   display: none !important;
+      // }
+
+      // .ql-container {
+      //   border: none !important;
+      //   ol {
+      //     padding-left: 0;
+      //   }
+      // }
 
       .newsInfo {
         background: #2d2d2d;

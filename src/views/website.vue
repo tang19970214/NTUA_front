@@ -1,7 +1,7 @@
 <template>
   <div class="website">
     <div class="web d-none d-mb-block">
-      <p class="m-0 Txt-title">Seminar/Work Camp website</p>
+      <p class="m-0 Txt-title">Conference & Workshop</p>
       <div class="mt-70 newsCard">
         <div class="newsCard__sortText">
           <div class="mr-35 mb-15" v-for="(item, index) in websiteSort" :key="'NS__' + index">

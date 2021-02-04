@@ -392,7 +392,7 @@ export default {
           {
             value: "02",
             text: "研討會",
-            path: "https://crafts.ntua.edu.tw/CDC2009/main.php",
+            // path: "https://crafts.ntua.edu.tw/CDC2009/main.php",
             mainPath: "website",
             pathName: "seminar",
           },

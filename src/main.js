@@ -10,6 +10,7 @@ import VueAxios from 'vue-axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
 import Vue2Editor from "vue2-editor";
+
 var VueScrollTo = require('vue-scrollto');
 
 import api from "@/api/apis.js";

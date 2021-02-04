@@ -34,7 +34,8 @@
                 </div>
                 <!-- contents -->
                 <div class="w-100 mt-10 context">
-                  <vue-editor v-model="item.contents"></vue-editor>
+                  <!-- <vue-editor v-model="item.contents"></vue-editor> -->
+                  <div v-html="item.contents"></div>
                 </div>
                 <!-- file -->
                 <div class="w-100 mt-10" v-if="item.attachedFile">

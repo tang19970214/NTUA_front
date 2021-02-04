@@ -2,14 +2,16 @@
   <div id="workCamp">
     <div class="web d-none d-mb-block">
       <div class="workCard">
-        <vue-editor v-model="workCampList.contents" :disabled="true"></vue-editor>
+        <!-- <vue-editor v-model="workCampList.contents" :disabled="true"></vue-editor> -->
+        <div v-html="workCampList.contents"></div>
       </div>
     </div>
 
     <div class="phone d-block d-mb-none">
       <div class="px-10 py-30">
         <div class="px-20">
-          <vue-editor v-model="workCampList.contents" :disabled="true"></vue-editor>
+          <!-- <vue-editor v-model="workCampList.contents" :disabled="true"></vue-editor> -->
+          <div v-html="workCampList.contents"></div>
         </div>
       </div>
     </div>
