@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
+import locale from "element-ui/lib/locale/lang/zh-TW";
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -16,7 +17,9 @@ var VueScrollTo = require('vue-scrollto');
 import api from "@/api/apis.js";
 import "@/assets/all.scss"
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, {
+  locale
+})
 Vue.use(require('vue-moment'))
 Vue.use(VueAxios, axios)
 Vue.use(VueAwesomeSwiper)
