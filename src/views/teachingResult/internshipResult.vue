@@ -6,12 +6,7 @@
         <p class="m-0">標題</p>
       </div>
       <div class="w-100">
-        <div
-          class="newsCard__table d-flex align-items-center flex-row cur-pointer"
-          v-for="(item, index) in internshipResultMsg"
-          :key="'BT__' + index"
-          @click="viewInfo(item)"
-        >
+        <div class="newsCard__table d-flex align-items-center flex-row cur-pointer" v-for="(item, index) in internshipResultMsg" :key="'BT__' + index" @click="viewInfo(item)">
           <p class="m-0" style="min-width: 220px; max-width: 220px">
             {{ item.releaseDate | moment("YYYY-MM-DD") }}
           </p>
@@ -26,26 +21,17 @@
 
     <div class="phone d-block d-mb-none">
       <div class="resultCard p-30">
-        <div
-          class="w-100 align-items-center justify-content-center flex-column"
-        >
+        <div class="w-100 align-items-center justify-content-center flex-column">
           <div class="w-100 resultCard__title">
             <el-row class="py-20">
               <el-col class="text-center" :span="8">公告日期</el-col>
               <el-col class="text-left" :span="16">標題</el-col>
             </el-row>
           </div>
-          <div
-            class="w-100 resultCard__content"
-            v-for="(item, index1) in internshipResultMsg"
-            :key="index1"
-            @click="goInfo(item.id)"
-          >
+          <div class="w-100 resultCard__content" v-for="(item, index1) in internshipResultMsg" :key="index1" @click="goInfo(item.id)">
             <el-row class="py-20">
               <el-col class="text-center" :span="8">
-                <div
-                  class="d-flex align-items-center justify-content-center flex-column"
-                >
+                <div class="d-flex align-items-center justify-content-center flex-column">
                   <p class="m-0">
                     {{ item.releaseDate | moment("YYYY") }}
                   </p>
@@ -66,31 +52,22 @@
     <!-- modal -->
     <div class="modal d-flex justify-content-center" v-if="showNewsInfo">
       <div class="modal__content">
-        <div
-          class="p-40 pos-relative d-flex align-items-start justify-content-center flex-column"
-        >
+        <div class="p-40 pos-relative d-flex align-items-start justify-content-center flex-column">
           <div class="p-10 modal__content--tag">
             <span class="d-inline-flex">實習成果</span>
           </div>
-          <div
-            class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20"
-          >
+          <div class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20">
             <label>TITLE</label>
             <strong>{{ selectNews.title }}</strong>
           </div>
-          <div
-            class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20"
-          >
+          <div class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20">
             <label>UPDATE</label>
             <p class="m-0">
               {{ selectNews.modifyDate | moment("YYYY-MM-DD") }}
             </p>
           </div>
           <div class="w-100 modal__content--card mt-20">
-            <vue-editor
-              v-model="selectNews.contents"
-              :disabled="true"
-            ></vue-editor>
+            <vue-editor v-model="selectNews.contents" :disabled="true"></vue-editor>
           </div>
           <div class="w-100 mt-40" v-if="selectNews.annexFile">
             <strong class="font-s-24">附檔</strong>
@@ -99,36 +76,13 @@
             </p>
             <div class="w-100 d-flex flex-row flex-wrap mt-20">
               <el-row class="w-100">
-                <el-col
-                  :xl="4"
-                  :lg="6"
-                  v-for="item in selectNews.annexFile"
-                  :key="item.id"
-                >
-                  <div
-                    class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10"
-                    @mouseenter="showfileInfo(item)"
-                    @mouseleave="closefileInfo(item)"
-                  >
-                    <a
-                      v-if="!fileInfo[item.id]"
-                      :href="item.files"
-                      :download="item.files"
-                      target="_blank"
-                    >
-                      <img
-                        src="@/assets/images/icon/pdf_icon.png"
-                        :alt="item.fileName"
-                        width="40px"
-                      />
+                <el-col :xl="4" :lg="6" v-for="item in selectNews.annexFile" :key="item.id">
+                  <div class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10" @mouseenter="showfileInfo(item)" @mouseleave="closefileInfo(item)">
+                    <a v-if="!fileInfo[item.id]" :href="item.files" :download="item.files" target="_blank">
+                      <img src="@/assets/images/icon/pdf_icon.png" :alt="item.fileName" width="40px" />
                     </a>
                     <div class="w-100 h-100 backCard" v-else>
-                      <a
-                        class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none"
-                        :href="item.files"
-                        :download="item.files"
-                        target="_blank"
-                      >
+                      <a class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none" :href="item.files" :download="item.files" target="_blank">
                         <strong>{{ item.fileName }}</strong>
                       </a>
                     </div>
@@ -138,10 +92,7 @@
             </div>
           </div>
           <div class="pos-absolute t-0 r-0 mt-20 mr-20">
-            <div
-              class="closeModalBtn d-flex align-items-center justify-content-center cur-pointer"
-              @click="showNewsInfo = false"
-            >
+            <div class="closeModalBtn d-flex align-items-center justify-content-center cur-pointer" @click="showNewsInfo = false">
               <i class="el-icon-close"></i>
             </div>
           </div>
@@ -213,7 +164,7 @@ export default {
 #internshipResult {
   .web {
     background: #2d2d2d;
-    padding: 120px 220px 120px 60px;
+    padding: 100px 180px 100px 80px;
     margin-left: 0;
     .newsCard {
       &__title {

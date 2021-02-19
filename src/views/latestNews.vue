@@ -4,13 +4,7 @@
       <p class="m-0 Txt-title">Latest news</p>
       <div class="mt-70 newsCard">
         <div class="newsCard__sortText">
-          <router-link
-            class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
-            :class="{ active: $route.name == item.pathURL }"
-            :to="{ name: item.pathURL }"
-            v-for="(item, index) in newsSort"
-            :key="'NS__' + index"
-          >
+          <router-link class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none" :class="{ active: $route.name == item.pathURL }" :to="{ name: item.pathURL }" v-for="(item, index) in newsSort" :key="'NS__' + index">
             <p class="m-0">{{ item.pathName }}</p>
             <i class="el-icon-minus"></i>
             <p class="m-0">0{{ index + 1 }}</p>
@@ -46,11 +40,7 @@
     <div class="phone d-block d-mb-none pt-70">
       <div class="w-100 d-flex align-items-center flex-row">
         <div class="ml-20">
-          <img
-            src="@/assets/images/icon/arrowLeft.png"
-            alt="返回上一頁"
-            @click="goPrev"
-          />
+          <img src="@/assets/images/icon/arrowLeft.png" alt="返回上一頁" @click="goPrev" />
         </div>
         <PhoneTitle :title="getPathName(newsSort)" :filterDate="false" />
       </div>
@@ -179,7 +169,7 @@ export default {
       }
       &__contentCard {
         background: #2d2d2d;
-        padding: 130px 220px 50px 60px;
+        padding: 100px 180px 100px 80px;
         &--title {
           width: 100%;
           font-size: 22px;

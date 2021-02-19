@@ -2,34 +2,24 @@
   <div id="hightlight">
     <div class="web d-none d-mb-block">
       <el-row class="w-100">
-        <el-col
-          class="d-flex align-items-center justify-content-center my-30"
-          style="height: 380px"
-          :span="12"
-          v-for="(item, index) in highlightData"
-          :key="'RD__' + index"
-        >
-          <div class="">
-            <img :src="item.coverPic" alt="" />
-          </div>
-          <div class="bookContent">
-            <strong class="m-0 bookContent-title">{{ item.title }}</strong>
-            <div class="bookContent-directions">
-              <p
-                class="m-0"
-                v-for="(items, index) in item.summary.split('\n')"
-                :key="'SMR__' + index"
-              >
-                {{ items }}
-              </p>
+        <el-col class="d-flex align-items-center justify-content-center" style="height: 380px" :span="12" v-for="(item, index) in highlightData" :key="'RD__' + index">
+          <div class="p-20 d-flex align-items-center">
+            <div>
+              <!-- <img :src="item.coverPic" alt="" /> -->
+              <el-image style="width: 250px; height: 380px" :src="item.coverPic" fit="cover"></el-image>
             </div>
-            <div class="d-flex align-items-center justify-content-end mt-18">
-              <router-link
-                class="bookContent-viewMore text-decoration-none"
-                :to="{ name: 'highlightInfo', params: { id: item.id } }"
-              >
-                VIEW MORE
-              </router-link>
+            <div class="bookContent">
+              <strong class="m-0 bookContent-title">{{ item.title }}</strong>
+              <div class="bookContent-directions">
+                <p class="m-0" v-for="(items, index) in item.summary.split('\n')" :key="'SMR__' + index">
+                  {{ items }}
+                </p>
+              </div>
+              <div class="d-flex align-items-center justify-content-end mt-18">
+                <router-link class="bookContent-viewMore text-decoration-none" :to="{ name: 'highlightInfo', params: { id: item.id } }">
+                  VIEW MORE
+                </router-link>
+              </div>
             </div>
           </div>
         </el-col>
@@ -42,11 +32,7 @@
 
     <div class="phone d-block d-mb-none">
       <div class="highlightCard pt-20 pb-40 px-60">
-        <div
-          class="d-flex flex-column"
-          v-for="(item, index1) in highlightData"
-          :key="index1"
-        >
+        <div class="d-flex flex-column" v-for="(item, index1) in highlightData" :key="index1">
           <div class="px-40">
             <img :src="item.coverPic" alt="" width="100%" />
           </div>
@@ -56,19 +42,12 @@
                 <strong>{{ item.title }}</strong>
               </div>
               <div class="px-35 text-left mb-20">
-                <p
-                  class="m-0"
-                  v-for="(items, index) in item.summary.split('\n')"
-                  :key="'PSMR__' + index"
-                >
+                <p class="m-0" v-for="(items, index) in item.summary.split('\n')" :key="'PSMR__' + index">
                   {{ items }}
                 </p>
               </div>
               <div class="w-100">
-                <router-link
-                  class="px-20 pt-10 text-decoration-none"
-                  :to="{ name: 'highlightInfo', params: { id: item.id } }"
-                >
+                <router-link class="px-20 pt-10 text-decoration-none" :to="{ name: 'highlightInfo', params: { id: item.id } }">
                   VIEW MORE
                 </router-link>
               </div>
@@ -117,19 +96,19 @@ export default {
 <style lang="scss">
 #hightlight {
   .web {
-    padding: 30px;
-    padding-top: 0 !important;
+    padding: 0 30px 80px 30px;
     margin-left: 0 !important;
     background: #2d2d2d;
     .bookContent {
-      position: relative;
-      margin-left: -35px;
-      margin-top: 45px;
+      // position: relative;
+      // margin-left: -35px;
+      transform: translateX(-2rem);
+      // margin-top: 30px;
       border: 2px solid #596164;
       box-sizing: border-box;
-      width: 475px;
+      // width: 475px;
       min-height: 250px;
-      padding: 65px 30px 20px 65px;
+      padding: 50px 30px 20px 50px;
       &-title {
         font-weight: bold;
         font-size: 18px;

@@ -931,7 +931,7 @@ export default {
         vm.awardData = res.data.data;
       });
     },
-    getWorks() {
+    async getWorks() {
       const vm = this;
       const listQuery = {
         TeachTypeId: "SYS_TEACH_WORKSHOP",
@@ -939,9 +939,10 @@ export default {
         limit: 20,
         key: undefined,
       };
-      vm.$api.award(listQuery).then((res) => {
+      await vm.$api.award(listQuery).then((res) => {
         vm.worksList = res.data.data;
         vm.worksNum = res.data.data.length;
+        this.$store.commit("SETLOADING", false);
       });
     },
     getNews() {
@@ -959,6 +960,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.commit("SETLOADING", true);
     this.initMap();
     this.getAward();
     this.getWorks();

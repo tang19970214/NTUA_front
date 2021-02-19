@@ -8,7 +8,7 @@
           </div>
         </el-col>
         <el-col :span="16">
-          <div class="historyCard d-flex flex-column mt-50">
+          <div class="historyCard d-flex flex-column my-50">
             <p class="m-0 historyCard-title">歷史沿革</p>
             <p class="m-0 historyCard-content">
               系前身為「國立臺灣藝術專科學校美術工藝科」，創立於民國46年，分「產品組」和「裝飾組」實施教學（民國73年正式分「工藝組」及「設計組」兩組，76年又增設「陶瓷組」），為國內最早成立之美術工藝系培育人才無數，為國內設計之發展奠定了深厚的根基。
@@ -21,21 +21,14 @@
       </el-row>
 
       <div class="w-100 d-flex align-items-center flex-row transY--8">
-        <div
-          class="education d-flex align-items-center justify-content-center cur-pointer"
-          v-for="(item, index) in education"
-          :key="'ED__' + index"
-          @click="openPeriod(item)"
-        >
+        <div class="education d-flex align-items-center justify-content-center cur-pointer" v-for="(item, index) in education" :key="'ED__' + index" @click="openPeriod(item)">
           {{ item.name }}
         </div>
       </div>
 
       <div class="w-100 education-system pb-150">
-        <p class="m-0 mt-80">學制概況</p>
-        <div
-          class="w-100 d-flex align-items-center justify-content-center mt-50"
-        >
+        <p class="m-0 mt-50 ml-16">學制概況</p>
+        <div class="w-100 d-flex align-items-center justify-content-center mt-50">
           <img src="@/assets/images/educationSystem.png" alt="" />
         </div>
       </div>
@@ -52,14 +45,8 @@
           </p>
         </div>
 
-        <div
-          class="px-30 py-10 d-flex align-items-center justify-content-between"
-        >
-          <div
-            class="w-100 mx-5 educationCard text-center"
-            v-for="(item, index1) in education"
-            :key="'EDU__' + index1"
-          >
+        <div class="px-30 py-10 d-flex align-items-center justify-content-between">
+          <div class="w-100 mx-5 educationCard text-center" v-for="(item, index1) in education" :key="'EDU__' + index1">
             <div class="p-10" @click="openPeriod_phone(item)">
               <p class="m-0">{{ item.name }}</p>
             </div>
@@ -70,11 +57,7 @@
           <PhoneTitle title="學制概況" :filterDate="false" />
           <div class="w-100 text-center pb-40">
             <div class="p-30">
-              <img
-                src="@/assets/images/education/education.svg"
-                alt=""
-                width="100%"
-              />
+              <img src="@/assets/images/education/education.svg" alt="" width="100%" />
             </div>
           </div>
         </div>
@@ -91,30 +74,16 @@
                 <strong>{{ getEducationInfo.name }}</strong>
               </div>
               <div class="periodCard__content">
-                <div
-                  class="p-70 d-flex align-items-center justify-content-center flex-column"
-                >
-                  <div
-                    class="w-100 d-flex align-items-start justify-content-around flex-row"
-                  >
-                    <div
-                      class="w-100 d-flex align-items-center justify-content-center flex-column"
-                      v-for="(item, index) in getEducationInfo.options.content"
-                      :key="'CT__' + index"
-                    >
-                      <div
-                        class="periodCard__content-yearCard d-inline-flex p-10"
-                      >
+                <div class="p-70 d-flex align-items-center justify-content-center flex-column">
+                  <div class="w-100 d-flex align-items-start justify-content-around flex-row">
+                    <div class="w-100 d-flex align-items-center justify-content-center flex-column" v-for="(item, index) in getEducationInfo.options.content" :key="'CT__' + index">
+                      <div class="periodCard__content-yearCard d-inline-flex p-10">
                         <p class="m-0">
                           {{ item.datetime }}
                         </p>
                       </div>
                       <div class="w-100 periodCard__content-introduce mt-20">
-                        <p
-                          class="m-0"
-                          v-for="(items, $index) in item.context"
-                          :key="'CTX__' + $index"
-                        >
+                        <p class="m-0" v-for="(items, $index) in item.context" :key="'CTX__' + $index">
                           {{ items.text }}
                         </p>
                       </div>
@@ -133,10 +102,7 @@
               </div>
             </div>
             <div class="pos-absolute t-0 r-0">
-              <div
-                class="closeModalBtn d-flex align-items-center justify-content-center cur-pointer"
-                @click="showPeriod = false"
-              >
+              <div class="closeModalBtn d-flex align-items-center justify-content-center cur-pointer" @click="showPeriod = false">
                 <i class="el-icon-close"></i>
               </div>
             </div>
@@ -151,24 +117,15 @@
           <div class="pos-relative w-100 d-flex justify-content-center">
             <div class="periodCardPhone text-center">
               <div class="periodCardPhone__content">
-                <div
-                  class="py-40 d-flex align-items-center justify-content-center flex-column"
-                >
+                <div class="py-40 d-flex align-items-center justify-content-center flex-column">
                   <div class="w-100 text-center">
                     <div class="px-50">
                       <div class="w-100 text-left mb-20">
                         <strong>{{ getEducationInfo.name }}</strong>
                       </div>
-                      <img
-                        :src="getEducationInfo.options.imgURL"
-                        alt=""
-                        width="100%"
-                      />
+                      <img :src="getEducationInfo.options.imgURL" alt="" width="100%" />
 
-                      <div
-                        class="text-left periodCardPhone__footer mt-20"
-                        v-if="getEducationInfo.options.footer"
-                      >
+                      <div class="text-left periodCardPhone__footer mt-20" v-if="getEducationInfo.options.footer">
                         <strong>{{ getEducationInfo.options.footer }}</strong>
                       </div>
                     </div>
@@ -177,10 +134,7 @@
               </div>
             </div>
             <div class="pos-absolute t-0 r-0">
-              <div
-                class="periodCardPhone__close d-flex align-items-center justify-content-center cur-pointer mt-20 mr-20"
-                @click="showPeriod_phone = false"
-              >
+              <div class="periodCardPhone__close d-flex align-items-center justify-content-center cur-pointer mt-20 mr-20" @click="showPeriod_phone = false">
                 <img src="@/assets/images/icon/cancel.png" alt="" />
               </div>
             </div>
@@ -344,7 +298,7 @@ export default {
     padding-top: 0;
     .historyCard {
       height: 100%;
-      padding: 0px 240px;
+      padding: 0px 160px;
 
       &-title {
         font-size: 48px;

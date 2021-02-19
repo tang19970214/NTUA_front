@@ -1,10 +1,7 @@
 <template>
   <div id="publishInfo">
     <div class="web d-none d-mb-block">
-      <div
-        class="w-100 pb-10 goPrev d-flex align-items-center flex-row cur-pointer"
-        @click="goPrev()"
-      >
+      <div class="w-100 pb-10 goPrev d-flex align-items-center flex-row cur-pointer" @click="goPrev()">
         <img src="@/assets/images/icon/arrowLeft.png" alt="回上一頁" />
         <strong class="font-s-24 pl-10">回上一頁</strong>
       </div>
@@ -12,232 +9,120 @@
       <div class="publishInfoBG pb-150">
         <!-- 成員資訊 -->
         <div class="authorCard">
-          <div class="p-100 d-flex align-items-start flex-row">
-            <div
-              class="d-flex align-items-center justify-content-center flex-column"
-            >
-              <img
-                :src="teacherList.pic"
-                :alt="teacherList.name"
-                height="300px"
-              />
+          <div class="py-80 px-60 d-flex align-items-start flex-row">
+
+            <div class="d-flex align-items-center justify-content-center flex-column">
+              <img :src="teacherList.pic" :alt="teacherList.name" height="300px" />
               <div class="d-flex align-items-start flex-row mt-20">
-                <div
-                  class="px-15 contactInfo d-flex align-items-center flex-column"
-                >
-                  <img
-                    class="mb-10"
-                    src="@/assets/images/icon/mail-icon.png"
-                    alt="電子郵件"
-                  />
+                <div class="px-15 contactInfo d-flex align-items-center flex-column">
+                  <img class="mb-10" src="@/assets/images/icon/mail-icon.png" alt="電子郵件" />
                   <p class="m-0">MAIL</p>
                 </div>
-                <div
-                  class="px-15 contactInfo d-flex align-items-center flex-column"
-                >
-                  <img
-                    class="mb-10"
-                    src="@/assets/images/icon/連結-icon.png"
-                    alt="個人網站"
-                  />
+                <div class="px-15 contactInfo d-flex align-items-center flex-column">
+                  <img class="mb-10" src="@/assets/images/icon/連結-icon.png" alt="個人網站" />
                   <p class="m-0">個人網站</p>
                 </div>
-                <div
-                  class="px-15 contactInfo d-flex align-items-center flex-column"
-                >
-                  <img
-                    class="mb-10"
-                    src="@/assets/images/icon/連結-icon.png"
-                    alt="個人著作"
-                  />
+                <div class="px-15 contactInfo d-flex align-items-center flex-column">
+                  <img class="mb-10" src="@/assets/images/icon/連結-icon.png" alt="個人著作" />
                   <p class="m-0">個人著作</p>
                 </div>
-                <div
-                  class="px-15 contactInfo d-flex align-items-center flex-column"
-                >
-                  <img
-                    class="mb-10"
-                    src="@/assets/images/icon/連結-icon.png"
-                    alt="個人研究"
-                  />
+                <div class="px-15 contactInfo d-flex align-items-center flex-column">
+                  <img class="mb-10" src="@/assets/images/icon/連結-icon.png" alt="個人研究" />
                   <p class="m-0">個人研究</p>
                 </div>
               </div>
             </div>
-            <div
-              class="profile d-flex flex-column justify-content-between ml-40"
-            >
+
+            <div class="profile d-flex flex-column justify-content-between ml-40">
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   姓名
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.name }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   Office_Hour
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.officeHour }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   聯絡電話
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.contactTel }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   傳真
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px;" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.fax }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   聯絡地址
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.addr }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   服務單位_部門
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   工藝設計學系
                 </div>
               </div>
             </div>
 
-            <div
-              class="profile d-flex flex-column justify-content-between ml-40"
-            >
+            <div class="profile d-flex flex-column justify-content-between ml-40">
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   類別
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.memberTypeName }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   職稱
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.jobTitle }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   授課領域
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.teachClass }}
                 </div>
               </div>
               <div class="d-flex flex-row">
-                <div
-                  class="profile__title profile__title-left text-right pl-20"
-                >
+                <div class="profile__title profile__title-left text-right pl-20">
                   研究專長
                 </div>
-                <img
-                  class="pt-12 px-10"
-                  src="@/assets/images/icon/dashLine.png"
-                  alt=""
-                  height="1px"
-                  width="60px"
-                />
+                <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.research }}
                 </div>
@@ -253,62 +138,36 @@
         <!-- 研究發表 -->
         <div class="publishInfoCard" v-if="getInfo">
           <el-collapse v-model="activeNames">
-            <el-collapse-item
-              :title="key"
-              :name="key"
-              v-for="(item, key) in publishData"
-              :key="item.id"
-            >
+            <el-collapse-item :title="key" :name="key" v-for="(item, key) in publishData" :key="item.id">
               <div class="publishInfoCard__content">
                 <!-- 研究發表 -->
                 <div v-if="key == '研究發表'">
                   <el-row>
-                    <el-col
-                      class="publishInfoCard__content--leftBlock pb-50"
-                      :span="4"
-                    >
+                    <el-col class="publishInfoCard__content--leftBlock pb-50" :span="4">
                       <ul class="m-0">
-                        <li
-                          class="py-5"
-                          v-for="(items, index__1) in item"
-                          :key="'PB1__' + index__1"
-                        >
-                          <p
-                            class="m-0 d-inline-flex"
-                            :class="{
+                        <li class="py-5" v-for="(items, index__1) in item" :key="'PB1__' + index__1">
+                          <p class="m-0 d-inline-flex" :class="{
                               activeColor: chooseMenuName == items.title,
-                            }"
-                            @click="openPublishInfo(items, index__1)"
-                          >
+                            }" @click="openPublishInfo(items, index__1)">
                             {{ items.title }}
                           </p>
                         </li>
                       </ul>
                     </el-col>
                     <el-col class="" :span="20">
-                      <div
-                        class="mr-120 ml-30 publishInfoCard__content--rightBlock"
-                      >
+                      <div class="mr-120 ml-30 publishInfoCard__content--rightBlock">
                         <div class="p-30">
-                          <vue-editor
-                            v-model="item[chooseInfoKey].contents"
-                            :disabled="true"
-                          />
+                          <vue-editor v-model="item[chooseInfoKey].contents" :disabled="true" />
                         </div>
                       </div>
                     </el-col>
                   </el-row>
                 </div>
                 <!-- 研究計畫 產學合作計畫 -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '研究計畫' || key == '產學合作計畫'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '研究計畫' || key == '產學合作計畫'">
                   <div class="px-50">
                     <div class="w-100 header">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center">
                         <el-col :span="3">年度</el-col>
                         <el-col :span="5">計畫名稱</el-col>
                         <el-col :span="3">參與人</el-col>
@@ -320,19 +179,13 @@
                       </el-row>
                     </div>
                     <div class="w-100 body">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                        v-for="(items, index__2) in item"
-                        :key="'PB2__' + index__2"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                         <el-col :span="3">{{ items.year }}</el-col>
                         <el-col :span="5">{{ items.title }}</el-col>
                         <el-col :span="3">{{ items.joinMember }}</el-col>
                         <el-col :span="3">{{ items.jobTitle }}</el-col>
                         <el-col :span="3">
-                          <div
-                            class="w-100 d-flex flex-column align-items-center justify-content-center"
-                          >
+                          <div class="w-100 d-flex flex-column align-items-center justify-content-center">
                             <p class="m-0">
                               {{ items.startDate | moment("YYYY-MM-DD") }}
                             </p>
@@ -343,35 +196,24 @@
                           </div>
                         </el-col>
                         <el-col :span="3">{{ items.mechanismName }}</el-col>
-                        <el-col :span="2"
-                          >{{ items.annexFile }}/{{ items.links }}</el-col
-                        >
+                        <el-col :span="2">{{ items.annexFile }}/{{ items.links }}</el-col>
                         <el-col :span="2">{{ items.remark }}</el-col>
                       </el-row>
                     </div>
                   </div>
                 </div>
                 <!-- 校內榮譽 校外榮譽 -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '校內榮譽' || key == '校外榮譽'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '校內榮譽' || key == '校外榮譽'">
                   <div class="px-50">
                     <div class="w-100 header">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center">
                         <el-col :span="3">得獎年度</el-col>
                         <el-col class="px-80 text-left">獎項名稱</el-col>
                         <el-col class="text-left" :span="5">頒獎單位</el-col>
                       </el-row>
                     </div>
                     <div class="w-100 body">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                        v-for="(items, index__2) in item"
-                        :key="'PB2__' + index__2"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                         <el-col :span="3">{{ items.year }}</el-col>
                         <el-col class="px-80 text-left">
                           {{ items.title }}
@@ -384,15 +226,10 @@
                   </div>
                 </div>
                 <!--學歷  -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '學歷'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '學歷'">
                   <div class="px-50">
                     <div class="w-100 header">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center">
                         <el-col :span="6">學校名稱</el-col>
                         <el-col :span="3">國別</el-col>
                         <el-col :span="6">系所</el-col>
@@ -401,19 +238,13 @@
                       </el-row>
                     </div>
                     <div class="w-100 body">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                        v-for="(items, index__2) in item"
-                        :key="'PB2__' + index__2"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                         <el-col :span="6">{{ items.title }}</el-col>
                         <el-col :span="3"> {{ items.mechanismName }}</el-col>
                         <el-col :span="6">{{ items.contents }}</el-col>
                         <el-col :span="3">{{ items.jobTitle }}</el-col>
                         <el-col :span="6">
-                          <div
-                            class="w-100 d-flex flex-column align-items-center justify-content-center"
-                          >
+                          <div class="w-100 d-flex flex-column align-items-center justify-content-center">
                             <p class="m-0">
                               {{ items.startDate | moment("YYYY-MM-DD") }}
                             </p>
@@ -427,15 +258,10 @@
                   </div>
                 </div>
                 <!-- 經歷 -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '經歷'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '經歷'">
                   <div class="px-50">
                     <div class="w-100 header">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center">
                         <el-col :span="6">服務機關</el-col>
                         <el-col :span="6">部門/系所</el-col>
                         <el-col :span="6">擔任職務</el-col>
@@ -443,18 +269,12 @@
                       </el-row>
                     </div>
                     <div class="w-100 body">
-                      <el-row
-                        class="py-40 d-flex align-items-center text-center"
-                        v-for="(items, index__2) in item"
-                        :key="'PB2__' + index__2"
-                      >
+                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                         <el-col :span="6">{{ items.title }}</el-col>
                         <el-col :span="6"> {{ items.mechanismName }}</el-col>
                         <el-col :span="6">{{ items.jobTitle }}</el-col>
                         <el-col :span="6">
-                          <div
-                            class="w-100 d-flex flex-column align-items-center justify-content-center"
-                          >
+                          <div class="w-100 d-flex flex-column align-items-center justify-content-center">
                             <p class="m-0">
                               {{ items.startDate | moment("YYYY-MM-DD") }}
                             </p>
@@ -477,10 +297,7 @@
 
         <div class="w-100">
           <div class="pt-50 d-flex align-items-center justify-content-center">
-            <div
-              class="pb-10 goPrev d-flex d-inline-flex align-items-center flex-row cur-pointer"
-              @click="goPrev()"
-            >
+            <div class="pb-10 goPrev d-flex d-inline-flex align-items-center flex-row cur-pointer" @click="goPrev()">
               <img src="@/assets/images/icon/arrowLeft.png" alt="回上一頁" />
               <strong class="font-s-24 pl-10">回上一頁</strong>
             </div>
@@ -498,45 +315,25 @@
       </div>
 
       <!-- 成員資訊 -->
-      <div
-        class="ml-20 authorCard px-40 py-30 d-flex align-items-center justify-content-center flex-column"
-      >
-        <div
-          class="authorCard__author w-100 d-flex align-items-center justify-content-center flex-column"
-        >
+      <div class="ml-20 authorCard px-40 py-30 d-flex align-items-center justify-content-center flex-column">
+        <div class="authorCard__author w-100 d-flex align-items-center justify-content-center flex-column">
           <img :src="teacherList.pic" :alt="teacherList.name" width="200px" />
           <div class="w-100 py-20">
             <div class="px-40 d-flex align-items-start justify-content-around">
               <div class="d-flex flex-column align-items-center">
-                <img
-                  src="@/assets/images/icon/mail-icon.png"
-                  alt=""
-                  width="20px"
-                />
+                <img src="@/assets/images/icon/mail-icon.png" alt="" width="20px" />
                 <p class="m-0">MAIL</p>
               </div>
               <div class="d-flex flex-column align-items-center">
-                <img
-                  src="@/assets/images/icon/連結-icon.png"
-                  alt=""
-                  width="20px"
-                />
+                <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人網站</p>
               </div>
               <div class="d-flex flex-column align-items-center">
-                <img
-                  src="@/assets/images/icon/連結-icon.png"
-                  alt=""
-                  width="20px"
-                />
+                <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人著作</p>
               </div>
               <div class="d-flex flex-column align-items-center">
-                <img
-                  src="@/assets/images/icon/連結-icon.png"
-                  alt=""
-                  width="20px"
-                />
+                <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人研究</p>
               </div>
             </div>
@@ -723,33 +520,17 @@
       <div class="ml-20 mt-50">
         <div class="publishInfoCard" v-if="getInfo">
           <el-collapse v-model="activeNames">
-            <el-collapse-item
-              :title="key"
-              :name="key"
-              v-for="(item, key) in publishData"
-              :key="item.id"
-            >
+            <el-collapse-item :title="key" :name="key" v-for="(item, key) in publishData" :key="item.id">
               <div class="publishInfoCard__content">
                 <!-- 研究發表 -->
                 <div v-if="key == '研究發表'">
                   <el-row>
-                    <el-col
-                      class="publishInfoCard__content--leftBlock pb-30"
-                      :span="24"
-                    >
+                    <el-col class="publishInfoCard__content--leftBlock pb-30" :span="24">
                       <ul class="m-0 p-0">
-                        <li
-                          class="py-5"
-                          v-for="(items, index__1) in item"
-                          :key="'PB1__' + index__1"
-                        >
-                          <p
-                            class="m-0 d-inline-flex"
-                            :class="{
+                        <li class="py-5" v-for="(items, index__1) in item" :key="'PB1__' + index__1">
+                          <p class="m-0 d-inline-flex" :class="{
                               activeColor: chooseMenuName == items.title,
-                            }"
-                            @click="openPublishInfo(items, index__1)"
-                          >
+                            }" @click="openPublishInfo(items, index__1)">
                             {{ items.title }}
                           </p>
                         </li>
@@ -757,19 +538,13 @@
                     </el-col>
                     <el-col class="" :span="24">
                       <div class="publishInfoCard__content--rightBlock pt-30">
-                        <vue-editor
-                          v-model="item[chooseInfoKey].contents"
-                          :disabled="true"
-                        />
+                        <vue-editor v-model="item[chooseInfoKey].contents" :disabled="true" />
                       </div>
                     </el-col>
                   </el-row>
                 </div>
                 <!-- 研究計畫 產學合作計畫 -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '研究計畫' || key == '產學合作計畫'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '研究計畫' || key == '產學合作計畫'">
                   <div class="w-100 header">
                     <el-row class="py-15 d-flex align-items-center text-center">
                       <el-col :span="6">年度</el-col>
@@ -778,11 +553,7 @@
                     </el-row>
                   </div>
                   <div class="w-100 body">
-                    <el-row
-                      class="py-15 d-flex align-items-center text-center"
-                      v-for="(items, index__2) in item"
-                      :key="'PB2__' + index__2"
-                    >
+                    <el-row class="py-15 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                       <el-col :span="6">{{ items.year }}</el-col>
                       <el-col class="text-left" :span="12">{{
                         items.title
@@ -792,10 +563,7 @@
                   </div>
                 </div>
                 <!-- 校內榮譽 校外榮譽 -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '校內榮譽' || key == '校外榮譽'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '校內榮譽' || key == '校外榮譽'">
                   <div class="w-100 header">
                     <el-row class="py-15 d-flex align-items-center text-center">
                       <el-col :span="6">得獎年度</el-col>
@@ -804,11 +572,7 @@
                     </el-row>
                   </div>
                   <div class="w-100 body">
-                    <el-row
-                      class="py-15 d-flex align-items-center text-center"
-                      v-for="(items, index__2) in item"
-                      :key="'PB2__' + index__2"
-                    >
+                    <el-row class="py-15 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                       <el-col :span="6">{{ items.year }}</el-col>
                       <el-col class="text-left" :span="12">
                         {{ items.title }}
@@ -820,10 +584,7 @@
                   </div>
                 </div>
                 <!-- 學歷 -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '學歷'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '學歷'">
                   <div class="w-100 header">
                     <el-row class="py-15 d-flex align-items-center text-center">
                       <el-col :span="8">學校名稱</el-col>
@@ -832,17 +593,11 @@
                     </el-row>
                   </div>
                   <div class="w-100 body">
-                    <el-row
-                      class="py-15 d-flex align-items-center text-center"
-                      v-for="(items, index__2) in item"
-                      :key="'PB2__' + index__2"
-                    >
+                    <el-row class="py-15 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                       <el-col :span="8">{{ items.title }}</el-col>
                       <el-col :span="9">{{ items.contents }}</el-col>
                       <el-col :span="7">
-                        <div
-                          class="w-100 d-flex flex-column align-items-center justify-content-center"
-                        >
+                        <div class="w-100 d-flex flex-column align-items-center justify-content-center">
                           <p class="m-0">
                             {{ items.startDate | moment("YYYY-MM-DD") }}
                           </p>
@@ -855,10 +610,7 @@
                   </div>
                 </div>
                 <!-- 經歷 -->
-                <div
-                  class="publishInfoCard__content--table"
-                  v-else-if="key == '經歷'"
-                >
+                <div class="publishInfoCard__content--table" v-else-if="key == '經歷'">
                   <div class="w-100 header">
                     <el-row class="py-15 d-flex align-items-center text-center">
                       <el-col :span="6">服務機關</el-col>
@@ -868,18 +620,12 @@
                     </el-row>
                   </div>
                   <div class="w-100 body">
-                    <el-row
-                      class="py-15 d-flex align-items-center text-center"
-                      v-for="(items, index__2) in item"
-                      :key="'PB2__' + index__2"
-                    >
+                    <el-row class="py-15 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                       <el-col :span="6">{{ items.title }}</el-col>
                       <el-col :span="9"> {{ items.mechanismName }}</el-col>
                       <el-col :span="3">{{ items.jobTitle }}</el-col>
                       <el-col :span="6">
-                        <div
-                          class="w-100 d-flex flex-column align-items-center justify-content-center"
-                        >
+                        <div class="w-100 d-flex flex-column align-items-center justify-content-center">
                           <p class="m-0">
                             {{ items.startDate | moment("YYYY-MM-DD") }}
                           </p>
@@ -1004,15 +750,14 @@ export default {
           border-left: 4px solid #ceb87f;
           height: 300px;
           &__title {
-            width: 180px;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 22px;
             line-height: 28px;
             letter-spacing: 0.1em;
             color: #ceb87f;
             &-left {
-              min-width: 180px;
-              max-width: 180px;
+              min-width: 160px;
+              max-width: 160px;
             }
             &-right {
               min-width: 110px;
@@ -1025,12 +770,7 @@ export default {
             letter-spacing: 0.1em;
             color: #ffffff;
             &-left {
-              min-width: 360px;
-              max-width: 360px;
-            }
-            &-right {
-              min-width: 350px;
-              max-width: 350px;
+              min-width: 120px;
             }
           }
         }

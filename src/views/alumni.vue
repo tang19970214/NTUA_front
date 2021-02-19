@@ -4,13 +4,7 @@
       <p class="m-0 Txt-title">Alumni</p>
       <div class="mt-70 newsCard">
         <div class="newsCard-sortText">
-          <router-link
-            class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
-            :class="{ active: $route.name == item.pathURL }"
-            :to="{ name: item.pathURL }"
-            v-for="(item, index) in alumniSort"
-            :key="'NS__' + index"
-          >
+          <router-link class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none" :class="{ active: $route.name == item.pathURL }" :to="{ name: item.pathURL }" v-for="(item, index) in alumniSort" :key="'NS__' + index">
             <p class="m-0">{{ item.pathName }}</p>
             <i class="el-icon-minus"></i>
             <p class="m-0">0{{ index + 1 }}</p>
@@ -38,12 +32,7 @@
             <p class="m-0 ml-auto pr-10">附件下載</p>
           </div>
           <div class="w-100">
-            <div
-              class="alumniTable w-100 d-flex align-items-center flex-row"
-              v-for="item in alumniData"
-              :key="item.id"
-              @click="viewInfo(item)"
-            >
+            <div class="alumniTable w-100 d-flex align-items-center flex-row" v-for="item in alumniData" :key="item.id" @click="viewInfo(item)">
               <p class="m-0" style="min-width: 220px; max-width: 220px">
                 {{ item.releaseDate | moment("YYYY-MM-DD") }}
               </p>
@@ -51,19 +40,8 @@
                 {{ item.title }}
               </p>
               <span class="ml-auto" v-if="!!getFileObj(item.annexFile)[0]">
-                <a
-                  class="ml-auto"
-                  :href="items.files"
-                  :download="items.fileName"
-                  target="_blank"
-                  v-for="(items, index) in getFileObj(item.annexFile)"
-                  :key="'AF__' + index"
-                >
-                  <el-tooltip
-                    :content="items.fileName"
-                    placement="bottom"
-                    effect="light"
-                  >
+                <a class="ml-auto" :href="items.files" :download="items.fileName" target="_blank" v-for="(items, index) in getFileObj(item.annexFile)" :key="'AF__' + index">
+                  <el-tooltip :content="items.fileName" placement="bottom" effect="light">
                     <img src="@/assets/images/icon/links.png" alt="" />
                   </el-tooltip>
                 </a>
@@ -81,35 +59,22 @@
     <div class="phone d-block d-mb-none pt-70">
       <div class="w-100 d-flex align-items-center flex-row">
         <div class="ml-20">
-          <img
-            src="@/assets/images/icon/arrowLeft.png"
-            alt="返回上一頁"
-            @click="goPrev"
-          />
+          <img src="@/assets/images/icon/arrowLeft.png" alt="返回上一頁" @click="goPrev" />
         </div>
         <PhoneTitle title="系友優秀表現" :filterDate="false" />
       </div>
       <div class="alumniCard pl-30 py-30">
-        <div
-          class="w-100 align-items-center justify-content-center flex-column"
-        >
+        <div class="w-100 align-items-center justify-content-center flex-column">
           <div class="w-100 alumniCard__title">
             <el-row class="py-20">
               <el-col class="text-center" :span="8">公告日期</el-col>
               <el-col class="text-left" :span="16">標題</el-col>
             </el-row>
           </div>
-          <div
-            class="w-100 alumniCard__content"
-            v-for="(item, index1) in alumniData"
-            :key="index1"
-            @click="goInfo(item.id)"
-          >
+          <div class="w-100 alumniCard__content" v-for="(item, index1) in alumniData" :key="index1" @click="goInfo(item.id)">
             <el-row class="py-20">
               <el-col class="text-center" :span="8">
-                <div
-                  class="w-100 d-flex align-items-center justify-content-center flex-column"
-                >
+                <div class="w-100 d-flex align-items-center justify-content-center flex-column">
                   <p class="m-0">
                     {{ item.releaseDate | moment("YYYY") }}
                   </p>
@@ -132,31 +97,22 @@
     <!-- modal -->
     <div class="modal d-flex justify-content-center" v-if="showNewsInfo">
       <div class="modal__content">
-        <div
-          class="p-40 pos-relative d-flex align-items-start justify-content-center flex-column"
-        >
+        <div class="p-40 pos-relative d-flex align-items-start justify-content-center flex-column">
           <div class="p-10 modal__content--tag">
             <span class="d-inline-flex">系友優秀表現</span>
           </div>
-          <div
-            class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20"
-          >
+          <div class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20">
             <label>TITLE</label>
             <strong>{{ selectNews.title }}</strong>
           </div>
-          <div
-            class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20"
-          >
+          <div class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20">
             <label>UPDATE</label>
             <p class="m-0">
               {{ selectNews.modifyDate | moment("YYYY-MM-DD") }}
             </p>
           </div>
           <div class="w-100 modal__content--card mt-20">
-            <vue-editor
-              v-model="selectNews.contents"
-              :disabled="true"
-            ></vue-editor>
+            <vue-editor v-model="selectNews.contents" :disabled="true"></vue-editor>
           </div>
           <div class="w-100 mt-40" v-if="selectNews.annexFile">
             <strong class="font-s-24">附檔</strong>
@@ -166,30 +122,12 @@
             <div class="w-100 d-flex flex-row flex-wrap mt-20">
               <el-row class="w-100">
                 <el-col :xl="4" :lg="6">
-                  <div
-                    class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10"
-                    @mouseenter="showfileInfo(selectNews.annexFile)"
-                    @mouseleave="closefileInfo(selectNews.annexFile)"
-                  >
-                    <a
-                      v-if="!fileInfo[selectNews.annexFile.id]"
-                      :href="selectNews.annexFile.files"
-                      :download="selectNews.annexFile.files"
-                      target="_blank"
-                    >
-                      <img
-                        src="@/assets/images/icon/pdf_icon.png"
-                        :alt="selectNews.annexFile.fileName"
-                        width="40px"
-                      />
+                  <div class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10" @mouseenter="showfileInfo(selectNews.annexFile)" @mouseleave="closefileInfo(selectNews.annexFile)">
+                    <a v-if="!fileInfo[selectNews.annexFile.id]" :href="selectNews.annexFile.files" :download="selectNews.annexFile.files" target="_blank">
+                      <img src="@/assets/images/icon/pdf_icon.png" :alt="selectNews.annexFile.fileName" width="40px" />
                     </a>
                     <div class="w-100 h-100 backCard" v-else>
-                      <a
-                        class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none"
-                        :href="selectNews.annexFile.files"
-                        :download="selectNews.annexFile.files"
-                        target="_blank"
-                      >
+                      <a class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none" :href="selectNews.annexFile.files" :download="selectNews.annexFile.files" target="_blank">
                         <strong>{{ selectNews.annexFile.fileName }}</strong>
                       </a>
                     </div>
@@ -199,10 +137,7 @@
             </div>
           </div>
           <div class="pos-absolute t-0 r-0 mt-20 mr-20">
-            <div
-              class="closeModalBtn d-flex align-items-center justify-content-center cur-pointer"
-              @click="showNewsInfo = false"
-            >
+            <div class="closeModalBtn d-flex align-items-center justify-content-center cur-pointer" @click="showNewsInfo = false">
               <i class="el-icon-close"></i>
             </div>
           </div>
@@ -369,7 +304,7 @@ export default {
       }
       &-contentCard {
         background: #2d2d2d;
-        padding: 130px 220px 50px 60px;
+        padding: 80px 180px 80px 80px;
         &_title {
           width: 100%;
           padding: 40px 30px;

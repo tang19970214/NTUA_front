@@ -1,13 +1,8 @@
 <template>
   <div id="award">
     <div class="web d-none d-mb-block">
-      <el-row
-        :gutter="20"
-        class="w-100 d-flex align-items-center awardContent"
-        v-for="(item, index) in awardData"
-        :key="'AD__' + index"
-      >
-        <el-col :span="4">
+      <el-row :gutter="20" class="w-100 d-flex align-items-center awardContent" v-for="(item, index) in awardData" :key="'AD__' + index">
+        <el-col :span="5">
           <div>
             <b>{{ item.releaseDate | moment("YYYY-MM-DD") }}</b>
           </div>
@@ -15,7 +10,7 @@
         <el-col :span="16">
           <div>{{ item.title }}</div>
         </el-col>
-        <el-col :span="4" class="text-right">
+        <el-col :span="3" class="text-right">
           <span class="cur-pointer" @click="viewInfo(item)">
             <img src="@/assets/images/icon/links.png" alt="" />
           </span>
@@ -29,12 +24,7 @@
 
     <div class="phone d-block d-mb-none">
       <div class="pt-40 pb-80 px-20">
-        <div
-          class="w-100 awardCard d-flex flex-row mb-15"
-          v-for="(item, index1) in awardData"
-          :key="index1"
-          @click="goAwardInfo(item.id)"
-        >
+        <div class="w-100 awardCard d-flex flex-row mb-15" v-for="(item, index1) in awardData" :key="index1" @click="goAwardInfo(item.id)">
           <div class="awardCard-date">
             <div class="px-10 py-15 d-flex flex-column align-items-center">
               <p class="m-0">{{ item.releaseDate | moment("YYYY") }}</p>
@@ -55,21 +45,15 @@
     <div class="modal d-flex justify-content-center" v-if="showNewsInfo">
       <div class="modal__content">
         <div class="p-40">
-          <div
-            class="w-100 pos-relative d-flex align-items-start justify-content-center flex-column"
-          >
+          <div class="w-100 pos-relative d-flex align-items-start justify-content-center flex-column">
             <div class="p-10 modal__content--tag">
               <span class="d-inline-flex">競賽得獎</span>
             </div>
-            <div
-              class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20"
-            >
+            <div class="w-100 d-flex flex-column justify-content-center modal__content--title mt-20">
               <label>TITLE</label>
               <strong>{{ selectNews.title }}</strong>
             </div>
-            <div
-              class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20"
-            >
+            <div class="w-100 d-flex flex-column justify-content-center modal__content--update mt-20">
               <label>UPDATE</label>
               <p class="m-0">
                 {{ selectNews.releaseDate | moment("YYYY-MM-DD") }}
@@ -79,10 +63,7 @@
               <p class="m-0">{{ selectNews.summury }}</p>
             </div>
             <div class="w-100 modal__content--card mt-20">
-              <vue-editor
-                v-model="selectNews.contents"
-                :disabled="true"
-              ></vue-editor>
+              <vue-editor v-model="selectNews.contents" :disabled="true"></vue-editor>
             </div>
             <div class="w-100 mt-40" v-if="selectNews.pics">
               <img :src="selectNews.pics" alt="" width="400px" />
@@ -94,36 +75,13 @@
               </p>
               <div class="w-100 d-flex flex-row flex-wrap mt-20">
                 <el-row class="w-100">
-                  <el-col
-                    :xl="4"
-                    :lg="6"
-                    v-for="item in selectNews.annexFile"
-                    :key="item.id"
-                  >
-                    <div
-                      class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10"
-                      @mouseenter="showfileInfo(item)"
-                      @mouseleave="closefileInfo(item)"
-                    >
-                      <a
-                        v-if="!fileInfo[item.id]"
-                        :href="item.files"
-                        :download="item.files"
-                        target="_blank"
-                      >
-                        <img
-                          src="@/assets/images/icon/pdf_icon.png"
-                          :alt="item.fileName"
-                          width="40px"
-                        />
+                  <el-col :xl="4" :lg="6" v-for="item in selectNews.annexFile" :key="item.id">
+                    <div class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10" @mouseenter="showfileInfo(item)" @mouseleave="closefileInfo(item)">
+                      <a v-if="!fileInfo[item.id]" :href="item.files" :download="item.files" target="_blank">
+                        <img src="@/assets/images/icon/pdf_icon.png" :alt="item.fileName" width="40px" />
                       </a>
                       <div class="w-100 h-100 backCard" v-else>
-                        <a
-                          class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none"
-                          :href="item.files"
-                          :download="item.files"
-                          target="_blank"
-                        >
+                        <a class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none" :href="item.files" :download="item.files" target="_blank">
                           <strong>{{ item.fileName }}</strong>
                         </a>
                       </div>
@@ -133,10 +91,7 @@
               </div>
             </div>
             <div class="pos-absolute t-0 r-0">
-              <div
-                class="modal__close d-flex align-items-center justify-content-center cur-pointer"
-                @click="showNewsInfo = false"
-              >
+              <div class="modal__close d-flex align-items-center justify-content-center cur-pointer" @click="showNewsInfo = false">
                 <i class="el-icon-close"></i>
               </div>
             </div>
@@ -210,7 +165,7 @@ export default {
   .web {
     padding-top: 0 !important;
     margin-left: 0 !important;
-    padding: 45px 380px;
+    padding: 20px 250px;
     .awardContent {
       border-bottom: 1px solid #c4c4c4;
       padding: 25px 0px;

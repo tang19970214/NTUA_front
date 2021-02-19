@@ -2,36 +2,25 @@
   <div id="record">
     <div class="web d-none d-mb-block">
       <el-row class="w-100">
-        <el-col
-          class="d-flex align-items-center justify-content-center my-30"
-          style="height: 380px"
-          :span="12"
-          v-for="(item, index) in recordData"
-          :key="'RD__' + index"
-        >
-          <div class="bookIMG">
-            <router-link :to="{ name: 'recordInfo', params: { id: item.id } }">
-              <img :src="item.coverPic" alt="" />
-            </router-link>
-          </div>
-          <div class="bookContent">
-            <strong class="m-0 bookContent-title">{{ item.title }}</strong>
-            <div class="bookContent-directions">
-              <p
-                class="m-0"
-                v-for="(items, index) in item.summary.split('\n')"
-                :key="'SMR__' + index"
-              >
-                {{ items }}
-              </p>
-            </div>
-            <div class="d-flex align-items-center justify-content-end mt-18">
-              <router-link
-                class="bookContent-viewMore text-decoration-none"
-                :to="{ name: 'recordInfo', params: { id: item.id } }"
-              >
-                VIEW MORE
+        <el-col class="d-flex align-items-center justify-content-center" style="height: 380px" :span="12" v-for="(item, index) in recordData" :key="'RD__' + index">
+          <div class="p-30 d-flex align-items-center">
+            <div class="bookIMG">
+              <router-link :to="{ name: 'recordInfo', params: { id: item.id } }">
+                <el-image style="width: 280px; height: 330px" :src="item.coverPic" fit="cover"></el-image>
               </router-link>
+            </div>
+            <div class="bookContent">
+              <strong class="m-0 bookContent-title">{{ item.title }}</strong>
+              <div class="bookContent-directions">
+                <p class="m-0" v-for="(items, index) in item.summary.split('\n')" :key="'SMR__' + index">
+                  {{ items }}
+                </p>
+              </div>
+              <div class="d-flex align-items-center justify-content-end mt-18">
+                <router-link class="bookContent-viewMore text-decoration-none" :to="{ name: 'recordInfo', params: { id: item.id } }">
+                  VIEW MORE
+                </router-link>
+              </div>
             </div>
           </div>
         </el-col>
@@ -44,11 +33,7 @@
 
     <div class="phone d-block d-mb-none">
       <div class="recordCard pt-20 pb-40 px-60">
-        <div
-          class="d-flex flex-column"
-          v-for="(item, index1) in recordData"
-          :key="index1"
-        >
+        <div class="d-flex flex-column" v-for="(item, index1) in recordData" :key="index1">
           <div class="px-40">
             <router-link :to="{ name: 'recordInfo', params: { id: item.id } }">
               <img :src="item.coverPic" alt="" width="100%" />
@@ -60,19 +45,12 @@
                 <strong>{{ item.title }}</strong>
               </div>
               <div class="px-30 text-left mb-20">
-                <p
-                  class="m-0"
-                  v-for="(items, index) in item.summary.split('\n')"
-                  :key="'PSMR__' + index"
-                >
+                <p class="m-0" v-for="(items, index) in item.summary.split('\n')" :key="'PSMR__' + index">
                   {{ items }}
                 </p>
               </div>
               <div class="w-100">
-                <router-link
-                  class="px-20 pt-10 text-decoration-none"
-                  :to="{ name: 'recordInfo', params: { id: item.id } }"
-                >
+                <router-link class="px-20 pt-10 text-decoration-none" :to="{ name: 'recordInfo', params: { id: item.id } }">
                   VIEW MORE
                 </router-link>
               </div>
@@ -133,13 +111,11 @@ export default {
     }
 
     .bookContent {
-      position: relative;
-      margin-left: -35px;
+      transform: translateX(-2rem);
       border: 2px solid #596164;
       box-sizing: border-box;
-      width: 475px;
       min-height: 250px;
-      padding: 65px 30px 20px 65px;
+      padding: 50px 20px 20px 50px;
       &-title {
         font-weight: bold;
         font-size: 18px;

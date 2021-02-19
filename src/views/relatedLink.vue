@@ -4,13 +4,7 @@
       <p class="m-0 Txt-title">Related links</p>
       <div class="mt-70 newsCard">
         <div class="newsCard-sortText">
-          <router-link
-            class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
-            :class="{ active: $route.name == item.pathURL }"
-            :to="{ name: item.pathURL }"
-            v-for="(item, index) in relatedLinkSort"
-            :key="'NS__' + index"
-          >
+          <router-link class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none" :class="{ active: $route.name == item.pathURL }" :to="{ name: item.pathURL }" v-for="(item, index) in relatedLinkSort" :key="'NS__' + index">
             <p class="m-0">{{ item.pathName }}</p>
             <i class="el-icon-minus"></i>
             <p class="m-0">0{{ index + 1 }}</p>
@@ -25,35 +19,14 @@
               <div class="w-100">
                 <p class="m-0">{{ getPathName(relatedLinkSort) }}</p>
               </div>
-              <!-- <div class="w-100">
-                <div
-                  class="w-100 d-flex justify-content-end newsCard-title_chooseYear"
-                >
-                  <select>
-                    <option
-                      :value="item"
-                      v-for="item in getYearGrouop()"
-                      :key="item"
-                    >
-                      {{ item }}
-                    </option>
-                  </select>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
 
         <div class="newsCard-contentCard">
           <div class="w-100">
-            <div
-              class="relatedLinkTable w-100 d-flex align-items-center justify-content-between flex-row"
-              v-for="item in linksList"
-              :key="item.id"
-            >
-              <p class="m-0" v-for="(items, index) in item" :key="index">
-                {{ items.title }}
-              </p>
+            <div class="relatedLinkTable w-100 d-flex align-items-center justify-content-between flex-row" v-for="item in linksList" :key="item.id">
+              <a :href="items.link" target="_blank" v-for="(items, index) in item" :key="index">{{items.title}}</a>
             </div>
           </div>
         </div>
@@ -63,11 +36,7 @@
     <div class="phone d-block d-mb-none pt-70">
       <PhoneTitle title="相關連結" :filterDate="false" />
       <div class="p-30 relatedCard">
-        <div
-          class="w-100 relatedCard__content mb-30"
-          v-for="item in linksList_phone"
-          :key="item.id"
-        >
+        <div class="w-100 relatedCard__content mb-30" v-for="item in linksList_phone" :key="item.id">
           <p class="m-0 pb-20">
             {{ item.title }}
           </p>
@@ -214,11 +183,15 @@ export default {
         .relatedLinkTable {
           padding: 30px;
           border-bottom: 1px solid #000000;
-          p {
+          a {
+            text-decoration: none;
             font-size: 20px;
             line-height: 25px;
             letter-spacing: 0.2em;
             color: #ffffff;
+            &:hover {
+              font-weight: bold;
+            }
           }
         }
       }

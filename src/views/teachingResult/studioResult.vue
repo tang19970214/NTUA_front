@@ -77,7 +77,7 @@
             <el-col :span="12" v-for="(item, index_2) in worksList" :key="item.id">
               <div class="p-10">
                 <div class="studioBG__info w-100 d-flex align-items-center justify-content-center flex-column">
-                  <el-image :src="item.pics" fit="cover" class="w-100" @click="getTouchIMG_phone(index_2)"></el-image>
+                  <el-image :src="item.pics" style="width: 150px; height: 150px" fit="cover" class="w-100" @click="getTouchIMG_phone(index_2)"></el-image>
                   <div class="w-100 text-center">
                     <strong class="mt-15 pt-10 px-10">{{ item.title }}</strong>
                   </div>
