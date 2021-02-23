@@ -401,6 +401,7 @@ const routes = [{
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (to.meta.goTop || document.body.clientWidth <= 1280) {

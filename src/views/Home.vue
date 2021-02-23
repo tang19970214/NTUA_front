@@ -133,9 +133,9 @@
 
           <div class="w-100 local">
             <div class="w-100 localCard d-flex flex-column">
-              <div class="localCard__info px-90 d-flex align-items-start flex-row pb-35" :class="{ 'pt-50': item.title !== '交通' }" v-for="(item, index) in accessList" :key="'AL_' + index">
+              <div class="localCard__info px-80 d-flex align-items-start flex-row pb-30" :class="{ 'pt-30': item.title !== '交通' }" v-for="(item, index) in accessList" :key="'AL_' + index">
                 <div class="localCard__info--title">
-                  <p class="m-0" :class="{ 'pt-50': item.title == '交通' }">
+                  <p class="m-0" :class="{ 'pt-30': item.title == '交通' }">
                     {{ item.title }}
                   </p>
                 </div>
@@ -163,7 +163,7 @@
                       </div>
                       <div class="w-100 content">
                         <p class="m-0 pb-20">
-                          接駁公車資訊請至以下網站　詢：
+                          接駁公車資訊請至以下網站查詢：
                           <a href="http://eec.ntua.edu.tw/bus/" target="_blank">http://eec.ntua.edu.tw/bus/
                           </a>
                         </p>
@@ -189,7 +189,7 @@
     <!-- phone -->
     <div class="phoneScreen d-block d-mb-none">
       <div class="px-30 pt-20 pb-40">
-        <!-- contest winning | ok -->
+        <!-- contest winning -->
         <div class="contest w-100 mb-30">
           <TitleText textTitle="CONTEST WINNING" />
           <div class="contest__limitWidth w-100 mt-10 d-flex align-items-start">
@@ -209,7 +209,7 @@
             </div>
           </div>
         </div>
-        <!-- students works | ok -->
+        <!-- students works -->
         <div class="students w-100 mb-50" v-if="worksList.length > 0">
           <TitleText textTitle="STUDENTS WORKS" />
           <div class="w-100 mt-15">
@@ -236,7 +236,7 @@
             </div>
           </div>
         </div>
-        <!-- what's new | ok -->
+        <!-- what's new -->
         <div class="whatsnew w-100 mb-100">
           <div class="w-100 d-flex align-items-center justify-content-between">
             <TitleText textTitle="WHAT'S NEW" />
@@ -261,7 +261,7 @@
             </div>
           </div>
         </div>
-        <!-- crafts | ok -->
+        <!-- crafts -->
         <div class="crafts w-100 mb-50">
           <div class="craftsCard">
             <div class="p-20 d-flex align-items-center justify-content-start">
@@ -318,7 +318,7 @@
                       </div>
                       <div class="w-100 content">
                         <p class="m-0 pb-10">
-                          接駁公車資訊請至以下網站　詢：
+                          接駁公車資訊請至以下網站查詢：
                           <a href="http://eec.ntua.edu.tw/bus/" target="_blank">http://eec.ntua.edu.tw/bus/
                           </a>
                         </p>
@@ -1138,8 +1138,8 @@ export default {
                 background: #2d2d2d;
                 color: #ffffff;
                 font-size: 24px;
-                padding-top: 40px;
-                padding-bottom: 40px;
+                padding-top: 20px;
+                padding-bottom: 20px;
               }
               &__content {
                 padding-bottom: 0;

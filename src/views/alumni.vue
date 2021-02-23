@@ -428,6 +428,7 @@ export default {
             font-size: 12px;
             letter-spacing: 0.2em;
             color: #000000;
+            overflow-wrap: anywhere;
           }
         }
       }
