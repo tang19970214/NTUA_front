@@ -241,19 +241,19 @@
                   <div class="px-50">
                     <div class="w-100 header">
                       <el-row class="py-40 d-flex align-items-center text-center">
-                        <el-col :span="6">學校名稱</el-col>
+                        <el-col :span="7">學校名稱</el-col>
                         <el-col :span="3">國別</el-col>
-                        <el-col :span="4">擔任職務</el-col>
-                        <el-col :span="5">系所</el-col>
+                        <!-- <el-col :span="4">擔任職務</el-col> -->
+                        <el-col :span="8">系所</el-col>
                         <el-col :span="6">起迄年月</el-col>
                       </el-row>
                     </div>
                     <div class="w-100 body">
                       <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
-                        <el-col :span="6">{{ items.title }}</el-col>
+                        <el-col :span="7">{{ items.title }}</el-col>
                         <el-col :span="3"> {{ items.mechanismName }}</el-col>
-                        <el-col :span="4">{{ items.jobTitle }}</el-col>
-                        <el-col :span="5">{{ items.contents }}</el-col>
+                        <el-col :span="8">{{ items.jobTitle }}</el-col>
+                        <!-- <el-col :span="5">{{ items.contents }}</el-col> -->
                         <el-col :span="6">
                           <div class="w-100 d-flex flex-column align-items-center justify-content-center">
                             <p class="m-0">
