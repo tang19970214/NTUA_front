@@ -4,13 +4,7 @@
       <p class="m-0 Txt-title">Department member</p>
       <div class="mt-70 newsCard">
         <div class="newsCard-sortText">
-          <router-link
-            class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none"
-            :class="{ active: $route.name == item.pathURL }"
-            :to="{ name: item.pathURL }"
-            v-for="(item, index) in departmentMemberSort"
-            :key="'NS__' + index"
-          >
+          <router-link class="mr-35 mb-15 d-flex align-items-center justify-content-end flex-row text-decoration-none" :class="{ active: $route.name == item.pathURL }" :to="{ name: item.pathURL }" v-for="(item, index) in departmentMemberSort" :key="'NS__' + index">
             <p class="m-0">{{ item.pathName }}</p>
             <i class="el-icon-minus"></i>
             <p class="m-0">0{{ index + 1 }}</p>
@@ -63,7 +57,7 @@ export default {
         },
         {
           pathURL: "administrative",
-          pathName: "行政助理",
+          pathName: "行政人員",
         },
       ],
     };

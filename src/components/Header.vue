@@ -412,7 +412,7 @@ export default {
           },
           {
             value: "03",
-            text: "行政助理",
+            text: "行政人員",
             mainPath: "departmentMember",
             pathName: "administrative",
           },

@@ -15,19 +15,30 @@
               <img :src="teacherList.pic" :alt="teacherList.name" height="300px" />
               <div class="d-flex align-items-start flex-row mt-20">
                 <div class="px-15 contactInfo d-flex align-items-center flex-column">
-                  <img class="mb-10" src="@/assets/images/icon/mail-icon.png" alt="電子郵件" />
+                  <a class="mb-10" :href="'mailto:'+teacherList.email" target="_blank">
+                    <img src="@/assets/images/icon/mail-icon.png" alt="電子郵件" />
+                  </a>
                   <p class="m-0">MAIL</p>
                 </div>
+
                 <div class="px-15 contactInfo d-flex align-items-center flex-column">
-                  <img class="mb-10" src="@/assets/images/icon/連結-icon.png" alt="個人網站" />
+                  <a class="mb-10" :href="teacherList.webUrl" target="_blank">
+                    <img src="@/assets/images/icon/連結-icon.png" alt="個人網站" />
+                  </a>
                   <p class="m-0">個人網站</p>
                 </div>
+
                 <div class="px-15 contactInfo d-flex align-items-center flex-column">
-                  <img class="mb-10" src="@/assets/images/icon/連結-icon.png" alt="個人著作" />
+                  <a class="mb-10" :href="teacherList.researchUrl" target="_blank">
+                    <img src="@/assets/images/icon/連結-icon.png" alt="個人著作" />
+                  </a>
                   <p class="m-0">個人著作</p>
                 </div>
+
                 <div class="px-15 contactInfo d-flex align-items-center flex-column">
-                  <img class="mb-10" src="@/assets/images/icon/連結-icon.png" alt="個人研究" />
+                  <a class="mb-10" :href="teacherList.bookUrl" target="_blank">
+                    <img src="@/assets/images/icon/連結-icon.png" alt="個人研究" />
+                  </a>
                   <p class="m-0">個人研究</p>
                 </div>
               </div>
@@ -232,8 +243,8 @@
                       <el-row class="py-40 d-flex align-items-center text-center">
                         <el-col :span="6">學校名稱</el-col>
                         <el-col :span="3">國別</el-col>
-                        <el-col :span="6">系所</el-col>
-                        <el-col :span="3">國別</el-col>
+                        <el-col :span="5">系所</el-col>
+                        <el-col :span="4">擔任職務</el-col>
                         <el-col :span="6">起迄年月</el-col>
                       </el-row>
                     </div>
@@ -241,8 +252,8 @@
                       <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
                         <el-col :span="6">{{ items.title }}</el-col>
                         <el-col :span="3"> {{ items.mechanismName }}</el-col>
-                        <el-col :span="6">{{ items.contents }}</el-col>
-                        <el-col :span="3">{{ items.jobTitle }}</el-col>
+                        <el-col :span="5">{{ items.contents }}</el-col>
+                        <el-col :span="4">{{ items.jobTitle }}</el-col>
                         <el-col :span="6">
                           <div class="w-100 d-flex flex-column align-items-center justify-content-center">
                             <p class="m-0">
