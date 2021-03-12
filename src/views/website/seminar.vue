@@ -12,7 +12,28 @@
           <!-- <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor> -->
           <!-- <ckeditor class="disEditor" :value="seminarList.contents" :config="setConfig" /> -->
           <div v-html="seminarList.contents"></div>
+
+          <div class="w-100 mt-40" v-if="seminarList.attachedFile">
+            <strong class="font-s-24 workCard__fileTitle">附檔</strong>
+            <div class="w-100 d-flex flex-row flex-wrap mt-20">
+              <el-row class="w-100">
+                <el-col :xl="4" :lg="6" v-for="item in JSON.parse(seminarList.attachedFile)" :key="item.id">
+                  <div class="modal__content--fileCard d-flex align-items-center justify-content-center mt-10" @mouseenter="showfileInfo(item)" @mouseleave="closefileInfo(item)">
+                    <a v-if="!fileInfo[item.id]" :href="item.files" :download="item.files" target="_blank">
+                      <img src="@/assets/images/icon/pdf_icon.png" :alt="item.fileName" width="40px" />
+                    </a>
+                    <div class="w-100 h-100 backCard" v-else>
+                      <a class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none" :href="item.files" :download="item.files" target="_blank">
+                        <strong>{{ item.fileName }}</strong>
+                      </a>
+                    </div>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+          </div>
         </div>
+
         <div class="w-100" v-else>
           <div class="newsTable w-100 d-flex align-items-center flex-row cur-pointer" v-for="item in newsList" :key="item.id" @click="viewInfo(item)">
             <p class="m-0" style="min-width: 220px; max-width: 220px">
@@ -37,6 +58,28 @@
           <!-- <vue-editor v-model="seminarList.contents" :disabled="true"></vue-editor> -->
           <!-- <ckeditor class="disEditor" :value="seminarList.contents" :config="setConfig" /> -->
           <div class="w-100 ckInfo" v-html="seminarList.contents"></div>
+
+          <div class="w-100 mt-20" v-if="seminarList.attachedFile">
+            <strong class="font-s-24 darkBG__fileText">附檔</strong>
+            <div class="downloadCard py-8 my-8" v-for="(items, index1) in JSON.parse(seminarList.attachedFile)" :key="index1">
+              <el-row class="d-flex align-items-center">
+                <el-col :span="6">
+                  <div class="w-100 d-flex align-items-center justify-content-center">
+                    <a :href="items.files" :download="items.files" target="_blank">
+                      <img src="@/assets/images/icon/pdf_icon.png" alt="" />
+                    </a>
+                  </div>
+                </el-col>
+                <el-col :span="18">
+                  <div class="px-16 d-flex align-items-center justify-content-center flex-column">
+                    <p class="m-0">
+                      {{ items.fileName }}
+                    </p>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+          </div>
         </div>
         <div class="w-100 newsInfo" v-else>
           <div class="w-100 newsInfo__card d-flex flex-row mb-15" v-for="item in newsList" :key="item.id" @click="goSeminarInfo(item.id)">
@@ -125,12 +168,12 @@ export default {
   },
   data() {
     return {
-      setConfig: {
-        readOnly: true,
-        uiColor: "#2d2d2d",
-        extraPlugins: "button,panelbutton,colorbutton",
-        dialog_backgroundCoverOpacity: 0,
-      },
+      // setConfig: {
+      //   readOnly: true,
+      //   uiColor: "#2d2d2d",
+      //   extraPlugins: "button,panelbutton,colorbutton",
+      //   dialog_backgroundCoverOpacity: 0,
+      // },
       defaultId: "6755196327667736576",
       tabList: [
         {
@@ -229,6 +272,19 @@ export default {
     goSeminarInfo(id) {
       this.$router.push({ name: "seminarInfo", params: { id: id } });
     },
+    showfileInfo(data) {
+      this.fileInfo = [this.selectNews].reduce(
+        (a, b) => ((a[b.id] = true), a),
+        {}
+      );
+      this.fileInfo[data?.id] = !this.fileInfo[data?.id];
+    },
+    closefileInfo(data) {
+      this.fileInfo = [this.selectNews].reduce(
+        (a, b) => ((a[b.id] = false), a),
+        {}
+      );
+    },
   },
   mounted() {
     this.$store.commit("SETLOADING", true);
@@ -263,8 +319,12 @@ export default {
       }
     }
     .workCard {
-      padding: 50px 200px 180px 40px;
+      padding: 50px 200px 150px 40px;
       background: #2d2d2d;
+
+      &__fileTitle {
+        color: white;
+      }
 
       .newsTable {
         padding: 30px;
@@ -288,22 +348,41 @@ export default {
     .darkBG {
       background: #2d2d2d;
 
-      .disEditor {
-        .cke {
-          &_contents {
-            min-height: calc(100vh - 210px);
-          }
+      &__fileText {
+        color: white;
+      }
 
-          &_top,
-          &_bottom {
-            display: none !important;
-          }
+      .downloadCard {
+        background: white;
+        border-radius: 5px;
+        p {
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 15px;
+          letter-spacing: 0.2em;
+          color: #596164;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          overflow-wrap: anywhere;
         }
       }
 
-      .ckInfo {
-        overflow-x: auto;
-      }
+      // .disEditor {
+      //   .cke {
+      //     &_contents {
+      //       min-height: calc(100vh - 210px);
+      //     }
+
+      //     &_top,
+      //     &_bottom {
+      //       display: none !important;
+      //     }
+      //   }
+      // }
+
+      // .ckInfo {
+      //   overflow-x: auto;
+      // }
 
       // .ql-editor {
       //   min-height: 100px;

@@ -154,7 +154,7 @@
                 <!-- 研究發表 -->
                 <div v-if="key == '研究發表'">
                   <el-row>
-                    <el-col class="publishInfoCard__content--leftBlock pb-50" :span="4">
+                    <el-col class="publishInfoCard__content--leftBlock pb-50" :span="5">
                       <ul class="m-0">
                         <li class="py-5" v-for="(items, index__1) in item" :key="'PB1__' + index__1">
                           <p class="m-0 d-inline-flex" :class="{
@@ -165,7 +165,7 @@
                         </li>
                       </ul>
                     </el-col>
-                    <el-col class="" :span="20">
+                    <el-col class="" :span="19">
                       <div class="mr-120 ml-30 publishInfoCard__content--rightBlock">
                         <div class="p-30">
                           <vue-editor v-model="item[chooseInfoKey].contents" :disabled="true" />
@@ -672,14 +672,14 @@ export default {
       memberListQuery: {
         MemberTypeId: "",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       publishListQuery: {
         MemberId: this.$route.params.author,
         DataTypeId: "",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       teacherList: [],

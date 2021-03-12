@@ -106,7 +106,7 @@ export default {
       listQuery: {
         TypeId: "SYS_DEPARTMENTRULE_MASTER",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       masterMsg: [],

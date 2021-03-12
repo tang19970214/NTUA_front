@@ -79,7 +79,7 @@ export default {
       listQuery: {
         NewsTypeId: "",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       seminarMsg: [],

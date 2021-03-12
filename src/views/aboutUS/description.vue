@@ -7,18 +7,10 @@
       </div>
 
       <div class="catalog">
-        <el-row
-          class="catalog__bor"
-          v-for="(item, index) in eduList"
-          :key="'EL_' + index"
-        >
+        <el-row class="catalog__bor" v-for="(item, index) in eduList" :key="'EL_' + index">
           <el-col :span="4">
             <div class="catalog__darkBG">
-              <div
-                class="p-20 d-flex align-items-center justify-content-around flex-column"
-                v-for="items in item.directoryList"
-                :key="items.value"
-              >
+              <div class="p-20 d-flex align-items-center justify-content-around flex-column" v-for="items in item.directoryList" :key="items.value">
                 <p class="m-0 py-10">{{ items.method_first }}</p>
                 <p class="m-0 py-10">{{ items.method_second }}</p>
                 <strong class="pt-20">{{ items.title }}</strong>
@@ -45,21 +37,10 @@
               <div class="w-100 mb-45 ml-150">
                 <p class="m-0 rules__title">課程規劃原則</p>
               </div>
-              <div
-                class="w-100 mb-60"
-                v-for="(item, index) in ruleList"
-                :key="'EL_' + index"
-              >
-                <img
-                  class="pos-absolute"
-                  :src="item.imgURL"
-                  alt=""
-                  height="190px"
-                />
+              <div class="w-100 mb-60" v-for="(item, index) in ruleList" :key="'EL_' + index">
+                <img class="pos-absolute" :src="item.imgURL" alt="" height="190px" />
                 <div class="rules__Card">
-                  <div
-                    class="h-100 pl-120 pr-90 d-flex align-items-center justify-content-center"
-                  >
+                  <div class="h-100 pl-120 pr-90 d-flex align-items-center justify-content-center">
                     {{ item.context }}
                   </div>
                 </div>
@@ -74,58 +55,29 @@
               </div>
               <div class="w-100">
                 <div class="w-100 downloadCard d-flex flex-column">
-                  <div
-                    class="px-80 py-15 downloadCard__download d-flex align-items-center"
-                  >
+                  <div class="px-80 py-15 downloadCard__download d-flex align-items-center">
                     <p class="m-0">五種學制地圖</p>
                     <span v-for="item in getEduMap" :key="item.id">
-                      <el-tooltip
-                        effect="light"
-                        content="檔案下載"
-                        placement="bottom"
-                      >
-                        <a
-                          class="d-flex align-items-center justify-content-center ml-20"
-                          :href="item.fileLink"
-                          :download="item.fileName"
-                          target="_blank"
-                        >
+                      <el-tooltip effect="light" content="檔案下載" placement="bottom">
+                        <a class="d-flex align-items-center justify-content-center ml-20" :href="item.fileLink" :download="item.fileName" target="_blank">
                           <img src="@/assets/images/icon/pdf_icon.png" alt="" />
                         </a>
                       </el-tooltip>
                     </span>
                   </div>
                   <div class="px-80 py-15 downloadCard__title">
-                    <a
-                      href="https://aca.ntua.edu.tw/article.aspx?ca=211&id=140"
-                      target="_blank"
-                    >
+                    <a href="https://aca.ntua.edu.tw/article.aspx?ca=211&id=140" target="_blank">
                       各年度課程科目學分表查詢
                     </a>
                   </div>
                   <div class="w-100 downloadCard__content">
                     <div class="py-20 px-30">
-                      <div
-                        class="d-flex align-items-center justify-content-center mt-20 mb-30"
-                        v-for="(item, key) in downloadList"
-                        :key="'DL_' + key"
-                      >
-                        <div
-                          class="w-100 py-20 d-flex align-items-center justify-content-center downloadCard__content-list pos-relative"
-                        >
-                          <a
-                            class="px-10"
-                            :href="items.fileLink"
-                            :download="items.fileLink"
-                            target="_blank"
-                            v-for="items in item"
-                            :key="items.id"
-                          >
+                      <div class="d-flex align-items-center justify-content-center mt-20 mb-30" v-for="(item, key) in downloadList" :key="'DL_' + key">
+                        <div class="w-100 py-20 d-flex align-items-center justify-content-center downloadCard__content-list pos-relative">
+                          <a class="px-10" :href="items.fileLink" :download="items.fileLink" target="_blank" v-for="items in item" :key="items.id">
                             {{ items.fileName }}
                           </a>
-                          <div
-                            class="downloadCard__content-blackTag p-10 d-flex align-items-center justify-content-center pos-absolute l-0 t-0"
-                          >
+                          <div class="downloadCard__content-blackTag p-10 d-flex align-items-center justify-content-center pos-absolute l-0 t-0">
                             {{ key }}
                           </div>
                         </div>
@@ -140,95 +92,44 @@
       </div>
 
       <div class="triangle">
-        <div
-          class="w-100 d-flex align-items-center justify-content-between pb-80 mb-80"
-        >
-          <div
-            class="w-100 d-flex align-items-center flex-column ml-25 mt-150"
-            v-for="(item, index) in depIntroduce"
-            :key="'DI_' + index"
-          >
+        <div class="w-100 d-flex align-items-center justify-content-between pb-80 mb-80">
+          <div class="w-100 d-flex align-items-center flex-column ml-25 mt-150" v-for="(item, index) in depIntroduce" :key="'DI_' + index">
             <div class="w-100 text-left">
               <p class="triangle__title d-flex m-0">{{ item.titleName }}</p>
             </div>
-            <div
-              class="w-100 triangle__content d-flex flex-column"
-              v-for="(items, index) in item.options"
-              :key="'OP_' + index"
-            >
+            <div class="w-100 triangle__content d-flex flex-column" v-for="(items, index) in item.options" :key="'OP_' + index">
               <p class="m-0">{{ items.context }}</p>
             </div>
           </div>
 
           <div class="w-100">
-            <div
-              class="w-100 d-flex align-items-center justify-content-center flex-column"
-            >
+            <div class="w-100 d-flex align-items-center justify-content-center flex-column">
               <div class="mt-20">
-                <img
-                  src="@/assets/images/triangle/triangle-top.png"
-                  alt=""
-                  v-if="!triangleBlock.top"
-                />
+                <img src="@/assets/images/triangle/triangle-top.png" alt="" v-if="!triangleBlock.top" />
                 <div class="pos-relative" v-else>
-                  <img
-                    src="@/assets/images/triangle/triangle-top_hover.png"
-                    alt=""
-                  />
-                  <div
-                    class="pos-absolute t-0 mt-130"
-                    style="margin-left: -18.4rem"
-                  >
-                    <img
-                      src="@/assets/images/triangle/triangle-topText_hover.png"
-                      alt=""
-                    />
+                  <img src="@/assets/images/triangle/triangle-top_hover.png" alt="" />
+                  <div class="pos-absolute t-0 mt-130" style="margin-left: -18.4rem">
+                    <img src="@/assets/images/triangle/triangle-topText_hover.png" alt="" />
                   </div>
                 </div>
               </div>
 
               <div class="mt-66">
-                <img
-                  src="@/assets/images/triangle/triangle-middle.png"
-                  alt=""
-                  v-if="!triangleBlock.middle"
-                />
+                <img src="@/assets/images/triangle/triangle-middle.png" alt="" v-if="!triangleBlock.middle" />
                 <div class="pos-relative" v-else>
-                  <img
-                    src="@/assets/images/triangle/triangle-middle_hover.png"
-                    alt=""
-                  />
-                  <div
-                    class="pos-absolute t-0 mt-60"
-                    style="margin-left: -19.6rem"
-                  >
-                    <img
-                      src="@/assets/images/triangle/triangle-middleText_hover.png"
-                      alt=""
-                    />
+                  <img src="@/assets/images/triangle/triangle-middle_hover.png" alt="" />
+                  <div class="pos-absolute t-0 mt-60" style="margin-left: -19.6rem">
+                    <img src="@/assets/images/triangle/triangle-middleText_hover.png" alt="" />
                   </div>
                 </div>
               </div>
 
               <div class="mt-44">
-                <img
-                  src="@/assets/images/triangle/triangle-bottom.png"
-                  alt=""
-                  v-if="!triangleBlock.bottom"
-                />
+                <img src="@/assets/images/triangle/triangle-bottom.png" alt="" v-if="!triangleBlock.bottom" />
                 <div class="pos-relative" v-else>
-                  <img
-                    src="@/assets/images/triangle/triangle-bottom_hover.png"
-                    alt=""
-                  />
-                  <div
-                    class="pos-absolute t-0 mt-45"
-                    style="margin-left: -57.3rem"
-                  >
-                    <img
-                      src="@/assets/images/triangle/triangle-bottomText_hover.png"
-                      alt=""
-                    />
+                  <img src="@/assets/images/triangle/triangle-bottom_hover.png" alt="" />
+                  <div class="pos-absolute t-0 mt-45" style="margin-left: -57.3rem">
+                    <img src="@/assets/images/triangle/triangle-bottomText_hover.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -246,16 +147,8 @@
         </div>
         <div class="px-40 py-20">
           <el-row>
-            <el-col
-              class="d-flex align-items-center justify-content-center"
-              :span="12"
-              v-for="item in directoryList"
-              :key="item.value"
-            >
-              <div
-                class="courseCard__content d-flex align-items-center justify-content-center flex-column my-10"
-                @click="openGoal(item.value)"
-              >
+            <el-col class="d-flex align-items-center justify-content-center" :span="12" v-for="item in directoryList" :key="item.value">
+              <div class="courseCard__content d-flex align-items-center justify-content-center flex-column my-10" @click="openGoal(item.value)">
                 <p class="m-0">{{ item.method_first }}</p>
                 <p class="m-0">{{ item.method_second }}</p>
                 <strong class="mt-5">{{ item.title }}</strong>
@@ -268,20 +161,9 @@
         <div class="coursePlan__title py-10 pl-60">
           <p class="m-0">課程規劃原則</p>
         </div>
-        <div
-          class="w-100 coursePlan__content d-flex align-items-center justify-content-center flex-column"
-        >
-          <div
-            class="p-10 d-flex flex-row align-items-center pos-relative"
-            v-for="(item, index1) in ruleList"
-            :key="index1"
-          >
-            <img
-              class="pos-absolute"
-              :src="item.imgURL"
-              alt=""
-              height="110px"
-            />
+        <div class="w-100 coursePlan__content d-flex align-items-center justify-content-center flex-column">
+          <div class="p-10 d-flex flex-row align-items-center pos-relative" v-for="(item, index1) in ruleList" :key="index1">
+            <img class="pos-absolute" :src="item.imgURL" alt="" height="110px" />
             <div class="coursePlan__content-card ml-45">
               <div class="py-30 pl-50 pr-10">
                 <p class="m-0">{{ item.context }}</p>
@@ -297,17 +179,11 @@
           </div>
           <div class="w-100 courseDownload__content mt-15">
             <div class="courseDownload__content-download w-100">
-              <div
-                class="px-20 py-10 d-flex align-items-center justify-content-center flex-row"
-              >
+              <div class="px-20 py-10 d-flex align-items-center justify-content-center flex-row">
                 <div class="w-100 text-center">
                   <p class="m-0">五種學制地圖</p>
                 </div>
-                <img
-                  src="@/assets/images/icon/pdf_icon.png"
-                  alt=""
-                  height="32px"
-                />
+                <img src="@/assets/images/icon/pdf_icon.png" alt="" height="32px" />
               </div>
             </div>
             <div class="courseDownload__content-header w-100 text-center">
@@ -317,19 +193,8 @@
             </div>
             <div class="courseDownload__content-body w-100">
               <div class="p-30">
-                <div
-                  class="w-100 subjectCard d-flex align-items-center justify-content-center py-10 pos-relative"
-                  v-for="(item, key) in downloadList"
-                  :key="'DLL__' + key"
-                >
-                  <a
-                    class="px-5"
-                    :href="items.fileLink"
-                    :download="items.fileLink"
-                    target="_blank"
-                    v-for="items in item"
-                    :key="items.id"
-                  >
+                <div class="w-100 subjectCard d-flex align-items-center justify-content-center py-10 pos-relative" v-for="(item, key) in downloadList" :key="'DLL__' + key">
+                  <a class="px-5" :href="items.fileLink" :download="items.fileLink" target="_blank" v-for="items in item" :key="items.id">
                     {{ items.fileName }}
                   </a>
                   <span class="subjectCard__tag p-6 pos-absolute t-0 l-0">
@@ -346,11 +211,7 @@
           <div class="w-100 courseDevelope__title mb-5">
             <p class="m-0">{{ item.titleName }}</p>
           </div>
-          <div
-            class="w-100 courseDevelope__content d-flex align-items-center justify-content-center"
-            v-for="(items, index4) in item.options"
-            :key="index4"
-          >
+          <div class="w-100 courseDevelope__content d-flex align-items-center justify-content-center" v-for="(items, index4) in item.options" :key="index4">
             <p class="m-0 my-5">{{ items.context }}</p>
           </div>
         </div>
@@ -364,20 +225,14 @@
             </div>
           </div>
           <div class="w-100 mt-20 pos-relative">
-            <img
-              src="@/assets/images/triangle/triangle_phone-middle.png"
-              alt=""
-            />
+            <img src="@/assets/images/triangle/triangle_phone-middle.png" alt="" />
             <div class="w-100 text-center pos-absolute t-0 mt-20">
               <p class="m-0">產品設計</p>
               <p class="m-0">理性邏輯＋感性直覺</p>
             </div>
           </div>
           <div class="w-100 mt-10 pos-relative">
-            <img
-              src="@/assets/images/triangle/triangle_phone-bottom.png"
-              alt=""
-            />
+            <img src="@/assets/images/triangle/triangle_phone-bottom.png" alt="" />
             <div class="w-100 text-center pos-absolute t-0">
               <p class="m-0">工藝創作</p>
               <p class="m-0">材質本位＋製作精神</p>
@@ -397,11 +252,7 @@
               <div class="py-70 px-20">
                 <div class="pl-30 goalCard__content">
                   <ul class="m-0 pl-0">
-                    <li
-                      class="mb-40"
-                      v-for="(item, index) in filterGoal(eduList)"
-                      :key="'LS__' + index"
-                    >
+                    <li class="mb-40" v-for="(item, index) in filterGoal(eduList)" :key="'LS__' + index">
                       {{ item.context }}
                     </li>
                   </ul>
@@ -409,10 +260,7 @@
               </div>
             </div>
             <div class="pos-absolute t-0 r-0">
-              <div
-                class="close d-flex align-items-center justify-content-center cur-pointer mt-20 mr-20"
-                @click="showGoal = false"
-              >
+              <div class="close d-flex align-items-center justify-content-center cur-pointer mt-20 mr-20" @click="showGoal = false">
                 <img src="@/assets/images/icon/cancel.png" alt="" />
               </div>
             </div>
@@ -430,7 +278,7 @@ export default {
       listQuery: {
         TypeId: "",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       topFlag: true,

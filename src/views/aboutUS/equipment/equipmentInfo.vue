@@ -7,10 +7,7 @@
       </div>
       <div class="mt-70 newsCard">
         <div class="px-150 pt-90 d-flex align-items-center">
-          <router-link
-            class="pr-20 d-flex align-items-center"
-            :to="{ name: 'equipment' }"
-          >
+          <router-link class="pr-20 d-flex align-items-center" :to="{ name: 'equipment' }">
             <img src="@/assets/images/icon/arrowLeft.png" alt="" width="30px" />
           </router-link>
           <strong class="newsCard__title">{{ albumTitle }}</strong>
@@ -18,30 +15,14 @@
         <div class="py-100 w-100 introduceCard mt-20">
           <div class="px-150 py-30">
             <el-row>
-              <el-col
-                class="mb-60"
-                :span="8"
-                v-for="(item, index) in classData"
-                :key="'CD__' + index"
-              >
-                <div
-                  class="w-100 d-flex align-items-center justify-content-center flex-column"
-                >
+              <el-col class="mb-60" :span="8" v-for="(item, index) in classData" :key="'CD__' + index">
+                <div class="w-100 d-flex align-items-center justify-content-center flex-column">
                   <div class="px-60">
-                    <div
-                      class="introduceCard__classIMG w-100 d-flex justify-content-center"
-                    >
-                      <el-image
-                        :src="item.links"
-                        fit="cover"
-                        style="width: 380px; height: 300px"
-                        @click="getTouchIMG(index)"
-                      ></el-image>
+                    <div class="introduceCard__classIMG w-100 d-flex justify-content-center">
+                      <el-image :src="item.links" fit="cover" style="width: 380px; height: 300px" @click="getTouchIMG(index)"></el-image>
                     </div>
 
-                    <div
-                      class="w-100 mt-40 d-flex justify-content-center d-inline-flex"
-                    >
+                    <div class="w-100 mt-40 d-flex justify-content-center d-inline-flex">
                       <div class="pt-10 introduceCard__viewBtn text-center">
                         <a class="text-decoration-none cur-pointer px-20">
                           {{ item.description }}
@@ -65,21 +46,9 @@
             <p class="m-0 font-s-28">相關空間</p>
           </div>
           <div class="w-100 anotherClass">
-            <div
-              class="anotherClass__content w-100 d-flex align-items-center justify-content-start flex-row mt-40"
-            >
-              <div
-                class="mx-15 d-flex align-items-center justify-content-center flex-column"
-                v-for="(item, index) in anotherClassList"
-                :key="'ACL__' + index"
-              >
-                <img
-                  class="cur-pointer"
-                  :src="item.coverPic"
-                  alt=""
-                  @click="showIntroduce(item)"
-                  v-if="item.id !== $route.params.id"
-                />
+            <div class="anotherClass__content w-100 d-flex align-items-center justify-content-start flex-row mt-40">
+              <div class="mx-15 d-flex align-items-center justify-content-center flex-column" v-for="(item, index) in anotherClassList" :key="'ACL__' + index">
+                <img class="cur-pointer" :src="item.coverPic" alt="" @click="showIntroduce(item)" v-if="item.id !== $route.params.id" />
                 <img :src="item.coverPic" alt="" v-else />
                 <div class="mt-20">
                   <strong>{{ item.title }}</strong>
@@ -93,9 +62,7 @@
 
     <!-- phone -->
     <div class="phone d-block d-mb-none pt-70">
-      <div
-        class="equipmentInfo__Title w-100 d-flex align-items-center flex-row"
-      >
+      <div class="equipmentInfo__Title w-100 d-flex align-items-center flex-row">
         <router-link class="pl-20" :to="{ name: 'equipment' }">
           <img src="@/assets/images/icon/arrowLeft.png" alt="" />
         </router-link>
@@ -105,21 +72,10 @@
       <div class="equipmentInfo__card mt-5">
         <div class="p-20">
           <el-row>
-            <el-col
-              :span="12"
-              v-for="(item, index1) in classData"
-              :key="item.id"
-            >
+            <el-col :span="12" v-for="(item, index1) in classData" :key="item.id">
               <div class="p-10">
-                <div
-                  class="equipmentInfo__card-information w-100 d-flex align-items-center justify-content-center flex-column"
-                >
-                  <el-image
-                    :src="item.links"
-                    fit="cover"
-                    style="width: 100%; height: 100px"
-                    @click="getTouchIMG_phone(index1)"
-                  ></el-image>
+                <div class="equipmentInfo__card-information w-100 d-flex align-items-center justify-content-center flex-column">
+                  <el-image :src="item.links" fit="cover" style="width: 100%; height: 100px" @click="getTouchIMG_phone(index1)"></el-image>
                   <strong class="mt-15 pt-10 px-20">展覽空間</strong>
                 </div>
               </div>
@@ -138,17 +94,8 @@
             <p class="m-0">相關空間</p>
           </div>
           <div class="w-100 mt-20 d-flex flex-row overflow-x">
-            <div
-              class="equipmentInfo__about-content d-flex align-items-center justify-content-center flex-column mr-20"
-              v-for="(item, index2) in anotherClassList"
-              :key="index2"
-            >
-              <img
-                :src="item.coverPic"
-                alt=""
-                width="200px"
-                @click="showIntroduce(item)"
-              />
+            <div class="equipmentInfo__about-content d-flex align-items-center justify-content-center flex-column mr-20" v-for="(item, index2) in anotherClassList" :key="index2">
+              <img :src="item.coverPic" alt="" width="200px" @click="showIntroduce(item)" />
               <div class="mt-10 text-center">
                 <strong class="font-s-14">{{ item.title }}</strong>
               </div>
@@ -167,36 +114,18 @@
               <div class="p-100">
                 <div class="w-100 d-flex align-items-end flex-row">
                   <img :src="classData[selectNum].links" alt="" width="700px" />
-                  <div
-                    class="d-flex align-items-center justify-content-center flex-column"
-                  >
-                    <div
-                      class="d-flex align-items-center justify-content-between"
-                    >
+                  <div class="d-flex align-items-center justify-content-center flex-column">
+                    <div class="d-flex align-items-center justify-content-between">
                       <div class="w-100 text-right">
-                        <img
-                          v-if="selectNum > 0"
-                          class="mr-20 cur-pointer"
-                          src="@/assets/images/arrowLeft_btn.png"
-                          alt="上一張"
-                          @click="prevPic"
-                        />
+                        <img v-if="selectNum > 0" class="mr-20 cur-pointer" src="@/assets/images/arrowLeft_btn.png" alt="上一張" @click="prevPic" />
                       </div>
                       <div class="w-100 text-left">
-                        <img
-                          v-if="selectNum < listCount"
-                          class="ml-20 cur-pointer"
-                          src="@/assets/images/arrowRight_btn.png"
-                          alt="下一張"
-                          @click="nextPic"
-                        />
+                        <img v-if="selectNum < listCount" class="ml-20 cur-pointer" src="@/assets/images/arrowRight_btn.png" alt="下一張" @click="nextPic" />
                       </div>
                     </div>
                     <div class="classCard__introduce d-inline-flex">
                       <div class="px-50 pt-60 pb-80">
-                        <div
-                          class="w-100 classCard__introduce-title text-left pb-5"
-                        >
+                        <div class="w-100 classCard__introduce-title text-left pb-5">
                           <strong>展覽空間</strong>
                         </div>
                         <div class="w-100 pr-60 classCard__introduce-content">
@@ -221,10 +150,7 @@
               </div>
             </div>
             <div class="pos-absolute t-0 r-0 mt-20 mr-20">
-              <div
-                class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
-                @click="showIMG = false"
-              >
+              <div class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3" @click="showIMG = false">
                 <i class="el-icon-close"></i>
               </div>
             </div>
@@ -238,47 +164,24 @@
         <div class="w-100 d-flex align-items-center justify-content-center">
           <div class="classCardPhone w-100">
             <div class="px-30 pt-10 pb-40">
-              <div
-                class="w-100 d-flex align-items-center justify-content-end mb-10"
-              >
-                <div
-                  class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3"
-                  @click="showIMG_phone = false"
-                >
+              <div class="w-100 d-flex align-items-center justify-content-end mb-10">
+                <div class="closeBtn d-flex align-items-center justify-content-center cur-pointer p-3" @click="showIMG_phone = false">
                   <i class="el-icon-close"></i>
                 </div>
               </div>
-              <div
-                class="w-100 d-flex align-items-end justify-content-center flex-column"
-              >
+              <div class="w-100 d-flex align-items-end justify-content-center flex-column">
                 <img :src="classData[selectNum].links" alt="" width="100%" />
                 <div class="w-100 classCardPhone__introduce">
                   <div class="px-30 py-10">
-                    <div
-                      class="w-100 classCardPhone__introduce-title text-left pb-5"
-                    >
+                    <div class="w-100 classCardPhone__introduce-title text-left pb-5">
                       <strong>展覽空間</strong>
                     </div>
-                    <div
-                      class="w-100 d-flex align-items-center justify-content-between my-8"
-                    >
+                    <div class="w-100 d-flex align-items-center justify-content-between my-8">
                       <div class="w-100 text-right">
-                        <img
-                          v-if="selectNum > 0"
-                          class="mr-20 cur-pointer"
-                          src="@/assets/images/arrowLeft_btn.png"
-                          alt="上一張"
-                          @click="prevPic"
-                        />
+                        <img v-if="selectNum > 0" class="mr-20 cur-pointer" src="@/assets/images/arrowLeft_btn.png" alt="上一張" @click="prevPic" />
                       </div>
                       <div class="w-100 text-left">
-                        <img
-                          v-if="selectNum < listCount"
-                          class="ml-20 cur-pointer"
-                          src="@/assets/images/arrowRight_btn.png"
-                          alt="下一張"
-                          @click="nextPic"
-                        />
+                        <img v-if="selectNum < listCount" class="ml-20 cur-pointer" src="@/assets/images/arrowRight_btn.png" alt="下一張" @click="nextPic" />
                       </div>
                     </div>
                     <div class="w-100 pr-60 classCardPhone__introduce-content">
@@ -313,12 +216,12 @@ export default {
       listQuery: {
         RoomId: this.$route.params.id,
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       classListQuery: {
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       albumTitle: "",

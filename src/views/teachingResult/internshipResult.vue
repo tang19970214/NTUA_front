@@ -115,7 +115,7 @@ export default {
         TeachTypeId: "SYS_TEACH_4C",
         Years: "",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       internshipResultMsg: [],

@@ -115,7 +115,7 @@ export default {
         TeachTypeId: "SYS_TEACH_COMPETITION",
         Years: "",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       awardData: [],

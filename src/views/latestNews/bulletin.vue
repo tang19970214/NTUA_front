@@ -100,7 +100,7 @@ export default {
       listQuery: {
         NewsTypeId: "SYS_NEWS_DEPARTMENT",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       bulletinMsg: [],

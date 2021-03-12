@@ -80,7 +80,7 @@ export default {
       listQuery: {
         NewsTypeId: "SYS_NEWS_COMPETITION",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       contestMsg: [],

@@ -3,33 +3,15 @@
     <div class="web d-none d-mb-block">
       <div class="w-100">
         <el-row>
-          <el-col
-            class="mb-150 d-flex justify-content-start"
-            :span="8"
-            v-for="(item, index) in teacherList"
-            :key="'TL_' + index"
-          >
+          <el-col class="mb-150 d-flex justify-content-start" :span="8" v-for="(item, index) in teacherList" :key="'TL_' + index">
             <div class="creation">
               <div class="front">
-                <img
-                  :src="item.pic"
-                  :alt="item.name"
-                  width="350px"
-                  height="452px"
-                />
+                <img :src="item.pic" :alt="item.name" width="350px" height="452px" />
               </div>
               <div class="back">
-                <div
-                  class="teacherList__introduce p-20 d-flex justify-content-center flex-column"
-                >
-                  <div
-                    class="w-100"
-                    v-for="(items, index) in item.backInfo"
-                    :key="index"
-                  >
-                    <div
-                      class="w-100 d-flex flex-row teacherList__introduce-content"
-                    >
+                <div class="teacherList__introduce p-20 d-flex justify-content-center flex-column">
+                  <div class="w-100" v-for="(items, index) in item.backInfo" :key="index">
+                    <div class="w-100 d-flex flex-row teacherList__introduce-content">
                       <el-row class="w-100">
                         <el-col :span="7">
                           <strong>{{ items.title }}</strong>
@@ -38,14 +20,8 @@
                           <img src="@/assets/images/icon/dashLine.png" alt="" />
                         </el-col>
                         <el-col :span="13" v-if="items.title == 'MAIL'">
-                          <a
-                            :href="'mailto:' + items.summary"
-                            v-if="items.summary"
-                          >
-                            <img
-                              src="@/assets/images/icon/email.png"
-                              alt="email link"
-                            />
+                          <a :href="'mailto:' + items.summary" v-if="items.summary">
+                            <img src="@/assets/images/icon/email.png" alt="email link" />
                           </a>
                         </el-col>
                         <el-col :span="13" v-else>
@@ -54,10 +30,7 @@
                       </el-row>
                     </div>
                   </div>
-                  <div
-                    class="w-100 text-left mt-20 teacherList__introduce-goPublishInfo"
-                    @click="goPublishInfo(item)"
-                  >
+                  <div class="w-100 text-left mt-20 teacherList__introduce-goPublishInfo" @click="goPublishInfo(item)">
                     <p class="m-0">研究發表</p>
                   </div>
                 </div>
@@ -75,50 +48,28 @@
     </div>
 
     <div class="phone d-block d-mb-none pb-20">
-      <div
-        class="cardBlock py-20 px-40 d-flex align-items-center flex-row"
-        v-for="fetch in teacherList_phone"
-        :key="fetch.id"
-      >
-        <div
-          class="teacherCard d-flex align-items-center flex-row"
-          v-for="(item, index1) in fetch"
-          :key="index1"
-        >
+      <div class="cardBlock py-20 px-40 d-flex align-items-center flex-row" v-for="fetch in teacherList_phone" :key="fetch.id">
+        <div class="teacherCard d-flex align-items-center flex-row" v-for="(item, index1) in fetch" :key="index1">
           <img :src="item.pic" alt="" width="200px" v-if="showInfo[item.key]" />
           <div class="teacherCard__information" v-else>
             <div class="p-15">
-              <div
-                class="d-flex align-items-center justify-content-start flex-column"
-                v-for="(items, index2) in item.backInfo"
-                :key="index2"
-              >
-                <div
-                  class="w-100 d-flex flex-column"
-                  v-if="items.title !== 'MAIL'"
-                >
+              <div class="d-flex align-items-center justify-content-start flex-column" v-for="(items, index2) in item.backInfo" :key="index2">
+                <div class="w-100 d-flex flex-column" v-if="items.title !== 'MAIL'">
                   <strong>{{ items.title }}</strong>
                   <p class="m-0 pl-10 py-5">{{ items.summary }}</p>
                 </div>
                 <div class="w-100 d-flex flex-column" v-else>
                   <strong>MAIL</strong>
                   <a :href="'mailto:' + items.summary" v-if="items.summary">
-                    <img
-                      class="pl-10 py-5"
-                      src="@/assets/images/icon/email.png"
-                      alt="email link"
-                      width="26px"
-                    />
+                    <img class="pl-10 py-5" src="@/assets/images/icon/email.png" alt="email link" width="26px" />
                   </a>
                 </div>
               </div>
               <div class="w-100">
-                <router-link
-                  :to="{
+                <router-link :to="{
                     name: 'publishInfo',
                     params: { author: item.id },
-                  }"
-                >
+                  }">
                   研究發表
                 </router-link>
               </div>
@@ -127,10 +78,7 @@
           <div class="teacherCard__name">
             <div class="p-10 d-flex flex-row justify-content-between">
               <p class="m-0">{{ item.name }} {{ item.subName }}</p>
-              <div
-                class="d-flex align-items-center"
-                @click="showTeacherInfo(item)"
-              >
+              <div class="d-flex align-items-center" @click="showTeacherInfo(item)">
                 <img src="@/assets/images/icon/arrowRight.png" alt="" />
               </div>
             </div>
@@ -148,7 +96,7 @@ export default {
       listQuery: {
         MemberTypeId: "SYS_MEMBER_FULLTIME",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       teacherList: [],

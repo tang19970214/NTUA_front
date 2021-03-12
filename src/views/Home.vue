@@ -936,7 +936,7 @@ export default {
       const listQuery = {
         TeachTypeId: "SYS_TEACH_WORKSHOP",
         page: 1,
-        limit: 20,
+        limit: 10,
         key: undefined,
       };
       await vm.$api.award(listQuery).then((res) => {

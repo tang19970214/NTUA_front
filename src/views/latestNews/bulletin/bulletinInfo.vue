@@ -9,11 +9,7 @@
       </div>
       <div class="w-100 newsInfo">
         <div class="px-20 pt-40 pb-90">
-          <div
-            class="w-100 newsInfo__card"
-            v-for="item in bulletinMsg"
-            :key="item.id"
-          >
+          <div class="w-100 newsInfo__card" v-for="item in bulletinMsg" :key="item.id">
             <div class="w-100 d-flex flex-row">
               <div class="newsInfo__card-date">
                 <div class="px-10 py-20 d-flex flex-column align-items-center">
@@ -42,32 +38,17 @@
                 </div>
                 <!-- file -->
                 <div class="w-100 mt-10" v-if="item.attachedFile">
-                  <div
-                    class="downloadCard py-25 mb-15"
-                    v-for="(items, index1) in item.attachedFile"
-                    :key="index1"
-                  >
+                  <div class="downloadCard py-25 mb-15" v-for="(items, index1) in item.attachedFile" :key="index1">
                     <el-row class="d-flex align-items-center">
                       <el-col :span="8">
-                        <div
-                          class="w-100 d-flex align-items-center justify-content-center"
-                        >
-                          <a
-                            :href="items.files"
-                            :download="items.files"
-                            target="_blank"
-                          >
-                            <img
-                              src="@/assets/images/icon/pdf_icon.png"
-                              alt=""
-                            />
+                        <div class="w-100 d-flex align-items-center justify-content-center">
+                          <a :href="items.files" :download="items.files" target="_blank">
+                            <img src="@/assets/images/icon/pdf_icon.png" alt="" />
                           </a>
                         </div>
                       </el-col>
                       <el-col :span="16">
-                        <div
-                          class="w-100 d-flex align-items-center justify-content-center flex-column"
-                        >
+                        <div class="w-100 d-flex align-items-center justify-content-center flex-column">
                           <p class="m-0">
                             {{ items.fileName }}
                           </p>
@@ -97,7 +78,7 @@ export default {
       listQuery: {
         NewsTypeId: "SYS_NEWS_DEPARTMENT",
         page: 1,
-        limit: 20,
+        limit: 999,
         key: undefined,
       },
       bulletinMsg: [],
