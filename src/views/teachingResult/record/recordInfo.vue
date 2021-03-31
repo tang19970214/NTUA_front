@@ -245,8 +245,7 @@ export default {
     .recordCard {
       background: #2d2d2d;
       &__info {
-        // min-height: 500px;
-        // max-height: 500px;
+        min-height: 500px;
         margin-bottom: 40px;
         img {
           transition: all 0.6s;
