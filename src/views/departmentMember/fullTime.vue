@@ -3,6 +3,39 @@
     <div class="web d-none d-mb-block">
       <div class="w-100">
         <el-row>
+          <el-col class="mb-150" :span="8" v-for="item in teacherList" :key="item.id">
+            <div class="teacherCard">
+              <div class="teacherCard__left">
+                <el-image style="width: 180px; height: 230px" :src="item.pic" :alt="item.name" fit="cover"></el-image>
+                <div class="teacherCard__left--title">
+                  <p class="m-0">{{item.backInfo[0].summary}}</p>
+                  <strong>{{item.name}} {{item.subName}}</strong>
+                </div>
+              </div>
+
+              <div class="teacherCard__right">
+                <div class="teacherCard__right--info" v-for="items in item.backInfo" :key="items.id">
+                  <strong v-if="items.title == '授課' || items.title == '聯繫我'">{{items.title}}</strong>
+                  <p class="m-0" v-if="items.title == '授課' || items.title == '聯繫我'">{{items.summary}}</p>
+                </div>
+
+                <div class="teacherCard__right--contact">
+                  <div class="sendMail">
+                    <a :href="'mailto:' + item.backInfo[3].summary" v-if="item.backInfo[3].summary">
+                      <img src="@/assets/images/icon/baseline-mail.png" alt="email link" width="35px" />
+                    </a>
+                  </div>
+                  <div class="goPublish cur-pointer" @click="goPublishInfo(item)">
+                    <strong>研究發表</strong>
+                    <img src="@/assets/images/icon/arrowRight.png" alt="前往研究發表" width="15px" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+
+        <!-- <el-row>
           <el-col class="mb-150 d-flex justify-content-start" :span="8" v-for="(item, index) in teacherList" :key="'TL_' + index">
             <div class="creation">
               <div class="front">
@@ -43,14 +76,14 @@
               </div>
             </div>
           </el-col>
-        </el-row>
+        </el-row> -->
       </div>
     </div>
 
     <div class="phone d-block d-mb-none pb-20">
       <div class="cardBlock py-20 px-40 d-flex align-items-center flex-row" v-for="fetch in teacherList_phone" :key="fetch.id">
         <div class="teacherCard d-flex align-items-center flex-row" v-for="(item, index1) in fetch" :key="index1">
-          <img :src="item.pic" alt="" width="200px" v-if="showInfo[item.key]" />
+          <el-image style="width: 200px; height: 257px" :src="item.pic" :alt="item.name" fit="cover" v-if="showInfo[item.key]"></el-image>
           <div class="teacherCard__information" v-else>
             <div class="p-15">
               <div class="d-flex align-items-center justify-content-start flex-column" v-for="(items, index2) in item.backInfo" :key="index2">
@@ -169,6 +202,93 @@ export default {
     margin-left: 120px;
     padding-left: 80px;
     background: #ffffff;
+
+    .teacherCard {
+      width: 100%;
+      height: 300px;
+      padding: 0 40px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+
+      &__left {
+        width: 180px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &--title {
+          width: 100%;
+          padding: 16px;
+          box-sizing: border-box;
+
+          p {
+            font-weight: 500;
+            font-size: 18px;
+            color: #b0b0b0;
+          }
+
+          strong {
+            font-size: 24px;
+            color: #ad9d72;
+          }
+        }
+      }
+
+      &__right {
+        position: relative;
+        width: calc(100% - 180px);
+        height: 100%;
+        background: #c4c4c4;
+
+        &--info {
+          width: 100%;
+          padding: 8px;
+          box-sizing: border-box;
+
+          strong {
+            font-size: 20px;
+            color: #2d2d2d;
+          }
+
+          p {
+            color: #2d2d2d;
+          }
+        }
+
+        &--contact {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          background: #52505a;
+
+          .sendMail {
+            padding: 8px;
+            background: #77767b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .goPublish {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            strong {
+              padding-right: 16px;
+              font-size: 20px;
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+
     .creation:hover {
       transform: rotateY(180deg);
     }
@@ -193,70 +313,70 @@ export default {
       transform: rotateY(-180deg);
     }
 
-    .teacherList {
-      height: 452px;
-      margin-bottom: 200px;
-      &__introduce {
-        width: 310px;
-        height: 410px;
-        border: 1px solid #c4c4c4;
-        &-content {
-          strong {
-            font-weight: bold;
-            font-size: 24px;
-            line-height: 210%;
-            letter-spacing: 0.25em;
-            color: #2d2d2d;
-          }
-          img {
-            transform: translateY(10px);
-          }
-          p {
-            font-size: 16px;
-            line-height: 250%;
-            letter-spacing: 0.1em;
-            color: #2d2d2d;
-            word-wrap: break-word;
-            overflow: hidden;
-            -webkit-line-clamp: 4;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-          }
-        }
-        &-goPublishInfo {
-          color: #ceb87f;
-          font-weight: bold;
-          font-size: 24px;
-          text-decoration: underline;
-          transition: all 0.6s;
-          cursor: pointer;
-          &:hover {
-            letter-spacing: 0.2rem;
-          }
-        }
-      }
+    // .teacherList {
+    //   height: 452px;
+    //   margin-bottom: 200px;
+    //   &__introduce {
+    //     width: 310px;
+    //     height: 410px;
+    //     border: 1px solid #c4c4c4;
+    //     &-content {
+    //       strong {
+    //         font-weight: bold;
+    //         font-size: 24px;
+    //         line-height: 210%;
+    //         letter-spacing: 0.25em;
+    //         color: #2d2d2d;
+    //       }
+    //       img {
+    //         transform: translateY(10px);
+    //       }
+    //       p {
+    //         font-size: 16px;
+    //         line-height: 250%;
+    //         letter-spacing: 0.1em;
+    //         color: #2d2d2d;
+    //         word-wrap: break-word;
+    //         overflow: hidden;
+    //         -webkit-line-clamp: 4;
+    //         text-overflow: ellipsis;
+    //         display: -webkit-box;
+    //         -webkit-box-orient: vertical;
+    //       }
+    //     }
+    //     &-goPublishInfo {
+    //       color: #ceb87f;
+    //       font-weight: bold;
+    //       font-size: 24px;
+    //       text-decoration: underline;
+    //       transition: all 0.6s;
+    //       cursor: pointer;
+    //       &:hover {
+    //         letter-spacing: 0.2rem;
+    //       }
+    //     }
+    //   }
 
-      &__rightBar {
-        height: 452px;
-        background: #c4c4c4;
-        writing-mode: vertical-lr;
-        background: #c4c4c4;
-        font-size: 28px;
-        color: #2d2d2d;
-        p {
-          letter-spacing: 0.6em;
-          &:first-child {
-            min-height: 150px;
-          }
-          &:last-child {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-          }
-        }
-      }
-    }
+    //   &__rightBar {
+    //     height: 452px;
+    //     background: #c4c4c4;
+    //     writing-mode: vertical-lr;
+    //     background: #c4c4c4;
+    //     font-size: 28px;
+    //     color: #2d2d2d;
+    //     p {
+    //       letter-spacing: 0.6em;
+    //       &:first-child {
+    //         min-height: 150px;
+    //       }
+    //       &:last-child {
+    //         overflow: hidden;
+    //         white-space: nowrap;
+    //         text-overflow: ellipsis;
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   .phone {
