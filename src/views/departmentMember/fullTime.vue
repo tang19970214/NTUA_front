@@ -200,7 +200,7 @@ export default {
   .web {
     padding-top: 0;
     margin-left: 120px;
-    padding-left: 80px;
+    padding-left: 20px;
     background: #ffffff;
 
     .teacherCard {
@@ -289,7 +289,7 @@ export default {
       }
     }
 
-    .creation:hover {
+    /* .creation:hover {
       transform: rotateY(180deg);
     }
     .creation {
@@ -311,7 +311,7 @@ export default {
     .back {
       z-index: 999;
       transform: rotateY(-180deg);
-    }
+    } */
 
     // .teacherList {
     //   height: 452px;
@@ -387,6 +387,7 @@ export default {
       .teacherCard {
         min-width: 290px;
         max-width: 290px;
+
         &__information {
           width: 200px;
           height: 257px;
@@ -413,6 +414,7 @@ export default {
             color: #ceb87f;
           }
         }
+
         &__name {
           height: 257px;
           background: #c4c4c4;

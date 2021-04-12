@@ -26,8 +26,8 @@
                     </a>
                   </div>
                   <div class="goPublish cur-pointer" @click="goPublishInfo(item)">
-                    <strong>研究發表</strong>
-                    <img src="@/assets/images/icon/arrowRight.png" alt="前往研究發表" width="15px" />
+                    <strong>工作內容</strong>
+                    <img src="@/assets/images/icon/arrowRight.png" alt="前往工作內容" width="15px" />
                   </div>
                 </div>
               </div>
@@ -77,10 +77,10 @@
     <div class="phone d-block d-mb-none pb-20">
       <div class="cardBlock py-20 px-40 d-flex align-items-center flex-row" v-for="fetch in teacherList_phone" :key="fetch.id">
         <div class="teacherCard d-flex align-items-center flex-row" v-for="(item, index1) in fetch" :key="index1">
-          <img :src="item.pic" alt="" width="200px" v-if="showInfo[item.key]" />
+          <el-image style="width: 200px; height: 257px" :src="item.pic" :alt="item.name" fit="cover" v-if="showInfo[item.key]"></el-image>
           <div class="teacherCard__information" v-else>
             <div class="p-15">
-              <div class="d-flex align-items-center justify-content-start flex-column" v-for="(items, index2) in item.info" :key="index2">
+              <div class="d-flex align-items-center justify-content-start flex-column" v-for="(items, index2) in item.backInfo" :key="index2">
                 <div class="w-100 d-flex flex-column" v-if="items.title !== 'MAIL'">
                   <strong>{{ items.title }}</strong>
                   <p class="m-0 pl-10 py-5">{{ items.summary }}</p>
@@ -91,14 +91,14 @@
                     <img class="pl-10 py-5" src="@/assets/images/icon/email.png" alt="email link" width="26px" />
                   </a>
                 </div>
-                <div class="w-100 d-flex flex-column">
-                  <router-link :to="{
-                      name: 'publishInfo',
-                      params: { author: items.author },
-                    }">
-                    研究發表
-                  </router-link>
-                </div>
+              </div>
+              <div class="w-100">
+                <router-link :to="{
+                    name: 'publishInfo',
+                    params: { author: item.id },
+                  }">
+                  工作內容
+                </router-link>
               </div>
             </div>
           </div>
@@ -194,7 +194,7 @@ export default {
   .web {
     padding-top: 0;
     margin-left: 120px;
-    padding-left: 80px;
+    padding-left: 20px;
     background: #ffffff;
 
     .teacherCard {
@@ -237,7 +237,7 @@ export default {
 
         &--info {
           width: 100%;
-          padding: 8px;
+          padding: 8px 16px;
           box-sizing: border-box;
 
           strong {
@@ -375,11 +375,10 @@ export default {
           width: 200px;
           height: 257px;
           background: white;
+          font-size: 14px;
+          line-height: 150%;
+          letter-spacing: 0.25em;
           strong {
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 150%;
-            letter-spacing: 0.25em;
             color: #2d2d2d;
           }
           p {
@@ -388,10 +387,14 @@ export default {
             border-left: 2px solid #c4c4c4;
             color: #2d2d2d;
             overflow: hidden;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
+          }
+          a {
+            font-weight: bold;
+            color: #ceb87f;
           }
         }
         &__name {

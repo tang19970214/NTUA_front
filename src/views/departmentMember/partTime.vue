@@ -80,7 +80,7 @@
     <div class="phone d-block d-mb-none pb-20">
       <div class="cardBlock py-20 px-40 d-flex align-items-center flex-row" v-for="fetch in teacherList_phone" :key="fetch.id">
         <div class="teacherCard d-flex align-items-center flex-row" v-for="(item, index1) in fetch" :key="index1">
-          <img :src="item.pic" alt="" width="200px" height="257px" v-if="showInfo[item.key]" />
+          <el-image style="width: 200px; height: 257px" :src="item.pic" :alt="item.name" fit="cover" v-if="showInfo[item.key]"></el-image>
           <div class="teacherCard__information" v-else>
             <div class="p-15">
               <div class="d-flex align-items-center justify-content-start flex-column" v-for="(items, index2) in item.backInfo" :key="index2">
@@ -94,17 +94,18 @@
                     <img class="pl-10 py-5" src="@/assets/images/icon/email.png" alt="email link" width="26px" />
                   </a>
                 </div>
-                <div class="w-100 d-flex flex-column">
-                  <router-link :to="{
-                      name: 'publishInfo',
-                      params: { author: items.author },
-                    }">
-                    研究發表
-                  </router-link>
-                </div>
+              </div>
+              <div class="w-100">
+                <router-link :to="{
+                    name: 'publishInfo',
+                    params: { author: item.id },
+                  }">
+                  研究發表
+                </router-link>
               </div>
             </div>
           </div>
+
           <div class="teacherCard__name">
             <div class="p-10 d-flex flex-row justify-content-between">
               <p class="m-0">{{ item.name }} {{ item.subName }}</p>
@@ -197,7 +198,7 @@ export default {
   .web {
     padding-top: 0;
     margin-left: 120px;
-    padding-left: 80px;
+    padding-left: 20px;
     background: #ffffff;
 
     .teacherCard {
@@ -377,11 +378,10 @@ export default {
           width: 200px;
           height: 257px;
           background: white;
+          font-size: 14px;
+          line-height: 150%;
+          letter-spacing: 0.25em;
           strong {
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 150%;
-            letter-spacing: 0.25em;
             color: #2d2d2d;
           }
           p {
@@ -390,10 +390,14 @@ export default {
             border-left: 2px solid #c4c4c4;
             color: #2d2d2d;
             overflow: hidden;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
+          }
+          a {
+            font-weight: bold;
+            color: #ceb87f;
           }
         }
         &__name {
