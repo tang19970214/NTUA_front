@@ -12,7 +12,7 @@
           <div class="py-80 px-60 d-flex align-items-start flex-row">
 
             <div class="d-flex align-items-center justify-content-center flex-column">
-              <img :src="teacherList.pic" :alt="teacherList.name" height="300px" />
+              <el-image style="width: 240px; height: 300px" :src="teacherList.pic" :alt="teacherList.name" fit="cover"></el-image>
               <div class="d-flex align-items-start flex-row mt-20">
                 <div class="px-15 contactInfo d-flex align-items-center flex-column">
                   <a class="mb-10" :href="'mailto:'+teacherList.email" target="_blank">
@@ -101,7 +101,7 @@
               </div>
             </div>
 
-            <div class="profile d-flex flex-column justify-content-between ml-40">
+            <div class="profile d-flex flex-column justify-content-around ml-40">
               <div class="d-flex flex-row">
                 <div class="profile__title profile__title-left text-right pl-20">
                   類別
@@ -111,7 +111,7 @@
                   {{ teacherList.memberTypeName }}
                 </div>
               </div>
-              <div class="d-flex flex-row">
+              <div class="d-flex flex-row" v-if="!$route.query.type">
                 <div class="profile__title profile__title-left text-right pl-20">
                   職稱
                 </div>
@@ -122,14 +122,14 @@
               </div>
               <div class="d-flex flex-row">
                 <div class="profile__title profile__title-left text-right pl-20">
-                  授課領域
+                  {{ !$route.query.type ? "授課領域" : "工作內容" }}
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
                   {{ teacherList.teachClass }}
                 </div>
               </div>
-              <div class="d-flex flex-row">
+              <div class="d-flex flex-row" v-if="!$route.query.type">
                 <div class="profile__title profile__title-left text-right pl-20">
                   研究專長
                 </div>
@@ -142,168 +142,170 @@
           </div>
         </div>
 
-        <div class="text-left pl-60">
+        <div class="text-left pl-60" v-if="!$route.query.type">
           <p class="Txt-title">研究發表</p>
         </div>
 
         <!-- 研究發表 -->
-        <div class="publishInfoCard" v-if="getInfo">
-          <el-collapse v-model="activeNames">
-            <el-collapse-item :title="key" :name="key" v-for="(item, key) in publishData" :key="item.id">
-              <div class="publishInfoCard__content">
-                <!-- 研究發表 -->
-                <div v-if="key == '研究發表'">
-                  <el-row>
-                    <el-col class="publishInfoCard__content--leftBlock pb-50" :span="5">
-                      <ul class="m-0">
-                        <li class="py-5" v-for="(items, index__1) in item" :key="'PB1__' + index__1">
-                          <p class="m-0 d-inline-flex" :class="{
+        <div v-if="!$route.query.type">
+          <div class="publishInfoCard" v-if="getInfo">
+            <el-collapse v-model="activeNames">
+              <el-collapse-item :title="key" :name="key" v-for="(item, key) in publishData" :key="item.id">
+                <div class="publishInfoCard__content">
+                  <!-- 研究發表 -->
+                  <div v-if="key == '研究發表'">
+                    <el-row>
+                      <el-col class="publishInfoCard__content--leftBlock pb-50" :span="5">
+                        <ul class="m-0">
+                          <li class="py-5" v-for="(items, index__1) in item" :key="'PB1__' + index__1">
+                            <p class="m-0 d-inline-flex" :class="{
                               activeColor: chooseMenuName == items.title,
                             }" @click="openPublishInfo(items, index__1)">
-                            {{ items.title }}
-                          </p>
-                        </li>
-                      </ul>
-                    </el-col>
-                    <el-col class="" :span="19">
-                      <div class="mr-120 ml-30 publishInfoCard__content--rightBlock">
-                        <div class="p-30">
-                          <vue-editor v-model="item[chooseInfoKey].contents" :disabled="true" />
+                              {{ items.title }}
+                            </p>
+                          </li>
+                        </ul>
+                      </el-col>
+                      <el-col class="" :span="19">
+                        <div class="mr-120 ml-30 publishInfoCard__content--rightBlock">
+                          <div class="p-30">
+                            <vue-editor v-model="item[chooseInfoKey].contents" :disabled="true" />
+                          </div>
                         </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                  <!-- 研究計畫 產學合作計畫 -->
+                  <div class="publishInfoCard__content--table" v-else-if="key == '研究計畫' || key == '產學合作計畫'">
+                    <div class="px-50">
+                      <div class="w-100 header">
+                        <el-row class="py-40 d-flex align-items-center text-center">
+                          <el-col :span="3">年度</el-col>
+                          <el-col :span="5">計畫名稱</el-col>
+                          <el-col :span="3">參與人</el-col>
+                          <el-col :span="3">擔任之工作</el-col>
+                          <el-col :span="3">計畫時間</el-col>
+                          <el-col :span="3">補助/委託機構</el-col>
+                          <el-col :span="2">附件檔案/參考連結</el-col>
+                          <el-col :span="2">備註</el-col>
+                        </el-row>
                       </div>
-                    </el-col>
-                  </el-row>
-                </div>
-                <!-- 研究計畫 產學合作計畫 -->
-                <div class="publishInfoCard__content--table" v-else-if="key == '研究計畫' || key == '產學合作計畫'">
-                  <div class="px-50">
-                    <div class="w-100 header">
-                      <el-row class="py-40 d-flex align-items-center text-center">
-                        <el-col :span="3">年度</el-col>
-                        <el-col :span="5">計畫名稱</el-col>
-                        <el-col :span="3">參與人</el-col>
-                        <el-col :span="3">擔任之工作</el-col>
-                        <el-col :span="3">計畫時間</el-col>
-                        <el-col :span="3">補助/委託機構</el-col>
-                        <el-col :span="2">附件檔案/參考連結</el-col>
-                        <el-col :span="2">備註</el-col>
-                      </el-row>
-                    </div>
-                    <div class="w-100 body">
-                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
-                        <el-col :span="3">{{ items.year }}</el-col>
-                        <el-col :span="5">{{ items.title }}</el-col>
-                        <el-col :span="3">{{ items.joinMember }}</el-col>
-                        <el-col :span="3">{{ items.jobTitle }}</el-col>
-                        <el-col :span="3">
-                          <div class="w-100 d-flex flex-column align-items-center justify-content-center">
-                            <p class="m-0">
-                              {{ items.startDate | moment("YYYY-MM-DD") }}
-                            </p>
+                      <div class="w-100 body">
+                        <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
+                          <el-col :span="3">{{ items.year }}</el-col>
+                          <el-col :span="5">{{ items.title }}</el-col>
+                          <el-col :span="3">{{ items.joinMember }}</el-col>
+                          <el-col :span="3">{{ items.jobTitle }}</el-col>
+                          <el-col :span="3">
+                            <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+                              <p class="m-0">
+                                {{ items.startDate | moment("YYYY-MM-DD") }}
+                              </p>
 
-                            <p class="m-0">
-                              {{ items.endDate | moment("YYYY-MM-DD") }}
-                            </p>
-                          </div>
-                        </el-col>
-                        <el-col :span="3">{{ items.mechanismName }}</el-col>
-                        <el-col :span="2">{{ items.annexFile }}/{{ items.links }}</el-col>
-                        <el-col :span="2">{{ items.remark }}</el-col>
-                      </el-row>
+                              <p class="m-0">
+                                {{ items.endDate | moment("YYYY-MM-DD") }}
+                              </p>
+                            </div>
+                          </el-col>
+                          <el-col :span="3">{{ items.mechanismName }}</el-col>
+                          <el-col :span="2">{{ items.annexFile }}/{{ items.links }}</el-col>
+                          <el-col :span="2">{{ items.remark }}</el-col>
+                        </el-row>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 校內榮譽 校外榮譽 -->
+                  <div class="publishInfoCard__content--table" v-else-if="key == '校內榮譽' || key == '校外榮譽'">
+                    <div class="px-50">
+                      <div class="w-100 header">
+                        <el-row class="py-40 d-flex align-items-center text-center">
+                          <el-col :span="3">得獎年度</el-col>
+                          <el-col class="px-80 text-left">獎項名稱</el-col>
+                          <el-col class="text-left" :span="5">頒獎單位</el-col>
+                        </el-row>
+                      </div>
+                      <div class="w-100 body">
+                        <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
+                          <el-col :span="3">{{ items.year }}</el-col>
+                          <el-col class="px-80 text-left">
+                            {{ items.title }}
+                          </el-col>
+                          <el-col class="text-left" :span="5">
+                            {{ items.mechanismName }}
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </div>
+                  </div>
+                  <!--學歷  -->
+                  <div class="publishInfoCard__content--table" v-else-if="key == '學歷'">
+                    <div class="px-50">
+                      <div class="w-100 header">
+                        <el-row class="py-40 d-flex align-items-center text-center">
+                          <el-col :span="7">學校名稱</el-col>
+                          <el-col :span="3">國別</el-col>
+                          <!-- <el-col :span="4">擔任職務</el-col> -->
+                          <el-col :span="8">系所</el-col>
+                          <el-col :span="6">起迄年月</el-col>
+                        </el-row>
+                      </div>
+                      <div class="w-100 body">
+                        <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
+                          <el-col :span="7">{{ items.title }}</el-col>
+                          <el-col :span="3"> {{ items.mechanismName }}</el-col>
+                          <el-col :span="8">{{ items.jobTitle }}</el-col>
+                          <!-- <el-col :span="5">{{ items.contents }}</el-col> -->
+                          <el-col :span="6">
+                            <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+                              <p class="m-0">
+                                {{ items.startDate | moment("YYYY-MM-DD") }}
+                              </p>
+                              <p class="m-0">
+                                {{ items.endDate | moment("YYYY-MM-DD") }}
+                              </p>
+                            </div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 經歷 -->
+                  <div class="publishInfoCard__content--table" v-else-if="key == '經歷'">
+                    <div class="px-50">
+                      <div class="w-100 header">
+                        <el-row class="py-40 d-flex align-items-center text-center">
+                          <el-col :span="6">服務機關</el-col>
+                          <el-col :span="6">部門/系所</el-col>
+                          <el-col :span="6">擔任職務</el-col>
+                          <el-col :span="6">起迄年月</el-col>
+                        </el-row>
+                      </div>
+                      <div class="w-100 body">
+                        <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
+                          <el-col :span="6">{{ items.title }}</el-col>
+                          <el-col :span="6"> {{ items.mechanismName }}</el-col>
+                          <el-col :span="6">{{ items.jobTitle }}</el-col>
+                          <el-col :span="6">
+                            <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+                              <p class="m-0">
+                                {{ items.startDate | moment("YYYY-MM-DD") }}
+                              </p>
+                              <p class="m-0">
+                                {{ items.endDate | moment("YYYY-MM-DD") }}
+                              </p>
+                            </div>
+                          </el-col>
+                        </el-row>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <!-- 校內榮譽 校外榮譽 -->
-                <div class="publishInfoCard__content--table" v-else-if="key == '校內榮譽' || key == '校外榮譽'">
-                  <div class="px-50">
-                    <div class="w-100 header">
-                      <el-row class="py-40 d-flex align-items-center text-center">
-                        <el-col :span="3">得獎年度</el-col>
-                        <el-col class="px-80 text-left">獎項名稱</el-col>
-                        <el-col class="text-left" :span="5">頒獎單位</el-col>
-                      </el-row>
-                    </div>
-                    <div class="w-100 body">
-                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
-                        <el-col :span="3">{{ items.year }}</el-col>
-                        <el-col class="px-80 text-left">
-                          {{ items.title }}
-                        </el-col>
-                        <el-col class="text-left" :span="5">
-                          {{ items.mechanismName }}
-                        </el-col>
-                      </el-row>
-                    </div>
-                  </div>
-                </div>
-                <!--學歷  -->
-                <div class="publishInfoCard__content--table" v-else-if="key == '學歷'">
-                  <div class="px-50">
-                    <div class="w-100 header">
-                      <el-row class="py-40 d-flex align-items-center text-center">
-                        <el-col :span="7">學校名稱</el-col>
-                        <el-col :span="3">國別</el-col>
-                        <!-- <el-col :span="4">擔任職務</el-col> -->
-                        <el-col :span="8">系所</el-col>
-                        <el-col :span="6">起迄年月</el-col>
-                      </el-row>
-                    </div>
-                    <div class="w-100 body">
-                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
-                        <el-col :span="7">{{ items.title }}</el-col>
-                        <el-col :span="3"> {{ items.mechanismName }}</el-col>
-                        <el-col :span="8">{{ items.jobTitle }}</el-col>
-                        <!-- <el-col :span="5">{{ items.contents }}</el-col> -->
-                        <el-col :span="6">
-                          <div class="w-100 d-flex flex-column align-items-center justify-content-center">
-                            <p class="m-0">
-                              {{ items.startDate | moment("YYYY-MM-DD") }}
-                            </p>
-                            <p class="m-0">
-                              {{ items.endDate | moment("YYYY-MM-DD") }}
-                            </p>
-                          </div>
-                        </el-col>
-                      </el-row>
-                    </div>
-                  </div>
-                </div>
-                <!-- 經歷 -->
-                <div class="publishInfoCard__content--table" v-else-if="key == '經歷'">
-                  <div class="px-50">
-                    <div class="w-100 header">
-                      <el-row class="py-40 d-flex align-items-center text-center">
-                        <el-col :span="6">服務機關</el-col>
-                        <el-col :span="6">部門/系所</el-col>
-                        <el-col :span="6">擔任職務</el-col>
-                        <el-col :span="6">起迄年月</el-col>
-                      </el-row>
-                    </div>
-                    <div class="w-100 body">
-                      <el-row class="py-40 d-flex align-items-center text-center" v-for="(items, index__2) in item" :key="'PB2__' + index__2">
-                        <el-col :span="6">{{ items.title }}</el-col>
-                        <el-col :span="6"> {{ items.mechanismName }}</el-col>
-                        <el-col :span="6">{{ items.jobTitle }}</el-col>
-                        <el-col :span="6">
-                          <div class="w-100 d-flex flex-column align-items-center justify-content-center">
-                            <p class="m-0">
-                              {{ items.startDate | moment("YYYY-MM-DD") }}
-                            </p>
-                            <p class="m-0">
-                              {{ items.endDate | moment("YYYY-MM-DD") }}
-                            </p>
-                          </div>
-                        </el-col>
-                      </el-row>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
-        </div>
-        <div class="p-60 text-center publishInfoCard-noData" v-else>
-          查無數據
+              </el-collapse-item>
+            </el-collapse>
+          </div>
+          <div class="p-60 text-center publishInfoCard-noData" v-else>
+            查無數據
+          </div>
         </div>
 
         <div class="w-100">

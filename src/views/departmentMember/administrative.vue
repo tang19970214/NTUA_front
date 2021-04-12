@@ -133,7 +133,11 @@ export default {
   },
   methods: {
     goPublishInfo(data) {
-      this.$router.push({ name: "publishInfo", params: { author: data.id } });
+      this.$router.push({
+        name: "publishInfo",
+        params: { author: data.id },
+        query: { type: "行政" },
+      });
     },
     showTeacherInfo(data) {
       this.showInfo[data?.key] = !this.showInfo[data?.key];
