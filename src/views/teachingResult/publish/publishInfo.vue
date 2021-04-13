@@ -45,10 +45,10 @@
             </div>
 
             <!-- 左列 -->
-            <div class="profile d-flex flex-column justify-content-start ml-40">
+            <div class="profile d-flex flex-column justify-content-around ml-40">
               <!-- 姓名 -->
-              <div class="d-flex flex-row pb-16">
-                <div class="profile__title profile__title-left text-right pl-20">
+              <div class="d-flex flex-row">
+                <div class="profile__title profile__title-left pl-20">
                   姓名
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -57,8 +57,8 @@
                 </div>
               </div>
               <!-- Office_Hour -->
-              <div class="d-flex flex-row pb-16">
-                <div class="profile__title profile__title-left text-right pl-20">
+              <div class="d-flex flex-row" v-if="!$route.query.type">
+                <div class="profile__title profile__title-left pl-20">
                   Office_Hour
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -67,8 +67,8 @@
                 </div>
               </div>
               <!-- 聯絡電話 -->
-              <div class="d-flex flex-row pb-16">
-                <div class="profile__title profile__title-left text-right pl-20">
+              <div class="d-flex flex-row">
+                <div class="profile__title profile__title-left pl-20">
                   聯絡電話
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -77,8 +77,8 @@
                 </div>
               </div>
               <!-- 傳真 -->
-              <div class="d-flex flex-row pb-16">
-                <div class="profile__title profile__title-left text-right pl-20">
+              <div class="d-flex flex-row6">
+                <div class="profile__title profile__title-left pl-20">
                   傳真
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px;" />
@@ -87,8 +87,8 @@
                 </div>
               </div>
               <!-- 聯絡地址 -->
-              <div class="d-flex flex-row pb-16">
-                <div class="profile__title profile__title-left text-right pl-20">
+              <div class="d-flex flex-row">
+                <div class="profile__title profile__title-left pl-20">
                   聯絡地址
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -98,7 +98,7 @@
               </div>
               <!-- 服務單位_部門 -->
               <div class="d-flex flex-row">
-                <div class="profile__title profile__title-left text-right pl-20">
+                <div class="profile__title profile__title-left pl-20">
                   服務單位_部門
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -112,7 +112,7 @@
             <div class="profile d-flex flex-column justify-content-start ml-40">
               <!-- 類別 -->
               <div class="d-flex flex-row pb-16">
-                <div class="profile__title profile__title-left text-right pl-20">
+                <div class="profile__title profile__title--left pl-20">
                   類別
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -122,7 +122,7 @@
               </div>
               <!-- 職稱 -->
               <div class="d-flex flex-row pb-16" v-if="!$route.query.type">
-                <div class="profile__title profile__title-left text-right pl-20">
+                <div class="profile__title profile__title--left pl-20">
                   職稱
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -132,7 +132,7 @@
               </div>
               <!-- 授課領域 | 工作內容 -->
               <div class="d-flex flex-row pb-16">
-                <div class="profile__title profile__title-left text-right pl-20">
+                <div class="profile__title profile__title--left pl-20">
                   {{ !$route.query.type ? "授課領域" : "工作內容" }}
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -142,7 +142,7 @@
               </div>
               <!-- 研究專長 -->
               <div class="d-flex flex-row" v-if="!$route.query.type">
-                <div class="profile__title profile__title-left text-right pl-20">
+                <div class="profile__title profile__title--left pl-20">
                   研究專長
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
@@ -386,7 +386,7 @@
             </el-col>
           </el-row>
           <!-- Office_Hour -->
-          <el-row class="py-5">
+          <el-row class="py-5" v-if="!$route.query.type">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
                 <strong>Office_Hour</strong>
@@ -796,6 +796,10 @@ export default {
             &-left {
               min-width: 160px;
               max-width: 160px;
+            }
+            &--left {
+              min-width: 110px;
+              max-width: 110px;
             }
             &-right {
               min-width: 110px;

@@ -96,12 +96,7 @@
                 </div>
               </div>
               <div class="w-100">
-                <router-link :to="{
-                    name: 'publishInfo',
-                    params: { author: item.id },
-                  }">
-                  研究發表
-                </router-link>
+                <a @click="goPublishInfo(item)">研究發表</a>
               </div>
             </div>
           </div>
@@ -137,7 +132,11 @@ export default {
   },
   methods: {
     goPublishInfo(data) {
-      this.$router.push({ name: "publishInfo", params: { author: data.id } });
+      this.$router.push({
+        name: "publishInfo",
+        params: { author: data.id },
+        query: { type: "兼任" },
+      });
     },
     showTeacherInfo(data) {
       this.showInfo[data?.key] = !this.showInfo[data?.key];
