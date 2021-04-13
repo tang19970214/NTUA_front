@@ -28,14 +28,14 @@
                   <p class="m-0">個人網站</p>
                 </div>
 
-                <div class="px-15 contactInfo d-flex align-items-center flex-column" v-if="!$route.query.type">
+                <div class="px-15 contactInfo d-flex align-items-center flex-column" v-if="$route.query.type !== '行政'">
                   <a class="mb-10" :href="teacherList.researchUrl" target="_blank">
                     <img src="@/assets/images/icon/連結-icon.png" alt="個人著作" />
                   </a>
                   <p class="m-0">個人著作</p>
                 </div>
 
-                <div class="px-15 contactInfo d-flex align-items-center flex-column" v-if="!$route.query.type">
+                <div class="px-15 contactInfo d-flex align-items-center flex-column" v-if="$route.query.type !== '行政'">
                   <a class="mb-10" :href="teacherList.bookUrl" target="_blank">
                     <img src="@/assets/images/icon/連結-icon.png" alt="個人研究" />
                   </a>
@@ -121,7 +121,7 @@
                 </div>
               </div>
               <!-- 職稱 -->
-              <div class="d-flex flex-row pb-16" v-if="!$route.query.type">
+              <div class="d-flex flex-row pb-16" v-if="$route.query.type !== '行政'">
                 <div class="profile__title profile__title--left pl-20">
                   職稱
                 </div>
@@ -133,7 +133,7 @@
               <!-- 授課領域 | 工作內容 -->
               <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title--left pl-20">
-                  {{ !$route.query.type ? "授課領域" : "工作內容" }}
+                  {{ $route.query.type !== '行政' ? "授課領域" : "工作內容" }}
                 </div>
                 <img class="pt-12 px-10" src="@/assets/images/icon/dashLine.png" alt="" height="1px" style="min-width: 40px; max-width: 40px" />
                 <div class="profile__context profile__context-left">
@@ -141,7 +141,7 @@
                 </div>
               </div>
               <!-- 研究專長 -->
-              <div class="d-flex flex-row" v-if="!$route.query.type">
+              <div class="d-flex flex-row" v-if="$route.query.type !== '行政'">
                 <div class="profile__title profile__title--left pl-20">
                   研究專長
                 </div>
@@ -155,10 +155,10 @@
         </div>
 
         <!-- 研究發表 -->
-        <div class="text-left pl-60" v-if="!$route.query.type">
+        <div class="text-left pl-60" v-if="$route.query.type !== '行政'">
           <p class="Txt-title">研究發表</p>
         </div>
-        <div v-if="!$route.query.type">
+        <div v-if="$route.query.type !== '行政'">
           <div class="publishInfoCard" v-if="getInfo">
             <el-collapse v-model="activeNames">
               <el-collapse-item :title="key" :name="key" v-for="(item, key) in publishData" :key="item.id">
@@ -353,11 +353,11 @@
                 <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人網站</p>
               </div>
-              <div class="d-flex flex-column align-items-center" v-if="!$route.query.type">
+              <div class="d-flex flex-column align-items-center" v-if="$route.query.type !== '行政'">
                 <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人著作</p>
               </div>
-              <div class="d-flex flex-column align-items-center" v-if="!$route.query.type">
+              <div class="d-flex flex-column align-items-center" v-if="$route.query.type !== '行政'">
                 <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人研究</p>
               </div>
@@ -498,7 +498,7 @@
             </el-col>
           </el-row>
           <!-- 職稱 -->
-          <el-row class="py-5" v-if="!$route.query.type">
+          <el-row class="py-5" v-if="$route.query.type !== '行政'">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
                 <strong>職稱</strong>
@@ -519,7 +519,7 @@
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
-                <strong>{{ !$route.query.type ? "授課領域" : "工作內容" }}</strong>
+                <strong>{{ $route.query.type !== '行政' ? "授課領域" : "工作內容" }}</strong>
               </div>
             </el-col>
             <el-col :span="4">
@@ -534,7 +534,7 @@
             </el-col>
           </el-row>
           <!-- 研究專長 -->
-          <el-row class="py-5" v-if="!$route.query.type">
+          <el-row class="py-5" v-if="$route.query.type !== '行政'">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
                 <strong>研究專長</strong>
@@ -555,7 +555,7 @@
       </div>
 
       <!-- 研究發表 -->
-      <div class="ml-20 mt-50" v-if="!$route.query.type">
+      <div class="ml-20 mt-50" v-if="$route.query.type !== '行政'">
         <div class="publishInfoCard" v-if="getInfo">
           <el-collapse v-model="activeNames">
             <el-collapse-item :title="key" :name="key" v-for="(item, key) in publishData" :key="item.id">
