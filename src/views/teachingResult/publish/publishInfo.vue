@@ -28,14 +28,14 @@
                   <p class="m-0">個人網站</p>
                 </div>
 
-                <div class="px-15 contactInfo d-flex align-items-center flex-column">
+                <div class="px-15 contactInfo d-flex align-items-center flex-column" v-if="!$route.query.type">
                   <a class="mb-10" :href="teacherList.researchUrl" target="_blank">
                     <img src="@/assets/images/icon/連結-icon.png" alt="個人著作" />
                   </a>
                   <p class="m-0">個人著作</p>
                 </div>
 
-                <div class="px-15 contactInfo d-flex align-items-center flex-column">
+                <div class="px-15 contactInfo d-flex align-items-center flex-column" v-if="!$route.query.type">
                   <a class="mb-10" :href="teacherList.bookUrl" target="_blank">
                     <img src="@/assets/images/icon/連結-icon.png" alt="個人研究" />
                   </a>
@@ -44,8 +44,10 @@
               </div>
             </div>
 
-            <div class="profile d-flex flex-column justify-content-between ml-40">
-              <div class="d-flex flex-row">
+            <!-- 左列 -->
+            <div class="profile d-flex flex-column justify-content-start ml-40">
+              <!-- 姓名 -->
+              <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title-left text-right pl-20">
                   姓名
                 </div>
@@ -54,7 +56,8 @@
                   {{ teacherList.name }}
                 </div>
               </div>
-              <div class="d-flex flex-row">
+              <!-- Office_Hour -->
+              <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title-left text-right pl-20">
                   Office_Hour
                 </div>
@@ -63,7 +66,8 @@
                   {{ teacherList.officeHour }}
                 </div>
               </div>
-              <div class="d-flex flex-row">
+              <!-- 聯絡電話 -->
+              <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title-left text-right pl-20">
                   聯絡電話
                 </div>
@@ -72,7 +76,8 @@
                   {{ teacherList.contactTel }}
                 </div>
               </div>
-              <div class="d-flex flex-row">
+              <!-- 傳真 -->
+              <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title-left text-right pl-20">
                   傳真
                 </div>
@@ -81,7 +86,8 @@
                   {{ teacherList.fax }}
                 </div>
               </div>
-              <div class="d-flex flex-row">
+              <!-- 聯絡地址 -->
+              <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title-left text-right pl-20">
                   聯絡地址
                 </div>
@@ -90,6 +96,7 @@
                   {{ teacherList.addr }}
                 </div>
               </div>
+              <!-- 服務單位_部門 -->
               <div class="d-flex flex-row">
                 <div class="profile__title profile__title-left text-right pl-20">
                   服務單位_部門
@@ -101,8 +108,10 @@
               </div>
             </div>
 
-            <div class="profile d-flex flex-column justify-content-around ml-40">
-              <div class="d-flex flex-row">
+            <!-- 右列 -->
+            <div class="profile d-flex flex-column justify-content-start ml-40">
+              <!-- 類別 -->
+              <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title-left text-right pl-20">
                   類別
                 </div>
@@ -111,7 +120,8 @@
                   {{ teacherList.memberTypeName }}
                 </div>
               </div>
-              <div class="d-flex flex-row" v-if="!$route.query.type">
+              <!-- 職稱 -->
+              <div class="d-flex flex-row pb-16" v-if="!$route.query.type">
                 <div class="profile__title profile__title-left text-right pl-20">
                   職稱
                 </div>
@@ -120,7 +130,8 @@
                   {{ teacherList.jobTitle }}
                 </div>
               </div>
-              <div class="d-flex flex-row">
+              <!-- 授課領域 | 工作內容 -->
+              <div class="d-flex flex-row pb-16">
                 <div class="profile__title profile__title-left text-right pl-20">
                   {{ !$route.query.type ? "授課領域" : "工作內容" }}
                 </div>
@@ -129,6 +140,7 @@
                   {{ teacherList.teachClass }}
                 </div>
               </div>
+              <!-- 研究專長 -->
               <div class="d-flex flex-row" v-if="!$route.query.type">
                 <div class="profile__title profile__title-left text-right pl-20">
                   研究專長
@@ -142,11 +154,10 @@
           </div>
         </div>
 
+        <!-- 研究發表 -->
         <div class="text-left pl-60" v-if="!$route.query.type">
           <p class="Txt-title">研究發表</p>
         </div>
-
-        <!-- 研究發表 -->
         <div v-if="!$route.query.type">
           <div class="publishInfoCard" v-if="getInfo">
             <el-collapse v-model="activeNames">
@@ -308,6 +319,7 @@
           </div>
         </div>
 
+        <!--  -->
         <div class="w-100">
           <div class="pt-50 d-flex align-items-center justify-content-center">
             <div class="pb-10 goPrev d-flex d-inline-flex align-items-center flex-row cur-pointer" @click="goPrev()">
@@ -341,11 +353,11 @@
                 <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人網站</p>
               </div>
-              <div class="d-flex flex-column align-items-center">
+              <div class="d-flex flex-column align-items-center" v-if="!$route.query.type">
                 <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人著作</p>
               </div>
-              <div class="d-flex flex-column align-items-center">
+              <div class="d-flex flex-column align-items-center" v-if="!$route.query.type">
                 <img src="@/assets/images/icon/連結-icon.png" alt="" width="20px" />
                 <p class="m-0">個人研究</p>
               </div>
@@ -353,7 +365,9 @@
           </div>
         </div>
 
+        <!-- 左列 -->
         <div class="authorCard__information w-100 pt-20 pb-40">
+          <!-- 姓名 -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
@@ -371,6 +385,7 @@
               </div>
             </el-col>
           </el-row>
+          <!-- Office_Hour -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
@@ -388,6 +403,7 @@
               </div>
             </el-col>
           </el-row>
+          <!-- 聯絡電話 -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
@@ -405,6 +421,7 @@
               </div>
             </el-col>
           </el-row>
+          <!-- 傳真 -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
@@ -422,6 +439,7 @@
               </div>
             </el-col>
           </el-row>
+          <!-- 聯絡地址 -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
@@ -439,6 +457,7 @@
               </div>
             </el-col>
           </el-row>
+          <!-- 服務單位_部門 -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
@@ -457,7 +476,10 @@
             </el-col>
           </el-row>
         </div>
+
+        <!-- 右列 -->
         <div class="authorCard__information w-100 pt-20 pb-40">
+          <!-- 類別 -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
@@ -475,7 +497,8 @@
               </div>
             </el-col>
           </el-row>
-          <el-row class="py-5">
+          <!-- 職稱 -->
+          <el-row class="py-5" v-if="!$route.query.type">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
                 <strong>職稱</strong>
@@ -492,10 +515,11 @@
               </div>
             </el-col>
           </el-row>
+          <!-- 授課領域 | 工作內容 -->
           <el-row class="py-5">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
-                <strong>授課領域</strong>
+                <strong>{{ !$route.query.type ? "授課領域" : "工作內容" }}</strong>
               </div>
             </el-col>
             <el-col :span="4">
@@ -509,7 +533,8 @@
               </div>
             </el-col>
           </el-row>
-          <el-row class="py-5">
+          <!-- 研究專長 -->
+          <el-row class="py-5" v-if="!$route.query.type">
             <el-col :span="8">
               <div class="w-100 text-right authorCard__information-title">
                 <strong>研究專長</strong>
@@ -530,7 +555,7 @@
       </div>
 
       <!-- 研究發表 -->
-      <div class="ml-20 mt-50">
+      <div class="ml-20 mt-50" v-if="!$route.query.type">
         <div class="publishInfoCard" v-if="getInfo">
           <el-collapse v-model="activeNames">
             <el-collapse-item :title="key" :name="key" v-for="(item, key) in publishData" :key="item.id">
