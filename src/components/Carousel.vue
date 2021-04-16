@@ -6,6 +6,9 @@
           <a :href="item.links" target="_blank">
             <img :src="item.pic" alt="" width="100%" height="100%" />
           </a>
+          <div class="workInfo">
+            <strong class="font-s-18">{{item.workInfo}}</strong>
+          </div>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -16,6 +19,9 @@
           <a :href="item.links" target="_blank">
             <img :src="item.pic" alt="" width="100%" height="250px" />
           </a>
+          <div class="swiper__workInfo">
+            <strong class="font-s-14">{{item.workInfo}}</strong>
+          </div>
         </swiper-slide>
       </swiper>
     </div>
@@ -50,3 +56,26 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#carousel {
+  position: relative;
+  width: 100%;
+  .workInfo {
+    position: absolute;
+    right: 20%;
+    bottom: 10px;
+    color: #4f4f4f;
+  }
+
+  .swiper {
+    position: relative;
+    &__workInfo {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      color: #4f4f4f;
+    }
+  }
+}
+</style>
