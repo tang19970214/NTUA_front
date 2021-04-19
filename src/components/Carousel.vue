@@ -63,8 +63,8 @@ export default {
   width: 100%;
   .workInfo {
     position: absolute;
-    right: 20%;
-    bottom: 10px;
+    right: 95px;
+    bottom: 40px;
     color: #4f4f4f;
   }
 
