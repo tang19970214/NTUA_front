@@ -111,6 +111,7 @@ export default {
   },
   methods: {
     viewInfo(data) {
+      console.log(data);
       this.showNewsInfo = true;
       this.selectNews = data;
       this.selectNews.attachedFile = JSON.parse(data.attachedFile);
@@ -138,9 +139,17 @@ export default {
       });
     },
   },
-  mounted() {
+  async mounted() {
     this.$store.commit("SETLOADING", true);
-    this.getList();
+    await this.getList();
+
+    /* 若從首頁導入，自動開啟詳細頁modal */
+    if (!!this.$store.state.newsId) {
+      const getSourceData = this.bulletinMsg.filter(
+        (res) => res.id == this.$store.state.newsId
+      )[0];
+      this.viewInfo(getSourceData);
+    }
   },
 };
 </script>

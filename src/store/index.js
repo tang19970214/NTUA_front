@@ -6,7 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     firstLoad: true,
-    loading: false
+    loading: false,
+    /* 從首頁進入最新消息頁，給ID判斷自動開啟modal */
+    newsId: "",
   },
   mutations: {
     SETFIRSTLOAD(state, payload) {
@@ -14,6 +16,9 @@ export default new Vuex.Store({
     },
     SETLOADING(state, payload) {
       state.loading = payload;
+    },
+    SETNEWSID(state, payload) {
+      state.newsId = payload;
     }
   },
   actions: {},

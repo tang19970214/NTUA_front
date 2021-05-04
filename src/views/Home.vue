@@ -13,7 +13,7 @@
               <div class="w-100 h-100 text-center pos-relative" style="width: 500px" v-for="item in awardData" :key="item.id">
                 <div class="mx-20 pos-relative">
                   <router-link :to="{ name: 'award' }">
-                    <el-image style="width: 100%; height: 300px" :src="item.pics" fit="cover"></el-image>
+                    <el-image style="width: 100%; height: 300px" :src="JSON.parse(item.pics)[0].files" fit="cover"></el-image>
                   </router-link>
                   <span class="introduceCard d-flex align-items-end justify-content-between">
                     <p class="m-0">{{ item.title }}</p>
@@ -83,20 +83,20 @@
               </div>
             </div>
             <div class="w-100">
-              <div class="mt-50" style="margin-left: 20%">
-                <div class="collapseCard__child mt-20" v-for="item in newsData" :key="item.id">
-                  <div class="h-100 d-flex align-items-center justify-content-between cur-pointer" @click="goNews(id)">
-                    <div>
+              <div class="mt-50" style="margin-left: 200px">
+                <div class="collapseCard__child mt-20" v-for="item in newsData" :key="item.id" @click="goNews(item.id)">
+                  <div class="h-100 d-flex align-items-center justify-content-between cur-pointer">
+                    <div class="collapseCard__child--datetime">
                       <p class="m-0">
                         {{ item.releaseDate | moment("YYYY-MM-DD") }}
                       </p>
                     </div>
-                    <div>
+                    <div class="w-100">
                       <p class="m-0">
                         {{ item.title }}
                       </p>
                     </div>
-                    <div>
+                    <div class="collapseCard__child--func">
                       <img class="cur-pointer" src="@/assets/images/arrowRight_btn.png" alt="" />
                     </div>
                   </div>
@@ -195,7 +195,7 @@
           <div class="contest__limitWidth w-100 mt-10 d-flex align-items-start">
             <div class="contest__card d-flex flex-column" v-for="item in awardData" :key="item.id">
               <router-link :to="{ name: 'award' }">
-                <img :src="item.pics" alt="" width="100%" height="120px" />
+                <img :src="JSON.parse(item.pics)[0].files" alt="" width="100%" height="120px" />
               </router-link>
               <div class="contest__card--title w-100 d-flex align-items-center justify-content-between py-10">
                 <p class="m-0">{{ item.title }}</p>
@@ -907,7 +907,8 @@ export default {
         console.log(this.worksNum);
       }
     },
-    goNews() {
+    goNews(id) {
+      this.$store.commit("SETNEWSID", id);
       this.$router.push({ name: "bulletin" });
     },
     goNewsInfo(id) {
@@ -1064,6 +1065,17 @@ export default {
       color: #77767b;
       height: 60px;
       border-bottom: 1px solid #c4c4c4;
+
+      &--datetime {
+        min-width: 120px;
+        max-width: 120px;
+      }
+
+      &--func {
+        min-width: 50px;
+        max-width: 50px;
+        text-align: right;
+      }
     }
   }
   .introduceBg {
