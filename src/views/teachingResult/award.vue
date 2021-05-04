@@ -65,8 +65,15 @@
             <div class="w-100 modal__content--card mt-20">
               <vue-editor v-model="selectNews.contents" :disabled="true"></vue-editor>
             </div>
-            <div class="w-100 mt-40" v-if="selectNews.pics">
-              <img :src="selectNews.pics" alt="" width="400px" />
+            <div class="w-100 mt-40" v-if="!!selectNews.pics">
+              <el-row>
+                <el-col class="p-8" :span="12" v-for="item in JSON.parse(selectNews.pics)" :key="item.id">
+                  <el-image style="width: 100%; height: 300px" fit="cover" :src="item.files" :alt="item.fileName"></el-image>
+                  <div class="p-4">
+                    <strong class="font-s-18">{{item.fileName}}</strong>
+                  </div>
+                </el-col>
+              </el-row>
             </div>
             <div class="w-100 mt-40" v-if="selectNews.annexFile">
               <strong class="font-s-24">附檔</strong>

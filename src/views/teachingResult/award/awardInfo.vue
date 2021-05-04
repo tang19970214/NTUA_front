@@ -26,11 +26,13 @@
                 </div>
               </div>
             </div>
+
             <div class="w-100 newsInfo__card-content">
               <div class="p-15">
                 <div class="w-100 mt-10 context">
                   <vue-editor v-model="item.contents"></vue-editor>
                 </div>
+
                 <div class="w-100 mt-10">
                   <div class="downloadCard py-25 mb-15" v-for="(items, index1) in item.annexFile" :key="index1">
                     <el-row class="d-flex align-items-center">
@@ -50,6 +52,17 @@
                       </el-col>
                     </el-row>
                   </div>
+                </div>
+
+                <div class="w-100 mt-10" v-if="!!item.pics">
+                  <el-row>
+                    <el-col class="p-4" :span="12" v-for="items in JSON.parse(item.pics)" :key="items.id">
+                      <el-image style="width: 100%; height: 200px" fit="cover" :src="items.files"></el-image>
+                      <div class="p-4">
+                        <strong>{{items.fileName}}</strong>
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </div>
             </div>
